@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-26T15:12:54+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
+
+&lt;h3 id=&quot;实现ai的基本策略&quot;&gt;实现AI的基本策略&lt;/h3&gt;
+
+&lt;h4 id=&quot;构建ai基础设施&quot;&gt;构建AI基础设施&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;矢量化的基础计算设施
+    &lt;ul&gt;
+      &lt;li&gt;可扩展的计算资源&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;构建基于ai的劳动力&quot;&gt;构建基于AI的&lt;code class=&quot;highlighter-rouge&quot;&gt;劳动力&lt;/code&gt;&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;机器人&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;机器设置&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;构建基于ai的可信任工具&quot;&gt;构建基于AI的可信任工具&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;智能识别，防篡改&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;基于ai的数据建模&quot;&gt;基于AI的数据建模&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;基于大数据的数据建模&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;使用ai驱动业务策略&quot;&gt;使用AI驱动业务策略&lt;/h4&gt;
+
+&lt;h4 id=&quot;构建基于ai的交互工具echosystem&quot;&gt;构建基于AI的交互工具(echosystem)&lt;/h4&gt;
+
+&lt;h2 id=&quot;机器学习的任务和目标&quot;&gt;机器学习的任务和目标&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;识别数据中的模式&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;预测未知数据&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;机器学习&lt;/p&gt;</content><author><name></name></author><category term="howto" /><summary type="html">机器学习成功的地方在于它可以做到跨领域应用。</summary></entry><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup-2" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup%202</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup-2">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
+
+&lt;h3 id=&quot;实现ai的基本策略&quot;&gt;实现AI的基本策略&lt;/h3&gt;
+
+&lt;h4 id=&quot;构建ai基础设施&quot;&gt;构建AI基础设施&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;矢量化的基础计算设施
+    &lt;ul&gt;
+      &lt;li&gt;可扩展的计算资源&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;构建基于ai的劳动力&quot;&gt;构建基于AI的&lt;code class=&quot;highlighter-rouge&quot;&gt;劳动力&lt;/code&gt;&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;机器人&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;机器设置&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;构建基于ai的可信任工具&quot;&gt;构建基于AI的可信任工具&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;智能识别，防篡改&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;基于ai的数据建模&quot;&gt;基于AI的数据建模&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;基于大数据的数据建模&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;使用ai驱动业务策略&quot;&gt;使用AI驱动业务策略&lt;/h4&gt;
+
+&lt;h4 id=&quot;构建基于ai的交互工具echosystem&quot;&gt;构建基于AI的交互工具(echosystem)&lt;/h4&gt;
+
+&lt;h2 id=&quot;机器学习的任务和目标&quot;&gt;机器学习的任务和目标&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;识别数据中的模式&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;预测未知数据&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;机器学习&lt;/p&gt;</content><author><name></name></author><category term="howto" /><summary type="html">机器学习成功的地方在于它可以做到跨领域应用。</summary></entry><entry><title type="html">关于创业的反思总结</title><link href="http://localhost:4000/management-get" rel="alternate" type="text/html" title="关于创业的反思总结" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/management-get</id><content type="html" xml:base="http://localhost:4000/management-get">&lt;p&gt;能与不能&lt;/p&gt;
+
+&lt;h2 id=&quot;问题域&quot;&gt;问题域&lt;/h2&gt;
+
+&lt;h3 id=&quot;依靠什么&quot;&gt;依靠什么?&lt;/h3&gt;
+
+&lt;h3 id=&quot;目标在哪里&quot;&gt;目标在哪里?&lt;/h3&gt;
+
+&lt;h3 id=&quot;底线在哪里&quot;&gt;底线在哪里？&lt;/h3&gt;
+
+&lt;h3 id=&quot;怎么做&quot;&gt;怎么做?&lt;/h3&gt;</content><author><name></name></author><category term="howto" /><summary type="html">能与不能</summary></entry><entry><title type="html">关于创业的反思总结</title><link href="http://localhost:4000/management-get-2" rel="alternate" type="text/html" title="关于创业的反思总结" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/management-get%202</id><content type="html" xml:base="http://localhost:4000/management-get-2">&lt;p&gt;能与不能&lt;/p&gt;
+
+&lt;h2 id=&quot;问题域&quot;&gt;问题域&lt;/h2&gt;
+
+&lt;h3 id=&quot;依靠什么&quot;&gt;依靠什么?&lt;/h3&gt;
+
+&lt;h3 id=&quot;目标在哪里&quot;&gt;目标在哪里?&lt;/h3&gt;
+
+&lt;h3 id=&quot;底线在哪里&quot;&gt;底线在哪里？&lt;/h3&gt;
+
+&lt;h3 id=&quot;怎么做&quot;&gt;怎么做?&lt;/h3&gt;</content><author><name></name></author><category term="howto" /><summary type="html">能与不能</summary></entry><entry><title type="html">[GCE]安装Kubernetes Dashboard</title><link href="http://localhost:4000/k8s-dashboard-install" rel="alternate" type="text/html" title="[GCE]安装Kubernetes Dashboard" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/k8s-dashboard-install</id><content type="html" xml:base="http://localhost:4000/k8s-dashboard-install">&lt;p&gt;Kubeternetes Dashboatd 安装手记&lt;/p&gt;
+
+&lt;h3 id=&quot;安装&quot;&gt;安装&lt;/h3&gt;
+
+&lt;p&gt;部署之前,确认一下yaml文件是来自master分支。&lt;/p&gt;
+
+&lt;p&gt;下面这个链接是来自dashboard在github上的最新代码&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://sourcegraph.com/github.com/kubernetes/dashboard@master/-/blob/src/deploy/recommended/kubernetes-dashboard.yaml?diff=cfc62d86f67b70771dfc0798f10a891aa329b9c4&amp;amp;utm_source=chrome-extension#L11
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://sourcegraph.com/github.com/kubernetes/dashboard@master/-/blob/src/deploy/recommended/kubernetes-dashboard.yaml?diff=cfc62d86f67b70771dfc0798f10a891aa329b9c4&amp;amp;utm_source=chrome-extension#L11&quot;&gt;点击查看&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;文件内容分为一下几个部分&lt;/p&gt;
+
+&lt;h3 id=&quot;dashboard-secret--serviceaccount-定义&quot;&gt;Dashboard Secret &amp;amp;&amp;amp; ServiceAccount 定义&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard-certs
+  namespace: kube-system
+type: Opaque
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Secret 在负责的网络环境中是很重要的角色,它是k8s世界里资源流通的凭证。&lt;/p&gt;
+
+&lt;p&gt;Secret类型的k8s资源把敏感数据比如秘钥,密码,token中从配置文件中拿了出来。&lt;/p&gt;
+
+&lt;p&gt;如果没有secret这个类型的抽象类型, 在k8s的yaml配置文件中将到处都是关于password,token,secret 这样的字样,而且密码修改后非常不容易维护。 这就是secret这类资源的价值吧。&lt;/p&gt;
+
+&lt;p&gt;Secret是一个Map数据类型,附加了一些行为,比如可以以volume mount的方式导入到Pods定义文件中去。&lt;/p&gt;
+
+&lt;p&gt;Secret 存储后的类型有3种&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Opaque 类型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;中文意思是&lt;不透明的&gt;,以base64格式存储。&lt;/不透明的&gt;&lt;/p&gt;
+
+&lt;p&gt;base64是一种可逆的加密方式。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;echo -n 'zhangqinghua' | base64
+
+输出 emhhbmdxaW5naHVh, 反解码很容易:
+
+echo -n 'emhhbmdxaW5naHVh' | base64 --decode 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;kubernetes.io/dockerconfigjson 类型。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;K8s的核心职责之一是容器编排,最常见的场景是拉取镜像并生成对应的pods资源。&lt;/p&gt;
+
+&lt;p&gt;在这过程中需要与私有仓库进行验权,这时候用到了这个类型的secret。&lt;/p&gt;
+
+&lt;p&gt;Secret的用法如下:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apiVersion: v1
+kind: Pod
+metadata:
+  name: test-scret-use-methods
+spec:
+  containers:
+  - name: test-container
+    image: 192.168.1.12:5000/xxxx/test-image:latest
+    imagePullPolicy: Always
+  imagePullSecrets:
+  - name: new-created-secret-for-demo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;其中new-created-secret-for-demo是新创建的secret。&lt;/p&gt;
+
+&lt;p&gt;在k8s的官方文档里有创建实例,&lt;a href=&quot;https://kubernetes.io/docs/concepts/configuration/secret/&quot;&gt;参考&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;kubernetes.io/service-account-token 类型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;k8snode-03@A11131221040327:~/$ kubectl get serviceaccount --all-namespaces
+NAMESPACE     NAME                                 SECRETS   AGE
+default       default                              1         18h
+kube-public   default                              1         18h
+kube-system   attachdetach-controller              1         18h
+kube-system   bootstrap-signer                     1         18h
+
+k8snode-03@A11131221040327:~/$ kubectl describe serviceaccount/default -n kube-system
+
+Name:                default
+Namespace:           kube-system
+Labels:              &amp;lt;none&amp;gt;
+Annotations:         &amp;lt;none&amp;gt;
+Image pull secrets:  &amp;lt;none&amp;gt;
+Mountable secrets:   default-token-jmgnw
+Tokens:              default-token-jmgnw
+Events:              &amp;lt;none&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Serviceaccount作为独立资源,关联了namespace、以及和它有关的token、secrets。&lt;/p&gt;
+
+&lt;p&gt;用途是在为pods内部的应用程序提供访问Service Api的凭证,例如,获取某一namespace下的pods列表。&lt;/p&gt;
+
+&lt;h3 id=&quot;角色和权限分配&quot;&gt;角色和权限分配&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kubernetes-dashboard-minimal
+  namespace: kube-system
+rules:
+  # Allow Dashboard to create 'kubernetes-dashboard-key-holder' secret.
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;secrets&quot;]
+  verbs: [&quot;create&quot;]
+  # Allow Dashboard to create 'kubernetes-dashboard-settings' config map.
+
+---------  
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kubernetes-dashboard-minimal
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: kubernetes-dashboard-minimal
+subjects:
+- kind: ServiceAccount
+  name: kubernetes-dashboard
+  namespace: kube-system
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这段配置把kubernetes-dashboard绑定到Role定义的权限设置里,规定它有权限操作的资源。&lt;/p&gt;
+
+&lt;h1 id=&quot;部署&quot;&gt;部署&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kind: Deployment
+apiVersion: apps/v1beta2
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kube-system
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: kubernetes-dashboard
+  template:
+    metadata:
+      labels:
+        k8s-app: kubernetes-dashboard
+    spec:
+      containers:
+      - name: kubernetes-dashboard
+        image: k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.0
+        ports:
+        - containerPort: 8443
+          protocol: TCP
+        args:
+          - --auto-generate-certificates
+          # Uncomment the following line to manually specify Kubernetes API server Host
+          # If not specified, Dashboard will attempt to auto discover the API server and connect
+          # to it. Uncomment only if the default does not work.
+          # - --apiserver-host=http://my-address:port
+        volumeMounts:
+        - name: kubernetes-dashboard-certs
+          mountPath: /certs
+          # Create on-disk volume to store exec logs
+        - mountPath: /tmp
+          name: tmp-volume
+        livenessProbe:
+          httpGet:
+            scheme: HTTPS
+            path: /
+            port: 8443
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+      volumes:
+      - name: kubernetes-dashboard-certs
+        secret:
+          secretName: kubernetes-dashboard-certs
+      - name: tmp-volume
+        emptyDir: {}
+      serviceAccountName: kubernetes-dashboard
+      # Comment the following tolerations if Dashboard must not be deployed on master
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Deployment 整合了上面定义的所有资源,包括Secret、AccountService。&lt;/p&gt;
+
+&lt;p&gt;这部分是最容易出错的地方。有个issue整理了无法启动的原因&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/kubernetes/dashboard/issues/1578&quot;&gt;issue&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Creating API server client for https://10.96.0.1:443
+Error while initializing connection to Kubernetes apiserver. This most likely means that the cluster is misconfigured (e.g., it has invalid apiserver certificates or service accounts configuration) or the --apiserver-host param points to a server that does not exist. Reason: Get https://10.96.0.1:443/version: dial tcp 10.96.0.1:443: i/o timeout
+Refer to the troubleshooting guide for more information: https://github.com/kubernetes/dashboard/blob/master/docs/user-guide/troubleshooting.md
+
+10.96.0.1 是Service Api 的cluster IP
+
+k8snode-03@A11131221040327:~/.kube$ kubectl get service
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    &amp;lt;none&amp;gt;        443/TCP   19h
+
+k8snode-03@A11131221040327:~/.kube$ kubectl describe service kubernetes
+Name:              kubernetes
+Namespace:         default
+Labels:            component=apiserver
+                   provider=kubernetes
+Annotations:       &amp;lt;none&amp;gt;
+Selector:          &amp;lt;none&amp;gt;
+Type:              ClusterIP
+IP:                10.96.0.1
+Port:              https  443/TCP
+TargetPort:        6443/TCP
+Endpoints:         192.168.12.39:6443
+Session Affinity:  None
+Events:            &amp;lt;none&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;最后,获取某一account的token&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;使用proxy访问dashboard&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl proxy
+
+输出
+Starting to serve on 127.0.0.1:8001 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="kubernetes" /><summary type="html">Kubeternetes Dashboatd 安装手记</summary></entry><entry><title type="html">[GCE]单节点部署kubernetes集群</title><link href="http://localhost:4000/k8s-from-scrach" rel="alternate" type="text/html" title="[GCE]单节点部署kubernetes集群" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/k8s-from-scrach</id><content type="html" xml:base="http://localhost:4000/k8s-from-scrach">&lt;p&gt;使用kubeadm部署单master节点的k8s&lt;/p&gt;
+
+&lt;p&gt;\———————-&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Unbuntu18.04
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;\———————-&lt;/p&gt;
+
+&lt;p&gt;1个master + 2个minion&lt;/p&gt;
+
+&lt;h3 id=&quot;1-安装docker以及master节点初始化&quot;&gt;1. 安装Docker以及Master节点初始化&lt;/h3&gt;
+
+&lt;p&gt;安装docker&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install docker.io
+
+sudo systemctl enable docker
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;安装kubeadm&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get update \
+  &amp;amp;&amp;amp; sudo apt-get install -y apt-transport-https \
+  &amp;amp;&amp;amp; curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+# k8s的资源暂不可用,使用16.04的更新资源 (xenial)
+echo &quot;deb http://apt.kubernetes.io/ kubernetes-xenial main&quot; \
+  | sudo tee -a /etc/apt/sources.list.d/kubernetes.list \
+  &amp;amp;&amp;amp; sudo apt-get update
+
+sudo apt install -y kubeadm  kubelet kubernetes-cni
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;关闭交换分区&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo swapoff -a 
+sudo rm -f /swapfile
+sudo vi /etc/fstab   # 注释点 /swapfile 入口
+
+sudo swapon --summary # 确认，如果没有输出，表明已经关闭
+cat /proc/swaps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;关闭交换分区的原因，官方的说法是为了性能，设计者希望每个kubelet都可以实时响应&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/kubernetes/kubernetes/issues/53533&quot;&gt;Kubelet/Kubernetes should work with Swap Enabled&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-初始化master节点&quot;&gt;2. 初始化master节点&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IP_ADDR=$(ip addr show eno1 | grep -Po 'inet \K[\d.]+')
+echo $IP_ADDR
+
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=${IP_ADDR} --kubernetes-version stable-1.2.1
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;cidr是一个很重要的概念，&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%97%A0%E7%B1%BB%E5%88%AB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1&quot;&gt;推荐阅读&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;CIDR分配的网络资源是网段，而不是具体的地址。所以在AWS或常见云平台上申请网络资源时，先输入CIDR，比如10.1.0.0/16。16对应的子网掩码是255.255.0.0。&lt;/p&gt;
+
+&lt;p&gt;默认的情况下，单个master节点是无法正常工作的，它不会分配pods资源。这里有个命令可以使master工作&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl taint nodes --all node-role.kubernetes.io/master-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;master节点被加入到了资源调度里面去。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-安装pod-network插件&quot;&gt;3. 安装Pod Network插件&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;The network must be deployed before any applications. Also, CoreDNS will not start up before a network is installed. kubeadm only supports Container Network Interface (CNI) based networks (and does not support kubenet).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;网络组件有很多种，Flannel， Weave Net,Calico 等&lt;/p&gt;
+
+&lt;p&gt;这里选择calico&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
+kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;输出结果确认
+kubectl get pods –all-namespaces&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;coredns在网络组建没有安装或者没有初始化完毕前是pending的状态&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-加入minion节点&quot;&gt;4. 加入Minion节点&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubeadm join 192.168.12.39:6443 --token 9uqyzo.y773su1b99kolayf --discovery-token-ca-cert-hash sha256:10ca82d1b6e3d9402b5243fa360e9c11a05320c1bd39989ab24aea1fcd6f8629
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这段命令是kubeadm init以后给出的。&lt;/p&gt;
+
+&lt;p&gt;–token 是节点加入凭证，如果忘记了，在master节点上可以重新获取&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubeadm token list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;顺利的话， join命令在几秒内就完成了。&lt;/p&gt;
+
+&lt;p&gt;加入节点确认&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl get nodes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5-遇到的问题&quot;&gt;5. 遇到的问题&lt;/h3&gt;
+
+&lt;p&gt;在ubuntu18.04的版本里，默认CNI插件不兼容k8s 1.12,需要重新编译, 插件地址&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://github.com/containernetworking/plugins
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;参考&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://k8smeetup.github.io/docs/admin/kubeadm/&quot;&gt;kubeadm 设置工具参考指南&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/qq_34463875/article/details/78042852&quot;&gt;Kubenetes中的证书&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%97%A0%E7%B1%BB%E5%88%AB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1s&quot;&gt;无类别域间路由&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/&quot;&gt;Creating a single master cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="kubernetes" /><summary type="html">使用kubeadm部署单master节点的k8s</summary></entry><entry><title type="html">[GCE]单节点部署kubernetes集群</title><link href="http://localhost:4000/k8s-from-scrach-2" rel="alternate" type="text/html" title="[GCE]单节点部署kubernetes集群" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/k8s-from-scrach%202</id><content type="html" xml:base="http://localhost:4000/k8s-from-scrach-2">&lt;p&gt;使用kubeadm部署单master节点的k8s&lt;/p&gt;
+
+&lt;p&gt;\———————-&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Unbuntu18.04
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;\———————-&lt;/p&gt;
+
+&lt;p&gt;1个master + 2个minion&lt;/p&gt;
+
+&lt;h3 id=&quot;1-安装docker以及master节点初始化&quot;&gt;1. 安装Docker以及Master节点初始化&lt;/h3&gt;
+
+&lt;p&gt;安装docker&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install docker.io
+
+sudo systemctl enable docker
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;安装kubeadm&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get update \
+  &amp;amp;&amp;amp; sudo apt-get install -y apt-transport-https \
+  &amp;amp;&amp;amp; curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+# k8s的资源暂不可用,使用16.04的更新资源 (xenial)
+echo &quot;deb http://apt.kubernetes.io/ kubernetes-xenial main&quot; \
+  | sudo tee -a /etc/apt/sources.list.d/kubernetes.list \
+  &amp;amp;&amp;amp; sudo apt-get update
+
+sudo apt install -y kubeadm  kubelet kubernetes-cni
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;关闭交换分区&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo swapoff -a 
+sudo rm -f /swapfile
+sudo vi /etc/fstab   # 注释点 /swapfile 入口
+
+sudo swapon --summary # 确认，如果没有输出，表明已经关闭
+cat /proc/swaps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;关闭交换分区的原因，官方的说法是为了性能，设计者希望每个kubelet都可以实时响应&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/kubernetes/kubernetes/issues/53533&quot;&gt;Kubelet/Kubernetes should work with Swap Enabled&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-初始化master节点&quot;&gt;2. 初始化master节点&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IP_ADDR=$(ip addr show eno1 | grep -Po 'inet \K[\d.]+')
+echo $IP_ADDR
+
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=${IP_ADDR} --kubernetes-version stable-1.2.1
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;cidr是一个很重要的概念，&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%97%A0%E7%B1%BB%E5%88%AB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1&quot;&gt;推荐阅读&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;CIDR分配的网络资源是网段，而不是具体的地址。所以在AWS或常见云平台上申请网络资源时，先输入CIDR，比如10.1.0.0/16。16对应的子网掩码是255.255.0.0。&lt;/p&gt;
+
+&lt;p&gt;默认的情况下，单个master节点是无法正常工作的，它不会分配pods资源。这里有个命令可以使master工作&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl taint nodes --all node-role.kubernetes.io/master-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;master节点被加入到了资源调度里面去。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-安装pod-network插件&quot;&gt;3. 安装Pod Network插件&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;The network must be deployed before any applications. Also, CoreDNS will not start up before a network is installed. kubeadm only supports Container Network Interface (CNI) based networks (and does not support kubenet).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;网络组件有很多种，Flannel， Weave Net,Calico 等&lt;/p&gt;
+
+&lt;p&gt;这里选择calico&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
+kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;输出结果确认
+kubectl get pods –all-namespaces&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;coredns在网络组建没有安装或者没有初始化完毕前是pending的状态&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-加入minion节点&quot;&gt;4. 加入Minion节点&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubeadm join 192.168.12.39:6443 --token 9uqyzo.y773su1b99kolayf --discovery-token-ca-cert-hash sha256:10ca82d1b6e3d9402b5243fa360e9c11a05320c1bd39989ab24aea1fcd6f8629
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这段命令是kubeadm init以后给出的。&lt;/p&gt;
+
+&lt;p&gt;–token 是节点加入凭证，如果忘记了，在master节点上可以重新获取&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubeadm token list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;顺利的话， join命令在几秒内就完成了。&lt;/p&gt;
+
+&lt;p&gt;加入节点确认&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl get nodes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5-遇到的问题&quot;&gt;5. 遇到的问题&lt;/h3&gt;
+
+&lt;p&gt;在ubuntu18.04的版本里，默认CNI插件不兼容k8s 1.12,需要重新编译, 插件地址&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://github.com/containernetworking/plugins
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;参考&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://k8smeetup.github.io/docs/admin/kubeadm/&quot;&gt;kubeadm 设置工具参考指南&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/qq_34463875/article/details/78042852&quot;&gt;Kubenetes中的证书&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%97%A0%E7%B1%BB%E5%88%AB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1s&quot;&gt;无类别域间路由&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/&quot;&gt;Creating a single master cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="kubernetes" /><summary type="html">使用kubeadm部署单master节点的k8s</summary></entry><entry><title type="html">前端工程中的测试模型</title><link href="http://localhost:4000/archi-vuejs-test-model" rel="alternate" type="text/html" title="前端工程中的测试模型" /><published>2018-09-11T17:14:11+08:00</published><updated>2018-09-11T17:14:11+08:00</updated><id>http://localhost:4000/archi-vuejs-test-model</id><content type="html" xml:base="http://localhost:4000/archi-vuejs-test-model">&lt;h2 id=&quot;architecture-design&quot;&gt;Architecture Design&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h3&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;</content><author><name></name></author><category term="frontend" /><summary type="html">Architecture Design</summary></entry><entry><title type="html">快速交付前端工程</title><link href="http://localhost:4000/archi-vuejs-deploy" rel="alternate" type="text/html" title="快速交付前端工程" /><published>2018-09-11T17:14:11+08:00</published><updated>2018-09-11T17:14:11+08:00</updated><id>http://localhost:4000/archi-vuejs-deploy</id><content type="html" xml:base="http://localhost:4000/archi-vuejs-deploy">&lt;h2 id=&quot;designments&quot;&gt;Designments&lt;/h2&gt;
+
+&lt;h3 id=&quot;基于vuejs的前端工程&quot;&gt;基于vuejs的前端工程&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/vuejs-architecture.png&quot; alt=&quot;vuejs architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;测试方法端到端测试单元测试集成测试&quot;&gt;测试方法(端到端测试、单元测试、集成测试)&lt;/h3&gt;
+
+&lt;h3 id=&quot;云上交付&quot;&gt;云上交付&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h3&gt;</content><author><name></name></author><category term="frontend" /><summary type="html">Designments</summary></entry><entry><title type="html">Ethereum开发笔记1-1: Blockchain简介</title><link href="http://localhost:4000/ethereum-dapp-develop" rel="alternate" type="text/html" title="Ethereum开发笔记1-1: Blockchain简介" /><published>2018-09-06T11:11:11+08:00</published><updated>2018-09-06T11:11:11+08:00</updated><id>http://localhost:4000/ethereum-dapp-develop</id><content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop">&lt;p&gt;区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。&lt;/p&gt;
+
+&lt;h3 id=&quot;历史&quot;&gt;历史&lt;/h3&gt;
+
+&lt;p&gt;参考论文&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nakamotoinstitute.org/finney/rpow/&quot;&gt;RPOW - 可重用的工作证明(Reusable Proofs of Work)&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="develop" /><summary type="html">区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。</summary></entry></feed>

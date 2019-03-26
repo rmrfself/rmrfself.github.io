@@ -1,0 +1,2029 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="http://localhost:4000/tag/jvm/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2019-03-26T15:12:54+08:00</updated>
+  <id>http://localhost:4000/tag/jvm/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">张庆华的个人日志 | </title>
+  
+
+  
+    <subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">JVM内部机制(七) Java内存模型(Java Momory Model)</title>
+      <link href="http://localhost:4000/jvm-jmm" rel="alternate" type="text/html" title="JVM内部机制(七) Java内存模型(Java Momory Model)" />
+      <published>2016-03-12T01:30:15+08:00</published>
+      <updated>2016-03-12T01:30:15+08:00</updated>
+      <id>http://localhost:4000/jvm-jmm</id>
+      <content type="html" xml:base="http://localhost:4000/jvm-jmm">&lt;script type=&quot;math/tex; mode=display&quot;&gt;e^{i\pi} + 1 = 0\\&lt;/script&gt;
+
+&lt;h2 id=&quot;什么是内存模型&quot;&gt;什么是内存模型&lt;/h2&gt;
+
+&lt;p&gt;Java的内存模型和jvm中的内存layout是两个不同的概念。&lt;/p&gt;
+
+&lt;p&gt;Jvm中的Memory Layout，栈、栈帧、Heap[新生代(New Generation)、旧生代、MetaData区域]是一种内存结构，是为实现Java语言而设计的一种存储结构，它与jvm的运行时状态无关，只要运行Java程序，这种存贮结构就会被用到。&lt;/p&gt;
+
+&lt;p&gt;而JSR133中定义的Java内存模型是Java语言层面的，讨论的核心是指令集(Instruction Set)如何在N个线程(并行执行序列)的背景下，使得每个单一线程以正确、符合预期的方式表达。&lt;/p&gt;
+
+&lt;p&gt;那么，问题来了。&lt;/p&gt;
+
+&lt;p&gt;在什么情况下，指令集会以符合预期的方式运行？相反，什么条件使得结果让人难以接受，为什么？&lt;/p&gt;
+
+&lt;p&gt;Java的内存模型讨论的正是这种问题边界存在原因，以及最佳实践。&lt;/p&gt;
+
+&lt;h2 id=&quot;数据同步的两大问题类型&quot;&gt;数据同步的两大问题类型&lt;/h2&gt;
+
+&lt;p&gt;判断程序是否被正确同步,有两种方法:&lt;/p&gt;
+
+&lt;h3 id=&quot;data-race&quot;&gt;Data Race&lt;/h3&gt;
+
+&lt;p&gt;对共享的字段或者数组元素同时进行R-W(读写)操作,这种情况被称为“数据竞争”(data race)&lt;/p&gt;
+
+&lt;h3 id=&quot;-happen-before-relationship&quot;&gt;⇒ Happen Before Relationship&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Happened-before&quot;&gt;happened-before&lt;/a&gt; 关系定义为:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;如果一个事件(event) 发生在另外一个事件前， 那么， 它们的结果也是如此。
+
+数学描述为
+
+传递性(transitivity): ∀ a,b,c,如果 a → b, b → c,  那么 a → c 
+
+对任意的a,b,c,  如果a发生在b之前，b发生在c之前， 那么， a 发生在c之前
+
+不自反特性: ∀a, a ↛ a 
+
+动作a不能在自身执行前发生
+
+不对称特性: ∀ a, b , 如果 a ≠ b, 那么 a → b , b ↛ a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Java程序中，固定的Happens-Before动作(actions、method、or sinle instruction)发生的情况有:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;同一个线程内，排在前面的指令(actions: read OR write)一定先执行。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;或者说，同一线程内的动作是顺序执行(SO)的。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;对监视器(monitor)的解锁动作(un-lock)一定发生在下一个锁动作(lock)之前。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这是锁资源的独占特性&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;对volatile字段的写(W)动作发生在对这个字段的读(R)动作之前&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;线程启动(Thread.start())发生已启动线程(Treads)的动作(actions)之前&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;某一活动线程的内动作(action)发生其他线程从join()成功返回之前&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;动作传递特性&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;对任意的a,b,c,  如果a发生在b之前，b发生在c之前， 那么， a 发生在c之前&lt;/p&gt;
+
+&lt;h3 id=&quot;产生数据同步问题的诱因&quot;&gt;产生数据同步问题的诱因&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;变量可见性(Visibility) → 不加控制的共享变量&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class LoopMayNeverEnd {
+    boolean done = false;
+
+    // 线程 1
+    void work() {
+        while (!done) {
+        // do work
+        }
+    }
+
+    // 线程 2
+    void stopWork() {
+        done = true;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;如果&lt;/p&gt;
+
+&lt;p&gt;线程1(r) $\xrightarrow[\text{Before}]{\text{happens}}$ 线程2(r)&lt;/p&gt;
+
+&lt;p&gt;那么，上面循环就编程了 while(true)了。&lt;/p&gt;
+
+&lt;p&gt;导致问题的原因是&lt;/p&gt;
+
+&lt;p&gt;线程1使用了其他线程也可以看到的变量。使用前并没有任务预防措施。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ordering → 编译器特权带来的同步问题&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;示例代码&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class BadlyOrdered {
+    boolean a = false;
+    boolean b = false;
+
+    // 线程 1
+    void threadOne() {
+        a = true;
+        b = true;
+    }
+
+    // 线程 2
+    boolean threadTwo() {
+        boolean r1 = b; // sees true
+        boolean r2 = a; // sees false
+        return r1 &amp;amp;&amp;amp; !r2; // returns true
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上述两个类方法缺少同步，这导致了线程2读取a,b的时候， 线程1执行到了一半: a == true, b == false。&lt;/p&gt;
+
+&lt;p&gt;正确的方式应该是确保&lt;/p&gt;
+
+&lt;p&gt;threadOne() $\xrightarrow[\text{Before}]{\text{happens}}$threadTwo()&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;原子性(Atomicity) → 读写的原子性封装&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;同步问题的根源-数据一致性&quot;&gt;同步问题的根源： 数据一致性&lt;/h2&gt;
+
+&lt;h3 id=&quot;区分actions和executions&quot;&gt;区分Actions和Executions&lt;/h3&gt;
+
+&lt;p&gt;一个action被描述为一个tuple&lt;/p&gt;
+
+&lt;p&gt;$⟨t,k,u,v⟩$, 有4种类型的变量定义&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;t → 代表执行动作的线程&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;k → 代表同步动作(Synchronization Actions)的类型&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;volatile read
+
+volatile write, 
+
+(normal or non-volatile) read
+
+(normal or non-volatile) write
+
+lock or unlock Volatile reads
+
+volatile writes
+
+locks and unlocks
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;v → 代表被actions用到的monitor或者变量&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;u → 此次动作的唯一ID&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一个执行(Executions)也被定义为一个tuple:&lt;/p&gt;
+
+&lt;p&gt;⟨P,A,$\xrightarrow{po}$,$\xrightarrow{so}$,W,V,$\xrightarrow{\text{sw}}$,$\xrightarrow{\text{hb}}$⟩&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;P → 代表程序或者指令&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A → 一组actions&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;$\xrightarrow{po}$ → A中被每个线程执行的actions的程序序列，这里不是指令序列。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;po → 程序顺序指的是编码是代码的定义顺序，这里是所有actions中的po&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;$\xrightarrow{so}$ → A中的同步顺序，这里还是程序序列&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;W → 在E中(执行序列中)定义的，可以被读感知到的写动作，记做W(r)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;V → 代表写动作执行后的值。对A中的写动作w，记做V(w),在执行序列E中写入的值。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;$\xrightarrow{sw}$ → 代表同步关系&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;x $\xrightarrow{synchronizes with}$ y，意味着x与y同步&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+x = r1 (volatile write ⤞ 读取x的值之前，需要x的rlease状态)
+
+y = x (volatile read ⤞ 读取x的值之前要等待x release结束)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$\xrightarrow{hb}$ → Happens Before 关系&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;同步的定义&quot;&gt;同步的定义&lt;/h3&gt;
+
+&lt;p&gt;如果满足一下条件， 执行序列E被认为是同步的&lt;/p&gt;
+
+&lt;p&gt;1、每次读(read)到的值由执行序列E中的一次W决定。被定义为&lt;/p&gt;
+
+&lt;p&gt;∀ r ∈ A, 使得&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases} 
+W(r) ∈ A \\
+W(r).v == r.v
+\end{cases}&lt;/script&gt;
+
+&lt;p&gt;可理解为： 写动作发生在当前E中，读到的值等于写后的值&lt;/p&gt;
+
+&lt;p&gt;2、代码执行顺序po和指令执行顺序同步顺序一致&lt;/p&gt;
+
+&lt;p&gt;不可用存在这种情况:&lt;/p&gt;
+
+&lt;p&gt;x,y ∈ A,  x $\xrightarrow{so}$ y &amp;amp; y $\xrightarrow{po}$ x&lt;/p&gt;
+
+&lt;p&gt;可理解为，对任意x,y 属于A， 不能存在以下情况:&lt;/p&gt;
+
+&lt;p&gt;y同步于x，y的值有x决定。y却又先于x执行&lt;/p&gt;
+
+&lt;p&gt;3、多线程执行服从于单线程指令执行一致性(The execution obeys intra-thread consistency)&lt;/p&gt;
+
+&lt;p&gt;可以理解为&lt;/p&gt;
+
+&lt;p&gt;多线程的执行结果与把多线程改造为单线程执行后的结果一致&lt;/p&gt;
+
+&lt;p&gt;4、多线程服从Happen-before一致性规则&lt;/p&gt;
+
+&lt;h3 id=&quot;被jmm允许的意外情况&quot;&gt;被Jmm允许的意外情况&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/jmm-02.png&quot; alt=&quot;jmm&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;本文解释一下在JDK8中,JVM如何执行方法。&lt;/p&gt;
+
+&lt;h3 id=&quot;todo&quot;&gt;TODO&lt;/h3&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jvm" />
+      
+
+      
+        <summary type="html"></summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">JVM内部机制(六) HotSpot代码导读</title>
+      <link href="http://localhost:4000/jvm-source-guide" rel="alternate" type="text/html" title="JVM内部机制(六) HotSpot代码导读" />
+      <published>2016-03-08T10:30:02+08:00</published>
+      <updated>2016-03-08T10:30:02+08:00</updated>
+      <id>http://localhost:4000/jvm-source-guide</id>
+      <content type="html" xml:base="http://localhost:4000/jvm-source-guide">&lt;p&gt;Hotspot源码阅读顺序&lt;/p&gt;
+
+&lt;h3 id=&quot;todo&quot;&gt;TODO&lt;/h3&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jvm" />
+      
+
+      
+        <summary type="html">Hotspot源码阅读顺序</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">JVM内部机制(六) HotSpot代码导读</title>
+      <link href="http://localhost:4000/jvm-source-guide-2" rel="alternate" type="text/html" title="JVM内部机制(六) HotSpot代码导读" />
+      <published>2016-03-08T10:30:02+08:00</published>
+      <updated>2016-03-08T10:30:02+08:00</updated>
+      <id>http://localhost:4000/jvm-source-guide%202</id>
+      <content type="html" xml:base="http://localhost:4000/jvm-source-guide-2">&lt;p&gt;Hotspot源码阅读顺序&lt;/p&gt;
+
+&lt;h3 id=&quot;todo&quot;&gt;TODO&lt;/h3&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jvm" />
+      
+
+      
+        <summary type="html">Hotspot源码阅读顺序</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">JVM内部机制(五)多线程编程模型中的常见问题</title>
+      <link href="http://localhost:4000/jvm-multiple-threads" rel="alternate" type="text/html" title="JVM内部机制(五)多线程编程模型中的常见问题" />
+      <published>2016-03-05T12:08:12+08:00</published>
+      <updated>2016-03-05T12:08:12+08:00</updated>
+      <id>http://localhost:4000/jvm-multiple-threads</id>
+      <content type="html" xml:base="http://localhost:4000/jvm-multiple-threads">&lt;p&gt;已转移到java.util.concurrent使用方法解析。&lt;/p&gt;
+
+&lt;h3 id=&quot;什么是threadlocal-它有什么用&quot;&gt;什么是ThreadLocal? 它有什么用?&lt;/h3&gt;
+
+&lt;p&gt;ThreadLocal 是为存储&lt;code class=&quot;highlighter-rouge&quot;&gt;线程独立&lt;/code&gt;的数据而设计的。&lt;/p&gt;
+
+&lt;h3 id=&quot;volatile-关键字的作用是什么&quot;&gt;volatile 关键字的作用是什么?&lt;/h3&gt;
+
+&lt;p&gt;在java实现的volatile版本中(区别于c++中的volatile[易挥发物])，使用这个关键字用来确保所有的&lt;code class=&quot;highlighter-rouge&quot;&gt;读&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;写&lt;/code&gt;在所有线程之间是&lt;code class=&quot;highlighter-rouge&quot;&gt;串行&lt;/code&gt;(顺序执行)的。它也确保了读出的值是&lt;code class=&quot;highlighter-rouge&quot;&gt;实际&lt;/code&gt;的值而不是工作区缓存的值&lt;/p&gt;
+
+&lt;h3 id=&quot;sleep和wait的区别&quot;&gt;sleep和wait的区别&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;wait() 是object类的实例方法&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;sleep(milliseconds)是线程的静态方法&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;wait()的设计目的是&lt;code class=&quot;highlighter-rouge&quot;&gt;线程间&lt;/code&gt;同步(synchronization)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Thread.sleep的设计目的是暂停当前执行线程，与同步或者锁没有直接关系&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;唤醒方式不同&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;wait()的使用方法:&lt;/p&gt;
+
+&lt;p&gt;被包围在同步块中，线程a调用线程b&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;synchronized (b) {
+    while (b.sum == 0) {
+        System.out.println(&quot;Waiting for ThreadB to complete...&quot;);
+        b.wait();
+    }
+ 
+    System.out.println(&quot;ThreadB has completed. &quot; + 
+      &quot;Sum from that thread is: &quot; + b.sum);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;唤醒方法&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int sum;
+  
+@Override
+public void run() {
+    synchronized (this) {
+        int i = 0;
+        while (i &amp;lt; 100000) {
+            sum += i;
+            i++; 
+        }
+        notify(); 
+    } 
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jvm" />
+      
+
+      
+        <summary type="html">已转移到java.util.concurrent使用方法解析。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">JVM内部机制(五)多线程编程模型中的常见问题</title>
+      <link href="http://localhost:4000/jvm-multiple-threads-2" rel="alternate" type="text/html" title="JVM内部机制(五)多线程编程模型中的常见问题" />
+      <published>2016-03-05T12:08:12+08:00</published>
+      <updated>2016-03-05T12:08:12+08:00</updated>
+      <id>http://localhost:4000/jvm-multiple-threads%202</id>
+      <content type="html" xml:base="http://localhost:4000/jvm-multiple-threads-2">&lt;p&gt;已转移到java.util.concurrent使用方法解析。&lt;/p&gt;
+
+&lt;h3 id=&quot;什么是threadlocal-它有什么用&quot;&gt;什么是ThreadLocal? 它有什么用?&lt;/h3&gt;
+
+&lt;p&gt;ThreadLocal 是为存储&lt;code class=&quot;highlighter-rouge&quot;&gt;线程独立&lt;/code&gt;的数据而设计的。&lt;/p&gt;
+
+&lt;h3 id=&quot;volatile-关键字的作用是什么&quot;&gt;volatile 关键字的作用是什么?&lt;/h3&gt;
+
+&lt;p&gt;在java实现的volatile版本中(区别于c++中的volatile[易挥发物])，使用这个关键字用来确保所有的&lt;code class=&quot;highlighter-rouge&quot;&gt;读&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;写&lt;/code&gt;在所有线程之间是&lt;code class=&quot;highlighter-rouge&quot;&gt;串行&lt;/code&gt;(顺序执行)的。它也确保了读出的值是&lt;code class=&quot;highlighter-rouge&quot;&gt;实际&lt;/code&gt;的值而不是工作区缓存的值&lt;/p&gt;
+
+&lt;h3 id=&quot;sleep和wait的区别&quot;&gt;sleep和wait的区别&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;wait() 是object类的实例方法&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;sleep(milliseconds)是线程的静态方法&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;wait()的设计目的是&lt;code class=&quot;highlighter-rouge&quot;&gt;线程间&lt;/code&gt;同步(synchronization)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Thread.sleep的设计目的是暂停当前执行线程，与同步或者锁没有直接关系&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;唤醒方式不同&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;wait()的使用方法:&lt;/p&gt;
+
+&lt;p&gt;被包围在同步块中，线程a调用线程b&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;synchronized (b) {
+    while (b.sum == 0) {
+        System.out.println(&quot;Waiting for ThreadB to complete...&quot;);
+        b.wait();
+    }
+ 
+    System.out.println(&quot;ThreadB has completed. &quot; + 
+      &quot;Sum from that thread is: &quot; + b.sum);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;唤醒方法&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int sum;
+  
+@Override
+public void run() {
+    synchronized (this) {
+        int i = 0;
+        while (i &amp;lt; 100000) {
+            sum += i;
+            i++; 
+        }
+        notify(); 
+    } 
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jvm" />
+      
+
+      
+        <summary type="html">已转移到java.util.concurrent使用方法解析。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">JVM内部机制(四)Java中的线程</title>
+      <link href="http://localhost:4000/jvm-thread" rel="alternate" type="text/html" title="JVM内部机制(四)Java中的线程" />
+      <published>2016-02-18T02:05:45+08:00</published>
+      <updated>2016-02-18T02:05:45+08:00</updated>
+      <id>http://localhost:4000/jvm-thread</id>
+      <content type="html" xml:base="http://localhost:4000/jvm-thread">&lt;p&gt;POSIX.equals(“Portable Operating System Interface”)&lt;/p&gt;
+
+&lt;h2 id=&quot;os中进程和线程&quot;&gt;OS中进程和线程&lt;/h2&gt;
+
+&lt;h3 id=&quot;线程基础&quot;&gt;线程基础&lt;/h3&gt;
+
+&lt;p&gt;进程是对资源的抽象，包括CPU、内存、IO操作、文件描述符等，是系统资源分配的最小单元。&lt;/p&gt;
+
+&lt;p&gt;线程是对调度和执行的抽象，是调度的最小单元。&lt;/p&gt;
+
+&lt;p&gt;线程是在进程内部运行的执行分支，每个线程对应一个独立的执行分支。&lt;/p&gt;
+
+&lt;p&gt;从执行角度看，线程是为了共享资源（共享地址空间），进程是为了资源独占（私有地址空间）。&lt;/p&gt;
+
+&lt;p&gt;按照代码执行的位置区分，可以把线程分为3种:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;用户空间线程&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;内核(kernel)空间线程&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fibers(常被翻译为纤程)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;以上3种资源调度方式如果独立使用，弊大于利。&lt;/p&gt;
+
+&lt;p&gt;比如，内核对纯用户空间的线程无感知。 当线程执行到IO时，产生系统调用，从而在内核空间被block。 整个进程内的所有线程都要一起等到IO完成后才可以继续执行。&lt;/p&gt;
+
+&lt;p&gt;如果把用户线程和内核线程混合使用，可以取长补短。这样就产生了线程调度模型。&lt;/p&gt;
+
+&lt;h3 id=&quot;线程调度模型&quot;&gt;线程调度模型&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/thread-model-design.png&quot; alt=&quot;线程调度模型&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;线程的调度方式目前的实现主要有两种:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;抢占式(preemptive)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/thread-preemptive-mode.png&quot; alt=&quot;抢占式&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;抢占式线程有内核主动调度并负责上下文切换。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;协作式(cooperative)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/thread-cooperate-mode.png&quot; alt=&quot;协作式&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;协作式线程最大的特点是调度权有线程自己决定，所以不存在并发和同步引起的问题。&lt;/p&gt;
+
+&lt;p&gt;缺点是协作线程无法把握下一次被执行的时间。&lt;/p&gt;
+
+&lt;h3 id=&quot;轻量级进程-lwp&quot;&gt;轻量级进程-LWP&lt;/h3&gt;
+
+&lt;h4 id=&quot;lightweight-progress&quot;&gt;Lightweight Progress&lt;/h4&gt;
+
+&lt;p&gt;在linux的实现中，用户线程和lwp之间是1:1的关系。lwp为用户空间内的线程陷入内核的系统调用提供了一个管道。&lt;/p&gt;
+
+&lt;p&gt;使用ps -eLf 命令可以查看系统内的LWP列表:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;UID        PID  PPID   LWP  C NLWP STIME TTY          TIME CMD
+root         1     0     1  0    1 Oct18 ?        00:00:36 /sbin/init splash
+root         2     0     2  0    1 Oct18 ?        00:00:00 [kthreadd]
+root         4     2     4  0    1 Oct18 ?        00:00:00 [kworker/0:0H]
+root         6     2     6  0    1 Oct18 ?        00:00:00 [mm_percpu_wq]s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;lwp在内核内体现为一个task_struct链。&lt;/p&gt;
+
+&lt;p&gt;task_struct结构体类似Jvm中的instance_oop对象，是一个多层次链，用来存储运行时需要的所有资源引用。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/task_struct.png&quot; alt=&quot;task_struct&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;用户线程&quot;&gt;用户线程&lt;/h3&gt;
+
+&lt;p&gt;用户线程指的是完全建立在用户空间的线程库，它的建立，同步，销毁，调度完全在用户空间完成，不需要内核的帮助。所以，这种线程的操作是极其快速的且低消耗的。&lt;/p&gt;
+
+&lt;h2 id=&quot;jvm中的执行结构&quot;&gt;Jvm中的执行结构&lt;/h2&gt;
+
+&lt;h3 id=&quot;线程&quot;&gt;线程&lt;/h3&gt;
+
+&lt;p&gt;在linux平台上，jvm内的线程模型也是1对1的关系&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/jvm-thread-frame.png&quot; alt=&quot;jvm thread model&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;参考文献&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://cs.nyu.edu/courses/fall09/G22.2250-001/class-notes.html&quot;&gt;G22.2250 Operating Systems&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.oracle.com/cd/E19455-01/806-5257/mtintro-72944/index.html&quot;&gt;Multithreaded Programming Guide&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.it.uu.se/education/course/homepage/os/vt18/&quot;&gt;Operating systems&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jvm" />
+      
+
+      
+        <summary type="html">POSIX.equals(“Portable Operating System Interface”)</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">JVM 内部机制(三)调试工具集</title>
+      <link href="http://localhost:4000/jvm-debug-tool" rel="alternate" type="text/html" title="JVM 内部机制(三)调试工具集" />
+      <published>2016-02-05T20:50:00+08:00</published>
+      <updated>2016-02-05T20:50:00+08:00</updated>
+      <id>http://localhost:4000/jvm-debug-tool</id>
+      <content type="html" xml:base="http://localhost:4000/jvm-debug-tool">&lt;p&gt;JVM运行时调试工具集&lt;/p&gt;
+
+&lt;h3 id=&quot;todo&quot;&gt;TODO&lt;/h3&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jvm" />
+      
+
+      
+        <summary type="html">JVM运行时调试工具集</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">JVM中的常见约定</title>
+      <link href="http://localhost:4000/jvm-internals" rel="alternate" type="text/html" title="JVM中的常见约定" />
+      <published>2016-01-23T15:05:10+08:00</published>
+      <updated>2016-01-23T15:05:10+08:00</updated>
+      <id>http://localhost:4000/jvm-internals</id>
+      <content type="html" xml:base="http://localhost:4000/jvm-internals">&lt;p&gt;Language is just like a puppet.&lt;/p&gt;
+
+&lt;h3 id=&quot;在类签名中-v-是什么意思&quot;&gt;在类签名中 “()V” 是什么意思?&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;The JVM uses a compact way of storing method signatures, of which constructors are considered a special case.
+
+For your example:
+
+() indicates a method taking no arguments
+V indicates that it returns nothing
+The other parts of the scheme are:
+
+B - byte
+C - char
+D - double
+F - float
+I - int
+J - long
+S - short
+V - void
+Z - boolean
+[ - array of the thing following the bracket
+L [class name] ; - instance of this class, with dots becoming slashes
+( [args] ) [return type] - method signature
+For example:
+
+public int foo(String bar, long[][] baz)
+would become
+
+(Ljava/lang/String;[[J)I
+See the spec at Sun^H^H^HOracle's web site
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;union用法示例&quot;&gt;union用法示例&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include&amp;lt;stdio.h&amp;gt;
+
+union var{        
+    long int l;        
+    int i;
+};
+
+main(){        
+    union var v;        
+    v.l = 5;        
+    printf(&quot;v.l is %d\n&quot;,v.i);        
+    v.i = 6;        
+    printf(&quot;now v.l is %ld! the address is %p\n&quot;,v.l,&amp;amp;v.l);        
+    printf(&quot;now v.i is %d! the address is %p\n&quot;,v.i,&amp;amp;v.;
+}
+
+结果：v.l is 5now v.l is 6! the address is 0xbfad1e2c
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jvm" />
+      
+
+      
+        <summary type="html">Language is just like a puppet.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">JVM内部机制(二)Java方法调用</title>
+      <link href="http://localhost:4000/jvm-method-call" rel="alternate" type="text/html" title="JVM内部机制(二)Java方法调用" />
+      <published>2016-01-22T22:10:11+08:00</published>
+      <updated>2016-01-22T22:10:11+08:00</updated>
+      <id>http://localhost:4000/jvm-method-call</id>
+      <content type="html" xml:base="http://localhost:4000/jvm-method-call">&lt;p&gt;封装、继承、多态。&lt;/p&gt;
+
+&lt;p&gt;封装做为继承奠定基础，继承又为多态的表达奠定基础。&lt;/p&gt;
+
+&lt;h3 id=&quot;堆栈&quot;&gt;堆栈&lt;/h3&gt;
+
+&lt;p&gt;堆的索引保存在栈上。&lt;/p&gt;
+
+&lt;p&gt;堆栈是一种数据结构,但更准确的说法是它是一种算法。&lt;/p&gt;
+
+&lt;p&gt;方法调用过程中, 堆栈的作用:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;存储方法用到的参数。用BP+偏移量的方法,把参数引入到方法作用域内。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;存储方法的返回值。把返回值重新放回到调用方的栈中。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;存储下一条指令的地址, 以便方法调用返回后继续执行。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;存储机器指令用到的操作数。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;堆栈先进后出、后进先出的性质, 契合了函数嵌套调用的过程。&lt;/p&gt;
+
+&lt;p&gt;就像拉皮筋,被动伸展（这个过程消耗生物体能量）,却可自动收缩。递归表达了更高级的调用形式- 自动伸缩。&lt;/p&gt;
+
+&lt;p&gt;方法调用的技术实现可通过两个寄存器(bp,sp)交替赋值做到。这样形式是为传参和带值返回设计的，因为参数的数量和类型是不固定的。&lt;/p&gt;
+
+&lt;p&gt;如果不考虑传参，直接jmp也可以模拟函数调用。在数字电路的实现程序中存在很多的goto或者直接跳转。&lt;/p&gt;
+
+&lt;p&gt;进程加载后,加载器在table中默认寻找代码段main标签指向的地址，并放入寄存器(CS:IP),开始拉皮筋式的函数调用。&lt;/p&gt;
+
+&lt;p&gt;CS:IP 和 BP:SP 张开了一个至少2个维度的空间。随着指令指针IP的往前推进,BP和SP像两个用弹簧连在一起的滑块,上下移动。&lt;/p&gt;
+
+&lt;p&gt;在Hotspot中通过解析字节码实现的函数调用,在宏观上也是基于上面的认识。&lt;/p&gt;
+
+&lt;h3 id=&quot;jvm中java函数的执行过程&quot;&gt;JVM中java函数的执行过程&lt;/h3&gt;
+
+&lt;p&gt;JVM中执行Java方法经历了两个大的阶段:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;ol&gt;
+      &lt;li&gt;JVM为执行java函数配备堆栈模型，然后JMP到调用Main函数。 这一步实现了从C++到Java的跨越。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;虚拟机的设计目标就是为了做到这一步，JVM中所有的设计都是为了高效、准确的执行java字节码中的方法。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;ol&gt;
+      &lt;li&gt;从字节码中解析字节码函数调用指令，eg. invoke_virtual，通过解释器或者JIT的指令分发函数去执行java函数。 从这个角度讲，java函数完成了‘函数’的定义，这个阶段的函数是抽象命令的集合。当被JIT解释执行的时候，才对应到了不同CPU架构下的具体指令的函数实现。Java的函数实现过程是用具体CPU架构下的指令去拟合的过程。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;从抽象到具体的实现过程中，存在各种映射关系。这种映射可以有不同类型的解释器或者编译器完成。&lt;/p&gt;
+
+&lt;h4 id=&quot;第一阶段-使用jni接口调用main函数&quot;&gt;第一阶段 使用JNI接口调用Main函数&lt;/h4&gt;
+
+&lt;p&gt;下面是一个长途跋涉的分析过程。&lt;/p&gt;
+
+&lt;p&gt;在jvm的加载过程中，InvocationFunctions* ifn 这个结构体是libjvm动态库加载过程的精华所在。InvocationFunctions 是由3个函数指针组成的结构体。分别指向三个JNI接口。&lt;/p&gt;
+
+&lt;p&gt;启动步骤包括&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;JLI_Launch -&amp;gt; LoadJavaVM -&amp;gt; JVMInit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;第一步，启动器中的main函数&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int
+main(int argc, char **argv)
+{
+    /* ..省略.. */ // 这一步直接返回JLI_Launch
+    return JLI_Launch(margc, margv,
+                   sizeof(const_jargs) / sizeof(char *), const_jargs,
+                   sizeof(const_appclasspath) / sizeof(char *), const_appclasspath,
+                   FULL_VERSION,
+                   DOT_VERSION,
+                   (const_progname != NULL) ? const_progname : *margv,
+                   (const_launcher != NULL) ? const_launcher : *margv,
+                   (const_jargs != NULL) ? JNI_TRUE : JNI_FALSE,
+                   const_cpwildcard, const_javaw, const_ergo_class);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;第二步，初始化jvm， 这一步相当于为工厂车间里面的各种生产工具上电。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
+ * Entry point. 
+ */
+int
+JLI_Launch(int argc, char ** argv,              /* main argc, argc */
+        int jargc, const char** jargv,          /* java args */
+        int appclassc, const char** appclassv,  /* app classpath */
+        const char* fullversion,                /* full version defined */
+        const char* dotversion,                 /* dot version defined */
+        const char* pname,                      /* program name */
+        const char* lname,                      /* launcher name */
+        jboolean javaargs,                      /* JAVA_ARGS */
+        jboolean cpwildcard,                    /* classpath wildcard*/
+        jboolean javaw,                         /* windows-only javaw */
+        jint ergo                               /* ergonomics class policy */
+)
+{
+    int mode = LM_UNKNOWN;  // 有三种模式 { &quot;Unknown&quot;, &quot;Main class&quot;, &quot;JAR file&quot; }; 用Main class 启动或者jar包启动，默认为未知
+    char *what = NULL;
+    char *cpath = 0;
+    char *main_class = NULL; // 指定main_class
+    int ret;
+    InvocationFunctions ifn; // vm从动态库加载以后，返回地址存在这个结构中。为JNI本地函数调用放开接口，这个结构体中存储了3个函数指针。调用者可直接跳转。
+    jlong start, end;
+    char jvmpath[MAXPATHLEN]; // jvm 路径
+    char jrepath[MAXPATHLEN]; // jre 路径
+    char jvmcfg[MAXPATHLEN];
+
+    _fVersion = fullversion;
+    _dVersion = dotversion;
+    _launcher_name = lname;
+    _program_name = pname;
+    _is_java_args = javaargs;
+    _wc_enabled = cpwildcard;
+    _ergo_policy = ergo; // java -XX:+PrintFlagsInitial -version jvm 运行时参数设置。 ergonomics class 可以解释为 java运行时体征类
+    /*
+     * 略过
+     */
+    if (!LoadJavaVM(jvmpath, &amp;amp;ifn)) { // 从相应平台上加载jvm的动态链接库，初始化ifn
+        return(6);
+    }
+    .... 为java application设置参数（略过） ....
+    // 启动jvm， 这个函数以后，java就像天空中的风筝，与启动器分道扬镳了
+    return JVMInit(&amp;amp;ifn, threadStackSize, argc, argv, mode, what, ret);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;接下来，创建一个启动线程。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int
+JVMInit(InvocationFunctions* ifn, jlong threadStackSize,
+        int argc, char **argv,
+        int mode, char *what, int ret)
+{
+    ShowSplashScreen();
+    return ContinueInNewThread(ifn, threadStackSize, argc, argv, mode, what, ret);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;最后，设置主线程堆栈大小，传入参数，正式载入JavaMain&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int
+ContinueInNewThread(InvocationFunctions* ifn, jlong threadStackSize,
+                    int argc, char **argv,
+                    int mode, char *what, int ret)
+{
+
+    /*
+     * If user doesn't specify stack size, check if VM has a preference.
+     * Note that HotSpot no longer supports JNI_VERSION_1_1 but it will
+     * return its default stack size through the init args structure.
+     */
+    if (threadStackSize == 0) {
+      struct JDK1_1InitArgs args1_1;
+      memset((void*)&amp;amp;args1_1, 0, sizeof(args1_1));
+      args1_1.version = JNI_VERSION_1_1;
+      ifn-&amp;gt;GetDefaultJavaVMInitArgs(&amp;amp;args1_1);  /* ignore return value */
+      if (args1_1.javaStackSize &amp;gt; 0) {
+         threadStackSize = args1_1.javaStackSize;
+      }
+    }
+
+    { /* Create a new thread to create JVM and invoke main method */
+      JavaMainArgs args;
+      int rslt;
+
+      args.argc = argc;
+      args.argv = argv;
+      args.mode = mode;
+      args.what = what;
+      args.ifn = *ifn;
+
+      rslt = ContinueInNewThread0(JavaMain, threadStackSize, (void*)&amp;amp;args);
+      /* If the caller has deemed there is an error we
+       * simply return that, otherwise we return the value of
+       * the callee
+       */
+      return (ret != 0) ? ret : rslt;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;jvm中使用&lt;a href=&quot;http://man7.org/linux/man-pages/man3/pthread_create.3.html&quot;&gt;pthread_create&lt;/a&gt;创建线程资源。&lt;/p&gt;
+
+&lt;p&gt;关于pthread_create相关的系统调用函数在&lt;unix系统编程&gt;一书有非常精彩，终生难忘的讲解。&lt;/unix系统编程&gt;&lt;/p&gt;
+
+&lt;p&gt;在pthread_create调用过程中，参数 (void &lt;em&gt;(&lt;/em&gt;)(void*))continuation 是一个函数指针格式的入参，指向JavaMain入口函数。&lt;/p&gt;
+
+&lt;p&gt;JavaMain的定义&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int JNICALL JavaMain(void * args); /* entry point 
+
+int JNICALL
+JavaMain(void * _args)
+{
+    JavaMainArgs *args = (JavaMainArgs *)_args; // 参数的地址是随线程启动传入的
+    int argc = args-&amp;gt;argc; // 参数数量，对函数来说，数量和类型同等重要，因为它是寻址依据。
+    char **argv = args-&amp;gt;argv;
+    int mode = args-&amp;gt;mode;
+    char *what = args-&amp;gt;what;
+    InvocationFunctions ifn = args-&amp;gt;ifn;//函数指针构成的结构体
+
+    JavaVM *vm = 0;
+    JNIEnv *env = 0;
+    jclass mainClass = NULL;
+    jclass appClass = NULL; // actual application class being launched
+    jmethodID mainID;
+    jobjectArray mainArgs;
+    int ret = 0;
+    jlong start, end;
+
+    ....
+
+    if (!InitializeJVM(&amp;amp;vm, &amp;amp;env, &amp;amp;ifn)) { // ifn-&amp;gt;CreateJavaVM(pvm, (void **)penv, &amp;amp;args); 这一步初始化虚拟机， 可以看到ifn所以jvm动态库入口的函数指针，在这个函数中的作用是初始化JVM。以上的5步函数跳转是为这次调用准备环境变量和参数。
+        JLI_ReportErrorMessage(JVM_ERROR1);
+        exit(1);
+    }
+    
+    .....
+
+    /* Invoke main method. */  // 这里调用Main函数。
+    (*env)-&amp;gt;CallStaticVoidMethod(env, mainClass, mainID, mainArgs);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;启动器主体部分逻辑分析完毕。&lt;/p&gt;
+
+&lt;p&gt;ifn的定义如下:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
+ * Pointers to the needed JNI invocation API, initialized by LoadJavaVM.
+ */
+typedef jint (JNICALL *CreateJavaVM_t)(JavaVM **pvm, void **env, void *args);
+typedef jint (JNICALL *GetDefaultJavaVMInitArgs_t)(void *args);
+typedef jint (JNICALL *GetCreatedJavaVMs_t)(JavaVM **vmBuf, jsize bufLen, jsize *nVMs);
+
+typedef struct {
+    CreateJavaVM_t CreateJavaVM;
+    GetDefaultJavaVMInitArgs_t GetDefaultJavaVMInitArgs;
+    GetCreatedJavaVMs_t GetCreatedJavaVMs;
+} InvocationFunctions;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ifn-&amp;gt;CreateJavaVM的值指向了libjvm动态库导出的符号链接JNI_CreateJavaVM。&lt;/p&gt;
+
+&lt;p&gt;另外两个函数指针被Java Native函数使用。&lt;/p&gt;
+
+&lt;p&gt;这个方法的定义文件是&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/jdk8u/hotspot/src/share/vm/prims/jni.cpp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;JNI_CreateJavaVM函数后，Java世界大门从此打开。&lt;/p&gt;
+
+&lt;h4 id=&quot;java中的函数调用过程&quot;&gt;Java中的函数调用过程&lt;/h4&gt;
+
+&lt;p&gt;函数调用堆栈&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/JavaCalls.png&quot; alt=&quot;jvm函数调用堆栈&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;JavaCalls&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;经过一系列的引导和堆栈切换，最终函数落到这个地方:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  jdk8u/hotspot/src/share/vm/runtime/javaCalls.cpp
+  ...
+
+    // do call
+  { JavaCallWrapper link(method, receiver, result, CHECK);
+    { HandleMark hm(thread);  // HandleMark used by HandleMarkCleaner
+
+      StubRoutines::call_stub()(
+        (address)&amp;amp;link,
+        // (intptr_t*)&amp;amp;(result-&amp;gt;_value), // see NOTE above (compiler problem)
+        result_val_address,          // see NOTE above (compiler problem)
+        result_type,
+        method(),
+        entry_point,
+        args-&amp;gt;parameters(),
+        args-&amp;gt;size_of_parameters(),
+        CHECK
+      );
+  } // Exit JavaCallWrapper (can block - potential return oop must be preserved)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这个方法是Jvm中最精妙的地方，它是一个陷阱。&lt;/p&gt;
+
+&lt;p&gt;Java文件中定义的方法, 它按照MethodDesc定义的格式被载入内存后，始终以java字节码的形式存在于Metaspace的堆中。背后的问题是，C++生成的机器指令如何调用抽象的“字节码”？&lt;/p&gt;
+
+&lt;p&gt;或者说，java的字节码是如何“嫁接”或者“寄生”到C++的堆栈中的？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/grafting.png&quot; alt=&quot;嫁接&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;字节码中的method在JVM中布局结构,如下图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/Method.png&quot; alt=&quot;java method layout&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;call_stub 也是一个函数指针，定义如下:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; // Calls to Java
+  typedef void (*CallStub)(
+    address   link,
+    intptr_t* result,
+    BasicType result_type,
+    Method* method,
+    address   entry_point,
+    intptr_t* parameters,
+    int       size_of_parameters,
+    TRAPS
+  );
+
+   static CallStub call_stub() { 
+       return CAST_TO_FN_PTR(CallStub, _call_stub_entry); 
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;x86平台上，_call_stub_entry 在文件&lt;/p&gt;
+
+&lt;p&gt;jdk8u/hotspot/src/cpu/x86/vm/stubGenerator_x86_64.cpp&lt;/p&gt;
+
+&lt;p&gt;中被初始化，这个类是平台相关的实现。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    StubRoutines::_call_stub_entry =
+      generate_call_stub(StubRoutines::_call_stub_return_address);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这个陷阱的布置路线&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;thread.cpp -&amp;gt; Threads::create_vm()
+
+↓↓↓↓↓↓↓↓↓ 
+
+init.cpp -&amp;gt; init_globals() -&amp;gt; stubRoutines_init1() -&amp;gt; stubRoutines_init2()
+
+↓↓↓↓↓↓↓↓↓ 
+
+stubRoutines.cpp
+StubGenerator_generate() -&amp;gt; generate_initial()
+
+↓↓↓↓↓↓↓↓↓ 
+StubRoutines::_call_stub_entry              =
+      generate_call_stub(StubRoutines::_call_stub_return_address);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;x86上的陷阱生成函数StubGenerator_generate(), 分析一下这个函数&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//------------------------------------------------------------------------------------------------------------------------
+  // Call stubs are used to call Java from C
+  //
+  //    [ return_from_Java     ] &amp;lt;--- rsp
+  //    [ argument word n      ]
+  //      ...
+  // -N [ argument word 1      ]
+  // -7 [ Possible padding for stack alignment ]
+  // -6 [ Possible padding for stack alignment ]
+  // -5 [ Possible padding for stack alignment ]
+  // -4 [ mxcsr save           ] &amp;lt;--- rsp_after_call
+  // -3 [ saved rbx,            ]
+  // -2 [ saved rsi            ]
+  // -1 [ saved rdi            ]
+  //  0 [ saved rbp,            ] &amp;lt;--- rbp,
+  //  1 [ return address       ]
+  //  2 [ ptr. to call wrapper ]
+  //  3 [ result               ]
+  //  4 [ result_type          ]
+  //  5 [ method               ]
+  //  6 [ entry_point          ]
+  //  7 [ parameters           ]
+  //  8 [ parameter_size       ]
+  //  9 [ thread               ]
+
+
+  address generate_call_stub(address&amp;amp; return_address) {
+    StubCodeMark mark(this, &quot;StubRoutines&quot;, &quot;call_stub&quot;);
+    address start = __ pc(); // 取到当前指令寄存器的值，从这个地址开始注入“字节码”编译后的汇编代码
+
+    // stub code parameters / addresses
+    assert(frame::entry_frame_call_wrapper_offset == 2, &quot;adjust this code&quot;);
+    bool  sse_save = false;
+    const Address rsp_after_call(rbp, -4 * wordSize); // same as in generate_catch_exception()!
+    const int     locals_count_in_bytes  (4*wordSize);
+    const Address mxcsr_save    (rbp, -4 * wordSize);
+    const Address saved_rbx     (rbp, -3 * wordSize);
+    const Address saved_rsi     (rbp, -2 * wordSize);
+    const Address saved_rdi     (rbp, -1 * wordSize);
+    const Address result        (rbp,  3 * wordSize);
+    const Address result_type   (rbp,  4 * wordSize);
+    const Address method        (rbp,  5 * wordSize);
+    const Address entry_point   (rbp,  6 * wordSize);
+    const Address parameters    (rbp,  7 * wordSize);
+    const Address parameter_size(rbp,  8 * wordSize);
+    const Address thread        (rbp,  9 * wordSize); // same as in generate_catch_exception()!
+    sse_save =  UseSSE &amp;gt; 0;
+
+    // stub code // 桩代码开始  __ 这个符号是一个宏，被替换后执行emit方法： 直接把机器指令送入代码段内存
+    __ enter();
+    __ movptr(rcx, parameter_size);              // parameter counter
+    __ shlptr(rcx, Interpreter::logStackElementSize); // convert parameter count to bytes
+    __ addptr(rcx, locals_count_in_bytes);       // reserve space for register saves
+    __ subptr(rsp, rcx);
+    __ andptr(rsp, -(StackAlignmentInBytes));    // Align stack
+
+    // save rdi, rsi, &amp;amp; rbx, according to C calling conventions // 这个地方是最微妙的地方，查了很多资料后来终于懂了
+    __ movptr(saved_rdi, rdi);
+    __ movptr(saved_rsi, rsi);
+    __ movptr(saved_rbx, rbx);
+    // save and initialize %mxcsr
+    if (sse_save) {
+      Label skip_ldmx;
+      __ stmxcsr(mxcsr_save);
+      __ movl(rax, mxcsr_save);
+      __ andl(rax, MXCSR_MASK);    // Only check control and mask bits
+      ExternalAddress mxcsr_std(StubRoutines::addr_mxcsr_std());
+      __ cmp32(rax, mxcsr_std);
+      __ jcc(Assembler::equal, skip_ldmx);
+      __ ldmxcsr(mxcsr_std);
+      __ bind(skip_ldmx);
+    }
+
+    // make sure the control word is correct.
+    __ fldcw(ExternalAddress(StubRoutines::addr_fpu_cntrl_wrd_std()));
+
+#ifdef ASSERT
+    // make sure we have no pending exceptions
+    { Label L;
+      __ movptr(rcx, thread);
+      __ cmpptr(Address(rcx, Thread::pending_exception_offset()), (int32_t)NULL_WORD);
+      __ jcc(Assembler::equal, L);
+      __ stop(&quot;StubRoutines::call_stub: entered with pending exception&quot;);
+      __ bind(L);
+    }
+#endif
+
+    // pass parameters if any
+    BLOCK_COMMENT(&quot;pass parameters if any&quot;);
+    Label parameters_done;
+    __ movl(rcx, parameter_size);  // parameter counter
+    __ testl(rcx, rcx);
+    __ jcc(Assembler::zero, parameters_done);
+
+    // parameter passing loop
+
+    Label loop;
+    // Copy Java parameters in reverse order (receiver last)
+    // Note that the argument order is inverted in the process
+    // source is rdx[rcx: N-1..0]
+    // dest   is rsp[rbx: 0..N-1]
+
+    __ movptr(rdx, parameters);          // parameter pointer
+    __ xorptr(rbx, rbx);
+
+    __ BIND(loop); // 这一步循环，把参数复制到当前栈中
+
+    // get parameter
+    __ movptr(rax, Address(rdx, rcx, Interpreter::stackElementScale(), -wordSize));
+    __ movptr(Address(rsp, rbx, Interpreter::stackElementScale(),
+                    Interpreter::expr_offset_in_bytes(0)), rax);          // store parameter
+    __ increment(rbx);
+    __ decrement(rcx);
+    __ jcc(Assembler::notZero, loop);
+
+    // call Java function
+    __ BIND(parameters_done);
+    __ movptr(rbx, method);           // get Method*  // 保存mothod的地址，跳入 _entry_point 以后会用到
+    __ movptr(rax, entry_point);      // get entry_point // 字节码解析入口
+    __ mov(rsi, rsp);                 // set sender sp
+    BLOCK_COMMENT(&quot;call Java function&quot;);
+    __ call(rax);
+
+    BLOCK_COMMENT(&quot;call_stub_return_address:&quot;);
+    return_address = __ pc();
+
+#ifdef COMPILER2
+    {
+      Label L_skip;
+      if (UseSSE &amp;gt;= 2) {
+        __ verify_FPU(0, &quot;call_stub_return&quot;);
+      } else {
+        for (int i = 1; i &amp;lt; 8; i++) {
+          __ ffree(i);
+        }
+
+        // UseSSE &amp;lt;= 1 so double result should be left on TOS
+        __ movl(rsi, result_type);
+        __ cmpl(rsi, T_DOUBLE);
+        __ jcc(Assembler::equal, L_skip);
+        if (UseSSE == 0) {
+          // UseSSE == 0 so float result should be left on TOS
+          __ cmpl(rsi, T_FLOAT);
+          __ jcc(Assembler::equal, L_skip);
+        }
+        __ ffree(0);
+      }
+      __ BIND(L_skip);
+    }
+#endif // COMPILER2
+
+    // store result depending on type
+    // (everything that is not T_LONG, T_FLOAT or T_DOUBLE is treated as T_INT)
+    __ movptr(rdi, result);
+    Label is_long, is_float, is_double, exit;
+    __ movl(rsi, result_type);
+    __ cmpl(rsi, T_LONG);
+    __ jcc(Assembler::equal, is_long);
+    __ cmpl(rsi, T_FLOAT);
+    __ jcc(Assembler::equal, is_float);
+    __ cmpl(rsi, T_DOUBLE);
+    __ jcc(Assembler::equal, is_double);
+
+    // handle T_INT case
+    __ movl(Address(rdi, 0), rax);
+    __ BIND(exit);
+
+    // check that FPU stack is empty
+    __ verify_FPU(0, &quot;generate_call_stub&quot;);
+
+    // pop parameters
+    __ lea(rsp, rsp_after_call);
+
+    // restore %mxcsr
+    if (sse_save) {
+      __ ldmxcsr(mxcsr_save);
+    }
+
+    // restore rdi, rsi and rbx,
+    __ movptr(rbx, saved_rbx);
+    __ movptr(rsi, saved_rsi);
+    __ movptr(rdi, saved_rdi);
+    __ addptr(rsp, 4*wordSize);
+
+    // return
+    __ pop(rbp);
+    __ ret(0);
+
+    // handle return types different from T_INT
+    __ BIND(is_long);
+    __ movl(Address(rdi, 0 * wordSize), rax);
+    __ movl(Address(rdi, 1 * wordSize), rdx);
+    __ jmp(exit);
+
+    __ BIND(is_float);
+    // interpreter uses xmm0 for return values
+    if (UseSSE &amp;gt;= 1) {
+      __ movflt(Address(rdi, 0), xmm0);
+    } else {
+      __ fstp_s(Address(rdi, 0));
+    }
+    __ jmp(exit);
+
+    __ BIND(is_double);
+    // interpreter uses xmm0 for return values
+    if (UseSSE &amp;gt;= 2) {
+      __ movdbl(Address(rdi, 0), xmm0);
+    } else {
+      __ fstp_d(Address(rdi, 0));
+    }
+    __ jmp(exit);
+
+    return start;
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这段代码最让人费解的是参数传递问题:&lt;/p&gt;
+
+&lt;p&gt;如何在解析字节码的时候，拿到参数的类型和对应的值？&lt;/p&gt;
+
+&lt;p&gt;这个问题最终的答案在_entry_point例程中。 它也是一个提前挖好的“陷阱”。&lt;/p&gt;
+
+&lt;p&gt;上一个函数执行以后，通过这个指令&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   __ movptr(rax, entry_point);      // get entry_point // 字节码解析入口
+    __ mov(rsi, rsp);                 // set sender sp
+    BLOCK_COMMENT(&quot;call Java function&quot;);
+    __ call(rax);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;跳入了 entry_point， 这个陷阱的“生成过程”如下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//
+// Generic interpreted method entry to (asm) interpreter
+//
+address InterpreterGenerator::generate_normal_entry(bool synchronized) {
+  // determine code generation flags
+  bool inc_counter  = UseCompiler || CountCompiledCalls;
+
+  // ebx: Method*
+  // r13: sender sp
+  address entry_point = __ pc();
+
+  const Address constMethod(rbx, Method::const_offset()); // java字节码存在constMethod中， Method中保存constMethod的引用
+  const Address access_flags(rbx, Method::access_flags_offset());
+  const Address size_of_parameters(rdx,
+                                   ConstMethod::size_of_parameters_offset()); //取得参数数量
+  const Address size_of_locals(rdx, ConstMethod::size_of_locals_offset()); //取得本地变量的数量。  
+
+  // get parameter size (always needed)
+  __ movptr(rdx, constMethod);
+  __ load_unsigned_short(rcx, size_of_parameters);
+
+  // rbx: Method*
+  // rcx: size of parameters // rcx寄存器的值，来自_call_stub
+  // r13: sender_sp (could differ from sp+wordSize if we were called via c2i )
+
+  __ load_unsigned_short(rdx, size_of_locals); // get size of locals in words
+  __ subl(rdx, rcx); // rdx = no. of additional locals
+
+  // YYY
+//   __ incrementl(rdx);
+//   __ andl(rdx, -2);
+
+  // see if we've got enough room on the stack for locals plus overhead.
+  generate_stack_overflow_check();
+
+  // get return address
+  __ pop(rax);
+
+  // compute beginning of parameters (r14)
+  __ lea(r14, Address(rsp, rcx, Address::times_8, -wordSize));
+
+  // rdx - # of additional locals
+  // allocate space for locals
+  // explicitly initialize locals  // 清零
+  {
+    Label exit, loop;
+    __ testl(rdx, rdx);
+    __ jcc(Assembler::lessEqual, exit); // do nothing if rdx &amp;lt;= 0
+    __ bind(loop);
+    __ push((int) NULL_WORD); // initialize local variables
+    __ decrementl(rdx); // until everything initialized
+    __ jcc(Assembler::greater, loop);
+    __ bind(exit);
+  }
+
+  // initialize fixed part of activation frame // 所有的尺寸设定好以后，生成java中的栈帧
+  generate_fixed_frame(false);
+
+  // make sure method is not native &amp;amp; not abstract
+#ifdef ASSERT
+  __ movl(rax, access_flags);
+  {
+    Label L;
+    __ testl(rax, JVM_ACC_NATIVE);
+    __ jcc(Assembler::zero, L);
+    __ stop(&quot;tried to execute native method as non-native&quot;);
+    __ bind(L);
+  }
+  {
+    Label L;
+    __ testl(rax, JVM_ACC_ABSTRACT);
+    __ jcc(Assembler::zero, L);
+    __ stop(&quot;tried to execute abstract method in interpreter&quot;);
+    __ bind(L);
+  }
+#endif
+
+  // Since at this point in the method invocation the exception
+  // handler would try to exit the monitor of synchronized methods
+  // which hasn't been entered yet, we set the thread local variable
+  // _do_not_unlock_if_synchronized to true. The remove_activation
+  // will check this flag.
+
+  const Address do_not_unlock_if_synchronized(r15_thread,
+        in_bytes(JavaThread::do_not_unlock_if_synchronized_offset()));
+  __ movbool(do_not_unlock_if_synchronized, true);
+
+  __ profile_parameters_type(rax, rcx, rdx);
+  // increment invocation count &amp;amp; check for overflow
+  Label invocation_counter_overflow;
+  Label profile_method;
+  Label profile_method_continue;
+  if (inc_counter) {
+    generate_counter_incr(&amp;amp;invocation_counter_overflow,
+                          &amp;amp;profile_method,
+                          &amp;amp;profile_method_continue);
+    if (ProfileInterpreter) {
+      __ bind(profile_method_continue);
+    }
+  }
+
+  Label continue_after_compile;
+  __ bind(continue_after_compile);
+
+  // check for synchronized interpreted methods
+  bang_stack_shadow_pages(false);
+
+  // reset the _do_not_unlock_if_synchronized flag
+  __ movbool(do_not_unlock_if_synchronized, false);
+
+  // check for synchronized methods
+  // Must happen AFTER invocation_counter check and stack overflow check,
+  // so method is not locked if overflows.
+  if (synchronized) {
+    // Allocate monitor and lock method
+    lock_method();
+  } else {
+    // no synchronization necessary
+#ifdef ASSERT
+    {
+      Label L;
+      __ movl(rax, access_flags);
+      __ testl(rax, JVM_ACC_SYNCHRONIZED);
+      __ jcc(Assembler::zero, L);
+      __ stop(&quot;method needs synchronization&quot;);
+      __ bind(L);
+    }
+#endif
+  }
+
+  // start execution
+#ifdef ASSERT
+  {
+    Label L;
+     const Address monitor_block_top (rbp,
+                 frame::interpreter_frame_monitor_block_top_offset * wordSize);
+    __ movptr(rax, monitor_block_top);
+    __ cmpptr(rax, rsp);
+    __ jcc(Assembler::equal, L);
+    __ stop(&quot;broken stack frame setup in interpreter&quot;);
+    __ bind(L);
+  }
+#endif
+
+  // jvmti support
+  __ notify_method_entry();
+
+  __ dispatch_next(vtos);
+
+  // invocation counter overflow
+  if (inc_counter) {
+    if (ProfileInterpreter) {
+      // We have decided to profile this method in the interpreter
+      __ bind(profile_method);
+      __ call_VM(noreg, CAST_FROM_FN_PTR(address, InterpreterRuntime::profile_method));
+      __ set_method_data_pointer_for_bcp();
+      __ get_method(rbx);
+      __ jmp(profile_method_continue);
+    }
+    // Handle overflow of counter and compile method
+    __ bind(invocation_counter_overflow);
+    generate_counter_overflow(&amp;amp;continue_after_compile);
+  }
+
+  return entry_point;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  // jvmti support
+  __ notify_method_entry();
+
+  __ dispatch_next(vtos);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这段代码继续往下执行字节码指令，进入到模板编译器阶段。&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jvm" />
+      
+
+      
+        <summary type="html">封装、继承、多态。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">JVM内部机制(一)加载字节码</title>
+      <link href="http://localhost:4000/jvm-class-loader" rel="alternate" type="text/html" title="JVM内部机制(一)加载字节码" />
+      <published>2016-01-15T23:25:35+08:00</published>
+      <updated>2016-01-15T23:25:35+08:00</updated>
+      <id>http://localhost:4000/jvm-class-loader</id>
+      <content type="html" xml:base="http://localhost:4000/jvm-class-loader">&lt;p&gt;How to load classfile ?&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    # What ? Why ? When? How ? 
+    public static void main(String[] args) {
+        int a;
+        System.out.println(a);
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在网上已经有很多文章讨论JVM, 以下是讲解JVM构成和运行机理的文章链接:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.oracle.com/javase/specs/&quot;&gt;Java Language and Virtual Machine Specifications&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Java_bytecode&quot;&gt;Java bytecode&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.cubrid.org/blog/understanding-jvm-internals&quot;&gt;Understanding JVM Internals&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.artima.com/insidejvm/ed2/jvm2.html&quot;&gt;The Architecture of the Java Virtual Machine&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.slideshare.net/RednaxelaFX/hotspot-vm20120303&quot;&gt;为啥别读HotSpot VM的源码&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/a1ec08fa513d2697ec074f9c5efbb2fb4216d81f.jpg&quot; alt=&quot;JVM的本质&quot; title=&quot;自动机&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://know.baidu.com/question/bb368a7cccaffc07649a794ae6e944e5ff6dd61&quot;&gt;图片来源&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;history-view&quot;&gt;History View&lt;/h2&gt;
+
+&lt;p&gt;在考察一项技术前,习惯查看一下它的history。因为从History里面能观察到一件事情的发展痕迹,它又不受当前环境的约束,很享受这个过程。 而且从历史信息中,你还可以了解到相关联的人、事、物,以及它们体现出来的价值观。&lt;/p&gt;
+
+&lt;p&gt;拿Java来说, 它的价值观是WORA(Write Once, Run Anywhere)。&lt;/p&gt;
+
+&lt;p&gt;因为它的这个价值取向,他的基本架构以及相关的服务衍生全部基于这个方向。&lt;/p&gt;
+
+&lt;p&gt;很多人拿java和C++比,和其他语言比,其实没有什么意义。它的设计目标不仅仅是在语言或者系统指令层面, 它的价值观是平台无关性。&lt;/p&gt;
+
+&lt;p&gt;在JVM中,系统指令由字节码动态生成。 至于java源文件,可以简单的理解为排版工具。&lt;/p&gt;
+
+&lt;p&gt;看下Java历史上的关键时间点&lt;/p&gt;
+
+&lt;p&gt;1991年4月,有james gosling博士领导的绿色计划(green project),名字叫OAK, 是不是很酷？ 它是java的前身。&lt;/p&gt;
+
+&lt;p&gt;2002年是java很重要的年份, 这一年java被大厂商一致性认可。同时这一年.net发布&lt;/p&gt;
+
+&lt;p&gt;2006年, sun 宣布开源java,并成立OpenJdk组织来维护代码。 在jdk1.7中,除了引用头文件和注释之外,其他部分两者基本一样。&lt;/p&gt;
+
+&lt;p&gt;2009年,oracle 收购java。&lt;/p&gt;
+
+&lt;h2 id=&quot;基础准备部分&quot;&gt;基础准备部分&lt;/h2&gt;
+
+&lt;h3 id=&quot;对字节byte的理解&quot;&gt;对字节(byte)的理解&lt;/h3&gt;
+
+&lt;p&gt;字节(Byte)是理解JVM内存模型的非常容易被忽略却很重的概念,它是JVM内存空间最基本的度量单位。&lt;/p&gt;
+
+&lt;p&gt;看一个例子&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;int[] foo = new int[1000000];&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;1 sizeof(int) == 4 * sizeof(byte), foo == 4M byte&lt;/p&gt;
+
+&lt;p&gt;对比&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;byte[] foo = new byte[1000000];&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;foo == 1M byte, 节省了3/4的内存&lt;/p&gt;
+
+&lt;p&gt;除了节省存储之外,还存在一个80/20原则。&lt;/p&gt;
+
+&lt;p&gt;生活中大部分信息,比如字母、汉字、可以直观感受的信息,”80%”可以用8位bit来表示。&lt;/p&gt;
+
+&lt;p&gt;使用byte可以轻松的表达其他类型, 不包括小数类型。浮点类型在JVM中有专门的实现。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Type&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+      &lt;th&gt;Default&lt;/th&gt;
+      &lt;th&gt;Size&lt;/th&gt;
+      &lt;th&gt;Example Literals&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;boolean&lt;/td&gt;
+      &lt;td&gt;true or false&lt;/td&gt;
+      &lt;td&gt;false&lt;/td&gt;
+      &lt;td&gt;1 bit&lt;/td&gt;
+      &lt;td&gt;true, false&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;byte&lt;/td&gt;
+      &lt;td&gt;twos complement integer&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1 byte&lt;/td&gt;
+      &lt;td&gt;(none)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;char&lt;/td&gt;
+      &lt;td&gt;Unicode character&lt;/td&gt;
+      &lt;td&gt;\u0000&lt;/td&gt;
+      &lt;td&gt;2 bytes&lt;/td&gt;
+      &lt;td&gt;‘a’, ‘\u0041’, ‘\101’,’\’, ‘'’, ‘\n’, ‘ß’&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;short&lt;/td&gt;
+      &lt;td&gt;twos complement integer&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;2 bytes&lt;/td&gt;
+      &lt;td&gt;(none)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;int&lt;/td&gt;
+      &lt;td&gt;twos complement integer&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;4 bytes&lt;/td&gt;
+      &lt;td&gt;-2, -1, 0, 1, 2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;long&lt;/td&gt;
+      &lt;td&gt;twos complement integer&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;8 bytes&lt;/td&gt;
+      &lt;td&gt;-2L, -1L, 0L, 1L, 2L&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;float&lt;/td&gt;
+      &lt;td&gt;IEEE 754 floating point&lt;/td&gt;
+      &lt;td&gt;0.0&lt;/td&gt;
+      &lt;td&gt;4 bytes&lt;/td&gt;
+      &lt;td&gt;1.23e100f, -1.23e-100f, .3f, 3.14F&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;double&lt;/td&gt;
+      &lt;td&gt;IEEE 754 floating point&lt;/td&gt;
+      &lt;td&gt;0.0&lt;/td&gt;
+      &lt;td&gt;8 bytes&lt;/td&gt;
+      &lt;td&gt;1.23456e300d, -1.23456e-300d, 1e1d&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;IEEE-754对浮点数有巧妙的定义,可参考&lt;a href=&quot;https://www.diycode.cc/topics/680&quot;&gt;IEEE-754 浮点数标准与 Java 实现&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;潜在的问题是，为什么clsassfile要设计成这个结构?&lt;/p&gt;
+
+&lt;p&gt;答案是为了保持上层结构的一致性。&lt;/p&gt;
+
+&lt;h3 id=&quot;java中的字节文件classfile&quot;&gt;Java中的字节文件(classfile)&lt;/h3&gt;
+
+&lt;p&gt;看一个简单的类&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;util&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HashMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;util&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;/**&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;*&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;author&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zhangqinghua&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;*/&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T1_1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;/**&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;param&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;*/&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TODO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;application&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;logic&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;here&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;HashMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hm&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HashMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;hm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;now&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;bar&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;baz&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;带调试信息编译&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;javac -g T1_1.java&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;classfile通过&lt;a href=&quot;https://github.com/stef-levesque/vscode-hexdump&quot;&gt;vscode-hexdump&lt;/a&gt;输出以后,直观感受如下:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  Offset: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 	
+00000000: CA FE BA BE 00 00 00 34 00 27 0A 00 0C 00 15 0A    J~:&amp;gt;...4.'......
+00000010: 00 16 00 17 07 00 18 0A 00 03 00 15 08 00 19 08    ................
+00000020: 00 1A 0A 00 03 00 1B 08 00 1C 08 00 1D 0B 00 1E    ................
+00000030: 00 1B 07 00 1F 07 00 20 01 00 06 3C 69 6E 69 74    ...........&amp;lt;init
+00000040: 3E 01 00 03 28 29 56 01 00 04 43 6F 64 65 01 00    &amp;gt;...()V...Code..
+00000050: 0F 4C 69 6E 65 4E 75 6D 62 65 72 54 61 62 6C 65    .LineNumberTable
+00000060: 01 00 04 6D 61 69 6E 01 00 16 28 5B 4C 6A 61 76    ...main...([Ljav
+00000070: 61 2F 6C 61 6E 67 2F 53 74 72 69 6E 67 3B 29 56    a/lang/String;)V
+00000080: 01 00 0A 53 6F 75 72 63 65 46 69 6C 65 01 00 09    ...SourceFile...
+00000090: 54 31 5F 31 2E 6A 61 76 61 0C 00 0D 00 0E 07 00    T1_1.java.......
+000000a0: 21 0C 00 22 00 23 01 00 11 6A 61 76 61 2F 75 74    !..&quot;.#...java/ut
+000000b0: 69 6C 2F 48 61 73 68 4D 61 70 01 00 03 6E 6F 77    il/HashMap...now
+000000c0: 01 00 03 62 61 72 0C 00 24 00 25 01 00 03 66 6F    ...bar..$.%...fo
+000000d0: 6F 01 00 03 62 61 7A 07 00 26 01 00 09 74 31 5F    o...baz..&amp;amp;...t1_
+000000e0: 31 2F 54 31 5F 31 01 00 10 6A 61 76 61 2F 6C 61    1/T1_1...java/la
+000000f0: 6E 67 2F 4F 62 6A 65 63 74 01 00 10 6A 61 76 61    ng/Object...java
+00000100: 2F 6C 61 6E 67 2F 53 79 73 74 65 6D 01 00 11 63    /lang/System...c
+00000110: 75 72 72 65 6E 74 54 69 6D 65 4D 69 6C 6C 69 73    urrentTimeMillis
+00000120: 01 00 03 28 29 4A 01 00 03 70 75 74 01 00 38 28    ...()J...put..8(
+00000130: 4C 6A 61 76 61 2F 6C 61 6E 67 2F 4F 62 6A 65 63    Ljava/lang/Objec
+00000140: 74 3B 4C 6A 61 76 61 2F 6C 61 6E 67 2F 4F 62 6A    t;Ljava/lang/Obj
+00000150: 65 63 74 3B 29 4C 6A 61 76 61 2F 6C 61 6E 67 2F    ect;)Ljava/lang/
+00000160: 4F 62 6A 65 63 74 3B 01 00 0D 6A 61 76 61 2F 75    Object;...java/u
+00000170: 74 69 6C 2F 4D 61 70 00 21 00 0B 00 0C 00 00 00    til/Map.!.......
+00000180: 00 00 02 00 01 00 0D 00 0E 00 01 00 0F 00 00 00    ................
+00000190: 1D 00 01 00 01 00 00 00 05 2A B7 00 01 B1 00 00    .........*7..1..
+000001a0: 00 01 00 10 00 00 00 06 00 01 00 00 00 0F 00 09    ................
+000001b0: 00 11 00 12 00 01 00 0F 00 00 00 51 00 03 00 05    ...........Q....
+000001c0: 00 00 00 25 B8 00 02 40 BB 00 03 59 B7 00 04 4E    ...%8..@;..Y7..N
+000001d0: 2D 12 05 12 06 B6 00 07 57 2D 3A 04 19 04 12 08    -....6..W-:.....
+000001e0: 12 09 B9 00 0A 03 00 57 B1 00 00 00 01 00 10 00    ..9....W1.......
+000001f0: 00 00 1A 00 06 00 00 00 15 00 04 00 16 00 0C 00    ................
+00000200: 17 00 15 00 18 00 18 00 19 00 24 00 1A 00 01 00    ..........$.....
+00000210: 13 00 00 00 02 00 14                               .......
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;看下他的数据结构定义&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+ClassFile {
+    u4             magic;  # 对应 CA FE BA BE,二进制字节码魔数 Magic。  在elf格式中也存在这样的模式,作用是区分二进制文件类型
+    u2             minor_version; # 副版本
+    u2             major_version; # 主版本
+    u2             constant_pool_count;
+    cp_info        constant_pool[constant_pool_count-1];
+    u2             access_flags;
+    u2             this_class;
+    u2             super_class;
+    u2             interfaces_count;
+    u2             interfaces[interfaces_count];
+    u2             fields_count;
+    field_info     fields[fields_count];
+    u2             methods_count;
+    method_info    methods[methods_count];
+    u2             attributes_count;
+    attribute_info attributes[attributes_count];
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;从上面数据结构上看,一个classfile要解析到内存,供JIT或者Intepreter使用,至少要做以下几件事:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;谁来负责解析？ 解析的顺序是什么？&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;把类型的元信息、字面量加载到相应区域(调试情况),比如class name, fileds name, function name 等&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;从Main函数启动主线程后,需要一个角色来驱动指令的往前推进,这是很重要的一步&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;JVM指令的翻译需要精确的上下文,比如堆上对象的引用,如何计算fields相对于instance的偏移？&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;函数是按需加载还是热加载？link的机制是什么？&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;先来看一个有趣的问题。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;who will load the loader?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;谁来负责加载根加载器本身?&lt;/p&gt;
+
+&lt;p&gt;答案是bootstrap classloader本身是平台相关的一部分,它不是java实现的&lt;/p&gt;
+
+&lt;p&gt;看下loader在加载过程中的位置&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/loader.png&quot; alt=&quot;jvm bootstrap loader&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Bootstrap class loader&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这个功能在openjdk源码中的定义位置&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;/jdk-8-hotspot/agent/src/share/classes/sun/jvm/hotspot/jdi/VirtualMachineImpl.java&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;代码片段如下:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;        javaLangString = st.probe(&quot;java/lang/String&quot;);
+        javaLangThread = st.probe(&quot;java/lang/Thread&quot;);
+        javaLangThreadGroup = st.probe(&quot;java/lang/ThreadGroup&quot;);
+        javaLangClass = st.probe(&quot;java/lang/Class&quot;);
+        javaLangClassLoader = st.probe(&quot;java/lang/ClassLoader&quot;);
+        javaLangThrowable = st.probe(&quot;java/lang/Throwable&quot;);
+        javaLangObject = st.probe(&quot;java/lang/Object&quot;);
+        javaLangCloneable = st.probe(&quot;java/lang/Cloneable&quot;);
+        javaIoSerializable = st.probe(&quot;java/io/Serializable&quot;);
+        javaLangEnum = st.probe(&quot;java/lang/Enum&quot;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;它实现了String、Thread、ThreadGroup、Class、ClassLoader、Throwable、Object、Cloneable、Serializable、Enum&lt;/p&gt;
+
+&lt;p&gt;这些class对象是把其它class文件映射到内存的基础, 包括下面的Ext class loader、System class loader。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ext class loader、System class loader&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;classLoaderExt.hpp 的定义位置, 负责加载jre/lib下的库文件&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;/jdk-8-hotspot/src/share/vm/classfile/classLoaderExt.hpp&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Loader 使用父辈委托代理模型(当有load请求时,直接委托), 当上面的Loader也找不到时, 子辈再亲自查找, 最后无法找到时抛出异常信息。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/jvmclassloader.jpg&quot; alt=&quot;jvm loader&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/loader-s.png&quot; alt=&quot;ext class loader&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;码字不易,转载注明出处。&lt;/p&gt;
+
+&lt;p&gt;下一篇文章 TODO: JVM中的函数调用模型&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jvm" />
+      
+
+      
+        <summary type="html">How to load classfile ?</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

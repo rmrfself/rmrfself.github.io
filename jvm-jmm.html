@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>JVM内部机制(七) Java内存模型(Java Momory Model)</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-abap.js"></script>
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="Learn, Innovate, Share - Business Based Vision." />
+    <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="http://localhost:4000/jvm-jmm" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="张庆华的个人日志" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="JVM内部机制(七) Java内存模型(Java Momory Model)" />
+    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:url" content="http://localhost:4000/jvm-jmm" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:tag" content="Jvm" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JVM内部机制(七) Java内存模型(Java Momory Model)" />
+    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:url" content="http://localhost:4000/" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="张庆华的个人日志" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Jvm" />
+    <meta name="twitter:site" content="@rmrfself" />
+    <meta name="twitter:creator" content="@rmrfself" />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="666" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "张庆华的个人日志",
+        "logo": "http://localhost:4000/assets/images/blog-icon.svg"
+    },
+    "url": "http://localhost:4000/jvm-jmm",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:4000/jvm-jmm"
+    },
+    "description": "Learn, Innovate, Share - Business Based Vision."
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="JVM内部机制(七) Java内存模型(Java Momory Model)" href="/feed.xml" />
+
+</head>
+<body class="home-template">
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
+            
+        
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-fb" href="https://facebook.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+</a>
+            
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <article class="post-full  no-image">
+            <header class="post-full-header">
+                <h1 class="post-full-title">JVM内部机制(七) Java内存模型(Java Momory Model)</h1>
+                <section class="post-full-meta">
+                    
+                        <span class="date-divider">分类: </span>
+                        
+                            
+                               <a href='/tag/jvm/'>JVM</a>
+                            
+                        
+                    
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="12 March 2016">2016-03-12 01:30</time>
+                </section>
+            </header>
+            
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <script type="math/tex; mode=display">e^{i\pi} + 1 = 0\\</script>
+
+<h2 id="什么是内存模型">什么是内存模型</h2>
+
+<p>Java的内存模型和jvm中的内存layout是两个不同的概念。</p>
+
+<p>Jvm中的Memory Layout，栈、栈帧、Heap[新生代(New Generation)、旧生代、MetaData区域]是一种内存结构，是为实现Java语言而设计的一种存储结构，它与jvm的运行时状态无关，只要运行Java程序，这种存贮结构就会被用到。</p>
+
+<p>而JSR133中定义的Java内存模型是Java语言层面的，讨论的核心是指令集(Instruction Set)如何在N个线程(并行执行序列)的背景下，使得每个单一线程以正确、符合预期的方式表达。</p>
+
+<p>那么，问题来了。</p>
+
+<p>在什么情况下，指令集会以符合预期的方式运行？相反，什么条件使得结果让人难以接受，为什么？</p>
+
+<p>Java的内存模型讨论的正是这种问题边界存在原因，以及最佳实践。</p>
+
+<h2 id="数据同步的两大问题类型">数据同步的两大问题类型</h2>
+
+<p>判断程序是否被正确同步,有两种方法:</p>
+
+<h3 id="data-race">Data Race</h3>
+
+<p>对共享的字段或者数组元素同时进行R-W(读写)操作,这种情况被称为“数据竞争”(data race)</p>
+
+<h3 id="-happen-before-relationship">⇒ Happen Before Relationship</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Happened-before">happened-before</a> 关系定义为:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>如果一个事件(event) 发生在另外一个事件前， 那么， 它们的结果也是如此。
+
+数学描述为
+
+传递性(transitivity): ∀ a,b,c,如果 a → b, b → c,  那么 a → c 
+
+对任意的a,b,c,  如果a发生在b之前，b发生在c之前， 那么， a 发生在c之前
+
+不自反特性: ∀a, a ↛ a 
+
+动作a不能在自身执行前发生
+
+不对称特性: ∀ a, b , 如果 a ≠ b, 那么 a → b , b ↛ a
+</code></pre></div></div>
+
+<p>Java程序中，固定的Happens-Before动作(actions、method、or sinle instruction)发生的情况有:</p>
+
+<ul>
+  <li>同一个线程内，排在前面的指令(actions: read OR write)一定先执行。</li>
+</ul>
+
+<p>或者说，同一线程内的动作是顺序执行(SO)的。</p>
+
+<ul>
+  <li>对监视器(monitor)的解锁动作(un-lock)一定发生在下一个锁动作(lock)之前。</li>
+</ul>
+
+<p>这是锁资源的独占特性</p>
+
+<ul>
+  <li>
+    <p>对volatile字段的写(W)动作发生在对这个字段的读(R)动作之前</p>
+  </li>
+  <li>
+    <p>线程启动(Thread.start())发生已启动线程(Treads)的动作(actions)之前</p>
+  </li>
+  <li>
+    <p>某一活动线程的内动作(action)发生其他线程从join()成功返回之前</p>
+  </li>
+  <li>
+    <p>动作传递特性</p>
+  </li>
+</ul>
+
+<p>对任意的a,b,c,  如果a发生在b之前，b发生在c之前， 那么， a 发生在c之前</p>
+
+<h3 id="产生数据同步问题的诱因">产生数据同步问题的诱因</h3>
+
+<ul>
+  <li>变量可见性(Visibility) → 不加控制的共享变量</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class LoopMayNeverEnd {
+    boolean done = false;
+
+    // 线程 1
+    void work() {
+        while (!done) {
+        // do work
+        }
+    }
+
+    // 线程 2
+    void stopWork() {
+        done = true;
+    }
+}
+</code></pre></div></div>
+
+<p>如果</p>
+
+<p>线程1(r) $\xrightarrow[\text{Before}]{\text{happens}}$ 线程2(r)</p>
+
+<p>那么，上面循环就编程了 while(true)了。</p>
+
+<p>导致问题的原因是</p>
+
+<p>线程1使用了其他线程也可以看到的变量。使用前并没有任务预防措施。</p>
+
+<ul>
+  <li>Ordering → 编译器特权带来的同步问题</li>
+</ul>
+
+<p>示例代码</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class BadlyOrdered {
+    boolean a = false;
+    boolean b = false;
+
+    // 线程 1
+    void threadOne() {
+        a = true;
+        b = true;
+    }
+
+    // 线程 2
+    boolean threadTwo() {
+        boolean r1 = b; // sees true
+        boolean r2 = a; // sees false
+        return r1 &amp;&amp; !r2; // returns true
+    }
+}
+</code></pre></div></div>
+
+<p>上述两个类方法缺少同步，这导致了线程2读取a,b的时候， 线程1执行到了一半: a == true, b == false。</p>
+
+<p>正确的方式应该是确保</p>
+
+<p>threadOne() $\xrightarrow[\text{Before}]{\text{happens}}$threadTwo()</p>
+
+<ul>
+  <li>原子性(Atomicity) → 读写的原子性封装</li>
+</ul>
+
+<h2 id="同步问题的根源-数据一致性">同步问题的根源： 数据一致性</h2>
+
+<h3 id="区分actions和executions">区分Actions和Executions</h3>
+
+<p>一个action被描述为一个tuple</p>
+
+<p>$⟨t,k,u,v⟩$, 有4种类型的变量定义</p>
+
+<ul>
+  <li>
+    <p>t → 代表执行动作的线程</p>
+  </li>
+  <li>
+    <p>k → 代表同步动作(Synchronization Actions)的类型</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>volatile read
+
+volatile write, 
+
+(normal or non-volatile) read
+
+(normal or non-volatile) write
+
+lock or unlock Volatile reads
+
+volatile writes
+
+locks and unlocks
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>v → 代表被actions用到的monitor或者变量</p>
+  </li>
+  <li>
+    <p>u → 此次动作的唯一ID</p>
+  </li>
+</ul>
+
+<p>一个执行(Executions)也被定义为一个tuple:</p>
+
+<p>⟨P,A,$\xrightarrow{po}$,$\xrightarrow{so}$,W,V,$\xrightarrow{\text{sw}}$,$\xrightarrow{\text{hb}}$⟩</p>
+
+<ul>
+  <li>
+    <p>P → 代表程序或者指令</p>
+  </li>
+  <li>
+    <p>A → 一组actions</p>
+  </li>
+  <li>
+    <p>$\xrightarrow{po}$ → A中被每个线程执行的actions的程序序列，这里不是指令序列。</p>
+  </li>
+</ul>
+
+<p>po → 程序顺序指的是编码是代码的定义顺序，这里是所有actions中的po</p>
+
+<ul>
+  <li>
+    <p>$\xrightarrow{so}$ → A中的同步顺序，这里还是程序序列</p>
+  </li>
+  <li>
+    <p>W → 在E中(执行序列中)定义的，可以被读感知到的写动作，记做W(r)</p>
+  </li>
+  <li>
+    <p>V → 代表写动作执行后的值。对A中的写动作w，记做V(w),在执行序列E中写入的值。</p>
+  </li>
+  <li>
+    <p>$\xrightarrow{sw}$ → 代表同步关系</p>
+  </li>
+</ul>
+
+<p>x $\xrightarrow{synchronizes with}$ y，意味着x与y同步</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+x = r1 (volatile write ⤞ 读取x的值之前，需要x的rlease状态)
+
+y = x (volatile read ⤞ 读取x的值之前要等待x release结束)
+
+</code></pre></div></div>
+
+<ul>
+  <li>$\xrightarrow{hb}$ → Happens Before 关系</li>
+</ul>
+
+<h3 id="同步的定义">同步的定义</h3>
+
+<p>如果满足一下条件， 执行序列E被认为是同步的</p>
+
+<p>1、每次读(read)到的值由执行序列E中的一次W决定。被定义为</p>
+
+<p>∀ r ∈ A, 使得</p>
+
+<script type="math/tex; mode=display">\begin{cases} 
+W(r) ∈ A \\
+W(r).v == r.v
+\end{cases}</script>
+
+<p>可理解为： 写动作发生在当前E中，读到的值等于写后的值</p>
+
+<p>2、代码执行顺序po和指令执行顺序同步顺序一致</p>
+
+<p>不可用存在这种情况:</p>
+
+<p>x,y ∈ A,  x $\xrightarrow{so}$ y &amp; y $\xrightarrow{po}$ x</p>
+
+<p>可理解为，对任意x,y 属于A， 不能存在以下情况:</p>
+
+<p>y同步于x，y的值有x决定。y却又先于x执行</p>
+
+<p>3、多线程执行服从于单线程指令执行一致性(The execution obeys intra-thread consistency)</p>
+
+<p>可以理解为</p>
+
+<p>多线程的执行结果与把多线程改造为单线程执行后的结果一致</p>
+
+<p>4、多线程服从Happen-before一致性规则</p>
+
+<h3 id="被jmm允许的意外情况">被Jmm允许的意外情况</h3>
+
+<p><img src="http://blog.h5tube.com/jmm-02.png" alt="jmm" /></p>
+
+<p>本文解释一下在JDK8中,JVM如何执行方法。</p>
+
+<h3 id="todo">TODO</h3>
+
+
+                </div>
+            </section>
+            <!-- Email subscribe form at the bottom of the page -->
+            
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+        </article>
+    </div>
+</main>
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/jvm/">Jvm</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/jvm-source-guide">JVM内部机制(六) HotSpot代码导读</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/jvm-source-guide-2">JVM内部机制(六) HotSpot代码导读</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/jvm-multiple-threads">JVM内部机制(五)多线程编程模型中的常见问题</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/jvm/">
+                                
+                                    See all 26 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card  no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/devops-kubernetes-basic">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Automation</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">kubernetes中的基本概念(一)</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card  no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/springboot-how-bean-managed">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Springboot</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">spring中的100个问题-bean是被透明化管理的?</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+        </div>
+    </div>
+</aside>
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://localhost:4000/">
+            
+                <img src="/assets/images/favicon.png" alt="张庆华的个人日志 icon" />
+            
+            <span>张庆华的个人日志</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">JVM内部机制(七) Java内存模型(Java Momory Model)</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=JVM%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6%28%E4%B8%83%29+Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%28Java+Momory+Model%29&amp;url=https://rmrfself.github.io/jvm-jmm"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/jvm-jmm"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+<!-- /post -->
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="my_profile">
+                    <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
+                    <div class='profile_detail'>
+                        <h5>关于我</h5>
+                    </div>
+                </section>
+                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+    
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-126286097-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+</body>
+</html>

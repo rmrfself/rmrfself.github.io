@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="http://localhost:4000/tag/algorithm/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2019-03-26T15:12:54+08:00</updated>
+  <id>http://localhost:4000/tag/algorithm/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">张庆华的个人日志 | </title>
+  
+
+  
+    <subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">常用工具类算法</title>
+      <link href="http://localhost:4000/archi-algorithm" rel="alternate" type="text/html" title="常用工具类算法" />
+      <published>2016-03-26T17:17:19+08:00</published>
+      <updated>2016-03-26T17:17:19+08:00</updated>
+      <id>http://localhost:4000/archi-algorithm</id>
+      <content type="html" xml:base="http://localhost:4000/archi-algorithm">&lt;p&gt;“你不解决问题，你和问题同归于寂。解决了问题，你和问题都明了起来”&lt;/p&gt;
+
+&lt;h3 id=&quot;比较两个字符串的异同&quot;&gt;比较两个字符串的异同&lt;/h3&gt;
+
+&lt;h4 id=&quot;算法解析&quot;&gt;算法解析&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/algorithm-string-compare.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;具体做法&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;分散&lt;被比较&gt;元素的序数到第一列&lt;/被比较&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;分散&lt;比较&gt;元素的序数到第一行&lt;/比较&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;逐行比较&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;比较规则: 比较左侧、上侧、左上角元素的大小，取最小值加1&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;返回对角线元素的值&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;算法验证&quot;&gt;算法验证&lt;/h4&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;
+
+&lt;p&gt;Code Example&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;org.springframework.beans.PropertyMatches.java&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;```
+private static int calculateStringDistance(String s1, String s2) {
+		if (s1.isEmpty()) {
+			return s2.length();
+		}
+		if (s2.isEmpty()) {
+			return s1.length();
+		}
+		int d[][] = new int[s1.length() + 1][s2.length() + 1];&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	for (int i = 0; i &amp;lt;= s1.length(); i++) {
+		d[i][0] = i;
+	}
+	for (int j = 0; j &amp;lt;= s2.length(); j++) {
+		d[0][j] = j;
+	}
+
+	for (int i = 1; i &amp;lt;= s1.length(); i++) {
+		char s_i = s1.charAt(i - 1);
+		for (int j = 1; j &amp;lt;= s2.length(); j++) {
+			int cost;
+			char t_j = s2.charAt(j - 1);
+			if (s_i == t_j) {
+				cost = 0;
+			}
+			else {
+				cost = 1;
+			}
+			d[i][j] = Math.min(Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1),
+					d[i - 1][j - 1] + cost);
+		}
+	}
+
+	return d[s1.length()][s2.length()];
+}
+```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="algorithm" />
+      
+
+      
+        <summary type="html">“你不解决问题，你和问题同归于寂。解决了问题，你和问题都明了起来”</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

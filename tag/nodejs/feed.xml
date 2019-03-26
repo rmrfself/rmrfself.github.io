@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="http://localhost:4000/tag/nodejs/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2019-03-26T15:12:54+08:00</updated>
+  <id>http://localhost:4000/tag/nodejs/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">张庆华的个人日志 | </title>
+  
+
+  
+    <subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Guideline-编写有效率的javascript代码</title>
+      <link href="http://localhost:4000/archi-efficient-js" rel="alternate" type="text/html" title="Guideline-编写有效率的javascript代码" />
+      <published>2015-02-10T11:17:10+08:00</published>
+      <updated>2015-02-10T11:17:10+08:00</updated>
+      <id>http://localhost:4000/archi-efficient-js</id>
+      <content type="html" xml:base="http://localhost:4000/archi-efficient-js">&lt;p&gt;Trust yourself, not the VM。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;对象的初始化顺序&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    function Point(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    var p1 = new Point(11,12);
+    var p1 = new Point(33,34);
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://&quot;&gt;nodejs中的隐藏类的生成方式&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Checklist:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;成员变量写在构造函数内&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;不要在其他地方任意添加成员变量或者方法&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Why:&lt;/p&gt;
+
+&lt;p&gt;每当有新变量添加的时候, 编译器会生成一个新的隐藏类。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-hiddenclass.png&quot; alt=&quot;Google I/O 2012&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;整数变量的使用&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var a = 1;
+...
+a = 1.5;
+...
+a = 'abcd';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Checklist:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a变量的重新赋值会引起 object a在内存中的被重新 allocation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;数组的用法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Checklist:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用从0开始的连续下标&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a[5000] = 1;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面表达式将促使编译器把变量a转化为一个字典类型&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不要删除数组中的元素，特别是numberic类型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var data = [1,2,3,4];
+
+delete data[2];
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面delete表达式会促使编译器把data转化为dictionary。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不要使用未初始化的数组元素&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var a = [];
+
+for(var i = 0; i &amp;lt; 10; i ++) {
+    a[0] = i; //   
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var a = [];
+
+a[0] = 0; // ⬲⬲ 至少快2倍
+
+for(var i = 0; i &amp;lt; 10; i ++) {
+    a[0] = i; //   
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;注意数组元素的类型转化&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// First step
+var a = new array();
+
+a[0] = 77;
+a[1] = 88;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-array-class-01.png&quot; alt=&quot;integer in array&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Second step
+a[2] = 0.5;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-array-class-02.png&quot; alt=&quot;integer in array&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Third step
+a[3] = true
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-array-class-03.png&quot; alt=&quot;bad thing&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;更好的方法:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//一次性初始化
+var data = [1,2,0.5, true];
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;方法的使用&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;充分利用IC(inline cache)&lt;/p&gt;
+
+&lt;p&gt;Checklist:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;避免多态&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function add(x, y) {
+    return x + y;
+}
+
+add(1, 2) // 生成单态隐藏类 monomorphic
+add(&quot;a&quot;,&quot;b&quot;) // 多态 polymorphic
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UJPdhx5zTaw&quot;&gt;Google I/O 2012 - Breaking the JavaScript Speed Limit with V8&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="nodejs" />
+      
+
+      
+        <summary type="html">Trust yourself, not the VM。</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

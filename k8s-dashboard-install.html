@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>[GCE]安装Kubernetes Dashboard</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-abap.js"></script>
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="Learn, Innovate, Share - Business Based Vision." />
+    <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="http://localhost:4000/k8s-dashboard-install" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="张庆华的个人日志" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="[GCE]安装Kubernetes Dashboard" />
+    <meta property="og:description" content="Kubeternetes Dashboatd 安装手记 安装 部署之前,确认一下yaml文件是来自master分支。 下面这个链接是来自dashboard在github上的最新代码 https://sourcegraph.com/github.com/kubernetes/dashboard@master/-/blob/src/deploy/recommended/kubernetes-dashboard.yaml?diff=cfc62d86f67b70771dfc0798f10a891aa329b9c4&amp;utm_source=chrome-extension#L11 点击查看 文件内容分为一下几个部分 Dashboard Secret &amp;&amp; ServiceAccount 定义 apiVersion: v1 kind: Secret metadata: labels: k8s-app: kubernetes-dashboard name: kubernetes-dashboard-certs namespace: kube-system type: Opaque Secret 在负责的网络环境中是很重要的角色,它是k8s世界里资源流通的凭证。 Secret类型的k8s资源把敏感数据比如秘钥,密码,token中从配置文件中拿了出来。 如果没有secret这个类型的抽象类型, 在k8s的yaml配置文件中将到处都是关于password,token,secret 这样的字样,而且密码修改后非常不容易维护。 这就是secret这类资源的价值吧。 Secret是一个Map数据类型,附加了一些行为,比如可以以volume mount的方式导入到Pods定义文件中去。 Secret 存储后的类型有3种 Opaque 类型 中文意思是,以base64格式存储。 base64是一种可逆的加密方式。 echo -n 'zhangqinghua' | base64 输出 emhhbmdxaW5naHVh," />
+    <meta property="og:url" content="http://localhost:4000/k8s-dashboard-install" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2018-10-10T19:20:11+08:00" />
+    <meta property="article:modified_time" content="2018-10-10T19:20:11+08:00" />
+    <meta property="article:tag" content="Kubernetes" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="[GCE]安装Kubernetes Dashboard" />
+    <meta name="twitter:description" content="Kubeternetes Dashboatd 安装手记 安装 部署之前,确认一下yaml文件是来自master分支。 下面这个链接是来自dashboard在github上的最新代码 https://sourcegraph.com/github.com/kubernetes/dashboard@master/-/blob/src/deploy/recommended/kubernetes-dashboard.yaml?diff=cfc62d86f67b70771dfc0798f10a891aa329b9c4&amp;utm_source=chrome-extension#L11 点击查看 文件内容分为一下几个部分 Dashboard Secret &amp;&amp; ServiceAccount 定义 apiVersion: v1 kind: Secret metadata: labels: k8s-app: kubernetes-dashboard name: kubernetes-dashboard-certs namespace: kube-system type: Opaque Secret 在负责的网络环境中是很重要的角色,它是k8s世界里资源流通的凭证。 Secret类型的k8s资源把敏感数据比如秘钥,密码,token中从配置文件中拿了出来。 如果没有secret这个类型的抽象类型, 在k8s的yaml配置文件中将到处都是关于password,token,secret 这样的字样,而且密码修改后非常不容易维护。 这就是secret这类资源的价值吧。 Secret是一个Map数据类型,附加了一些行为,比如可以以volume mount的方式导入到Pods定义文件中去。 Secret 存储后的类型有3种 Opaque 类型 中文意思是,以base64格式存储。 base64是一种可逆的加密方式。 echo -n 'zhangqinghua' | base64 输出 emhhbmdxaW5naHVh," />
+    <meta name="twitter:url" content="http://localhost:4000/" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="张庆华的个人日志" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Kubernetes" />
+    <meta name="twitter:site" content="@rmrfself" />
+    <meta name="twitter:creator" content="@rmrfself" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "张庆华的个人日志",
+        "logo": "http://localhost:4000/assets/images/blog-icon.svg"
+    },
+    "url": "http://localhost:4000/k8s-dashboard-install",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:4000/k8s-dashboard-install"
+    },
+    "description": "Kubeternetes Dashboatd 安装手记 安装 部署之前,确认一下yaml文件是来自master分支。 下面这个链接是来自dashboard在github上的最新代码 https://sourcegraph.com/github.com/kubernetes/dashboard@master/-/blob/src/deploy/recommended/kubernetes-dashboard.yaml?diff=cfc62d86f67b70771dfc0798f10a891aa329b9c4&amp;utm_source=chrome-extension#L11 点击查看 文件内容分为一下几个部分 Dashboard Secret &amp;&amp; ServiceAccount 定义 apiVersion: v1 kind: Secret metadata: labels: k8s-app: kubernetes-dashboard name: kubernetes-dashboard-certs namespace: kube-system type: Opaque Secret 在负责的网络环境中是很重要的角色,它是k8s世界里资源流通的凭证。 Secret类型的k8s资源把敏感数据比如秘钥,密码,token中从配置文件中拿了出来。 如果没有secret这个类型的抽象类型, 在k8s的yaml配置文件中将到处都是关于password,token,secret 这样的字样,而且密码修改后非常不容易维护。 这就是secret这类资源的价值吧。 Secret是一个Map数据类型,附加了一些行为,比如可以以volume mount的方式导入到Pods定义文件中去。 Secret 存储后的类型有3种 Opaque 类型 中文意思是,以base64格式存储。 base64是一种可逆的加密方式。 echo -n 'zhangqinghua' | base64 输出 emhhbmdxaW5naHVh,"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="[GCE]安装Kubernetes Dashboard" href="/feed.xml" />
+
+</head>
+<body class="devops">
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-fb" href="https://facebook.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+</a>
+            
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <article class="post-full  no-image">
+            <header class="post-full-header">
+                <h1 class="post-full-title">[GCE]安装Kubernetes Dashboard</h1>
+                <section class="post-full-meta">
+                    
+                        <span class="date-divider">分类: </span>
+                        
+                            
+                               <a href='/tag/kubernetes/'>KUBERNETES</a>
+                            
+                        
+                    
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="10 October 2018">2018-10-10 19:20</time>
+                </section>
+            </header>
+            
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>Kubeternetes Dashboatd 安装手记</p>
+
+<h3 id="安装">安装</h3>
+
+<p>部署之前,确认一下yaml文件是来自master分支。</p>
+
+<p>下面这个链接是来自dashboard在github上的最新代码</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://sourcegraph.com/github.com/kubernetes/dashboard@master/-/blob/src/deploy/recommended/kubernetes-dashboard.yaml?diff=cfc62d86f67b70771dfc0798f10a891aa329b9c4&amp;utm_source=chrome-extension#L11
+</code></pre></div></div>
+<p><a href="https://sourcegraph.com/github.com/kubernetes/dashboard@master/-/blob/src/deploy/recommended/kubernetes-dashboard.yaml?diff=cfc62d86f67b70771dfc0798f10a891aa329b9c4&amp;utm_source=chrome-extension#L11">点击查看</a></p>
+
+<p>文件内容分为一下几个部分</p>
+
+<h3 id="dashboard-secret--serviceaccount-定义">Dashboard Secret &amp;&amp; ServiceAccount 定义</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard-certs
+  namespace: kube-system
+type: Opaque
+</code></pre></div></div>
+
+<p>Secret 在负责的网络环境中是很重要的角色,它是k8s世界里资源流通的凭证。</p>
+
+<p>Secret类型的k8s资源把敏感数据比如秘钥,密码,token中从配置文件中拿了出来。</p>
+
+<p>如果没有secret这个类型的抽象类型, 在k8s的yaml配置文件中将到处都是关于password,token,secret 这样的字样,而且密码修改后非常不容易维护。 这就是secret这类资源的价值吧。</p>
+
+<p>Secret是一个Map数据类型,附加了一些行为,比如可以以volume mount的方式导入到Pods定义文件中去。</p>
+
+<p>Secret 存储后的类型有3种</p>
+
+<ul>
+  <li>Opaque 类型</li>
+</ul>
+
+<p>中文意思是<不透明的>,以base64格式存储。</不透明的></p>
+
+<p>base64是一种可逆的加密方式。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo -n 'zhangqinghua' | base64
+
+输出 emhhbmdxaW5naHVh, 反解码很容易:
+
+echo -n 'emhhbmdxaW5naHVh' | base64 --decode 
+</code></pre></div></div>
+
+<ul>
+  <li>kubernetes.io/dockerconfigjson 类型。</li>
+</ul>
+
+<p>K8s的核心职责之一是容器编排,最常见的场景是拉取镜像并生成对应的pods资源。</p>
+
+<p>在这过程中需要与私有仓库进行验权,这时候用到了这个类型的secret。</p>
+
+<p>Secret的用法如下:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: test-scret-use-methods
+spec:
+  containers:
+  - name: test-container
+    image: 192.168.1.12:5000/xxxx/test-image:latest
+    imagePullPolicy: Always
+  imagePullSecrets:
+  - name: new-created-secret-for-demo
+</code></pre></div></div>
+
+<p>其中new-created-secret-for-demo是新创建的secret。</p>
+
+<p>在k8s的官方文档里有创建实例,<a href="https://kubernetes.io/docs/concepts/configuration/secret/">参考</a></p>
+
+<ul>
+  <li>kubernetes.io/service-account-token 类型</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k8snode-03@A11131221040327:~/$ kubectl get serviceaccount --all-namespaces
+NAMESPACE     NAME                                 SECRETS   AGE
+default       default                              1         18h
+kube-public   default                              1         18h
+kube-system   attachdetach-controller              1         18h
+kube-system   bootstrap-signer                     1         18h
+
+k8snode-03@A11131221040327:~/$ kubectl describe serviceaccount/default -n kube-system
+
+Name:                default
+Namespace:           kube-system
+Labels:              &lt;none&gt;
+Annotations:         &lt;none&gt;
+Image pull secrets:  &lt;none&gt;
+Mountable secrets:   default-token-jmgnw
+Tokens:              default-token-jmgnw
+Events:              &lt;none&gt;
+</code></pre></div></div>
+
+<p>Serviceaccount作为独立资源,关联了namespace、以及和它有关的token、secrets。</p>
+
+<p>用途是在为pods内部的应用程序提供访问Service Api的凭证,例如,获取某一namespace下的pods列表。</p>
+
+<h3 id="角色和权限分配">角色和权限分配</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kubernetes-dashboard-minimal
+  namespace: kube-system
+rules:
+  # Allow Dashboard to create 'kubernetes-dashboard-key-holder' secret.
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["create"]
+  # Allow Dashboard to create 'kubernetes-dashboard-settings' config map.
+
+---------  
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kubernetes-dashboard-minimal
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: kubernetes-dashboard-minimal
+subjects:
+- kind: ServiceAccount
+  name: kubernetes-dashboard
+  namespace: kube-system
+</code></pre></div></div>
+
+<p>这段配置把kubernetes-dashboard绑定到Role定义的权限设置里,规定它有权限操作的资源。</p>
+
+<h1 id="部署">部署</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kind: Deployment
+apiVersion: apps/v1beta2
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kube-system
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: kubernetes-dashboard
+  template:
+    metadata:
+      labels:
+        k8s-app: kubernetes-dashboard
+    spec:
+      containers:
+      - name: kubernetes-dashboard
+        image: k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.0
+        ports:
+        - containerPort: 8443
+          protocol: TCP
+        args:
+          - --auto-generate-certificates
+          # Uncomment the following line to manually specify Kubernetes API server Host
+          # If not specified, Dashboard will attempt to auto discover the API server and connect
+          # to it. Uncomment only if the default does not work.
+          # - --apiserver-host=http://my-address:port
+        volumeMounts:
+        - name: kubernetes-dashboard-certs
+          mountPath: /certs
+          # Create on-disk volume to store exec logs
+        - mountPath: /tmp
+          name: tmp-volume
+        livenessProbe:
+          httpGet:
+            scheme: HTTPS
+            path: /
+            port: 8443
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+      volumes:
+      - name: kubernetes-dashboard-certs
+        secret:
+          secretName: kubernetes-dashboard-certs
+      - name: tmp-volume
+        emptyDir: {}
+      serviceAccountName: kubernetes-dashboard
+      # Comment the following tolerations if Dashboard must not be deployed on master
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+</code></pre></div></div>
+
+<p>Deployment 整合了上面定义的所有资源,包括Secret、AccountService。</p>
+
+<p>这部分是最容易出错的地方。有个issue整理了无法启动的原因</p>
+
+<p><a href="https://github.com/kubernetes/dashboard/issues/1578">issue</a></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Creating API server client for https://10.96.0.1:443
+Error while initializing connection to Kubernetes apiserver. This most likely means that the cluster is misconfigured (e.g., it has invalid apiserver certificates or service accounts configuration) or the --apiserver-host param points to a server that does not exist. Reason: Get https://10.96.0.1:443/version: dial tcp 10.96.0.1:443: i/o timeout
+Refer to the troubleshooting guide for more information: https://github.com/kubernetes/dashboard/blob/master/docs/user-guide/troubleshooting.md
+
+10.96.0.1 是Service Api 的cluster IP
+
+k8snode-03@A11131221040327:~/.kube$ kubectl get service
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   19h
+
+k8snode-03@A11131221040327:~/.kube$ kubectl describe service kubernetes
+Name:              kubernetes
+Namespace:         default
+Labels:            component=apiserver
+                   provider=kubernetes
+Annotations:       &lt;none&gt;
+Selector:          &lt;none&gt;
+Type:              ClusterIP
+IP:                10.96.0.1
+Port:              https  443/TCP
+TargetPort:        6443/TCP
+Endpoints:         192.168.12.39:6443
+Session Affinity:  None
+Events:            &lt;none&gt;
+
+</code></pre></div></div>
+
+<p>最后,获取某一account的token</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+</code></pre></div></div>
+
+<p>使用proxy访问dashboard</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl proxy
+
+输出
+Starting to serve on 127.0.0.1:8001 
+</code></pre></div></div>
+
+
+                </div>
+            </section>
+            <!-- Email subscribe form at the bottom of the page -->
+            
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+        </article>
+    </div>
+</main>
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/kubernetes/">Kubernetes</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/k8s-from-scrach">[GCE]单节点部署kubernetes集群</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/k8s-from-scrach-2">[GCE]单节点部署kubernetes集群</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/kubernetes/">
+                                
+                                    See all 2 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card  no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/management-get-2">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Howto</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">关于创业的反思总结</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card  no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/k8s-from-scrach">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Kubernetes</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">[GCE]单节点部署kubernetes集群</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+        </div>
+    </div>
+</aside>
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://localhost:4000/">
+            
+                <img src="/assets/images/favicon.png" alt="张庆华的个人日志 icon" />
+            
+            <span>张庆华的个人日志</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">[GCE]安装Kubernetes Dashboard</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%5BGCE%5D%E5%AE%89%E8%A3%85Kubernetes+Dashboard&amp;url=https://rmrfself.github.io/k8s-dashboard-install"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/k8s-dashboard-install"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+<!-- /post -->
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="my_profile">
+                    <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
+                    <div class='profile_detail'>
+                        <h5>关于我</h5>
+                    </div>
+                </section>
+                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+    
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-126286097-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+</body>
+</html>

@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>JVM内部机制(二)Java方法调用</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-abap.js"></script>
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="Learn, Innovate, Share - Business Based Vision." />
+    <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="http://localhost:4000/jvm-method-call" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="张庆华的个人日志" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="JVM内部机制(二)Java方法调用" />
+    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:url" content="http://localhost:4000/jvm-method-call" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:tag" content="Jvm" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JVM内部机制(二)Java方法调用" />
+    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:url" content="http://localhost:4000/" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="张庆华的个人日志" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Jvm" />
+    <meta name="twitter:site" content="@rmrfself" />
+    <meta name="twitter:creator" content="@rmrfself" />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="666" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "张庆华的个人日志",
+        "logo": "http://localhost:4000/assets/images/blog-icon.svg"
+    },
+    "url": "http://localhost:4000/jvm-method-call",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:4000/jvm-method-call"
+    },
+    "description": "Learn, Innovate, Share - Business Based Vision."
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="JVM内部机制(二)Java方法调用" href="/feed.xml" />
+
+</head>
+<body class="home-template">
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
+            
+        
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-fb" href="https://facebook.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+</a>
+            
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <article class="post-full  no-image">
+            <header class="post-full-header">
+                <h1 class="post-full-title">JVM内部机制(二)Java方法调用</h1>
+                <section class="post-full-meta">
+                    
+                        <span class="date-divider">分类: </span>
+                        
+                            
+                               <a href='/tag/jvm/'>JVM</a>
+                            
+                        
+                    
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="22 January 2016">2016-01-22 22:10</time>
+                </section>
+            </header>
+            
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>封装、继承、多态。</p>
+
+<p>封装做为继承奠定基础，继承又为多态的表达奠定基础。</p>
+
+<h3 id="堆栈">堆栈</h3>
+
+<p>堆的索引保存在栈上。</p>
+
+<p>堆栈是一种数据结构,但更准确的说法是它是一种算法。</p>
+
+<p>方法调用过程中, 堆栈的作用:</p>
+
+<ul>
+  <li>
+    <p>存储方法用到的参数。用BP+偏移量的方法,把参数引入到方法作用域内。</p>
+  </li>
+  <li>
+    <p>存储方法的返回值。把返回值重新放回到调用方的栈中。</p>
+  </li>
+  <li>
+    <p>存储下一条指令的地址, 以便方法调用返回后继续执行。</p>
+  </li>
+  <li>
+    <p>存储机器指令用到的操作数。</p>
+  </li>
+</ul>
+
+<p>堆栈先进后出、后进先出的性质, 契合了函数嵌套调用的过程。</p>
+
+<p>就像拉皮筋,被动伸展（这个过程消耗生物体能量）,却可自动收缩。递归表达了更高级的调用形式- 自动伸缩。</p>
+
+<p>方法调用的技术实现可通过两个寄存器(bp,sp)交替赋值做到。这样形式是为传参和带值返回设计的，因为参数的数量和类型是不固定的。</p>
+
+<p>如果不考虑传参，直接jmp也可以模拟函数调用。在数字电路的实现程序中存在很多的goto或者直接跳转。</p>
+
+<p>进程加载后,加载器在table中默认寻找代码段main标签指向的地址，并放入寄存器(CS:IP),开始拉皮筋式的函数调用。</p>
+
+<p>CS:IP 和 BP:SP 张开了一个至少2个维度的空间。随着指令指针IP的往前推进,BP和SP像两个用弹簧连在一起的滑块,上下移动。</p>
+
+<p>在Hotspot中通过解析字节码实现的函数调用,在宏观上也是基于上面的认识。</p>
+
+<h3 id="jvm中java函数的执行过程">JVM中java函数的执行过程</h3>
+
+<p>JVM中执行Java方法经历了两个大的阶段:</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>JVM为执行java函数配备堆栈模型，然后JMP到调用Main函数。 这一步实现了从C++到Java的跨越。</li>
+    </ol>
+  </li>
+</ul>
+
+<p>虚拟机的设计目标就是为了做到这一步，JVM中所有的设计都是为了高效、准确的执行java字节码中的方法。</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>从字节码中解析字节码函数调用指令，eg. invoke_virtual，通过解释器或者JIT的指令分发函数去执行java函数。 从这个角度讲，java函数完成了‘函数’的定义，这个阶段的函数是抽象命令的集合。当被JIT解释执行的时候，才对应到了不同CPU架构下的具体指令的函数实现。Java的函数实现过程是用具体CPU架构下的指令去拟合的过程。</li>
+    </ol>
+  </li>
+</ul>
+
+<p>从抽象到具体的实现过程中，存在各种映射关系。这种映射可以有不同类型的解释器或者编译器完成。</p>
+
+<h4 id="第一阶段-使用jni接口调用main函数">第一阶段 使用JNI接口调用Main函数</h4>
+
+<p>下面是一个长途跋涉的分析过程。</p>
+
+<p>在jvm的加载过程中，InvocationFunctions* ifn 这个结构体是libjvm动态库加载过程的精华所在。InvocationFunctions 是由3个函数指针组成的结构体。分别指向三个JNI接口。</p>
+
+<p>启动步骤包括</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JLI_Launch -&gt; LoadJavaVM -&gt; JVMInit
+</code></pre></div></div>
+
+<p>第一步，启动器中的main函数</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int
+main(int argc, char **argv)
+{
+    /* ..省略.. */ // 这一步直接返回JLI_Launch
+    return JLI_Launch(margc, margv,
+                   sizeof(const_jargs) / sizeof(char *), const_jargs,
+                   sizeof(const_appclasspath) / sizeof(char *), const_appclasspath,
+                   FULL_VERSION,
+                   DOT_VERSION,
+                   (const_progname != NULL) ? const_progname : *margv,
+                   (const_launcher != NULL) ? const_launcher : *margv,
+                   (const_jargs != NULL) ? JNI_TRUE : JNI_FALSE,
+                   const_cpwildcard, const_javaw, const_ergo_class);
+}
+</code></pre></div></div>
+
+<p>第二步，初始化jvm， 这一步相当于为工厂车间里面的各种生产工具上电。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+ * Entry point. 
+ */
+int
+JLI_Launch(int argc, char ** argv,              /* main argc, argc */
+        int jargc, const char** jargv,          /* java args */
+        int appclassc, const char** appclassv,  /* app classpath */
+        const char* fullversion,                /* full version defined */
+        const char* dotversion,                 /* dot version defined */
+        const char* pname,                      /* program name */
+        const char* lname,                      /* launcher name */
+        jboolean javaargs,                      /* JAVA_ARGS */
+        jboolean cpwildcard,                    /* classpath wildcard*/
+        jboolean javaw,                         /* windows-only javaw */
+        jint ergo                               /* ergonomics class policy */
+)
+{
+    int mode = LM_UNKNOWN;  // 有三种模式 { "Unknown", "Main class", "JAR file" }; 用Main class 启动或者jar包启动，默认为未知
+    char *what = NULL;
+    char *cpath = 0;
+    char *main_class = NULL; // 指定main_class
+    int ret;
+    InvocationFunctions ifn; // vm从动态库加载以后，返回地址存在这个结构中。为JNI本地函数调用放开接口，这个结构体中存储了3个函数指针。调用者可直接跳转。
+    jlong start, end;
+    char jvmpath[MAXPATHLEN]; // jvm 路径
+    char jrepath[MAXPATHLEN]; // jre 路径
+    char jvmcfg[MAXPATHLEN];
+
+    _fVersion = fullversion;
+    _dVersion = dotversion;
+    _launcher_name = lname;
+    _program_name = pname;
+    _is_java_args = javaargs;
+    _wc_enabled = cpwildcard;
+    _ergo_policy = ergo; // java -XX:+PrintFlagsInitial -version jvm 运行时参数设置。 ergonomics class 可以解释为 java运行时体征类
+    /*
+     * 略过
+     */
+    if (!LoadJavaVM(jvmpath, &amp;ifn)) { // 从相应平台上加载jvm的动态链接库，初始化ifn
+        return(6);
+    }
+    .... 为java application设置参数（略过） ....
+    // 启动jvm， 这个函数以后，java就像天空中的风筝，与启动器分道扬镳了
+    return JVMInit(&amp;ifn, threadStackSize, argc, argv, mode, what, ret);
+}
+</code></pre></div></div>
+
+<p>接下来，创建一个启动线程。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int
+JVMInit(InvocationFunctions* ifn, jlong threadStackSize,
+        int argc, char **argv,
+        int mode, char *what, int ret)
+{
+    ShowSplashScreen();
+    return ContinueInNewThread(ifn, threadStackSize, argc, argv, mode, what, ret);
+}
+</code></pre></div></div>
+
+<p>最后，设置主线程堆栈大小，传入参数，正式载入JavaMain</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int
+ContinueInNewThread(InvocationFunctions* ifn, jlong threadStackSize,
+                    int argc, char **argv,
+                    int mode, char *what, int ret)
+{
+
+    /*
+     * If user doesn't specify stack size, check if VM has a preference.
+     * Note that HotSpot no longer supports JNI_VERSION_1_1 but it will
+     * return its default stack size through the init args structure.
+     */
+    if (threadStackSize == 0) {
+      struct JDK1_1InitArgs args1_1;
+      memset((void*)&amp;args1_1, 0, sizeof(args1_1));
+      args1_1.version = JNI_VERSION_1_1;
+      ifn-&gt;GetDefaultJavaVMInitArgs(&amp;args1_1);  /* ignore return value */
+      if (args1_1.javaStackSize &gt; 0) {
+         threadStackSize = args1_1.javaStackSize;
+      }
+    }
+
+    { /* Create a new thread to create JVM and invoke main method */
+      JavaMainArgs args;
+      int rslt;
+
+      args.argc = argc;
+      args.argv = argv;
+      args.mode = mode;
+      args.what = what;
+      args.ifn = *ifn;
+
+      rslt = ContinueInNewThread0(JavaMain, threadStackSize, (void*)&amp;args);
+      /* If the caller has deemed there is an error we
+       * simply return that, otherwise we return the value of
+       * the callee
+       */
+      return (ret != 0) ? ret : rslt;
+    }
+}
+</code></pre></div></div>
+
+<p>jvm中使用<a href="http://man7.org/linux/man-pages/man3/pthread_create.3.html">pthread_create</a>创建线程资源。</p>
+
+<p>关于pthread_create相关的系统调用函数在<unix系统编程>一书有非常精彩，终生难忘的讲解。</unix系统编程></p>
+
+<p>在pthread_create调用过程中，参数 (void <em>(</em>)(void*))continuation 是一个函数指针格式的入参，指向JavaMain入口函数。</p>
+
+<p>JavaMain的定义</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int JNICALL JavaMain(void * args); /* entry point 
+
+int JNICALL
+JavaMain(void * _args)
+{
+    JavaMainArgs *args = (JavaMainArgs *)_args; // 参数的地址是随线程启动传入的
+    int argc = args-&gt;argc; // 参数数量，对函数来说，数量和类型同等重要，因为它是寻址依据。
+    char **argv = args-&gt;argv;
+    int mode = args-&gt;mode;
+    char *what = args-&gt;what;
+    InvocationFunctions ifn = args-&gt;ifn;//函数指针构成的结构体
+
+    JavaVM *vm = 0;
+    JNIEnv *env = 0;
+    jclass mainClass = NULL;
+    jclass appClass = NULL; // actual application class being launched
+    jmethodID mainID;
+    jobjectArray mainArgs;
+    int ret = 0;
+    jlong start, end;
+
+    ....
+
+    if (!InitializeJVM(&amp;vm, &amp;env, &amp;ifn)) { // ifn-&gt;CreateJavaVM(pvm, (void **)penv, &amp;args); 这一步初始化虚拟机， 可以看到ifn所以jvm动态库入口的函数指针，在这个函数中的作用是初始化JVM。以上的5步函数跳转是为这次调用准备环境变量和参数。
+        JLI_ReportErrorMessage(JVM_ERROR1);
+        exit(1);
+    }
+    
+    .....
+
+    /* Invoke main method. */  // 这里调用Main函数。
+    (*env)-&gt;CallStaticVoidMethod(env, mainClass, mainID, mainArgs);
+}
+</code></pre></div></div>
+
+<p>启动器主体部分逻辑分析完毕。</p>
+
+<p>ifn的定义如下:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+ * Pointers to the needed JNI invocation API, initialized by LoadJavaVM.
+ */
+typedef jint (JNICALL *CreateJavaVM_t)(JavaVM **pvm, void **env, void *args);
+typedef jint (JNICALL *GetDefaultJavaVMInitArgs_t)(void *args);
+typedef jint (JNICALL *GetCreatedJavaVMs_t)(JavaVM **vmBuf, jsize bufLen, jsize *nVMs);
+
+typedef struct {
+    CreateJavaVM_t CreateJavaVM;
+    GetDefaultJavaVMInitArgs_t GetDefaultJavaVMInitArgs;
+    GetCreatedJavaVMs_t GetCreatedJavaVMs;
+} InvocationFunctions;
+
+</code></pre></div></div>
+
+<p>ifn-&gt;CreateJavaVM的值指向了libjvm动态库导出的符号链接JNI_CreateJavaVM。</p>
+
+<p>另外两个函数指针被Java Native函数使用。</p>
+
+<p>这个方法的定义文件是</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/jdk8u/hotspot/src/share/vm/prims/jni.cpp
+</code></pre></div></div>
+
+<p>JNI_CreateJavaVM函数后，Java世界大门从此打开。</p>
+
+<h4 id="java中的函数调用过程">Java中的函数调用过程</h4>
+
+<p>函数调用堆栈</p>
+
+<p><img src="http://blog.h5tube.com/JavaCalls.png" alt="jvm函数调用堆栈" /></p>
+
+<ul>
+  <li>JavaCalls</li>
+</ul>
+
+<p>经过一系列的引导和堆栈切换，最终函数落到这个地方:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  jdk8u/hotspot/src/share/vm/runtime/javaCalls.cpp
+  ...
+
+    // do call
+  { JavaCallWrapper link(method, receiver, result, CHECK);
+    { HandleMark hm(thread);  // HandleMark used by HandleMarkCleaner
+
+      StubRoutines::call_stub()(
+        (address)&amp;link,
+        // (intptr_t*)&amp;(result-&gt;_value), // see NOTE above (compiler problem)
+        result_val_address,          // see NOTE above (compiler problem)
+        result_type,
+        method(),
+        entry_point,
+        args-&gt;parameters(),
+        args-&gt;size_of_parameters(),
+        CHECK
+      );
+  } // Exit JavaCallWrapper (can block - potential return oop must be preserved)
+</code></pre></div></div>
+
+<p>这个方法是Jvm中最精妙的地方，它是一个陷阱。</p>
+
+<p>Java文件中定义的方法, 它按照MethodDesc定义的格式被载入内存后，始终以java字节码的形式存在于Metaspace的堆中。背后的问题是，C++生成的机器指令如何调用抽象的“字节码”？</p>
+
+<p>或者说，java的字节码是如何“嫁接”或者“寄生”到C++的堆栈中的？</p>
+
+<p><img src="http://blog.h5tube.com/grafting.png" alt="嫁接" /></p>
+
+<p>字节码中的method在JVM中布局结构,如下图</p>
+
+<p><img src="http://blog.h5tube.com/Method.png" alt="java method layout" /></p>
+
+<p>call_stub 也是一个函数指针，定义如下:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> // Calls to Java
+  typedef void (*CallStub)(
+    address   link,
+    intptr_t* result,
+    BasicType result_type,
+    Method* method,
+    address   entry_point,
+    intptr_t* parameters,
+    int       size_of_parameters,
+    TRAPS
+  );
+
+   static CallStub call_stub() { 
+       return CAST_TO_FN_PTR(CallStub, _call_stub_entry); 
+    }
+</code></pre></div></div>
+
+<p>x86平台上，_call_stub_entry 在文件</p>
+
+<p>jdk8u/hotspot/src/cpu/x86/vm/stubGenerator_x86_64.cpp</p>
+
+<p>中被初始化，这个类是平台相关的实现。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    StubRoutines::_call_stub_entry =
+      generate_call_stub(StubRoutines::_call_stub_return_address);
+</code></pre></div></div>
+
+<p>这个陷阱的布置路线</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thread.cpp -&gt; Threads::create_vm()
+
+↓↓↓↓↓↓↓↓↓ 
+
+init.cpp -&gt; init_globals() -&gt; stubRoutines_init1() -&gt; stubRoutines_init2()
+
+↓↓↓↓↓↓↓↓↓ 
+
+stubRoutines.cpp
+StubGenerator_generate() -&gt; generate_initial()
+
+↓↓↓↓↓↓↓↓↓ 
+StubRoutines::_call_stub_entry              =
+      generate_call_stub(StubRoutines::_call_stub_return_address);
+</code></pre></div></div>
+
+<p>x86上的陷阱生成函数StubGenerator_generate(), 分析一下这个函数</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//------------------------------------------------------------------------------------------------------------------------
+  // Call stubs are used to call Java from C
+  //
+  //    [ return_from_Java     ] &lt;--- rsp
+  //    [ argument word n      ]
+  //      ...
+  // -N [ argument word 1      ]
+  // -7 [ Possible padding for stack alignment ]
+  // -6 [ Possible padding for stack alignment ]
+  // -5 [ Possible padding for stack alignment ]
+  // -4 [ mxcsr save           ] &lt;--- rsp_after_call
+  // -3 [ saved rbx,            ]
+  // -2 [ saved rsi            ]
+  // -1 [ saved rdi            ]
+  //  0 [ saved rbp,            ] &lt;--- rbp,
+  //  1 [ return address       ]
+  //  2 [ ptr. to call wrapper ]
+  //  3 [ result               ]
+  //  4 [ result_type          ]
+  //  5 [ method               ]
+  //  6 [ entry_point          ]
+  //  7 [ parameters           ]
+  //  8 [ parameter_size       ]
+  //  9 [ thread               ]
+
+
+  address generate_call_stub(address&amp; return_address) {
+    StubCodeMark mark(this, "StubRoutines", "call_stub");
+    address start = __ pc(); // 取到当前指令寄存器的值，从这个地址开始注入“字节码”编译后的汇编代码
+
+    // stub code parameters / addresses
+    assert(frame::entry_frame_call_wrapper_offset == 2, "adjust this code");
+    bool  sse_save = false;
+    const Address rsp_after_call(rbp, -4 * wordSize); // same as in generate_catch_exception()!
+    const int     locals_count_in_bytes  (4*wordSize);
+    const Address mxcsr_save    (rbp, -4 * wordSize);
+    const Address saved_rbx     (rbp, -3 * wordSize);
+    const Address saved_rsi     (rbp, -2 * wordSize);
+    const Address saved_rdi     (rbp, -1 * wordSize);
+    const Address result        (rbp,  3 * wordSize);
+    const Address result_type   (rbp,  4 * wordSize);
+    const Address method        (rbp,  5 * wordSize);
+    const Address entry_point   (rbp,  6 * wordSize);
+    const Address parameters    (rbp,  7 * wordSize);
+    const Address parameter_size(rbp,  8 * wordSize);
+    const Address thread        (rbp,  9 * wordSize); // same as in generate_catch_exception()!
+    sse_save =  UseSSE &gt; 0;
+
+    // stub code // 桩代码开始  __ 这个符号是一个宏，被替换后执行emit方法： 直接把机器指令送入代码段内存
+    __ enter();
+    __ movptr(rcx, parameter_size);              // parameter counter
+    __ shlptr(rcx, Interpreter::logStackElementSize); // convert parameter count to bytes
+    __ addptr(rcx, locals_count_in_bytes);       // reserve space for register saves
+    __ subptr(rsp, rcx);
+    __ andptr(rsp, -(StackAlignmentInBytes));    // Align stack
+
+    // save rdi, rsi, &amp; rbx, according to C calling conventions // 这个地方是最微妙的地方，查了很多资料后来终于懂了
+    __ movptr(saved_rdi, rdi);
+    __ movptr(saved_rsi, rsi);
+    __ movptr(saved_rbx, rbx);
+    // save and initialize %mxcsr
+    if (sse_save) {
+      Label skip_ldmx;
+      __ stmxcsr(mxcsr_save);
+      __ movl(rax, mxcsr_save);
+      __ andl(rax, MXCSR_MASK);    // Only check control and mask bits
+      ExternalAddress mxcsr_std(StubRoutines::addr_mxcsr_std());
+      __ cmp32(rax, mxcsr_std);
+      __ jcc(Assembler::equal, skip_ldmx);
+      __ ldmxcsr(mxcsr_std);
+      __ bind(skip_ldmx);
+    }
+
+    // make sure the control word is correct.
+    __ fldcw(ExternalAddress(StubRoutines::addr_fpu_cntrl_wrd_std()));
+
+#ifdef ASSERT
+    // make sure we have no pending exceptions
+    { Label L;
+      __ movptr(rcx, thread);
+      __ cmpptr(Address(rcx, Thread::pending_exception_offset()), (int32_t)NULL_WORD);
+      __ jcc(Assembler::equal, L);
+      __ stop("StubRoutines::call_stub: entered with pending exception");
+      __ bind(L);
+    }
+#endif
+
+    // pass parameters if any
+    BLOCK_COMMENT("pass parameters if any");
+    Label parameters_done;
+    __ movl(rcx, parameter_size);  // parameter counter
+    __ testl(rcx, rcx);
+    __ jcc(Assembler::zero, parameters_done);
+
+    // parameter passing loop
+
+    Label loop;
+    // Copy Java parameters in reverse order (receiver last)
+    // Note that the argument order is inverted in the process
+    // source is rdx[rcx: N-1..0]
+    // dest   is rsp[rbx: 0..N-1]
+
+    __ movptr(rdx, parameters);          // parameter pointer
+    __ xorptr(rbx, rbx);
+
+    __ BIND(loop); // 这一步循环，把参数复制到当前栈中
+
+    // get parameter
+    __ movptr(rax, Address(rdx, rcx, Interpreter::stackElementScale(), -wordSize));
+    __ movptr(Address(rsp, rbx, Interpreter::stackElementScale(),
+                    Interpreter::expr_offset_in_bytes(0)), rax);          // store parameter
+    __ increment(rbx);
+    __ decrement(rcx);
+    __ jcc(Assembler::notZero, loop);
+
+    // call Java function
+    __ BIND(parameters_done);
+    __ movptr(rbx, method);           // get Method*  // 保存mothod的地址，跳入 _entry_point 以后会用到
+    __ movptr(rax, entry_point);      // get entry_point // 字节码解析入口
+    __ mov(rsi, rsp);                 // set sender sp
+    BLOCK_COMMENT("call Java function");
+    __ call(rax);
+
+    BLOCK_COMMENT("call_stub_return_address:");
+    return_address = __ pc();
+
+#ifdef COMPILER2
+    {
+      Label L_skip;
+      if (UseSSE &gt;= 2) {
+        __ verify_FPU(0, "call_stub_return");
+      } else {
+        for (int i = 1; i &lt; 8; i++) {
+          __ ffree(i);
+        }
+
+        // UseSSE &lt;= 1 so double result should be left on TOS
+        __ movl(rsi, result_type);
+        __ cmpl(rsi, T_DOUBLE);
+        __ jcc(Assembler::equal, L_skip);
+        if (UseSSE == 0) {
+          // UseSSE == 0 so float result should be left on TOS
+          __ cmpl(rsi, T_FLOAT);
+          __ jcc(Assembler::equal, L_skip);
+        }
+        __ ffree(0);
+      }
+      __ BIND(L_skip);
+    }
+#endif // COMPILER2
+
+    // store result depending on type
+    // (everything that is not T_LONG, T_FLOAT or T_DOUBLE is treated as T_INT)
+    __ movptr(rdi, result);
+    Label is_long, is_float, is_double, exit;
+    __ movl(rsi, result_type);
+    __ cmpl(rsi, T_LONG);
+    __ jcc(Assembler::equal, is_long);
+    __ cmpl(rsi, T_FLOAT);
+    __ jcc(Assembler::equal, is_float);
+    __ cmpl(rsi, T_DOUBLE);
+    __ jcc(Assembler::equal, is_double);
+
+    // handle T_INT case
+    __ movl(Address(rdi, 0), rax);
+    __ BIND(exit);
+
+    // check that FPU stack is empty
+    __ verify_FPU(0, "generate_call_stub");
+
+    // pop parameters
+    __ lea(rsp, rsp_after_call);
+
+    // restore %mxcsr
+    if (sse_save) {
+      __ ldmxcsr(mxcsr_save);
+    }
+
+    // restore rdi, rsi and rbx,
+    __ movptr(rbx, saved_rbx);
+    __ movptr(rsi, saved_rsi);
+    __ movptr(rdi, saved_rdi);
+    __ addptr(rsp, 4*wordSize);
+
+    // return
+    __ pop(rbp);
+    __ ret(0);
+
+    // handle return types different from T_INT
+    __ BIND(is_long);
+    __ movl(Address(rdi, 0 * wordSize), rax);
+    __ movl(Address(rdi, 1 * wordSize), rdx);
+    __ jmp(exit);
+
+    __ BIND(is_float);
+    // interpreter uses xmm0 for return values
+    if (UseSSE &gt;= 1) {
+      __ movflt(Address(rdi, 0), xmm0);
+    } else {
+      __ fstp_s(Address(rdi, 0));
+    }
+    __ jmp(exit);
+
+    __ BIND(is_double);
+    // interpreter uses xmm0 for return values
+    if (UseSSE &gt;= 2) {
+      __ movdbl(Address(rdi, 0), xmm0);
+    } else {
+      __ fstp_d(Address(rdi, 0));
+    }
+    __ jmp(exit);
+
+    return start;
+  }
+</code></pre></div></div>
+
+<p>这段代码最让人费解的是参数传递问题:</p>
+
+<p>如何在解析字节码的时候，拿到参数的类型和对应的值？</p>
+
+<p>这个问题最终的答案在_entry_point例程中。 它也是一个提前挖好的“陷阱”。</p>
+
+<p>上一个函数执行以后，通过这个指令</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   __ movptr(rax, entry_point);      // get entry_point // 字节码解析入口
+    __ mov(rsi, rsp);                 // set sender sp
+    BLOCK_COMMENT("call Java function");
+    __ call(rax);
+</code></pre></div></div>
+
+<p>跳入了 entry_point， 这个陷阱的“生成过程”如下</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//
+// Generic interpreted method entry to (asm) interpreter
+//
+address InterpreterGenerator::generate_normal_entry(bool synchronized) {
+  // determine code generation flags
+  bool inc_counter  = UseCompiler || CountCompiledCalls;
+
+  // ebx: Method*
+  // r13: sender sp
+  address entry_point = __ pc();
+
+  const Address constMethod(rbx, Method::const_offset()); // java字节码存在constMethod中， Method中保存constMethod的引用
+  const Address access_flags(rbx, Method::access_flags_offset());
+  const Address size_of_parameters(rdx,
+                                   ConstMethod::size_of_parameters_offset()); //取得参数数量
+  const Address size_of_locals(rdx, ConstMethod::size_of_locals_offset()); //取得本地变量的数量。  
+
+  // get parameter size (always needed)
+  __ movptr(rdx, constMethod);
+  __ load_unsigned_short(rcx, size_of_parameters);
+
+  // rbx: Method*
+  // rcx: size of parameters // rcx寄存器的值，来自_call_stub
+  // r13: sender_sp (could differ from sp+wordSize if we were called via c2i )
+
+  __ load_unsigned_short(rdx, size_of_locals); // get size of locals in words
+  __ subl(rdx, rcx); // rdx = no. of additional locals
+
+  // YYY
+//   __ incrementl(rdx);
+//   __ andl(rdx, -2);
+
+  // see if we've got enough room on the stack for locals plus overhead.
+  generate_stack_overflow_check();
+
+  // get return address
+  __ pop(rax);
+
+  // compute beginning of parameters (r14)
+  __ lea(r14, Address(rsp, rcx, Address::times_8, -wordSize));
+
+  // rdx - # of additional locals
+  // allocate space for locals
+  // explicitly initialize locals  // 清零
+  {
+    Label exit, loop;
+    __ testl(rdx, rdx);
+    __ jcc(Assembler::lessEqual, exit); // do nothing if rdx &lt;= 0
+    __ bind(loop);
+    __ push((int) NULL_WORD); // initialize local variables
+    __ decrementl(rdx); // until everything initialized
+    __ jcc(Assembler::greater, loop);
+    __ bind(exit);
+  }
+
+  // initialize fixed part of activation frame // 所有的尺寸设定好以后，生成java中的栈帧
+  generate_fixed_frame(false);
+
+  // make sure method is not native &amp; not abstract
+#ifdef ASSERT
+  __ movl(rax, access_flags);
+  {
+    Label L;
+    __ testl(rax, JVM_ACC_NATIVE);
+    __ jcc(Assembler::zero, L);
+    __ stop("tried to execute native method as non-native");
+    __ bind(L);
+  }
+  {
+    Label L;
+    __ testl(rax, JVM_ACC_ABSTRACT);
+    __ jcc(Assembler::zero, L);
+    __ stop("tried to execute abstract method in interpreter");
+    __ bind(L);
+  }
+#endif
+
+  // Since at this point in the method invocation the exception
+  // handler would try to exit the monitor of synchronized methods
+  // which hasn't been entered yet, we set the thread local variable
+  // _do_not_unlock_if_synchronized to true. The remove_activation
+  // will check this flag.
+
+  const Address do_not_unlock_if_synchronized(r15_thread,
+        in_bytes(JavaThread::do_not_unlock_if_synchronized_offset()));
+  __ movbool(do_not_unlock_if_synchronized, true);
+
+  __ profile_parameters_type(rax, rcx, rdx);
+  // increment invocation count &amp; check for overflow
+  Label invocation_counter_overflow;
+  Label profile_method;
+  Label profile_method_continue;
+  if (inc_counter) {
+    generate_counter_incr(&amp;invocation_counter_overflow,
+                          &amp;profile_method,
+                          &amp;profile_method_continue);
+    if (ProfileInterpreter) {
+      __ bind(profile_method_continue);
+    }
+  }
+
+  Label continue_after_compile;
+  __ bind(continue_after_compile);
+
+  // check for synchronized interpreted methods
+  bang_stack_shadow_pages(false);
+
+  // reset the _do_not_unlock_if_synchronized flag
+  __ movbool(do_not_unlock_if_synchronized, false);
+
+  // check for synchronized methods
+  // Must happen AFTER invocation_counter check and stack overflow check,
+  // so method is not locked if overflows.
+  if (synchronized) {
+    // Allocate monitor and lock method
+    lock_method();
+  } else {
+    // no synchronization necessary
+#ifdef ASSERT
+    {
+      Label L;
+      __ movl(rax, access_flags);
+      __ testl(rax, JVM_ACC_SYNCHRONIZED);
+      __ jcc(Assembler::zero, L);
+      __ stop("method needs synchronization");
+      __ bind(L);
+    }
+#endif
+  }
+
+  // start execution
+#ifdef ASSERT
+  {
+    Label L;
+     const Address monitor_block_top (rbp,
+                 frame::interpreter_frame_monitor_block_top_offset * wordSize);
+    __ movptr(rax, monitor_block_top);
+    __ cmpptr(rax, rsp);
+    __ jcc(Assembler::equal, L);
+    __ stop("broken stack frame setup in interpreter");
+    __ bind(L);
+  }
+#endif
+
+  // jvmti support
+  __ notify_method_entry();
+
+  __ dispatch_next(vtos);
+
+  // invocation counter overflow
+  if (inc_counter) {
+    if (ProfileInterpreter) {
+      // We have decided to profile this method in the interpreter
+      __ bind(profile_method);
+      __ call_VM(noreg, CAST_FROM_FN_PTR(address, InterpreterRuntime::profile_method));
+      __ set_method_data_pointer_for_bcp();
+      __ get_method(rbx);
+      __ jmp(profile_method_continue);
+    }
+    // Handle overflow of counter and compile method
+    __ bind(invocation_counter_overflow);
+    generate_counter_overflow(&amp;continue_after_compile);
+  }
+
+  return entry_point;
+}
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  // jvmti support
+  __ notify_method_entry();
+
+  __ dispatch_next(vtos);
+</code></pre></div></div>
+
+<p>这段代码继续往下执行字节码指令，进入到模板编译器阶段。</p>
+
+
+                </div>
+            </section>
+            <!-- Email subscribe form at the bottom of the page -->
+            
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+        </article>
+    </div>
+</main>
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/jvm/">Jvm</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/jvm-jmm">JVM内部机制(七) Java内存模型(Java Momory Model)</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/jvm-source-guide">JVM内部机制(六) HotSpot代码导读</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/jvm-source-guide-2">JVM内部机制(六) HotSpot代码导读</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/jvm/">
+                                
+                                    See all 26 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card  no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/jvm-internals">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Jvm</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">JVM中的常见约定</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card  no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/jvm-class-loader">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Jvm</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">JVM内部机制(一)加载字节码</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+        </div>
+    </div>
+</aside>
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://localhost:4000/">
+            
+                <img src="/assets/images/favicon.png" alt="张庆华的个人日志 icon" />
+            
+            <span>张庆华的个人日志</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">JVM内部机制(二)Java方法调用</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=JVM%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6%28%E4%BA%8C%29Java%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8&amp;url=https://rmrfself.github.io/jvm-method-call"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/jvm-method-call"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+<!-- /post -->
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="my_profile">
+                    <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
+                    <div class='profile_detail'>
+                        <h5>关于我</h5>
+                    </div>
+                </section>
+                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+    
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-126286097-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+</body>
+</html>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="http://localhost:4000/tag/cloud/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2019-03-26T15:12:54+08:00</updated>
+  <id>http://localhost:4000/tag/cloud/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">张庆华的个人日志 | </title>
+  
+
+  
+    <subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">azure云基础架构(infrastructure)</title>
+      <link href="http://localhost:4000/archi-azure-architecture-design" rel="alternate" type="text/html" title="azure云基础架构(infrastructure)" />
+      <published>2017-07-31T20:12:19+08:00</published>
+      <updated>2017-07-31T20:12:19+08:00</updated>
+      <id>http://localhost:4000/archi-azure-architecture-design</id>
+      <content type="html" xml:base="http://localhost:4000/archi-azure-architecture-design">&lt;p&gt;公有云架构设计以及设计技巧&lt;/p&gt;
+
+&lt;h3 id=&quot;一-资源选型策略&quot;&gt;(一) 资源选型策略&lt;/h3&gt;
+
+&lt;h4 id=&quot;架构设计时充分利用云上基础设施&quot;&gt;架构设计时充分利用云上基础设施。&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;azure提供了第7层(http)的application gateway, 它可以负责负载的分发，并可以通过sesssion affinity实现session的绑定。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这时候在设计infra的时候，可以考虑这一点避免重复设计session的共享机制。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;灾备。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;azure在设计的时候，存储已经考虑了跨大区的灾备。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Monitoring &amp;amp;&amp;amp; Health checking &amp;amp;&amp;amp; Alert&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Logging&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;以上工具不都是免费的，但是性价比比较高。&lt;/p&gt;
+
+&lt;h4 id=&quot;了解azure云的资费方式&quot;&gt;了解azure云的资费方式&lt;/h4&gt;
+
+&lt;p&gt;国外(GCE, Aws)的计算资源都是按照per-hour收费的。所以在设计时，哪些是长期运行的几点，哪些是临时的job，需要分清楚。&lt;/p&gt;
+
+&lt;p&gt;azure提供了一个非常难用的&lt;a href=&quot;https://azure.microsoft.com/en-us/pricing/calculator/&quot;&gt;价格计算器&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;如果不是流量巨大的应用或者流量突发类型的应用， 设计指导方针是 先按照架构设计&lt;code class=&quot;highlighter-rouge&quot;&gt;跑一次&lt;/code&gt;试试看。&lt;/p&gt;
+
+&lt;p&gt;为什么？&lt;/p&gt;
+
+&lt;p&gt;azure的计算资源类型从A0-G5, 有50种以上的计算资源。&lt;/p&gt;
+
+&lt;p&gt;虽然每种类型有自己的计算能力(2 cores, 8G RAM), 也有对应的文档描述， 但是通过文档&lt;code class=&quot;highlighter-rouge&quot;&gt;很难区分&lt;/code&gt;具体型号的明确&lt;code class=&quot;highlighter-rouge&quot;&gt;界限&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;当选择的计算资源不适合时，可以实时热扩。 不用影响正在运行的进程。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;azure上的gateway，包括loadbalencer 后端是通过windows上的IIS实现的。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;我们曾经发生一个事故。
+曾经有一个项目部署了一套saas系统到azure上，当压力增加时(qps大约200左右) 会引发502 error。&lt;/p&gt;
+
+&lt;p&gt;投诉路线是这样的&lt;/p&gt;
+
+&lt;p&gt;中国上海 $→$  亚洲日本 $→$ 美国总部。&lt;/p&gt;
+
+&lt;p&gt;最终问题定位在application gateway上，升级以后问题才解决。&lt;/p&gt;
+
+&lt;h3 id=&quot;二-azure上的系统架构设计样例&quot;&gt;(二) azure上的系统架构设计样例&lt;/h3&gt;
+
+&lt;p&gt;开始设计之前，请参考一下这个lib。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://azure.microsoft.com/en-us/solutions/architecture/cross-cloud-scaling/&quot;&gt;https://azure.microsoft.com/en-us/solutions/architecture/cross-cloud-scaling/&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="cloud" />
+      
+
+      
+        <summary type="html">公有云架构设计以及设计技巧</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">azure云基础架构(infrastructure)</title>
+      <link href="http://localhost:4000/archi-azure-architecture-design-2" rel="alternate" type="text/html" title="azure云基础架构(infrastructure)" />
+      <published>2017-07-31T20:12:19+08:00</published>
+      <updated>2017-07-31T20:12:19+08:00</updated>
+      <id>http://localhost:4000/archi-azure-architecture-design%202</id>
+      <content type="html" xml:base="http://localhost:4000/archi-azure-architecture-design-2">&lt;p&gt;公有云架构设计以及设计技巧&lt;/p&gt;
+
+&lt;h3 id=&quot;一-资源选型策略&quot;&gt;(一) 资源选型策略&lt;/h3&gt;
+
+&lt;h4 id=&quot;架构设计时充分利用云上基础设施&quot;&gt;架构设计时充分利用云上基础设施。&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;azure提供了第7层(http)的application gateway, 它可以负责负载的分发，并可以通过sesssion affinity实现session的绑定。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这时候在设计infra的时候，可以考虑这一点避免重复设计session的共享机制。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;灾备。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;azure在设计的时候，存储已经考虑了跨大区的灾备。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Monitoring &amp;amp;&amp;amp; Health checking &amp;amp;&amp;amp; Alert&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Logging&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;以上工具不都是免费的，但是性价比比较高。&lt;/p&gt;
+
+&lt;h4 id=&quot;了解azure云的资费方式&quot;&gt;了解azure云的资费方式&lt;/h4&gt;
+
+&lt;p&gt;国外(GCE, Aws)的计算资源都是按照per-hour收费的。所以在设计时，哪些是长期运行的几点，哪些是临时的job，需要分清楚。&lt;/p&gt;
+
+&lt;p&gt;azure提供了一个非常难用的&lt;a href=&quot;https://azure.microsoft.com/en-us/pricing/calculator/&quot;&gt;价格计算器&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;如果不是流量巨大的应用或者流量突发类型的应用， 设计指导方针是 先按照架构设计&lt;code class=&quot;highlighter-rouge&quot;&gt;跑一次&lt;/code&gt;试试看。&lt;/p&gt;
+
+&lt;p&gt;为什么？&lt;/p&gt;
+
+&lt;p&gt;azure的计算资源类型从A0-G5, 有50种以上的计算资源。&lt;/p&gt;
+
+&lt;p&gt;虽然每种类型有自己的计算能力(2 cores, 8G RAM), 也有对应的文档描述， 但是通过文档&lt;code class=&quot;highlighter-rouge&quot;&gt;很难区分&lt;/code&gt;具体型号的明确&lt;code class=&quot;highlighter-rouge&quot;&gt;界限&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;当选择的计算资源不适合时，可以实时热扩。 不用影响正在运行的进程。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;azure上的gateway，包括loadbalencer 后端是通过windows上的IIS实现的。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;我们曾经发生一个事故。
+曾经有一个项目部署了一套saas系统到azure上，当压力增加时(qps大约200左右) 会引发502 error。&lt;/p&gt;
+
+&lt;p&gt;投诉路线是这样的&lt;/p&gt;
+
+&lt;p&gt;中国上海 $→$  亚洲日本 $→$ 美国总部。&lt;/p&gt;
+
+&lt;p&gt;最终问题定位在application gateway上，升级以后问题才解决。&lt;/p&gt;
+
+&lt;h3 id=&quot;二-azure上的系统架构设计样例&quot;&gt;(二) azure上的系统架构设计样例&lt;/h3&gt;
+
+&lt;p&gt;开始设计之前，请参考一下这个lib。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://azure.microsoft.com/en-us/solutions/architecture/cross-cloud-scaling/&quot;&gt;https://azure.microsoft.com/en-us/solutions/architecture/cross-cloud-scaling/&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="cloud" />
+      
+
+      
+        <summary type="html">公有云架构设计以及设计技巧</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

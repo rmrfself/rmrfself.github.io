@@ -1,0 +1,2384 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="http://localhost:4000/tag/architecture/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2019-03-26T15:12:54+08:00</updated>
+  <id>http://localhost:4000/tag/architecture/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">张庆华的个人日志 | </title>
+  
+
+  
+    <subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">设计模式之组织行为(二)</title>
+      <link href="http://localhost:4000/archi-design-pattern-bahavior2-2" rel="alternate" type="text/html" title="设计模式之组织行为(二)" />
+      <published>2017-02-07T10:02:11+08:00</published>
+      <updated>2017-02-07T10:02:11+08:00</updated>
+      <id>http://localhost:4000/archi-design-pattern-bahavior2%202</id>
+      <content type="html" xml:base="http://localhost:4000/archi-design-pattern-bahavior2-2">&lt;p&gt;高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;画图不易，请勿转载。&lt;/p&gt;
+
+&lt;h1 id=&quot;对象行为组织类&quot;&gt;对象行为组织类&lt;/h1&gt;
+
+&lt;h2 id=&quot;iterator迭代器&quot;&gt;Iterator(迭代器)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_iterator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;interface Iterator{
+    Object First();
+    Object Next();
+    boolean IsDone();
+    Object CurrentItem();
+}
+
+abstract class Aggregate{
+    abstract Iterator CreateIterator();
+}
+
+class ConcreteIterator implements Iterator{
+    private List&amp;lt;Object&amp;gt; list = new ArrayList&amp;lt;Object&amp;gt;();
+    private int curr=0;
+    public ConcreteIterator(List&amp;lt;Object&amp;gt; list){
+        this.list = list;
+    }
+
+    public Object First(){
+        return list.get(0);
+    }
+
+    public Object Next(){
+        Object ret = null;
+        curr++;
+        if(curr &amp;lt; list.size()){
+            ret = list.get(curr);
+        }
+        return ret;
+    }
+
+    public boolean IsDone(){
+        return curr&amp;gt;=list.size()?true:false;
+    }
+
+    public Object CurrentItem(){
+        return list.get(curr);
+    }
+}
+
+class ConcreteAggregate extends Aggregate{
+    private List&amp;lt;Object&amp;gt; list = new ArrayList&amp;lt;Object&amp;gt;();
+    public ConcreteAggregate(List&amp;lt;Object&amp;gt; list){
+        this.list = list;
+    }
+    public Iterator CreateIterator(){
+        return new ConcreteIterator(list);
+    }
+}
+
+class client{
+    public static void main(String[] args){
+    List&amp;lt;Object&amp;gt; list = new ArrayList&amp;lt;Object&amp;gt;();
+    list.add(&quot;miner&quot;);
+    list.add(&quot;any&quot;);
+    Aggregate agg = new ConcreteAggregate(list);
+    Iterator iterator = agg.CreateIterator();
+    iterator.First();
+    while(!iterator.IsDone()){
+        System.out.println(iterator.CurrentItem());
+        iterator.Next();
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;中介者mediator&quot;&gt;中介者(Mediator)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_mediator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;备忘录memento&quot;&gt;备忘录(Memento)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_memento.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.util.List;
+import java.util.ArrayList;
+class Originator {
+    private String state;
+    // The class could also contain additional data that is not part of the
+    // state saved in the memento..
+ 
+    public void set(String state) {
+        this.state = state;
+        System.out.println(&quot;Originator: Setting state to &quot; + state);
+    }
+ 
+    public Memento saveToMemento() {
+        System.out.println(&quot;Originator: Saving to Memento.&quot;);
+        return new Memento(this.state);
+    }
+ 
+    public void restoreFromMemento(Memento memento) {
+        this.state = memento.getSavedState();
+        System.out.println(&quot;Originator: State after restoring from Memento: &quot; + state);
+    }
+ 
+    public static class Memento {
+        private final String state;
+
+        public Memento(String stateToSave) {
+            state = stateToSave;
+        }
+ 
+        // accessible by outer class only
+        private String getSavedState() {
+            return state;
+        }
+    }
+}
+ 
+class Caretaker {
+    public static void main(String[] args) {
+        List&amp;lt;Originator.Memento&amp;gt; savedStates = new ArrayList&amp;lt;Originator.Memento&amp;gt;();
+ 
+        Originator originator = new Originator();
+        originator.set(&quot;State1&quot;);
+        originator.set(&quot;State2&quot;);
+        savedStates.add(originator.saveToMemento());
+        originator.set(&quot;State3&quot;);
+        // We can request multiple mementos, and choose which one to roll back to.
+        savedStates.add(originator.saveToMemento());
+        originator.set(&quot;State4&quot;);
+ 
+        originator.restoreFromMemento(savedStates.get(1));   
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;订阅观察者模式observe&quot;&gt;订阅/观察者模式(Observe)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_observe.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class AbstractSubject(object):
+    def register(self, listener):
+        raise NotImplementedError(&quot;Must subclass me&quot;)
+ 
+    def deregister(self, listener):
+        raise NotImplementedError(&quot;Must subclass me&quot;)
+ 
+    def notify_listeners(self, event):
+        raise NotImplementedError(&quot;Must subclass me&quot;)
+ 
+class Listener(object):
+    def __init__(self, name, subject):
+        self.name = name
+        subject.register(self)
+ 
+    def notify(self, event):
+        print self.name, &quot;received event&quot;, event
+ 
+class Subject(AbstractSubject):
+    def __init__(self):
+        self.listeners = []
+        self.data = None
+
+    def getUserAction(self):
+        self.data = raw_input('Enter something to do:')
+        return self.data
+
+    # Implement abstract Class AbstractSubject
+
+    def register(self, listener):
+        self.listeners.append(listener)
+ 
+    def deregister(self, listener):
+        self.listeners.remove(listener)
+ 
+    def notify_listeners(self, event):
+        for listener in self.listeners:
+            listener.notify(event)
+
+ 
+if __name__==&quot;__main__&quot;:
+    # make a subject object to spy on
+    subject = Subject()
+ 
+    # register two listeners to monitor it.
+    listenerA = Listener(&quot;&amp;lt;listener A&amp;gt;&quot;, subject)
+    listenerB = Listener(&quot;&amp;lt;listener B&amp;gt;&quot;, subject)
+ 
+    # simulated event
+    subject.notify_listeners (&quot;&amp;lt;event 1&amp;gt;&quot;)
+    # outputs:
+    #     &amp;lt;listener A&amp;gt; received event &amp;lt;event 1&amp;gt;
+    #     &amp;lt;listener B&amp;gt; received event &amp;lt;event 1&amp;gt;
+ 
+    action = subject.getUserAction()
+    subject.notify_listeners(action)
+    #Enter something to do:hello
+    # outputs:
+    #     &amp;lt;listener A&amp;gt; received event hello
+    #     &amp;lt;listener B&amp;gt; received event hello
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;状态state&quot;&gt;状态(state)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_state.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;策略模式strategy&quot;&gt;策略模式(Strategy)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_strategy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;模板方法template&quot;&gt;模板方法(Template)&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_template.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
+  * An abstract class that is common to several games in
+  * which players play against the others, but only one is
+  * playing at a given time.
+  */
+ 
+ abstract class Game {
+ 
+     private int playersCount;
+ 
+     abstract void initializeGame();
+ 
+     abstract void makePlay(int player);
+ 
+     abstract boolean endOfGame();
+ 
+     abstract void printWinner();
+ 
+     /* A template method : */
+     final void playOneGame(int playersCount) {
+         this.playersCount = playersCount;
+         initializeGame();
+         int j = 0;
+         while (!endOfGame()){
+             makePlay(j);
+             j = (j + 1) % playersCount;
+         }
+         printWinner();
+     }
+ }
+
+//Now we can extend this class in order to implement actual games:
+
+ class Monopoly extends Game {
+ 
+     /* Implementation of necessary concrete methods */
+ 
+     void initializeGame() {
+         // ...
+     }
+ 
+     void makePlay(int player) {
+         // ...
+     }
+ 
+     boolean endOfGame() {
+         // ...
+     }
+ 
+     void printWinner() {
+         // ...
+     }
+  
+     /* Specific declarations for the Monopoly game. */
+ 
+     // ...
+ 
+ }
+
+ class Chess extends Game {
+ 
+     /* Implementation of necessary concrete methods */
+ 
+     void initializeGame() {
+         // ...
+     }
+ 
+     void makePlay(int player) {
+         // ...
+     }
+ 
+     boolean endOfGame() {
+         // ...
+     }
+ 
+     void printWinner() {
+         // ...
+     }
+  
+     /* Specific declarations for the chess game. */
+ 
+     // ...
+ 
+ }
+
+ public class Player {
+     public static void main(String[] args) {
+         Game chessGame = new Chess();
+         chessGame.initializeGame();
+         chessGame.playOneGame(1); //call template method
+     }
+ }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;访问者visitor&quot;&gt;访问者(visitor)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_vistor.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;visistor模式在spring-beans中的应用:&lt;/p&gt;
+
+&lt;p&gt;/spring-beans/src/main/java/org/springframework/beans/factory/config/BeanDefinitionVisitor.java&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+	 * Traverse the given BeanDefinition object and the MutablePropertyValues
+	 * and ConstructorArgumentValues contained in them.
+	 * @param beanDefinition the BeanDefinition object to traverse
+	 * @see #resolveStringValue(String)
+	 */
+	public void visitBeanDefinition(BeanDefinition beanDefinition) {
+		visitParentName(beanDefinition);
+		visitBeanClassName(beanDefinition);
+		visitFactoryBeanName(beanDefinition);
+		visitFactoryMethodName(beanDefinition);
+		visitScope(beanDefinition);
+		visitPropertyValues(beanDefinition.getPropertyValues());
+		ConstructorArgumentValues cas = beanDefinition.getConstructorArgumentValues();
+		visitIndexedArgumentValues(cas.getIndexedArgumentValues());
+		visitGenericArgumentValues(cas.getGenericArgumentValues());
+	}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+
+      
+        <summary type="html">高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">设计模式之组织行为(二)</title>
+      <link href="http://localhost:4000/archi-design-pattern-bahavior2" rel="alternate" type="text/html" title="设计模式之组织行为(二)" />
+      <published>2017-02-07T10:02:11+08:00</published>
+      <updated>2017-02-07T10:02:11+08:00</updated>
+      <id>http://localhost:4000/archi-design-pattern-bahavior2</id>
+      <content type="html" xml:base="http://localhost:4000/archi-design-pattern-bahavior2">&lt;p&gt;高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;画图不易，请勿转载。&lt;/p&gt;
+
+&lt;h1 id=&quot;对象行为组织类&quot;&gt;对象行为组织类&lt;/h1&gt;
+
+&lt;h2 id=&quot;iterator迭代器&quot;&gt;Iterator(迭代器)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_iterator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;interface Iterator{
+    Object First();
+    Object Next();
+    boolean IsDone();
+    Object CurrentItem();
+}
+
+abstract class Aggregate{
+    abstract Iterator CreateIterator();
+}
+
+class ConcreteIterator implements Iterator{
+    private List&amp;lt;Object&amp;gt; list = new ArrayList&amp;lt;Object&amp;gt;();
+    private int curr=0;
+    public ConcreteIterator(List&amp;lt;Object&amp;gt; list){
+        this.list = list;
+    }
+
+    public Object First(){
+        return list.get(0);
+    }
+
+    public Object Next(){
+        Object ret = null;
+        curr++;
+        if(curr &amp;lt; list.size()){
+            ret = list.get(curr);
+        }
+        return ret;
+    }
+
+    public boolean IsDone(){
+        return curr&amp;gt;=list.size()?true:false;
+    }
+
+    public Object CurrentItem(){
+        return list.get(curr);
+    }
+}
+
+class ConcreteAggregate extends Aggregate{
+    private List&amp;lt;Object&amp;gt; list = new ArrayList&amp;lt;Object&amp;gt;();
+    public ConcreteAggregate(List&amp;lt;Object&amp;gt; list){
+        this.list = list;
+    }
+    public Iterator CreateIterator(){
+        return new ConcreteIterator(list);
+    }
+}
+
+class client{
+    public static void main(String[] args){
+    List&amp;lt;Object&amp;gt; list = new ArrayList&amp;lt;Object&amp;gt;();
+    list.add(&quot;miner&quot;);
+    list.add(&quot;any&quot;);
+    Aggregate agg = new ConcreteAggregate(list);
+    Iterator iterator = agg.CreateIterator();
+    iterator.First();
+    while(!iterator.IsDone()){
+        System.out.println(iterator.CurrentItem());
+        iterator.Next();
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;中介者mediator&quot;&gt;中介者(Mediator)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_mediator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;备忘录memento&quot;&gt;备忘录(Memento)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_memento.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.util.List;
+import java.util.ArrayList;
+class Originator {
+    private String state;
+    // The class could also contain additional data that is not part of the
+    // state saved in the memento..
+ 
+    public void set(String state) {
+        this.state = state;
+        System.out.println(&quot;Originator: Setting state to &quot; + state);
+    }
+ 
+    public Memento saveToMemento() {
+        System.out.println(&quot;Originator: Saving to Memento.&quot;);
+        return new Memento(this.state);
+    }
+ 
+    public void restoreFromMemento(Memento memento) {
+        this.state = memento.getSavedState();
+        System.out.println(&quot;Originator: State after restoring from Memento: &quot; + state);
+    }
+ 
+    public static class Memento {
+        private final String state;
+
+        public Memento(String stateToSave) {
+            state = stateToSave;
+        }
+ 
+        // accessible by outer class only
+        private String getSavedState() {
+            return state;
+        }
+    }
+}
+ 
+class Caretaker {
+    public static void main(String[] args) {
+        List&amp;lt;Originator.Memento&amp;gt; savedStates = new ArrayList&amp;lt;Originator.Memento&amp;gt;();
+ 
+        Originator originator = new Originator();
+        originator.set(&quot;State1&quot;);
+        originator.set(&quot;State2&quot;);
+        savedStates.add(originator.saveToMemento());
+        originator.set(&quot;State3&quot;);
+        // We can request multiple mementos, and choose which one to roll back to.
+        savedStates.add(originator.saveToMemento());
+        originator.set(&quot;State4&quot;);
+ 
+        originator.restoreFromMemento(savedStates.get(1));   
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;订阅观察者模式observe&quot;&gt;订阅/观察者模式(Observe)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_observe.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class AbstractSubject(object):
+    def register(self, listener):
+        raise NotImplementedError(&quot;Must subclass me&quot;)
+ 
+    def deregister(self, listener):
+        raise NotImplementedError(&quot;Must subclass me&quot;)
+ 
+    def notify_listeners(self, event):
+        raise NotImplementedError(&quot;Must subclass me&quot;)
+ 
+class Listener(object):
+    def __init__(self, name, subject):
+        self.name = name
+        subject.register(self)
+ 
+    def notify(self, event):
+        print self.name, &quot;received event&quot;, event
+ 
+class Subject(AbstractSubject):
+    def __init__(self):
+        self.listeners = []
+        self.data = None
+
+    def getUserAction(self):
+        self.data = raw_input('Enter something to do:')
+        return self.data
+
+    # Implement abstract Class AbstractSubject
+
+    def register(self, listener):
+        self.listeners.append(listener)
+ 
+    def deregister(self, listener):
+        self.listeners.remove(listener)
+ 
+    def notify_listeners(self, event):
+        for listener in self.listeners:
+            listener.notify(event)
+
+ 
+if __name__==&quot;__main__&quot;:
+    # make a subject object to spy on
+    subject = Subject()
+ 
+    # register two listeners to monitor it.
+    listenerA = Listener(&quot;&amp;lt;listener A&amp;gt;&quot;, subject)
+    listenerB = Listener(&quot;&amp;lt;listener B&amp;gt;&quot;, subject)
+ 
+    # simulated event
+    subject.notify_listeners (&quot;&amp;lt;event 1&amp;gt;&quot;)
+    # outputs:
+    #     &amp;lt;listener A&amp;gt; received event &amp;lt;event 1&amp;gt;
+    #     &amp;lt;listener B&amp;gt; received event &amp;lt;event 1&amp;gt;
+ 
+    action = subject.getUserAction()
+    subject.notify_listeners(action)
+    #Enter something to do:hello
+    # outputs:
+    #     &amp;lt;listener A&amp;gt; received event hello
+    #     &amp;lt;listener B&amp;gt; received event hello
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;状态state&quot;&gt;状态(state)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_state.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;策略模式strategy&quot;&gt;策略模式(Strategy)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_strategy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;模板方法template&quot;&gt;模板方法(Template)&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_template.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
+  * An abstract class that is common to several games in
+  * which players play against the others, but only one is
+  * playing at a given time.
+  */
+ 
+ abstract class Game {
+ 
+     private int playersCount;
+ 
+     abstract void initializeGame();
+ 
+     abstract void makePlay(int player);
+ 
+     abstract boolean endOfGame();
+ 
+     abstract void printWinner();
+ 
+     /* A template method : */
+     final void playOneGame(int playersCount) {
+         this.playersCount = playersCount;
+         initializeGame();
+         int j = 0;
+         while (!endOfGame()){
+             makePlay(j);
+             j = (j + 1) % playersCount;
+         }
+         printWinner();
+     }
+ }
+
+//Now we can extend this class in order to implement actual games:
+
+ class Monopoly extends Game {
+ 
+     /* Implementation of necessary concrete methods */
+ 
+     void initializeGame() {
+         // ...
+     }
+ 
+     void makePlay(int player) {
+         // ...
+     }
+ 
+     boolean endOfGame() {
+         // ...
+     }
+ 
+     void printWinner() {
+         // ...
+     }
+  
+     /* Specific declarations for the Monopoly game. */
+ 
+     // ...
+ 
+ }
+
+ class Chess extends Game {
+ 
+     /* Implementation of necessary concrete methods */
+ 
+     void initializeGame() {
+         // ...
+     }
+ 
+     void makePlay(int player) {
+         // ...
+     }
+ 
+     boolean endOfGame() {
+         // ...
+     }
+ 
+     void printWinner() {
+         // ...
+     }
+  
+     /* Specific declarations for the chess game. */
+ 
+     // ...
+ 
+ }
+
+ public class Player {
+     public static void main(String[] args) {
+         Game chessGame = new Chess();
+         chessGame.initializeGame();
+         chessGame.playOneGame(1); //call template method
+     }
+ }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;访问者visitor&quot;&gt;访问者(visitor)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_vistor.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;visistor模式在spring-beans中的应用:&lt;/p&gt;
+
+&lt;p&gt;/spring-beans/src/main/java/org/springframework/beans/factory/config/BeanDefinitionVisitor.java&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+	 * Traverse the given BeanDefinition object and the MutablePropertyValues
+	 * and ConstructorArgumentValues contained in them.
+	 * @param beanDefinition the BeanDefinition object to traverse
+	 * @see #resolveStringValue(String)
+	 */
+	public void visitBeanDefinition(BeanDefinition beanDefinition) {
+		visitParentName(beanDefinition);
+		visitBeanClassName(beanDefinition);
+		visitFactoryBeanName(beanDefinition);
+		visitFactoryMethodName(beanDefinition);
+		visitScope(beanDefinition);
+		visitPropertyValues(beanDefinition.getPropertyValues());
+		ConstructorArgumentValues cas = beanDefinition.getConstructorArgumentValues();
+		visitIndexedArgumentValues(cas.getIndexedArgumentValues());
+		visitGenericArgumentValues(cas.getGenericArgumentValues());
+	}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+
+      
+        <summary type="html">高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">设计模式之组织行为(一)</title>
+      <link href="http://localhost:4000/archi-design-pattern-bahavior" rel="alternate" type="text/html" title="设计模式之组织行为(一)" />
+      <published>2017-02-05T23:20:19+08:00</published>
+      <updated>2017-02-05T23:20:19+08:00</updated>
+      <id>http://localhost:4000/archi-design-pattern-bahavior</id>
+      <content type="html" xml:base="http://localhost:4000/archi-design-pattern-bahavior">&lt;p&gt;如果对每一个类型为 T1的对象 o1，都有类型为 T2 的对象o2，使得以 T1定义的所有程序 P 在所有的对象 o1 都代换成 o2 时，程序 P 的行为没有发生变化，那么类型 T2 是类型 T1 的子类型。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;画图不易，请勿转载。&lt;/p&gt;
+
+&lt;h1 id=&quot;对象行为组织类&quot;&gt;对象行为组织类&lt;/h1&gt;
+
+&lt;h2 id=&quot;chain-of-repository责任链&quot;&gt;Chain of repository(责任链)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_chain_of_repo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.util.*;
+
+abstract class Logger 
+{
+    public static int ERR = 3;
+    public static int NOTICE = 5;
+    public static int DEBUG = 7;
+    protected int mask;
+
+    // The next element in the chain of responsibility
+    protected Logger next;
+    public Logger setNext( Logger l)
+    {
+        next = l;
+        return this;
+    }
+
+    public final void message( String msg, int priority )
+    {
+        if ( priority &amp;lt;= mask ) 
+        {
+            writeMessage( msg );
+            if ( next != null )
+            {
+                next.message( msg, priority );
+            }
+        }
+    }
+    
+    protected abstract void writeMessage( String msg );
+
+}
+
+class StdoutLogger extends Logger 
+{
+
+    public StdoutLogger( int mask ) { this.mask = mask; }
+
+    protected void writeMessage( String msg )
+    {
+        System.out.println( &quot;Writting to stdout: &quot; + msg );
+    }
+}
+
+
+class EmailLogger extends Logger 
+{
+
+    public EmailLogger( int mask ) { this.mask = mask; }
+
+    protected void writeMessage( String msg )
+    {
+        System.out.println( &quot;Sending via email: &quot; + msg );
+    }
+}
+
+class StderrLogger extends Logger 
+{
+
+    public StderrLogger( int mask ) { this.mask = mask; }
+
+    protected void writeMessage( String msg )
+    {
+        System.out.println( &quot;Sending to stderr: &quot; + msg );
+    }
+}
+
+public class ChainOfResponsibilityExample
+{
+    public static void main( String[] args )
+    {
+        // Build the chain of responsibility
+        Logger l = new StdoutLogger( Logger.DEBUG).setNext(
+                            new EmailLogger( Logger.NOTICE ).setNext(
+                            new StderrLogger( Logger.ERR ) ) );
+
+        // Handled by StdoutLogger
+        l.message( &quot;Entering function y.&quot;, Logger.DEBUG );
+
+        // Handled by StdoutLogger and EmailLogger
+        l.message( &quot;Step1 completed.&quot;, Logger.NOTICE );
+
+        // Handled by all three loggers
+        l.message( &quot;An error has occurred.&quot;, Logger.ERR );
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;命令模式command&quot;&gt;命令模式(command)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_command.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;命令模式是比较深刻的设计模式。它抽象了方法«调用过程»,把方法请求和受到影响的类之间的关联解耦。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;与这种模式相反的情形就是一个’big function‘，各种情况放在一个函数当中。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F&quot;&gt;源码示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.util.List;
+import java.util.ArrayList;
+
+/* The Command interface */
+public interface Command {
+   void execute();
+}
+
+/* The Invoker class */
+public class Switch {
+   private List&amp;lt;Command&amp;gt; history = new ArrayList&amp;lt;Command&amp;gt;();
+
+   public Switch() {
+   }
+
+   public void storeAndExecute(Command cmd) {
+      this.history.add(cmd); // optional 
+      cmd.execute();        
+   }
+}
+
+/* The Receiver class */
+public class Light {
+   public Light() {
+   }
+
+   public void turnOn() {
+      System.out.println(&quot;The light is on&quot;);
+   }
+
+   public void turnOff() {
+      System.out.println(&quot;The light is off&quot;);
+   }
+}
+
+/* The Command for turning on the light - ConcreteCommand #1 */
+public class FlipUpCommand implements Command {
+   private Light theLight;
+
+   public FlipUpCommand(Light light) {
+      this.theLight = light;
+   }
+
+   public void execute(){
+      theLight.turnOn();
+   }
+}
+
+/* The Command for turning off the light - ConcreteCommand #2 */
+public class FlipDownCommand implements Command {
+   private Light theLight;
+
+   public FlipDownCommand(Light light) {
+      this.theLight = light;
+   }
+
+   public void execute() {
+      theLight.turnOff();
+   }
+}
+
+/* The test class or client */
+public class PressSwitch {
+   public static void main(String[] args){
+      Light lamp = new Light();
+      Command switchUp = new FlipUpCommand(lamp);
+      Command switchDown = new FlipDownCommand(lamp);
+
+      Switch mySwitch = new Switch();
+
+      try {
+         if (&quot;ON&quot;.equalsIgnoreCase(args[0])) {
+            mySwitch.storeAndExecute(switchUp);
+         }
+         else if (&quot;OFF&quot;.equalsIgnoreCase(args[0])) {
+            mySwitch.storeAndExecute(switchDown);
+         }
+         else {
+            System.out.println(&quot;Argument \&quot;ON\&quot; or \&quot;OFF\&quot; is required.&quot;);
+         }
+      } catch (Exception e) {
+         System.out.println(&quot;Arguments required.&quot;);
+      }
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;解释器interpreter&quot;&gt;解释器(Interpreter)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_interpreter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Interpreter_pattern&quot;&gt;源码示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.util.Map;
+
+interface Expression {
+    public int interpret(final Map&amp;lt;String, Expression&amp;gt; variables);
+}
+
+class Number implements Expression {
+    private int number;
+    public Number(final int number)       { this.number = number; }
+    public int interpret(final Map&amp;lt;String, Expression&amp;gt; variables)  { return number; }
+}
+
+class Plus implements Expression {
+    Expression leftOperand;
+    Expression rightOperand;
+    public Plus(final Expression left, final Expression right) {
+        leftOperand = left;
+        rightOperand = right;
+    }
+		
+    public int interpret(final Map&amp;lt;String, Expression&amp;gt; variables) {
+        return leftOperand.interpret(variables) + rightOperand.interpret(variables);
+    }
+}
+
+class Minus implements Expression {
+    Expression leftOperand;
+    Expression rightOperand;
+    public Minus(final Expression left, final Expression right) {
+        leftOperand = left;
+        rightOperand = right;
+    }
+		
+    public int interpret(final Map&amp;lt;String, Expression&amp;gt; variables) {
+        return leftOperand.interpret(variables) - rightOperand.interpret(variables);
+    }
+}
+
+class Variable implements Expression {
+    private String name;
+    public Variable(final String name)       { this.name = name; }
+    public int interpret(final Map&amp;lt;String, Expression&amp;gt; variables) {
+        if (null == variables.get(name)) return 0; // Either return new Number(0).
+        return variables.get(name).interpret(variables);
+    }
+}
+
+//
+import java.util.Map;
+import java.util.Stack;
+
+class Evaluator implements Expression {
+    private Expression syntaxTree;
+
+    public Evaluator(final String expression) {
+        final Stack&amp;lt;Expression&amp;gt; expressionStack = new Stack&amp;lt;Expression&amp;gt;();
+        for (final String token : expression.split(&quot; &quot;)) {
+            if (token.equals(&quot;+&quot;)) {
+                final Expression subExpression = new Plus(expressionStack.pop(), expressionStack.pop());
+                expressionStack.push(subExpression);
+            } else if (token.equals(&quot;-&quot;)) {
+                // it's necessary to remove first the right operand from the stack
+                final Expression right = expressionStack.pop();
+                // ..and then the left one
+                final Expression left = expressionStack.pop();
+                final Expression subExpression = new Minus(left, right);
+                expressionStack.push(subExpression);
+            } else
+                expressionStack.push(new Variable(token));
+        }
+        syntaxTree = expressionStack.pop();
+    }
+
+    public int interpret(final Map&amp;lt;String, Expression&amp;gt; context) {
+        return syntaxTree.interpret(context);
+    }
+}
+//
+
+import java.util.Map;
+import java.util.HashMap;
+
+public class InterpreterExample {
+    public static void main(final String[] args) {
+        final String expression = &quot;w x z - +&quot;;
+        final Evaluator sentence = new Evaluator(expression);
+        final Map&amp;lt;String, Expression&amp;gt; variables = new HashMap&amp;lt;String, Expression&amp;gt;();
+        variables.put(&quot;w&quot;, new Number(5));
+        variables.put(&quot;x&quot;, new Number(10));
+        variables.put(&quot;z&quot;, new Number(42));
+        final int result = sentence.interpret(variables);
+        System.out.println(result);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+
+      
+        <summary type="html">如果对每一个类型为 T1的对象 o1，都有类型为 T2 的对象o2，使得以 T1定义的所有程序 P 在所有的对象 o1 都代换成 o2 时，程序 P 的行为没有发生变化，那么类型 T2 是类型 T1 的子类型。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">设计模式之对象创建</title>
+      <link href="http://localhost:4000/archi-design-pattern-createral-2" rel="alternate" type="text/html" title="设计模式之对象创建" />
+      <published>2017-01-31T19:09:19+08:00</published>
+      <updated>2017-01-31T19:09:19+08:00</updated>
+      <id>http://localhost:4000/archi-design-pattern-createral%202</id>
+      <content type="html" xml:base="http://localhost:4000/archi-design-pattern-createral-2">&lt;p&gt;类型的本质是一种约束。接口可以理解为一种行为类型。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;画图不易，请勿转载。&lt;/p&gt;
+
+&lt;h1 id=&quot;对象构造类&quot;&gt;对象构造类&lt;/h1&gt;
+
+&lt;h2 id=&quot;singleton单一状态模式&quot;&gt;singleton(单一状态模式)&lt;/h2&gt;
+
+&lt;p&gt;利用静态方法，从内存直取。&lt;/p&gt;
+
+&lt;h2 id=&quot;prototype原型&quot;&gt;prototype(原型)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_prototype.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/** Prototype Class **/
+ public class Cookie implements Cloneable {
+   
+    public Object clone() throws CloneNotSupportedException
+    {
+        //In an actual implementation of this pattern you would now attach references to
+        //the expensive to produce parts from the copies that are held inside the prototype.
+        return (Cookie) super.clone();
+    }
+ }
+ 
+ /** Concrete Prototypes to clone **/
+ public class CoconutCookie extends Cookie { }
+ 
+ /** Client Class**/
+ public class CookieMachine
+ {
+ 
+   private Cookie cookie;//cookie必须是可复制的
+ 
+     public CookieMachine(Cookie cookie) { 
+         this.cookie = cookie; 
+     } 
+
+    public Cookie makeCookie()
+    {
+        try
+        {
+            return (Cookie) cookie.clone();
+        } catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    } 
+
+ 
+     public static void main(String args[]){ 
+         Cookie tempCookie =  null; 
+         Cookie prot = new CoconutCookie(); 
+         CookieMachine cm = new CookieMachine(prot); //设置原型
+         for(int i=0; i&amp;lt;100; i++) 
+             tempCookie = cm.makeCookie();//通过复制原型返回多个cookie 
+     } 
+ }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;## 工厂方法&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ![](http://blog.h5tube.com/design_patterns_factory_method.png)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;//Button类
+class Button{/* …&lt;em&gt;/}
+class WinButton extends Button{/&lt;/em&gt; …&lt;em&gt;/}
+class MacButton extends Button{/&lt;/em&gt; …*/}&lt;/p&gt;
+
+&lt;p&gt;//工厂类
+interface ButtonFactory{
+    abstract Button createButton();
+}
+class WinButtonFactory implements ButtonFactory{
+    Button createButton(){
+        return new WinButton();
+    }
+}
+class MacButtonFactory implements ButtonFactory{
+    Button createButton(){
+        return new MacButton();
+    }
+}&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+## 抽象工厂
+
+![](http://blog.h5tube.com/design_patterns_abstract_factory.png)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;public interface Button {}
+public interface Border {}&lt;/p&gt;
+
+&lt;p&gt;public class MacButton implements Button {}
+public class MacBorder implements Border {}&lt;/p&gt;
+
+&lt;p&gt;public class WinButton implements Button {}
+public class WinBorder implements Border {}&lt;/p&gt;
+
+&lt;p&gt;public class MacFactory {
+	public static Button createButton() {
+	    return new MacButton();
+	}
+		public static Border createBorder() {
+	    return new MacBorder();
+	}
+}&lt;/p&gt;
+
+&lt;p&gt;public class WinFactory {
+	public static Button createButton() {
+	    return new WinButton();
+	}
+		public static Border createBorder() {
+	    return new WinBorder();
+	}
+}&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+## Builder(建造、生成器)
+
+![](http://blog.h5tube.com/design_patterns_builder.png)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;/** “Product” */
+ class Pizza {
+   private String dough = “”;
+   private String sauce = “”;
+   private String topping = “”;&lt;/p&gt;
+
+&lt;p&gt;public void setDough (String dough)     { this.dough = dough; }
+   public void setSauce (String sauce)     { this.sauce = sauce; }
+   public void setTopping (String topping) { this.topping = topping; }
+ }&lt;/p&gt;
+
+&lt;p&gt;’’/** “Abstract Builder” */’’
+ abstract class PizzaBuilder {
+   protected Pizza pizza;&lt;/p&gt;
+
+&lt;p&gt;public Pizza getPizza() { return pizza; }
+   public void createNewPizzaProduct() { pizza = new Pizza(); }&lt;/p&gt;
+
+&lt;p&gt;public abstract void buildDough();
+   public abstract void buildSauce();
+   public abstract void buildTopping();
+ }&lt;/p&gt;
+
+&lt;p&gt;/** “ConcreteBuilder” */
+ class HawaiianPizzaBuilder extends PizzaBuilder {
+   public void buildDough()   { pizza.setDough(“cross”); }
+   public void buildSauce()   { pizza.setSauce(“mild”); }
+   public void buildTopping() { pizza.setTopping(“ham+pineapple”); }
+ }&lt;/p&gt;
+
+&lt;p&gt;/** “ConcreteBuilder” */
+ class SpicyPizzaBuilder extends PizzaBuilder {
+   public void buildDough()   { pizza.setDough(“pan baked”); }
+   public void buildSauce()   { pizza.setSauce(“hot”); }
+   public void buildTopping() { pizza.setTopping(“pepperoni+salami”); }
+ }&lt;/p&gt;
+
+&lt;p&gt;’’/** “Director” */’’
+ class Waiter {
+   private PizzaBuilder pizzaBuilder;&lt;/p&gt;
+
+&lt;p&gt;public void setPizzaBuilder (PizzaBuilder pb) { pizzaBuilder = pb; }
+   public Pizza getPizza() { return pizzaBuilder.getPizza(); }&lt;/p&gt;
+
+&lt;p&gt;public void constructPizza() {
+     pizzaBuilder.createNewPizzaProduct();
+     pizzaBuilder.buildDough();
+     pizzaBuilder.buildSauce();
+     pizzaBuilder.buildTopping();
+   }
+ }&lt;/p&gt;
+
+&lt;p&gt;/** A customer ordering a pizza. */
+ class BuilderExample {
+   public static void main(String[] args) {
+     Waiter waiter = new Waiter();
+     PizzaBuilder hawaiian_pizzabuilder = new HawaiianPizzaBuilder();
+     PizzaBuilder spicy_pizzabuilder = new SpicyPizzaBuilder();&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; waiter.setPizzaBuilder ( hawaiian_pizzabuilder );
+ waiter.constructPizza();
+ 
+ Pizza pizza = waiter.getPizza();    }  }  ```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+
+      
+        <summary type="html">类型的本质是一种约束。接口可以理解为一种行为类型。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">设计模式之对象创建</title>
+      <link href="http://localhost:4000/archi-design-pattern-createral" rel="alternate" type="text/html" title="设计模式之对象创建" />
+      <published>2017-01-31T19:09:19+08:00</published>
+      <updated>2017-01-31T19:09:19+08:00</updated>
+      <id>http://localhost:4000/archi-design-pattern-createral</id>
+      <content type="html" xml:base="http://localhost:4000/archi-design-pattern-createral">&lt;p&gt;类型的本质是一种约束。接口可以理解为一种行为类型。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;画图不易，请勿转载。&lt;/p&gt;
+
+&lt;h1 id=&quot;对象构造类&quot;&gt;对象构造类&lt;/h1&gt;
+
+&lt;h2 id=&quot;singleton单一状态模式&quot;&gt;singleton(单一状态模式)&lt;/h2&gt;
+
+&lt;p&gt;利用静态方法，从内存直取。&lt;/p&gt;
+
+&lt;h2 id=&quot;prototype原型&quot;&gt;prototype(原型)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_prototype.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/** Prototype Class **/
+ public class Cookie implements Cloneable {
+   
+    public Object clone() throws CloneNotSupportedException
+    {
+        //In an actual implementation of this pattern you would now attach references to
+        //the expensive to produce parts from the copies that are held inside the prototype.
+        return (Cookie) super.clone();
+    }
+ }
+ 
+ /** Concrete Prototypes to clone **/
+ public class CoconutCookie extends Cookie { }
+ 
+ /** Client Class**/
+ public class CookieMachine
+ {
+ 
+   private Cookie cookie;//cookie必须是可复制的
+ 
+     public CookieMachine(Cookie cookie) { 
+         this.cookie = cookie; 
+     } 
+
+    public Cookie makeCookie()
+    {
+        try
+        {
+            return (Cookie) cookie.clone();
+        } catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    } 
+
+ 
+     public static void main(String args[]){ 
+         Cookie tempCookie =  null; 
+         Cookie prot = new CoconutCookie(); 
+         CookieMachine cm = new CookieMachine(prot); //设置原型
+         for(int i=0; i&amp;lt;100; i++) 
+             tempCookie = cm.makeCookie();//通过复制原型返回多个cookie 
+     } 
+ }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;## 工厂方法&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ![](http://blog.h5tube.com/design_patterns_factory_method.png)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;//Button类
+class Button{/* …&lt;em&gt;/}
+class WinButton extends Button{/&lt;/em&gt; …&lt;em&gt;/}
+class MacButton extends Button{/&lt;/em&gt; …*/}&lt;/p&gt;
+
+&lt;p&gt;//工厂类
+interface ButtonFactory{
+    abstract Button createButton();
+}
+class WinButtonFactory implements ButtonFactory{
+    Button createButton(){
+        return new WinButton();
+    }
+}
+class MacButtonFactory implements ButtonFactory{
+    Button createButton(){
+        return new MacButton();
+    }
+}&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+## 抽象工厂
+
+![](http://blog.h5tube.com/design_patterns_abstract_factory.png)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;public interface Button {}
+public interface Border {}&lt;/p&gt;
+
+&lt;p&gt;public class MacButton implements Button {}
+public class MacBorder implements Border {}&lt;/p&gt;
+
+&lt;p&gt;public class WinButton implements Button {}
+public class WinBorder implements Border {}&lt;/p&gt;
+
+&lt;p&gt;public class MacFactory {
+	public static Button createButton() {
+	    return new MacButton();
+	}
+		public static Border createBorder() {
+	    return new MacBorder();
+	}
+}&lt;/p&gt;
+
+&lt;p&gt;public class WinFactory {
+	public static Button createButton() {
+	    return new WinButton();
+	}
+		public static Border createBorder() {
+	    return new WinBorder();
+	}
+}&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+## Builder(建造、生成器)
+
+![](http://blog.h5tube.com/design_patterns_builder.png)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;/** “Product” */
+ class Pizza {
+   private String dough = “”;
+   private String sauce = “”;
+   private String topping = “”;&lt;/p&gt;
+
+&lt;p&gt;public void setDough (String dough)     { this.dough = dough; }
+   public void setSauce (String sauce)     { this.sauce = sauce; }
+   public void setTopping (String topping) { this.topping = topping; }
+ }&lt;/p&gt;
+
+&lt;p&gt;’’/** “Abstract Builder” */’’
+ abstract class PizzaBuilder {
+   protected Pizza pizza;&lt;/p&gt;
+
+&lt;p&gt;public Pizza getPizza() { return pizza; }
+   public void createNewPizzaProduct() { pizza = new Pizza(); }&lt;/p&gt;
+
+&lt;p&gt;public abstract void buildDough();
+   public abstract void buildSauce();
+   public abstract void buildTopping();
+ }&lt;/p&gt;
+
+&lt;p&gt;/** “ConcreteBuilder” */
+ class HawaiianPizzaBuilder extends PizzaBuilder {
+   public void buildDough()   { pizza.setDough(“cross”); }
+   public void buildSauce()   { pizza.setSauce(“mild”); }
+   public void buildTopping() { pizza.setTopping(“ham+pineapple”); }
+ }&lt;/p&gt;
+
+&lt;p&gt;/** “ConcreteBuilder” */
+ class SpicyPizzaBuilder extends PizzaBuilder {
+   public void buildDough()   { pizza.setDough(“pan baked”); }
+   public void buildSauce()   { pizza.setSauce(“hot”); }
+   public void buildTopping() { pizza.setTopping(“pepperoni+salami”); }
+ }&lt;/p&gt;
+
+&lt;p&gt;’’/** “Director” */’’
+ class Waiter {
+   private PizzaBuilder pizzaBuilder;&lt;/p&gt;
+
+&lt;p&gt;public void setPizzaBuilder (PizzaBuilder pb) { pizzaBuilder = pb; }
+   public Pizza getPizza() { return pizzaBuilder.getPizza(); }&lt;/p&gt;
+
+&lt;p&gt;public void constructPizza() {
+     pizzaBuilder.createNewPizzaProduct();
+     pizzaBuilder.buildDough();
+     pizzaBuilder.buildSauce();
+     pizzaBuilder.buildTopping();
+   }
+ }&lt;/p&gt;
+
+&lt;p&gt;/** A customer ordering a pizza. */
+ class BuilderExample {
+   public static void main(String[] args) {
+     Waiter waiter = new Waiter();
+     PizzaBuilder hawaiian_pizzabuilder = new HawaiianPizzaBuilder();
+     PizzaBuilder spicy_pizzabuilder = new SpicyPizzaBuilder();&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; waiter.setPizzaBuilder ( hawaiian_pizzabuilder );
+ waiter.constructPizza();
+ 
+ Pizza pizza = waiter.getPizza();    }  }  ```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+
+      
+        <summary type="html">类型的本质是一种约束。接口可以理解为一种行为类型。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">设计模式之组件构造</title>
+      <link href="http://localhost:4000/archi-design-pattern-instructure" rel="alternate" type="text/html" title="设计模式之组件构造" />
+      <published>2017-01-27T10:12:19+08:00</published>
+      <updated>2017-01-27T10:12:19+08:00</updated>
+      <id>http://localhost:4000/archi-design-pattern-instructure</id>
+      <content type="html" xml:base="http://localhost:4000/archi-design-pattern-instructure">&lt;p&gt;架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;画图不易，请勿转载。&lt;/p&gt;
+
+&lt;h1 id=&quot;对象构造类&quot;&gt;对象构造类&lt;/h1&gt;
+
+&lt;h2 id=&quot;适配器模式&quot;&gt;适配器模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_adapter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;代理模式&quot;&gt;代理模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_proxy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F&quot;&gt;源码示例&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.util.*;
+ 
+interface Image {
+    public void displayImage();
+}
+
+//on System A 
+class RealImage implements Image {
+    private String filename;
+    public RealImage(String filename) { 
+        this.filename = filename;
+        loadImageFromDisk();
+    }
+
+    private void loadImageFromDisk() {
+        System.out.println(&quot;Loading   &quot; + filename);
+    }
+
+    public void displayImage() { 
+        System.out.println(&quot;Displaying &quot; + filename); 
+    }
+}
+
+//on System B 
+class ProxyImage implements Image {
+    private String filename;
+    private Image image;
+ 
+    public ProxyImage(String filename) { 
+        this.filename = filename; 
+    }
+    public void displayImage() {
+        if(image == null)
+              image = new RealImage(filename);
+        image.displayImage();
+    }
+}
+ 
+class ProxyExample {
+    public static void main(String[] args) {
+        Image image1 = new ProxyImage(&quot;HiRes_10MB_Photo1&quot;);
+        Image image2 = new ProxyImage(&quot;HiRes_10MB_Photo2&quot;);     
+        
+        image1.displayImage(); // loading necessary
+        image2.displayImage(); // loading necessary
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;桥接模式&quot;&gt;桥接模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_bridge.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%A9%8B%E6%8E%A5%E6%A8%A1%E5%BC%8F&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/** &quot;Implementor&quot; */
+interface DrawingAPI
+{
+    public void drawCircle(double x, double y, double radius);
+}
+
+/** &quot;ConcreteImplementor&quot; 1/2 */
+class DrawingAPI1 implements DrawingAPI
+{
+   public void drawCircle(double x, double y, double radius) 
+   {
+        System.out.printf(&quot;API1.circle at %f:%f radius %f\n&quot;, x, y, radius);
+   }
+}
+
+/** &quot;ConcreteImplementor&quot; 2/2 */
+class DrawingAPI2 implements DrawingAPI
+{
+   public void drawCircle(double x, double y, double radius) 
+   { 
+        System.out.printf(&quot;API2.circle at %f:%f radius %f\n&quot;, x, y, radius);
+   }
+}
+
+/** &quot;Abstraction&quot; */
+interface Shape
+{
+   public void draw();                                            // low-level
+   public void resizeByPercentage(double pct);     // high-level
+}
+
+/** &quot;Refined Abstraction&quot; */
+class CircleShape implements Shape
+{
+   private double x, y, radius;
+   private DrawingAPI drawingAPI;
+   public CircleShape(double x, double y, double radius, DrawingAPI drawingAPI)
+   {
+       this.x = x;  this.y = y;  this.radius = radius; 
+       this.drawingAPI = drawingAPI;
+   }
+
+   // low-level i.e. Implementation specific
+   public void draw()
+   {
+        drawingAPI.drawCircle(x, y, radius);
+   }   
+   // high-level i.e. Abstraction specific
+   public void resizeByPercentage(double pct)
+   {
+        radius *= pct;
+   }
+}
+
+/** &quot;Client&quot; */
+class BridgePattern {
+   public static void main(String[] args)
+   {
+       Shape[] shapes = new Shape[2];
+       shapes[0] = new CircleShape(1, 2, 3, new DrawingAPI1());
+       shapes[1] = new CircleShape(5, 7, 11, new DrawingAPI2());
+
+       for (Shape shape : shapes)
+       {
+           shape.resizeByPercentage(2.5);
+           shape.draw();
+       }
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;组合模式&quot;&gt;组合模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_composite.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;装饰器模式&quot;&gt;装饰器模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_decorator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;外观模式&quot;&gt;外观模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_facade.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Facade_pattern&quot;&gt;源码示例&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/* Complex parts */
+
+class CPU {
+	public void freeze() { ... }
+	public void jump(long position) { ... }
+	public void execute() { ... }
+}
+
+class Memory {
+	public void load(long position, byte[] data) {
+		...
+	}
+}
+
+class HardDrive {
+	public byte[] read(long lba, int size) {
+		...
+	}
+}
+
+/* Façade */
+
+class Computer {
+	public void startComputer() {
+		cpu.freeze();
+		memory.load(BOOT_ADDRESS, hardDrive.read(BOOT_SECTOR, SECTOR_SIZE));
+		cpu.jump(BOOT_ADDRESS);
+		cpu.execute();
+	}
+}
+
+/* Client */
+
+class You {
+	public static void main(String[] args) {
+		Computer facade = new Computer();
+		facade.startComputer();
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;享元模式&quot;&gt;享元模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_flyweight.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public enum FontEffect {
+    BOLD, ITALIC, SUPERSCRIPT, SUBSCRIPT, STRIKETHROUGH
+}
+
+public final class FontData {
+    /**
+     * A weak hash map will drop unused references to FontData.
+     * Values have to be wrapped in WeakReferences, 
+     * because value objects in weak hash map are held by strong references.
+     */
+    private static final WeakHashMap&amp;lt;FontData, WeakReference&amp;lt;FontData&amp;gt;&amp;gt; FLY_WEIGHT_DATA =
+        new WeakHashMap&amp;lt;FontData, WeakReference&amp;lt;FontData&amp;gt;&amp;gt;();
+    private final int pointSize;
+    private final String fontFace;
+    private final Color color;
+    private final Set&amp;lt;FontEffect&amp;gt; effects;
+
+    private FontData(int pointSize, String fontFace, Color color, EnumSet&amp;lt;FontEffect&amp;gt; effects) {
+        this.pointSize = pointSize;
+        this.fontFace = fontFace;
+        this.color = color;
+        this.effects = Collections.unmodifiableSet(effects);
+    }
+
+    public static FontData create(int pointSize, String fontFace, Color color,
+        FontEffect... effects) {
+        EnumSet&amp;lt;FontEffect&amp;gt; effectsSet = EnumSet.noneOf(FontEffect.class);
+        for (FontEffect fontEffect : effects) {
+            effectsSet.add(fontEffect);
+        }
+        // We are unconcerned with object creation cost, we are reducing overall memory consumption
+        FontData data = new FontData(pointSize, fontFace, color, effectsSet);
+
+        // Retrieve previously created instance with the given values if it (still) exists
+        WeakReference&amp;lt;FontData&amp;gt; ref = FLY_WEIGHT_DATA.get(data);
+        FontData result = (ref != null) ? ref.get() : null;
+        
+        // Store new font data instance if no matching instance exists
+        if (result == null) {
+            FLY_WEIGHT_DATA.put(data, new WeakReference&amp;lt;FontData&amp;gt; (data));
+            result = data;
+        }
+        // return the single immutable copy with the given values
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof FontData) {
+            if (obj == this) {
+                return true;
+            }
+            FontData other = (FontData) obj;
+            return other.pointSize == pointSize &amp;amp;&amp;amp; other.fontFace.equals(fontFace)
+                &amp;amp;&amp;amp; other.color.equals(color) &amp;amp;&amp;amp; other.effects.equals(effects);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return (pointSize * 37 + effects.hashCode() * 13) * fontFace.hashCode();
+    }
+
+    // Getters for the font data, but no setters. FontData is immutable.
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;服务启动&quot;&gt;服务启动&lt;/h4&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+
+      
+        <summary type="html">架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">设计模式之组件构造</title>
+      <link href="http://localhost:4000/archi-design-pattern-instructure-2" rel="alternate" type="text/html" title="设计模式之组件构造" />
+      <published>2017-01-27T10:12:19+08:00</published>
+      <updated>2017-01-27T10:12:19+08:00</updated>
+      <id>http://localhost:4000/archi-design-pattern-instructure%202</id>
+      <content type="html" xml:base="http://localhost:4000/archi-design-pattern-instructure-2">&lt;p&gt;架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;画图不易，请勿转载。&lt;/p&gt;
+
+&lt;h1 id=&quot;对象构造类&quot;&gt;对象构造类&lt;/h1&gt;
+
+&lt;h2 id=&quot;适配器模式&quot;&gt;适配器模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_adapter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;代理模式&quot;&gt;代理模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_proxy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F&quot;&gt;源码示例&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.util.*;
+ 
+interface Image {
+    public void displayImage();
+}
+
+//on System A 
+class RealImage implements Image {
+    private String filename;
+    public RealImage(String filename) { 
+        this.filename = filename;
+        loadImageFromDisk();
+    }
+
+    private void loadImageFromDisk() {
+        System.out.println(&quot;Loading   &quot; + filename);
+    }
+
+    public void displayImage() { 
+        System.out.println(&quot;Displaying &quot; + filename); 
+    }
+}
+
+//on System B 
+class ProxyImage implements Image {
+    private String filename;
+    private Image image;
+ 
+    public ProxyImage(String filename) { 
+        this.filename = filename; 
+    }
+    public void displayImage() {
+        if(image == null)
+              image = new RealImage(filename);
+        image.displayImage();
+    }
+}
+ 
+class ProxyExample {
+    public static void main(String[] args) {
+        Image image1 = new ProxyImage(&quot;HiRes_10MB_Photo1&quot;);
+        Image image2 = new ProxyImage(&quot;HiRes_10MB_Photo2&quot;);     
+        
+        image1.displayImage(); // loading necessary
+        image2.displayImage(); // loading necessary
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;桥接模式&quot;&gt;桥接模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_bridge.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%A9%8B%E6%8E%A5%E6%A8%A1%E5%BC%8F&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/** &quot;Implementor&quot; */
+interface DrawingAPI
+{
+    public void drawCircle(double x, double y, double radius);
+}
+
+/** &quot;ConcreteImplementor&quot; 1/2 */
+class DrawingAPI1 implements DrawingAPI
+{
+   public void drawCircle(double x, double y, double radius) 
+   {
+        System.out.printf(&quot;API1.circle at %f:%f radius %f\n&quot;, x, y, radius);
+   }
+}
+
+/** &quot;ConcreteImplementor&quot; 2/2 */
+class DrawingAPI2 implements DrawingAPI
+{
+   public void drawCircle(double x, double y, double radius) 
+   { 
+        System.out.printf(&quot;API2.circle at %f:%f radius %f\n&quot;, x, y, radius);
+   }
+}
+
+/** &quot;Abstraction&quot; */
+interface Shape
+{
+   public void draw();                                            // low-level
+   public void resizeByPercentage(double pct);     // high-level
+}
+
+/** &quot;Refined Abstraction&quot; */
+class CircleShape implements Shape
+{
+   private double x, y, radius;
+   private DrawingAPI drawingAPI;
+   public CircleShape(double x, double y, double radius, DrawingAPI drawingAPI)
+   {
+       this.x = x;  this.y = y;  this.radius = radius; 
+       this.drawingAPI = drawingAPI;
+   }
+
+   // low-level i.e. Implementation specific
+   public void draw()
+   {
+        drawingAPI.drawCircle(x, y, radius);
+   }   
+   // high-level i.e. Abstraction specific
+   public void resizeByPercentage(double pct)
+   {
+        radius *= pct;
+   }
+}
+
+/** &quot;Client&quot; */
+class BridgePattern {
+   public static void main(String[] args)
+   {
+       Shape[] shapes = new Shape[2];
+       shapes[0] = new CircleShape(1, 2, 3, new DrawingAPI1());
+       shapes[1] = new CircleShape(5, 7, 11, new DrawingAPI2());
+
+       for (Shape shape : shapes)
+       {
+           shape.resizeByPercentage(2.5);
+           shape.draw();
+       }
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;组合模式&quot;&gt;组合模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_composite.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;装饰器模式&quot;&gt;装饰器模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_decorator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;外观模式&quot;&gt;外观模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_facade.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Facade_pattern&quot;&gt;源码示例&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/* Complex parts */
+
+class CPU {
+	public void freeze() { ... }
+	public void jump(long position) { ... }
+	public void execute() { ... }
+}
+
+class Memory {
+	public void load(long position, byte[] data) {
+		...
+	}
+}
+
+class HardDrive {
+	public byte[] read(long lba, int size) {
+		...
+	}
+}
+
+/* Façade */
+
+class Computer {
+	public void startComputer() {
+		cpu.freeze();
+		memory.load(BOOT_ADDRESS, hardDrive.read(BOOT_SECTOR, SECTOR_SIZE));
+		cpu.jump(BOOT_ADDRESS);
+		cpu.execute();
+	}
+}
+
+/* Client */
+
+class You {
+	public static void main(String[] args) {
+		Computer facade = new Computer();
+		facade.startComputer();
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;享元模式&quot;&gt;享元模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_flyweight.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public enum FontEffect {
+    BOLD, ITALIC, SUPERSCRIPT, SUBSCRIPT, STRIKETHROUGH
+}
+
+public final class FontData {
+    /**
+     * A weak hash map will drop unused references to FontData.
+     * Values have to be wrapped in WeakReferences, 
+     * because value objects in weak hash map are held by strong references.
+     */
+    private static final WeakHashMap&amp;lt;FontData, WeakReference&amp;lt;FontData&amp;gt;&amp;gt; FLY_WEIGHT_DATA =
+        new WeakHashMap&amp;lt;FontData, WeakReference&amp;lt;FontData&amp;gt;&amp;gt;();
+    private final int pointSize;
+    private final String fontFace;
+    private final Color color;
+    private final Set&amp;lt;FontEffect&amp;gt; effects;
+
+    private FontData(int pointSize, String fontFace, Color color, EnumSet&amp;lt;FontEffect&amp;gt; effects) {
+        this.pointSize = pointSize;
+        this.fontFace = fontFace;
+        this.color = color;
+        this.effects = Collections.unmodifiableSet(effects);
+    }
+
+    public static FontData create(int pointSize, String fontFace, Color color,
+        FontEffect... effects) {
+        EnumSet&amp;lt;FontEffect&amp;gt; effectsSet = EnumSet.noneOf(FontEffect.class);
+        for (FontEffect fontEffect : effects) {
+            effectsSet.add(fontEffect);
+        }
+        // We are unconcerned with object creation cost, we are reducing overall memory consumption
+        FontData data = new FontData(pointSize, fontFace, color, effectsSet);
+
+        // Retrieve previously created instance with the given values if it (still) exists
+        WeakReference&amp;lt;FontData&amp;gt; ref = FLY_WEIGHT_DATA.get(data);
+        FontData result = (ref != null) ? ref.get() : null;
+        
+        // Store new font data instance if no matching instance exists
+        if (result == null) {
+            FLY_WEIGHT_DATA.put(data, new WeakReference&amp;lt;FontData&amp;gt; (data));
+            result = data;
+        }
+        // return the single immutable copy with the given values
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof FontData) {
+            if (obj == this) {
+                return true;
+            }
+            FontData other = (FontData) obj;
+            return other.pointSize == pointSize &amp;amp;&amp;amp; other.fontFace.equals(fontFace)
+                &amp;amp;&amp;amp; other.color.equals(color) &amp;amp;&amp;amp; other.effects.equals(effects);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return (pointSize * 37 + effects.hashCode() * 13) * fontFace.hashCode();
+    }
+
+    // Getters for the font data, but no setters. FontData is immutable.
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;服务启动&quot;&gt;服务启动&lt;/h4&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+
+      
+        <summary type="html">架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">对开发方式的思考</title>
+      <link href="http://localhost:4000/archi-architect-org" rel="alternate" type="text/html" title="对开发方式的思考" />
+      <published>2016-02-10T20:29:11+08:00</published>
+      <updated>2016-02-10T20:29:11+08:00</updated>
+      <id>http://localhost:4000/archi-architect-org</id>
+      <content type="html" xml:base="http://localhost:4000/archi-architect-org">&lt;p&gt;由为什么我需要迭代引起的思考。&lt;/p&gt;
+
+&lt;h4 id=&quot;开发的目标是什么the-target-of-dev&quot;&gt;开发的目标是什么(the target of dev)？&lt;/h4&gt;
+
+&lt;h5 id=&quot;双层交互人与环境之间的信息交换&quot;&gt;双层交互(人与环境之间的信息交换)&lt;/h5&gt;
+
+&lt;p&gt;开发的目标是为了实现人和工具的交互，工具和工具之间的交互。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/why-iterate.png&quot; alt=&quot;人机交互&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;对效率的思考&quot;&gt;对效率的思考&lt;/h5&gt;
+
+&lt;p&gt;迭代的过程把复杂问题分解成可实现、可部署的小的升级过程。&lt;/p&gt;
+
+&lt;p&gt;这里的问题是， 不同的团队背景的“复杂问题”是不同的。&lt;/p&gt;
+
+&lt;h5 id=&quot;产品定义初期的复杂问题&quot;&gt;产品定义初期的“复杂问题”&lt;/h5&gt;
+
+&lt;p&gt;产品或者工具本身带来的不确定性。&lt;/p&gt;
+
+&lt;p&gt;&amp;lt; 根本原因是，市场需求的本质是盲目的。&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;这对开发者来说， 从市场反馈的信息也是“相对盲目”的。 需要“决断”过程。&lt;/p&gt;
+
+&lt;p&gt;这种产品定义的决断过程一般不是快速“升级”可解决的。&lt;/p&gt;
+
+&lt;p&gt;所以， 对开发者来讲， 产品定义初期， 需要整理出一份“代码清单”：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;哪些是可复用的？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;对移动产品来讲， 基础通信框架和UI定义方式是可复用的。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;哪些是临时的？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;业务实现逻辑是临时的。&lt;/p&gt;
+
+&lt;h5 id=&quot;产品或者工具发展过程中的复杂问题&quot;&gt;产品或者工具发展过程中的“复杂问题”&lt;/h5&gt;
+
+&lt;p&gt;这个过程，用户量从1到N， 系统复杂度度从1到N&lt;/p&gt;
+
+&lt;p&gt;这里带来的“复杂问题”是， 如何做反馈？&lt;/p&gt;
+
+&lt;p&gt;有价值的东西并不是N的用户量， 而是1到N的增长率带来的反馈信息。如何捕捉这种信息？&lt;/p&gt;
+
+&lt;h5 id=&quot;产品或者工具问题基本稳定后的复杂问题&quot;&gt;产品或者工具问题“基本稳定”后的复杂问题&lt;/h5&gt;
+
+&lt;p&gt;这个过程的复杂问题是”稳定性“, 如何修复系统问题性？&lt;/p&gt;
+
+&lt;p&gt;这里，稳定性包括： 系统升级稳定性和系统降级稳定性。&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+
+      
+        <summary type="html">由为什么我需要迭代引起的思考。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">论什么是架构?</title>
+      <link href="http://localhost:4000/archi-architect-who" rel="alternate" type="text/html" title="论什么是架构?" />
+      <published>2016-02-10T20:29:11+08:00</published>
+      <updated>2016-02-10T20:29:11+08:00</updated>
+      <id>http://localhost:4000/archi-architect-who</id>
+      <content type="html" xml:base="http://localhost:4000/archi-architect-who">&lt;p&gt;架构的核心内容是什么?&lt;/p&gt;
+
+&lt;h4 id=&quot;架构的原则objectives&quot;&gt;架构的原则(Objectives)&lt;/h4&gt;
+
+&lt;p&gt;总体原则&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;从架构的角度看(下面箭头方向)，推荐的架构原则&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;(1) 面向变化设计&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;(2) 面向风险设计&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;(3) 模型化 + 可视化(这是为什么mvc经久不衰的原因，它同时满足了两个要求)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;(4) 面向进化设计&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;架构的过程&quot;&gt;架构的过程&lt;/h4&gt;
+
+&lt;p&gt;架构不是一个东西(not a thing, not a tool)，它是一个最优路径规划和设计的过程。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;(1) 组织过程。 它为团队成员(stakeholders)提供沟通桥梁。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;(2) 早期决策，架构价值的重要体现。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;好的架构表现&quot;&gt;好的架构表现&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;(1) 测试的完整性，满足质量要求&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;(2) 安全。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;安全的竞争壁垒的保障，属于“守”的一方。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;(3) 满足性能能要求。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;架构必须满足时空要求&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;(4) 用户友好&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;使用者友好，满足人类情感要求，至少不排斥。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;(5) 可扩展&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;潜在的满足时空要求&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;(6) 可维护&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;使异常可控制， 满足内部安全性要求。&lt;/p&gt;
+&lt;/blockquote&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="architecture" />
+      
+
+      
+        <summary type="html">架构的核心内容是什么?</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

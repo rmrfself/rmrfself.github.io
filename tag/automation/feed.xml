@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="http://localhost:4000/tag/automation/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2019-03-26T15:12:54+08:00</updated>
+  <id>http://localhost:4000/tag/automation/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">张庆华的个人日志 | </title>
+  
+
+  
+    <subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">devops那些事-虚拟化讲座讲义</title>
+      <link href="http://localhost:4000/devops-docker-presentation" rel="alternate" type="text/html" title="devops那些事-虚拟化讲座讲义" />
+      <published>2017-11-22T10:01:19+08:00</published>
+      <updated>2017-11-22T10:01:19+08:00</updated>
+      <id>http://localhost:4000/devops-docker-presentation</id>
+      <content type="html" xml:base="http://localhost:4000/devops-docker-presentation">&lt;p&gt;docker基础讲座讲义&lt;/p&gt;
+
+&lt;h4 id=&quot;讲座内容&quot;&gt;讲座内容&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/01.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/02.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/03.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/04.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/05.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/06.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/07.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/08.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/09.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/10.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/11.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/12.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/13.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/14.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">docker基础讲座讲义</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">ISTQB证书(QA)</title>
+      <link href="http://localhost:4000/devops-test-cer" rel="alternate" type="text/html" title="ISTQB证书(QA)" />
+      <published>2017-02-18T20:21:19+08:00</published>
+      <updated>2017-02-18T20:21:19+08:00</updated>
+      <id>http://localhost:4000/devops-test-cer</id>
+      <content type="html" xml:base="http://localhost:4000/devops-test-cer">&lt;p&gt;对质量的理解是优秀开发的基础。&lt;/p&gt;
+
+&lt;h4 id=&quot;certified-tester-owned&quot;&gt;Certified tester owned&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/istqb-cer-small.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">对质量的理解是优秀开发的基础。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">ISTQB证书(QA)</title>
+      <link href="http://localhost:4000/devops-test-cer-2" rel="alternate" type="text/html" title="ISTQB证书(QA)" />
+      <published>2017-02-18T20:21:19+08:00</published>
+      <updated>2017-02-18T20:21:19+08:00</updated>
+      <id>http://localhost:4000/devops-test-cer%202</id>
+      <content type="html" xml:base="http://localhost:4000/devops-test-cer-2">&lt;p&gt;对质量的理解是优秀开发的基础。&lt;/p&gt;
+
+&lt;h4 id=&quot;certified-tester-owned&quot;&gt;Certified tester owned&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/istqb-cer-small.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">对质量的理解是优秀开发的基础。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">构建devops团队</title>
+      <link href="http://localhost:4000/devops-baseon-cloud" rel="alternate" type="text/html" title="构建devops团队" />
+      <published>2016-09-20T00:11:15+08:00</published>
+      <updated>2016-09-20T00:11:15+08:00</updated>
+      <id>http://localhost:4000/devops-baseon-cloud</id>
+      <content type="html" xml:base="http://localhost:4000/devops-baseon-cloud">&lt;p&gt;基于价值的软件交付流程&lt;/p&gt;
+
+&lt;h3 id=&quot;devops-team&quot;&gt;Devops team&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/aws-delivery.png&quot; alt=&quot;devops&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;#TODO&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">基于价值的软件交付流程</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">自动化测试工具-cucumber</title>
+      <link href="http://localhost:4000/devops-automation" rel="alternate" type="text/html" title="自动化测试工具-cucumber" />
+      <published>2016-09-18T23:10:19+08:00</published>
+      <updated>2016-09-18T23:10:19+08:00</updated>
+      <id>http://localhost:4000/devops-automation</id>
+      <content type="html" xml:base="http://localhost:4000/devops-automation">&lt;p&gt;Cucumber在自动化测试中的用法&lt;/p&gt;
+
+&lt;h2 id=&quot;与jenkins集成&quot;&gt;与jenkins集成&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cucumber-jvm.png&quot; alt=&quot;jenkins-cucumber-jvm&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;#TODO
+#TODO&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">Cucumber在自动化测试中的用法</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">自动化测试工具-cucumber</title>
+      <link href="http://localhost:4000/devops-automation-2" rel="alternate" type="text/html" title="自动化测试工具-cucumber" />
+      <published>2016-09-18T23:10:19+08:00</published>
+      <updated>2016-09-18T23:10:19+08:00</updated>
+      <id>http://localhost:4000/devops-automation%202</id>
+      <content type="html" xml:base="http://localhost:4000/devops-automation-2">&lt;p&gt;Cucumber在自动化测试中的用法&lt;/p&gt;
+
+&lt;h2 id=&quot;与jenkins集成&quot;&gt;与jenkins集成&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cucumber-jvm.png&quot; alt=&quot;jenkins-cucumber-jvm&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;#TODO
+#TODO&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">Cucumber在自动化测试中的用法</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">install mysql on mac</title>
+      <link href="http://localhost:4000/devops-mysql-mac-install" rel="alternate" type="text/html" title="install mysql on mac" />
+      <published>2016-07-21T10:06:10+08:00</published>
+      <updated>2016-07-21T10:06:10+08:00</updated>
+      <id>http://localhost:4000/devops-mysql-mac-install</id>
+      <content type="html" xml:base="http://localhost:4000/devops-mysql-mac-install">&lt;p&gt;使用brew安装mysql(已更新至sierra)&lt;/p&gt;
+
+&lt;h2 id=&quot;install-mysql-on-macos&quot;&gt;Install MySQL on macOS&lt;/h2&gt;
+&lt;p&gt;This procedure explains how to install &lt;a href=&quot;https://www.mysql.com&quot;&gt;MySQL&lt;/a&gt; using &lt;a href=&quot;http://brew.sh&quot;&gt;Homebrew&lt;/a&gt; on macOS Sierra 10.12&lt;/p&gt;
+
+&lt;h3 id=&quot;install-homebrew&quot;&gt;Install Homebrew&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Installing Homebrew is effortless, open Terminal and enter :&lt;br /&gt;
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;$  /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Note:&lt;/strong&gt; Homebrew will download and install Command Line Tools for Xcode 8.0 as part of the installation process.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;install-mysql&quot;&gt;Install MySQL&lt;/h3&gt;
+&lt;p&gt;At this time of writing, Homebrew has MySQL version &lt;strong&gt;5.7.15&lt;/strong&gt; as default formulae in its main repository :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Enter the following command : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew info mysql&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Expected output: &lt;strong&gt;mysql: stable 5.7.15 (bottled)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To install MySQL enter : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew install mysql&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;additional-configuration&quot;&gt;Additional configuration&lt;/h2&gt;
+&lt;h3 id=&quot;homebrew&quot;&gt;Homebrew&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Install &lt;strong&gt;brew services&lt;/strong&gt; first : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew tap homebrew/services&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Load and start the MySQL service : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew services start mysql&lt;/code&gt;. &lt;br /&gt;
+Expected output : &lt;strong&gt;Successfully started &lt;code class=&quot;highlighter-rouge&quot;&gt;mysql&lt;/code&gt; (label: homebrew.mxcl.mysql)&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Check of the MySQL service has been loaded : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew services list&lt;/code&gt; &lt;sup&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Verify the installed MySQL instance : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ mysql -V&lt;/code&gt;. &lt;br /&gt;
+Expected output : &lt;strong&gt;Ver 14.14 Distrib 5.7.15, for osx10.12 (x86_64)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mysql&quot;&gt;MySQL&lt;/h3&gt;
+&lt;p&gt;Open Terminal and execute the following command to set the root password:&lt;br /&gt;
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;mysqladmin -u root password 'yourpassword'&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Important&lt;/strong&gt; : Use the single ‘quotes’ to surround the password and make sure to select a strong password!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;database-management&quot;&gt;Database Management&lt;/h3&gt;
+&lt;p&gt;To manage your databases, I recommend using &lt;a href=&quot;http://www.sequelpro.com&quot;&gt;Sequel Pro&lt;/a&gt;, a MySQL management tool designed for macOS. &lt;br /&gt;
+Current version available: &lt;strong&gt;1.1.2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;comments&quot;&gt;Comments&lt;/h5&gt;
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; The &lt;code class=&quot;highlighter-rouge&quot;&gt;brew services start mysql&lt;/code&gt; - instruction is equal to :&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+$ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">使用brew安装mysql(已更新至sierra)</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">JWT的工作原理</title>
+      <link href="http://localhost:4000/devops-jwt-howto" rel="alternate" type="text/html" title="JWT的工作原理" />
+      <published>2016-07-21T10:06:10+08:00</published>
+      <updated>2016-07-21T10:06:10+08:00</updated>
+      <id>http://localhost:4000/devops-jwt-howto</id>
+      <content type="html" xml:base="http://localhost:4000/devops-jwt-howto">&lt;p&gt;Json Web Token&lt;/p&gt;
+
+&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A JSON Web Token (JWT) is a JSON object that is defined in RFC 7519 as a safe way to represent a set of information between two parties. The token is composed of a header, a payload, and a signature.
+
+JWT 是在RFC 7519中定义的json对象, 包括头部，负荷，和一个签名。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;JWT是一个json格式的object, 包含了加密算法和加密后的数据。&lt;/p&gt;
+
+&lt;p&gt;JWT在spring中的使用流程&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/spring-security1.png&quot; alt=&quot;JWT HOW TO WORK&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;JWT相对于cookie-session验证机制的优势是, 它是无状态的。&lt;/p&gt;
+
+&lt;p&gt;具体含义是，&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;服务器端除了存储签发token使用的secret之外无需在节点中存储额外信息，也就是节点是无状态的。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;任意节点收到jwt数据后，在server端只要拿到解密的秘钥即可。无需为每个链接在服务器中存储特殊数据，这也解决了session共享问题。&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">Json Web Token</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">JWT的工作原理</title>
+      <link href="http://localhost:4000/devops-jwt-howto-2" rel="alternate" type="text/html" title="JWT的工作原理" />
+      <published>2016-07-21T10:06:10+08:00</published>
+      <updated>2016-07-21T10:06:10+08:00</updated>
+      <id>http://localhost:4000/devops-jwt-howto%202</id>
+      <content type="html" xml:base="http://localhost:4000/devops-jwt-howto-2">&lt;p&gt;Json Web Token&lt;/p&gt;
+
+&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A JSON Web Token (JWT) is a JSON object that is defined in RFC 7519 as a safe way to represent a set of information between two parties. The token is composed of a header, a payload, and a signature.
+
+JWT 是在RFC 7519中定义的json对象, 包括头部，负荷，和一个签名。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;JWT是一个json格式的object, 包含了加密算法和加密后的数据。&lt;/p&gt;
+
+&lt;p&gt;JWT在spring中的使用流程&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/spring-security1.png&quot; alt=&quot;JWT HOW TO WORK&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;JWT相对于cookie-session验证机制的优势是, 它是无状态的。&lt;/p&gt;
+
+&lt;p&gt;具体含义是，&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;服务器端除了存储签发token使用的secret之外无需在节点中存储额外信息，也就是节点是无状态的。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;任意节点收到jwt数据后，在server端只要拿到解密的秘钥即可。无需为每个链接在服务器中存储特殊数据，这也解决了session共享问题。&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">Json Web Token</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">aws中配置elastic beantalk的ssl证书</title>
+      <link href="http://localhost:4000/devops-aws-ssl-csr" rel="alternate" type="text/html" title="aws中配置elastic beantalk的ssl证书" />
+      <published>2016-06-28T10:16:10+08:00</published>
+      <updated>2016-06-28T10:16:10+08:00</updated>
+      <id>http://localhost:4000/devops-aws-ssl-csr</id>
+      <content type="html" xml:base="http://localhost:4000/devops-aws-ssl-csr">&lt;p&gt;配置elastic beantalk的ssl证书&lt;/p&gt;
+
+&lt;h3 id=&quot;生成私钥&quot;&gt;生成私钥&lt;/h3&gt;
+
+&lt;h4 id=&quot;安装opensslmac-osx&quot;&gt;安装openssl(mac osx)&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装&lt;a href=&quot;https://www.openssl.org/&quot;&gt;OpenSSL工具&lt;/a&gt;。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;执行命令&lt;code class=&quot;highlighter-rouge&quot;&gt;openssl req -new -nodes -sha256 -newkey rsa:2048 -keyout myprivate.key -out mydomain.csr&lt;/code&gt;生成CSR文件。其中，&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-new&lt;/code&gt; 指定生成一个新的CSR。&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-nodes&lt;/code&gt; 指定私钥文件不被加密。&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-sha256&lt;/code&gt; 指定摘要算法。&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-keyout&lt;/code&gt; 生成私钥文件。&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-newkey rsa:2048&lt;/code&gt; 指定私钥类型和长度。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;您手动生成CSR文件时，一般需要输入以下信息：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt; 输入的中文信息需要使用UTF8编码格式。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Organization Name(O)： 申请单位名称法定名称，可以是中文或英文。&lt;/li&gt;
+  &lt;li&gt;Organization Unit(OU)： 申请单位的所在部门，可以是中文或英文。&lt;/li&gt;
+  &lt;li&gt;Country Code(C)： 申请单位所属国家，只能是两个字母的国家码。例如，中国只能是CN。&lt;/li&gt;
+  &lt;li&gt;State or Province(S)： 申请单位所在省名或州名，可以是中文或英文。&lt;/li&gt;
+  &lt;li&gt;Locality(L)： 申请单位所在城市名，可以是中文或英文。&lt;/li&gt;
+  &lt;li&gt;Common Name(CN)： 申请SSL证书的具体网站域名。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;生成CSR文件mydomain.csr。&lt;/p&gt;
+
+    &lt;p&gt;需要输入的信息说明如下：&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+          &lt;th&gt;示例&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Country Name&lt;/td&gt;
+          &lt;td&gt;ISO国家代码（两位字符）&lt;/td&gt;
+          &lt;td&gt;CN&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;State or Province Name&lt;/td&gt;
+          &lt;td&gt;所在省份&lt;/td&gt;
+          &lt;td&gt;ZheJiang&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Locality Name&lt;/td&gt;
+          &lt;td&gt;所在城市&lt;/td&gt;
+          &lt;td&gt;HangZhou&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Organization Name&lt;/td&gt;
+          &lt;td&gt;公司名称&lt;/td&gt;
+          &lt;td&gt;HangZhou xxx Technologies, Inc.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Organizational Unit Name&lt;/td&gt;
+          &lt;td&gt;部门名称&lt;/td&gt;
+          &lt;td&gt;IT Dept.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Common Name&lt;/td&gt;
+          &lt;td&gt;申请证书的域名&lt;/td&gt;
+          &lt;td&gt;www.example.com&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Email Address&lt;/td&gt;
+          &lt;td&gt;不需要输入&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;A challenge password&lt;/td&gt;
+          &lt;td&gt;不需要输入&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;p&gt;完成命令提示的输入后，会在当前目录下生成myprivate.key（私钥文件）和 mydomain.csr（CSR，证书请求文件）两个文件。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">配置elastic beantalk的ssl证书</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

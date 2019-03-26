@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="http://localhost:4000/tag/develop/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2019-03-26T15:12:54+08:00</updated>
+  <id>http://localhost:4000/tag/develop/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">张庆华的个人日志 | </title>
+  
+
+  
+    <subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Ethereum开发笔记1-1: Blockchain简介</title>
+      <link href="http://localhost:4000/ethereum-dapp-develop" rel="alternate" type="text/html" title="Ethereum开发笔记1-1: Blockchain简介" />
+      <published>2018-09-06T11:11:11+08:00</published>
+      <updated>2018-09-06T11:11:11+08:00</updated>
+      <id>http://localhost:4000/ethereum-dapp-develop</id>
+      <content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop">&lt;p&gt;区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。&lt;/p&gt;
+
+&lt;h3 id=&quot;历史&quot;&gt;历史&lt;/h3&gt;
+
+&lt;p&gt;参考论文&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nakamotoinstitute.org/finney/rpow/&quot;&gt;RPOW - 可重用的工作证明(Reusable Proofs of Work)&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name></name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="develop" />
+      
+
+      
+        <summary type="html">区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>
