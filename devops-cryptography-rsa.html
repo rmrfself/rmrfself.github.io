@@ -45,14 +45,113 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="数据安全基础-RSA算法" />
-    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:description" content="不对称加密应用方案
+
+什么是根证书(Root certificate)
+
+
+
+https://en.wikipedia.org/wiki/Root_certificate
+
+CA（Certificate Agent)
+
+存放 A、B 数字证书的代理机构，在数字证书里包含有各自的RSA公钥与加密算法)
+
+什么是认证(Authentication)
+
+认证是安全通信的前提，如何认证出了问题，在通信的两端出现了错位的情况，也就是说A的目标通信对象可以被C替代，则后续的安全设施都形同虚构。
+
+从这个角度讲，认证就是验证通信对方是否持有私钥。
+
+A与B的安全通信认证过程如下:
+
+1) A向CA请求B的数字证书。
+
+2) CA把B的证书作为参数生成一个HASH, 生成一个数字签名（Digital Signature).
+
+3) CA把数字签名附在B的数字证书之后，即 B的数字证书 + CA 数字签名，发给A
+
+4) A 拥有CA的公钥，可以解密CA的数字签名(CA用自己的私钥加密后的摘要)，得到hash，同时对接收到的B的数字证书做hash运算，如果一致，则认为此证书安全有效，这个过程成为证书的数据完整性保护(Data Integrity)
+
+
+
+以上是A获取B的公钥的过程。
+
+https://en.wikipedia.org/wiki/Public-key_cryptography
+
+公钥的性质之一是可以解密私钥加密后的数据(公钥和私钥其实可以互解密，数学原理上是一个大数分解成2个大的素数，在数学上，两个大的素数地位是平等的)
+
+5) A 请求认证B， B用自己的私钥加密自己的身份（在apache/nignx中有对应的设置) 发给A， 由于A已经从CA处取到了B的公钥，所以A可以解密B的加密报文。解密成功A与B的认证阶段工作结束。
+
+总结，这种加密算法的过程是
+
+1) 你用私钥加密的数据只能用你的公钥解密。
+
+2) 你的公钥存放在CA(证书发放结构，通常需要付费)里
+
+3) 证书本身的传输也需要类似的加密。
+
+4) 由3引发的问题是证书结构的证书(公钥)是谁发放的？这个是个死循环，最终需要一个根证书。根证书是由自己签名，不需要再验证的证书。
+
+" />
     <meta property="og:url" content="http://localhost:4000/devops-cryptography-rsa" />
     <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2016-03-27T21:20:19+08:00" />
+    <meta property="article:modified_time" content="2016-03-27T21:20:19+08:00" />
     <meta property="article:tag" content="Automation" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="数据安全基础-RSA算法" />
-    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:description" content="不对称加密应用方案
+
+什么是根证书(Root certificate)
+
+
+
+https://en.wikipedia.org/wiki/Root_certificate
+
+CA（Certificate Agent)
+
+存放 A、B 数字证书的代理机构，在数字证书里包含有各自的RSA公钥与加密算法)
+
+什么是认证(Authentication)
+
+认证是安全通信的前提，如何认证出了问题，在通信的两端出现了错位的情况，也就是说A的目标通信对象可以被C替代，则后续的安全设施都形同虚构。
+
+从这个角度讲，认证就是验证通信对方是否持有私钥。
+
+A与B的安全通信认证过程如下:
+
+1) A向CA请求B的数字证书。
+
+2) CA把B的证书作为参数生成一个HASH, 生成一个数字签名（Digital Signature).
+
+3) CA把数字签名附在B的数字证书之后，即 B的数字证书 + CA 数字签名，发给A
+
+4) A 拥有CA的公钥，可以解密CA的数字签名(CA用自己的私钥加密后的摘要)，得到hash，同时对接收到的B的数字证书做hash运算，如果一致，则认为此证书安全有效，这个过程成为证书的数据完整性保护(Data Integrity)
+
+
+
+以上是A获取B的公钥的过程。
+
+https://en.wikipedia.org/wiki/Public-key_cryptography
+
+公钥的性质之一是可以解密私钥加密后的数据(公钥和私钥其实可以互解密，数学原理上是一个大数分解成2个大的素数，在数学上，两个大的素数地位是平等的)
+
+5) A 请求认证B， B用自己的私钥加密自己的身份（在apache/nignx中有对应的设置) 发给A， 由于A已经从CA处取到了B的公钥，所以A可以解密B的加密报文。解密成功A与B的认证阶段工作结束。
+
+总结，这种加密算法的过程是
+
+1) 你用私钥加密的数据只能用你的公钥解密。
+
+2) 你的公钥存放在CA(证书发放结构，通常需要付费)里
+
+3) 证书本身的传输也需要类似的加密。
+
+4) 由3引发的问题是证书结构的证书(公钥)是谁发放的？这个是个死循环，最终需要一个根证书。根证书是由自己签名，不需要再验证的证书。
+
+" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -61,8 +160,8 @@
     <meta name="twitter:data2" content="Automation" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
 
     <script type="application/ld+json">
 {
@@ -84,7 +183,55 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/devops-cryptography-rsa"
     },
-    "description": "Learn, Innovate, Share - Business Based Vision."
+    "description": "不对称加密应用方案
+
+什么是根证书(Root certificate)
+
+
+
+https://en.wikipedia.org/wiki/Root_certificate
+
+CA（Certificate Agent)
+
+存放 A、B 数字证书的代理机构，在数字证书里包含有各自的RSA公钥与加密算法)
+
+什么是认证(Authentication)
+
+认证是安全通信的前提，如何认证出了问题，在通信的两端出现了错位的情况，也就是说A的目标通信对象可以被C替代，则后续的安全设施都形同虚构。
+
+从这个角度讲，认证就是验证通信对方是否持有私钥。
+
+A与B的安全通信认证过程如下:
+
+1) A向CA请求B的数字证书。
+
+2) CA把B的证书作为参数生成一个HASH, 生成一个数字签名（Digital Signature).
+
+3) CA把数字签名附在B的数字证书之后，即 B的数字证书 + CA 数字签名，发给A
+
+4) A 拥有CA的公钥，可以解密CA的数字签名(CA用自己的私钥加密后的摘要)，得到hash，同时对接收到的B的数字证书做hash运算，如果一致，则认为此证书安全有效，这个过程成为证书的数据完整性保护(Data Integrity)
+
+
+
+以上是A获取B的公钥的过程。
+
+https://en.wikipedia.org/wiki/Public-key_cryptography
+
+公钥的性质之一是可以解密私钥加密后的数据(公钥和私钥其实可以互解密，数学原理上是一个大数分解成2个大的素数，在数学上，两个大的素数地位是平等的)
+
+5) A 请求认证B， B用自己的私钥加密自己的身份（在apache/nignx中有对应的设置) 发给A， 由于A已经从CA处取到了B的公钥，所以A可以解密B的加密报文。解密成功A与B的认证阶段工作结束。
+
+总结，这种加密算法的过程是
+
+1) 你用私钥加密的数据只能用你的公钥解密。
+
+2) 你的公钥存放在CA(证书发放结构，通常需要付费)里
+
+3) 证书本身的传输也需要类似的加密。
+
+4) 由3引发的问题是证书结构的证书(公钥)是谁发放的？这个是个死循环，最终需要一个根证书。根证书是由自己签名，不需要再验证的证书。
+
+"
 }
     </script>
 
@@ -100,7 +247,7 @@
     <link rel="alternate" type="application/rss+xml" title="数据安全基础-RSA算法" href="/feed.xml" />
 
 </head>
-<body class="home-template">
+<body class="devops">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -115,6 +262,12 @@ into the {body} of the default.hbs template -->
                 <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
             
         
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
         
     </div>
     <div class="site-nav-right">
@@ -267,32 +420,12 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
-                                            <li><a href="/devops-docker-presentation">devops那些事-虚拟化讲座讲义</a></li>
+                                            <li><a href="/k8s-from-scrach">[GCE]单节点部署kubernetes集群</a></li>
                                         
                                     
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
@@ -309,7 +442,7 @@ into the {body} of the default.hbs template -->
                                     
                                         
                                         
-                                            <li><a href="/devops-test-cer">ISTQB证书(QA)</a></li>
+                                            <li><a href="/devops-docker-presentation">Devops那些事-虚拟化讲座讲义</a></li>
                                         
                                     
                                   
@@ -318,26 +451,12 @@ into the {body} of the default.hbs template -->
                                     
                                         
                                         
-                                            <li><a href="/devops-test-cer-2">ISTQB证书(QA)</a></li>
+                                            <li><a href="/archi-postgresql">PostgreSQL MySQL 数据类型映射</a></li>
                                         
                                     
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
@@ -373,17 +492,11 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
@@ -419,8 +532,6 @@ into the {body} of the default.hbs template -->
                                         
                                         
                                     
-                                  
-                                
                                   
                                 
                                   
@@ -453,6 +564,8 @@ into the {body} of the default.hbs template -->
                                         
                                         
                                     
+                                  
+                                
                                   
                                 
                                   
@@ -474,16 +587,8 @@ into the {body} of the default.hbs template -->
                                         
                                         
                                     
-                                  
-                                
-                                  
-                                
-                                  
-                                
                                   
                                 
-                                  
-                                    
                                   
                                 
                                   
@@ -501,19 +606,9 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
                                     
-                                  
-                                
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -523,11 +618,6 @@ into the {body} of the default.hbs template -->
                                     
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -564,25 +654,10 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
                                     
-                                  
-                                
-                                  
-                                    
                                         
                                         
                                     
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
@@ -602,18 +677,10 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
                                     
-                                  
-                                
                                   
                                 
                                   
@@ -623,12 +690,6 @@ into the {body} of the default.hbs template -->
                                         
                                         
                                     
-                                  
-                                
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
@@ -638,27 +699,12 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
                                 
                                   
                                     
                                         
                                         
                                     
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
@@ -676,7 +722,7 @@ into the {body} of the default.hbs template -->
                         <footer class="read-next-card-footer">
                             <a href="/tag/automation/">
                                 
-                                    See all 35 posts  →
+                                    See all 28 posts  →
                                 
                             </a>
                         </footer>
@@ -687,20 +733,20 @@ into the {body} of the default.hbs template -->
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card devops no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/springboot-annotations">
+            <a class="post-card-content-link" href="/devops-kubernetes-basic">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Springboot</span>
+                                <span class="post-card-tags">Automation</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">spring中的100个问题-注解是如何工作的(一)?</h2>
+                    <h2 class="post-card-title">Kubernetes中的基本概念(二)</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -739,20 +785,20 @@ into the {body} of the default.hbs template -->
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card designment no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/devops-dns-basic">
+            <a class="post-card-content-link" href="/archi-miller-rabin">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Automation</span>
+                                <span class="post-card-tags">Algorithm</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">dns解析中常用记录的含义</h2>
+                    <h2 class="post-card-title">Miller-rabin算法</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -837,11 +883,16 @@ into the {body} of the default.hbs template -->
                 <section class="my_profile">
                     <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
                     <div class='profile_detail'>
-                        <h5>关于我</h5>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
                     </div>
                 </section>
-                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
             </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
         </footer>
     </div>
 

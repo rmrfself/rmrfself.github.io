@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/automation/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-03-26T15:12:54+08:00</updated>
+  <updated>2019-03-26T20:43:04+08:00</updated>
   <id>http://localhost:4000/tag/automation/feed.xml</id>
 
   
@@ -44,8 +44,160 @@
 
   
     <entry>
-      <title type="html">devops那些事-虚拟化讲座讲义</title>
-      <link href="http://localhost:4000/devops-docker-presentation" rel="alternate" type="text/html" title="devops那些事-虚拟化讲座讲义" />
+      <title type="html">[GCE]单节点部署kubernetes集群</title>
+      <link href="http://localhost:4000/k8s-from-scrach" rel="alternate" type="text/html" title="[GCE]单节点部署kubernetes集群" />
+      <published>2018-10-10T19:20:11+08:00</published>
+      <updated>2018-10-10T19:20:11+08:00</updated>
+      <id>http://localhost:4000/k8s-from-scrach</id>
+      <content type="html" xml:base="http://localhost:4000/k8s-from-scrach">&lt;p&gt;使用kubeadm部署单master节点的k8s, 1个master + 2个minion&lt;/p&gt;
+
+&lt;h3 id=&quot;1-安装docker以及master节点初始化&quot;&gt;1. 安装Docker以及Master节点初始化&lt;/h3&gt;
+
+&lt;p&gt;安装docker&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install docker.io
+
+sudo systemctl enable docker
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;安装kubeadm&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get update \
+  &amp;amp;&amp;amp; sudo apt-get install -y apt-transport-https \
+  &amp;amp;&amp;amp; curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+# k8s的资源暂不可用,使用16.04的更新资源 (xenial)
+echo &quot;deb http://apt.kubernetes.io/ kubernetes-xenial main&quot; \
+  | sudo tee -a /etc/apt/sources.list.d/kubernetes.list \
+  &amp;amp;&amp;amp; sudo apt-get update
+
+sudo apt install -y kubeadm  kubelet kubernetes-cni
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;关闭交换分区&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo swapoff -a 
+sudo rm -f /swapfile
+sudo vi /etc/fstab   # 注释点 /swapfile 入口
+
+sudo swapon --summary # 确认，如果没有输出，表明已经关闭
+cat /proc/swaps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;关闭交换分区的原因，官方的说法是为了性能，设计者希望每个kubelet都可以实时响应&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/kubernetes/kubernetes/issues/53533&quot;&gt;Kubelet/Kubernetes should work with Swap Enabled&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-初始化master节点&quot;&gt;2. 初始化master节点&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IP_ADDR=$(ip addr show eno1 | grep -Po 'inet \K[\d.]+')
+echo $IP_ADDR
+
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=${IP_ADDR} --kubernetes-version stable-1.2.1
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;cidr是一个很重要的概念，&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%97%A0%E7%B1%BB%E5%88%AB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1&quot;&gt;推荐阅读&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;CIDR分配的网络资源是网段，而不是具体的地址。所以在AWS或常见云平台上申请网络资源时，先输入CIDR，比如10.1.0.0/16。16对应的子网掩码是255.255.0.0。&lt;/p&gt;
+
+&lt;p&gt;默认的情况下，单个master节点是无法正常工作的，它不会分配pods资源。这里有个命令可以使master工作&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl taint nodes --all node-role.kubernetes.io/master-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;master节点被加入到了资源调度里面去。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-安装pod-network插件&quot;&gt;3. 安装Pod Network插件&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;The network must be deployed before any applications. Also, CoreDNS will not start up before a network is installed. kubeadm only supports Container Network Interface (CNI) based networks (and does not support kubenet).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;网络组件有很多种，Flannel， Weave Net,Calico 等&lt;/p&gt;
+
+&lt;p&gt;这里选择calico&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
+kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;输出结果确认
+kubectl get pods –all-namespaces&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;coredns在网络组建没有安装或者没有初始化完毕前是pending的状态&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-加入minion节点&quot;&gt;4. 加入Minion节点&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubeadm join 192.168.12.39:6443 --token 9uqyzo.y773su1b99kolayf --discovery-token-ca-cert-hash sha256:10ca82d1b6e3d9402b5243fa360e9c11a05320c1bd39989ab24aea1fcd6f8629
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这段命令是kubeadm init以后给出的。&lt;/p&gt;
+
+&lt;p&gt;–token 是节点加入凭证，如果忘记了，在master节点上可以重新获取&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubeadm token list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;顺利的话， join命令在几秒内就完成了。&lt;/p&gt;
+
+&lt;p&gt;加入节点确认&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl get nodes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5-遇到的问题&quot;&gt;5. 遇到的问题&lt;/h3&gt;
+
+&lt;p&gt;在ubuntu18.04的版本里，默认CNI插件不兼容k8s 1.12,需要重新编译, 插件地址&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://github.com/containernetworking/plugins
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;参考&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://k8smeetup.github.io/docs/admin/kubeadm/&quot;&gt;kubeadm 设置工具参考指南&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/qq_34463875/article/details/78042852&quot;&gt;Kubenetes中的证书&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%97%A0%E7%B1%BB%E5%88%AB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1s&quot;&gt;无类别域间路由&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/&quot;&gt;Creating a single master cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">使用kubeadm部署单master节点的k8s, 1个master + 2个minion</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Devops那些事-虚拟化讲座讲义</title>
+      <link href="http://localhost:4000/devops-docker-presentation" rel="alternate" type="text/html" title="Devops那些事-虚拟化讲座讲义" />
       <published>2017-11-22T10:01:19+08:00</published>
       <updated>2017-11-22T10:01:19+08:00</updated>
       <id>http://localhost:4000/devops-docker-presentation</id>
@@ -88,7 +240,7 @@
       
 
       <author>
-          <name></name>
+          <name>mikezhang</name>
         
         
       </author>
@@ -108,16 +260,396 @@
     </entry>
   
     <entry>
-      <title type="html">ISTQB证书(QA)</title>
-      <link href="http://localhost:4000/devops-test-cer" rel="alternate" type="text/html" title="ISTQB证书(QA)" />
-      <published>2017-02-18T20:21:19+08:00</published>
-      <updated>2017-02-18T20:21:19+08:00</updated>
-      <id>http://localhost:4000/devops-test-cer</id>
-      <content type="html" xml:base="http://localhost:4000/devops-test-cer">&lt;p&gt;对质量的理解是优秀开发的基础。&lt;/p&gt;
+      <title type="html">PostgreSQL MySQL 数据类型映射</title>
+      <link href="http://localhost:4000/archi-postgresql" rel="alternate" type="text/html" title="PostgreSQL MySQL 数据类型映射" />
+      <published>2017-08-15T18:31:11+08:00</published>
+      <updated>2017-08-15T18:31:11+08:00</updated>
+      <id>http://localhost:4000/archi-postgresql</id>
+      <content type="html" xml:base="http://localhost:4000/archi-postgresql">&lt;p&gt;参考
+&lt;a href=&quot;https://dev.mysql.com/doc/workbench/en/wb-migration-database-postgresql-typemapping.html&quot;&gt;PostgreSQL Type Mapping&lt;/a&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;certified-tester-owned&quot;&gt;Certified tester owned&lt;/h4&gt;
+&lt;h3 id=&quot;postgresql类型-转换为-mysql类型&quot;&gt;PostgreSQL类型 转换为 MySQL类型&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/istqb-cer-small.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;PostgreSQL Type&lt;/th&gt;
+      &lt;th&gt;MySQL Type&lt;/th&gt;
+      &lt;th&gt;Comment&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;INT&lt;/td&gt;
+      &lt;td&gt;INT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SMALLINT&lt;/td&gt;
+      &lt;td&gt;SMALLINT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BIGINT&lt;/td&gt;
+      &lt;td&gt;BIGINT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SERIAL&lt;/td&gt;
+      &lt;td&gt;INT&lt;/td&gt;
+      &lt;td&gt;Sets AUTO_INCREMENT in its table definition.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SMALLSERIAL&lt;/td&gt;
+      &lt;td&gt;SMALLINT&lt;/td&gt;
+      &lt;td&gt;Sets AUTO_INCREMENT in its table definition.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BIGSERIAL&lt;/td&gt;
+      &lt;td&gt;BIGINT&lt;/td&gt;
+      &lt;td&gt;Sets AUTO_INCREMENT in its table definition.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BIT&lt;/td&gt;
+      &lt;td&gt;BIT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BOOLEAN&lt;/td&gt;
+      &lt;td&gt;TINYINT(1)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;REAL&lt;/td&gt;
+      &lt;td&gt;FLOAT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DOUBLE PRECISION&lt;/td&gt;
+      &lt;td&gt;DOUBLE&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NUMERIC&lt;/td&gt;
+      &lt;td&gt;DECIMAL&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DECIMAL&lt;/td&gt;
+      &lt;td&gt;DECIMAL&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MONEY&lt;/td&gt;
+      &lt;td&gt;DECIMAL(19,2)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CHAR&lt;/td&gt;
+      &lt;td&gt;CHAR/LONGTEXT&lt;/td&gt;
+      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have CHAR columns with a length up to 255 characters. Anything larger is migrated as LONGTEXT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NATIONAL CHARACTER&lt;/td&gt;
+      &lt;td&gt;CHAR/LONGTEXT&lt;/td&gt;
+      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types. In MySQL, character set of strings depend on the column character set instead of the datatype.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;VARCHAR&lt;/td&gt;
+      &lt;td&gt;VARCHAR/MEDIUMTEXT/LONGTEXT&lt;/td&gt;
+      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NATIONAL CHARACTER VARYING&lt;/td&gt;
+      &lt;td&gt;VARCHAR/MEDIUMTEXT/LONGTEXT&lt;/td&gt;
+      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types. In MySQL, character set of strings depend on the column character set instead of the datatype.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DATE&lt;/td&gt;
+      &lt;td&gt;DATE&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TIME&lt;/td&gt;
+      &lt;td&gt;TIME&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TIMESTAMP&lt;/td&gt;
+      &lt;td&gt;DATETIME&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;INTERVAL&lt;/td&gt;
+      &lt;td&gt;TIME&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BYTEA&lt;/td&gt;
+      &lt;td&gt;LONGBLOB&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TEXT&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CIDR&lt;/td&gt;
+      &lt;td&gt;VARCHAR(43)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;INET&lt;/td&gt;
+      &lt;td&gt;VARCHAR(43)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MACADDR&lt;/td&gt;
+      &lt;td&gt;VARCHAR(17)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;UUID&lt;/td&gt;
+      &lt;td&gt;VARCHAR(36)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;XML&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;JSON&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TSVECTOR&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TSQUERY&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ARRAY&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;POINT&lt;/td&gt;
+      &lt;td&gt;POINT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LINE&lt;/td&gt;
+      &lt;td&gt;LINESTRING&lt;/td&gt;
+      &lt;td&gt;Although LINE length is infinite, and LINESTRING is finite in MySQL, it is approximated&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LSEG&lt;/td&gt;
+      &lt;td&gt;LINESTRING&lt;/td&gt;
+      &lt;td&gt;A LSEG is like a LINESTRING with only two points&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BOX&lt;/td&gt;
+      &lt;td&gt;POLYGON&lt;/td&gt;
+      &lt;td&gt;A BOX is a POLYGON with five points and right angles&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;PATH&lt;/td&gt;
+      &lt;td&gt;LINESTRING&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;POLYGON&lt;/td&gt;
+      &lt;td&gt;POLYGON&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CIRCLE&lt;/td&gt;
+      &lt;td&gt;POLYGON&lt;/td&gt;
+      &lt;td&gt;A POLYGON is used to approximate a CIRCLE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TXID_SNAPSHOT&lt;/td&gt;
+      &lt;td&gt;VARCHAR&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;类型&quot;&gt;类型&lt;/h3&gt;
+&lt;p&gt;1. 数据类型&lt;/p&gt;
+
+&lt;p&gt;1.1 PostgreSQL&lt;/p&gt;
+
+&lt;p&gt;高精度numeric, 浮点, 自增序列，货币，字节流，时间，日期，时间戳，布尔，枚举，平面几何，立体几何，多维几何，地球，PostGIS，网络，比特流，全文检索，UUID，XML，JSON，数组，复合类型，域类型，范围，树类型，化学类型，基因序列，FDW, 大对象, 图像&lt;/p&gt;
+
+&lt;p&gt;1.2 MySQL&lt;/p&gt;
+
+&lt;p&gt;数字，时间，字符串，简单的GIS，JSON&lt;/p&gt;
+
+&lt;p&gt;2. 支持索引的数据类型&lt;/p&gt;
+
+&lt;p&gt;2.1 PostgreSQL&lt;/p&gt;
+
+&lt;p&gt;高精度numeric, 浮点, 自增序列，货币，字节流，时间，日期，时间戳，布尔，枚举，平面几何，立体几何，多维几何，地球，PostGIS，网络，比特流，全文检索，UUID，XML，JSON，数组，复合类型，域类型，范围，树类型，化学，基因序列&lt;/p&gt;
+
+&lt;p&gt;2.2 MySQL&lt;/p&gt;
+
+&lt;p&gt;数字，字符串，比特流，时间，全文检索，GIS&lt;/p&gt;
+
+&lt;h3 id=&quot;索引支持&quot;&gt;索引支持&lt;/h3&gt;
+&lt;p&gt;1. 索引方法&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持 btree, hash, gist, sp-gist, gin, brin , bloom , rum 索引&lt;/p&gt;
+
+&lt;p&gt;MySQL 支持 btree, gis类型索引&lt;/p&gt;
+
+&lt;p&gt;2. 规则表达式、前后模糊查询，支持索引检索&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;3. 数组支持索引&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;4. 全文检索支持索引&lt;/p&gt;
+
+&lt;p&gt;5. 索引扩展功能&lt;/p&gt;
+
+&lt;p&gt;5.1 PostgreSQL 支持 表达式索引，部分索引，联合索引&lt;/p&gt;
+
+&lt;p&gt;5.2 PostgreSQL 支持图像相似度、文本相似度搜索&lt;/p&gt;
+
+&lt;p&gt;5.3 自定义索引访问方法(bloom, rum, ……)&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL支持&lt;/p&gt;
+
+&lt;h3 id=&quot;多引擎和外部源支持&quot;&gt;多引擎和外部源支持&lt;/h3&gt;
+&lt;p&gt;1. 多引擎支持&lt;/p&gt;
+
+&lt;p&gt;1.1 PostgreSQL&lt;/p&gt;
+
+&lt;p&gt;内置heap, 通过插件实现内存表, 列存储, 压缩存储, 流式存储, 非关系存储等。&lt;/p&gt;
+
+&lt;p&gt;1.2 MySQL&lt;/p&gt;
+
+&lt;p&gt;MyISAM, innodb, …&lt;/p&gt;
+
+&lt;p&gt;2. 外部表&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL支持任意外部数据源, (例如jdbc, file, odbc, oracle, mysql, db2, redis, mongo, ES, hadoop……)&lt;/p&gt;
+
+&lt;p&gt;https://wiki.postgresql.org/wiki/Fdw&lt;/p&gt;
+
+&lt;p&gt;3. dblink&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;4. 内存表&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 通过外部表支持，或者通过插件支持&lt;/p&gt;
+
+&lt;p&gt;5. ES(弹性搜索引擎) 引擎&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;h3 id=&quot;安全&quot;&gt;安全&lt;/h3&gt;
+&lt;p&gt;1. 数据加密&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持加密数据类型，可选GPG加密算法&lt;/p&gt;
+
+&lt;p&gt;2. 认证方法&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持 密码、LDAP、AD、GSSAPI、SSPI、Ident、Peer、RADIUS、PAM、签名认证&lt;/p&gt;
+
+&lt;p&gt;3. 数据传输加密&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;4. 行安全策略&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;5. 数据库内部支持libselinux接口, (美国国家安全局制定的安全加强标准)&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;h3 id=&quot;优化器&quot;&gt;优化器&lt;/h3&gt;
+&lt;p&gt;http://www.postgresql.org/docs/9.5/static/runtime-config-query.html&lt;/p&gt;
+
+&lt;p&gt;1. GPU 并行计算支持&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;2. 遗传优化器算法&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持CBO、CRO、遗传算法&lt;/p&gt;
+
+&lt;p&gt;3. HINT PLAN&lt;/p&gt;
+
+&lt;p&gt;4. CPU 并行计算&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持 (线性性能提升)&lt;/p&gt;
+
+&lt;p&gt;5. 自定义成本因子&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;h3 id=&quot;编程扩展&quot;&gt;编程扩展&lt;/h3&gt;
+&lt;p&gt;1. 是否支持采样查询&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;2. 是否支持扩展采样算法&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;3. 自定义数据类型&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;4. 自定义索引方法&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;5. 字符集自动转换, C扩展接口&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;6. 自定义聚合&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;7. 自定义窗口&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;h3 id=&quot;扩展能力&quot;&gt;扩展能力&lt;/h3&gt;
+&lt;p&gt;1. 类型扩展，操作符扩展，函数扩展，索引方法扩展，索引扩展，&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;2. C触发器函数， C事件触发器函数&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;3. 函数语言扩展&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持扩展函数支持接口, erlang, ….&lt;/p&gt;
+
+&lt;p&gt;4. 机器学习库&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;5. 流式计算&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;</content>
 
       
       
@@ -126,7 +658,7 @@
       
 
       <author>
-          <name></name>
+          <name>mikezhang</name>
         
         
       </author>
@@ -138,7 +670,7 @@
       
 
       
-        <summary type="html">对质量的理解是优秀开发的基础。</summary>
+        <summary type="html">参考 PostgreSQL Type Mapping</summary>
       
 
       
@@ -146,226 +678,132 @@
     </entry>
   
     <entry>
-      <title type="html">ISTQB证书(QA)</title>
-      <link href="http://localhost:4000/devops-test-cer-2" rel="alternate" type="text/html" title="ISTQB证书(QA)" />
-      <published>2017-02-18T20:21:19+08:00</published>
-      <updated>2017-02-18T20:21:19+08:00</updated>
-      <id>http://localhost:4000/devops-test-cer%202</id>
-      <content type="html" xml:base="http://localhost:4000/devops-test-cer-2">&lt;p&gt;对质量的理解是优秀开发的基础。&lt;/p&gt;
+      <title type="html">Postgres的流复制最佳实践</title>
+      <link href="http://localhost:4000/archi-postgresql" rel="alternate" type="text/html" title="Postgres的流复制最佳实践" />
+      <published>2017-08-11T19:30:10+08:00</published>
+      <updated>2017-08-11T19:30:10+08:00</updated>
+      <id>http://localhost:4000/archi-postgresql</id>
+      <content type="html" xml:base="http://localhost:4000/archi-postgresql">&lt;p&gt;一主两从，介绍PG 9.5的主从最佳实践。&lt;/p&gt;
 
-&lt;h4 id=&quot;certified-tester-owned&quot;&gt;Certified tester owned&lt;/h4&gt;
+&lt;h3 id=&quot;初始化主库&quot;&gt;初始化主库&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/istqb-cer-small.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;initdb -D /exp2/pgdata -E UTF8 --locale=C -U postgres 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-      
-      
-      
-      
-      
+&lt;h3 id=&quot;配置postgresqlconf&quot;&gt;配置postgresql.conf&lt;/h3&gt;
 
-      <author>
-          <name></name>
-        
-        
-      </author>
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;listen_addresses = '*'			
+port = 5433				
+max_connections = 700			
+unix_socket_directories = '/exp2/pgdata/data_salon/socket'	
+shared_buffers = 1024MB			
+work_mem = 10MB				
+dynamic_shared_memory_type = posix	
+wal_level = hot_standby			
+wal_buffers = 1024kB			
+checkpoint_segments = 64		
+max_wal_senders = 3		
+wal_keep_segments = 32		
+random_page_cost = 2.0			
+effective_cache_size = 3072MB
+logging_collector = on			
+log_directory = 'pg_log'		
+log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'	
+log_rotation_age = 1d			
+log_rotation_size = 20MB		
+log_min_duration_statement = 5000	
+log_line_prefix = '[%d %p %t %c %l]'	
+log_timezone = 'Japan'
+autovacuum_vacuum_cost_limit = 200	
+datestyle = 'iso, ymd'
+timezone = 'Japan'
+client_encoding = UTF8						
+default_text_search_config = 'pg_catalog.simple'
+deadlock_timeout = 100s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-      
+&lt;h3 id=&quot;配置pg_hbaconf&quot;&gt;配置pg_hba.conf&lt;/h3&gt;
 
-      
-        <category term="automation" />
-      
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# &quot;local&quot; is for Unix domain socket connections only  
+local   all             all                                     trust  
+# IPv4 local connections:  
+host    all             all             127.0.0.1/32            trust  
+# IPv6 local connections:  
+host    all             all             ::1/128                 trust  
+# Allow replication connections from localhost, by a user with the  
+# replication privilege.  
+local   replication     all                                     trust  
+host    replication     all             127.0.0.1/32            trust  
+host    replication     all             ::1/128                 trust  
+host replication all 0.0.0.0/0 md5  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-      
-        <summary type="html">对质量的理解是优秀开发的基础。</summary>
-      
+&lt;h3 id=&quot;配置recoverydone&quot;&gt;配置recovery.done&lt;/h3&gt;
 
-      
-      
-    </entry>
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vi recovery.done  
   
-    <entry>
-      <title type="html">构建devops团队</title>
-      <link href="http://localhost:4000/devops-baseon-cloud" rel="alternate" type="text/html" title="构建devops团队" />
-      <published>2016-09-20T00:11:15+08:00</published>
-      <updated>2016-09-20T00:11:15+08:00</updated>
-      <id>http://localhost:4000/devops-baseon-cloud</id>
-      <content type="html" xml:base="http://localhost:4000/devops-baseon-cloud">&lt;p&gt;基于价值的软件交付流程&lt;/p&gt;
+recovery_target_timeline = 'latest'  
+standby_mode = on  
+primary_conninfo = 'host=127.0.0.1 port=5433 user=app_user password=app123'  
+# recovery_min_apply_delay = 0   #延迟多少分钟应用，用户可以配置延迟的备库，例如给一点误操作的缓冲时间。在备库不会这么早被应用。  
 
-&lt;h3 id=&quot;devops-team&quot;&gt;Devops team&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/aws-delivery.png&quot; alt=&quot;devops&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;启动主库&quot;&gt;启动主库&lt;/h3&gt;
 
-&lt;p&gt;#TODO&lt;/p&gt;</content>
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pg_ctl start -D /exp2/pgdata&lt;/code&gt;&lt;/p&gt;
 
-      
-      
-      
-      
-      
+&lt;h3 id=&quot;创建流复制角色&quot;&gt;创建流复制角色&lt;/h3&gt;
 
-      <author>
-          <name></name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="automation" />
-      
-
-      
-        <summary type="html">基于价值的软件交付流程</summary>
-      
-
-      
-      
-    </entry>
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;psql 
+Type &quot;help&quot; for help.  
   
-    <entry>
-      <title type="html">自动化测试工具-cucumber</title>
-      <link href="http://localhost:4000/devops-automation" rel="alternate" type="text/html" title="自动化测试工具-cucumber" />
-      <published>2016-09-18T23:10:19+08:00</published>
-      <updated>2016-09-18T23:10:19+08:00</updated>
-      <id>http://localhost:4000/devops-automation</id>
-      <content type="html" xml:base="http://localhost:4000/devops-automation">&lt;p&gt;Cucumber在自动化测试中的用法&lt;/p&gt;
+postgres=# set synchronous_commit =off;  
+SET  
+postgres=# create role rep login replication encrypted password 'pwd';  
+CREATE ROLE
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;创建备库&quot;&gt;创建备库&lt;/h3&gt;
 
-&lt;h2 id=&quot;与jenkins集成&quot;&gt;与jenkins集成&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pg_basebackup -D /exp2/pgdata -F p -X stream -h 127.0.0.1 -p 5433 -U rep  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cucumber-jvm.png&quot; alt=&quot;jenkins-cucumber-jvm&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;启动备库&quot;&gt;启动备库&lt;/h3&gt;
 
-&lt;p&gt;#TODO
-#TODO&lt;/p&gt;</content>
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mv recovery.done recovery.conf  
+pg_ctl start -D /exp2/pgdata
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-      
-      
-      
-      
-      
+&lt;h3 id=&quot;压测&quot;&gt;压测&lt;/h3&gt;
 
-      <author>
-          <name></name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="automation" />
-      
-
-      
-        <summary type="html">Cucumber在自动化测试中的用法</summary>
-      
-
-      
-      
-    </entry>
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pgbench -i -s 100 -h 127.0.0.1 -p 5433 -U postgres  
   
-    <entry>
-      <title type="html">自动化测试工具-cucumber</title>
-      <link href="http://localhost:4000/devops-automation-2" rel="alternate" type="text/html" title="自动化测试工具-cucumber" />
-      <published>2016-09-18T23:10:19+08:00</published>
-      <updated>2016-09-18T23:10:19+08:00</updated>
-      <id>http://localhost:4000/devops-automation%202</id>
-      <content type="html" xml:base="http://localhost:4000/devops-automation-2">&lt;p&gt;Cucumber在自动化测试中的用法&lt;/p&gt;
+pgbench -n -r -P 1 -h 127.0.0.1 -p 5433 -U postgres -c 32 -j 32 -T 120  
 
-&lt;h2 id=&quot;与jenkins集成&quot;&gt;与jenkins集成&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cucumber-jvm.png&quot; alt=&quot;jenkins-cucumber-jvm&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;#TODO
-#TODO&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name></name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="automation" />
-      
-
-      
-        <summary type="html">Cucumber在自动化测试中的用法</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">install mysql on mac</title>
-      <link href="http://localhost:4000/devops-mysql-mac-install" rel="alternate" type="text/html" title="install mysql on mac" />
-      <published>2016-07-21T10:06:10+08:00</published>
-      <updated>2016-07-21T10:06:10+08:00</updated>
-      <id>http://localhost:4000/devops-mysql-mac-install</id>
-      <content type="html" xml:base="http://localhost:4000/devops-mysql-mac-install">&lt;p&gt;使用brew安装mysql(已更新至sierra)&lt;/p&gt;
-
-&lt;h2 id=&quot;install-mysql-on-macos&quot;&gt;Install MySQL on macOS&lt;/h2&gt;
-&lt;p&gt;This procedure explains how to install &lt;a href=&quot;https://www.mysql.com&quot;&gt;MySQL&lt;/a&gt; using &lt;a href=&quot;http://brew.sh&quot;&gt;Homebrew&lt;/a&gt; on macOS Sierra 10.12&lt;/p&gt;
-
-&lt;h3 id=&quot;install-homebrew&quot;&gt;Install Homebrew&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Installing Homebrew is effortless, open Terminal and enter :&lt;br /&gt;
- &lt;code class=&quot;highlighter-rouge&quot;&gt;$  /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Note:&lt;/strong&gt; Homebrew will download and install Command Line Tools for Xcode 8.0 as part of the installation process.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;install-mysql&quot;&gt;Install MySQL&lt;/h3&gt;
-&lt;p&gt;At this time of writing, Homebrew has MySQL version &lt;strong&gt;5.7.15&lt;/strong&gt; as default formulae in its main repository :&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Enter the following command : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew info mysql&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Expected output: &lt;strong&gt;mysql: stable 5.7.15 (bottled)&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;To install MySQL enter : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew install mysql&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;additional-configuration&quot;&gt;Additional configuration&lt;/h2&gt;
-&lt;h3 id=&quot;homebrew&quot;&gt;Homebrew&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Install &lt;strong&gt;brew services&lt;/strong&gt; first : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew tap homebrew/services&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Load and start the MySQL service : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew services start mysql&lt;/code&gt;. &lt;br /&gt;
-Expected output : &lt;strong&gt;Successfully started &lt;code class=&quot;highlighter-rouge&quot;&gt;mysql&lt;/code&gt; (label: homebrew.mxcl.mysql)&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Check of the MySQL service has been loaded : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew services list&lt;/code&gt; &lt;sup&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Verify the installed MySQL instance : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ mysql -V&lt;/code&gt;. &lt;br /&gt;
-Expected output : &lt;strong&gt;Ver 14.14 Distrib 5.7.15, for osx10.12 (x86_64)&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;mysql&quot;&gt;MySQL&lt;/h3&gt;
-&lt;p&gt;Open Terminal and execute the following command to set the root password:&lt;br /&gt;
- &lt;code class=&quot;highlighter-rouge&quot;&gt;mysqladmin -u root password 'yourpassword'&lt;/code&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Important&lt;/strong&gt; : Use the single ‘quotes’ to surround the password and make sure to select a strong password!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;database-management&quot;&gt;Database Management&lt;/h3&gt;
-&lt;p&gt;To manage your databases, I recommend using &lt;a href=&quot;http://www.sequelpro.com&quot;&gt;Sequel Pro&lt;/a&gt;, a MySQL management tool designed for macOS. &lt;br /&gt;
-Current version available: &lt;strong&gt;1.1.2&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;comments&quot;&gt;Comments&lt;/h5&gt;
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; The &lt;code class=&quot;highlighter-rouge&quot;&gt;brew services start mysql&lt;/code&gt; - instruction is equal to :&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
-$ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+transaction type: &amp;lt;builtin: TPC-B (sort of)&amp;gt;
+scaling factor: 100
+query mode: simple
+number of clients: 32
+number of threads: 32
+duration: 120 s
+number of transactions actually processed: 1326066
+latency average = 2.896 ms
+latency stddev = 2.030 ms
+tps = 11050.199659 (including connections establishing)
+tps = 11051.140876 (excluding connections establishing)
+script statistics:
+ - statement latencies in milliseconds:
+         0.002  \set aid random(1, 100000 * :scale)
+         0.001  \set bid random(1, 1 * :scale)
+         0.001  \set tid random(1, 10 * :scale)
+         0.000  \set delta random(-5000, 5000)
+         0.043  BEGIN;
+         0.154  UPDATE pgbench_accounts SET abalance = abalance + :delta WHERE aid = :aid;
+         0.112  SELECT abalance FROM pgbench_accounts WHERE aid = :aid;
+         0.159  UPDATE pgbench_tellers SET tbalance = tbalance + :delta WHERE tid = :tid;
+         0.423  UPDATE pgbench_branches SET bbalance = bbalance + :delta WHERE bid = :bid;
+         0.092  INSERT INTO pgbench_history (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);
+         1.910  END;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
 
       
@@ -375,7 +813,7 @@ $ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
       
 
       <author>
-          <name></name>
+          <name>mikezhang</name>
         
         
       </author>
@@ -387,7 +825,7 @@ $ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
       
 
       
-        <summary type="html">使用brew安装mysql(已更新至sierra)</summary>
+        <summary type="html">一主两从，介绍PG 9.5的主从最佳实践。</summary>
       
 
       
@@ -395,35 +833,74 @@ $ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
     </entry>
   
     <entry>
-      <title type="html">JWT的工作原理</title>
-      <link href="http://localhost:4000/devops-jwt-howto" rel="alternate" type="text/html" title="JWT的工作原理" />
-      <published>2016-07-21T10:06:10+08:00</published>
-      <updated>2016-07-21T10:06:10+08:00</updated>
-      <id>http://localhost:4000/devops-jwt-howto</id>
-      <content type="html" xml:base="http://localhost:4000/devops-jwt-howto">&lt;p&gt;Json Web Token&lt;/p&gt;
+      <title type="html">azure云基础架构(infrastructure)</title>
+      <link href="http://localhost:4000/archi-azure-architecture-design" rel="alternate" type="text/html" title="azure云基础架构(infrastructure)" />
+      <published>2017-07-31T20:12:19+08:00</published>
+      <updated>2017-07-31T20:12:19+08:00</updated>
+      <id>http://localhost:4000/archi-azure-architecture-design</id>
+      <content type="html" xml:base="http://localhost:4000/archi-azure-architecture-design">&lt;p&gt;公有云架构设计以及设计技巧&lt;/p&gt;
 
-&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+&lt;h3 id=&quot;一-资源选型策略&quot;&gt;(一) 资源选型策略&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A JSON Web Token (JWT) is a JSON object that is defined in RFC 7519 as a safe way to represent a set of information between two parties. The token is composed of a header, a payload, and a signature.
+&lt;h4 id=&quot;架构设计时充分利用云上基础设施&quot;&gt;架构设计时充分利用云上基础设施。&lt;/h4&gt;
 
-JWT 是在RFC 7519中定义的json对象, 包括头部，负荷，和一个签名。
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ol&gt;
+  &lt;li&gt;azure提供了第7层(http)的application gateway, 它可以负责负载的分发，并可以通过sesssion affinity实现session的绑定。&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;JWT是一个json格式的object, 包含了加密算法和加密后的数据。&lt;/p&gt;
+&lt;p&gt;这时候在设计infra的时候，可以考虑这一点避免重复设计session的共享机制。&lt;/p&gt;
 
-&lt;p&gt;JWT在spring中的使用流程&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;灾备。&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/spring-security1.png&quot; alt=&quot;JWT HOW TO WORK&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;azure在设计的时候，存储已经考虑了跨大区的灾备。&lt;/p&gt;
 
-&lt;p&gt;JWT相对于cookie-session验证机制的优势是, 它是无状态的。&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Monitoring &amp;amp;&amp;amp; Health checking &amp;amp;&amp;amp; Alert&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Logging&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;具体含义是，&lt;/p&gt;
+&lt;p&gt;以上工具不都是免费的，但是性价比比较高。&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;服务器端除了存储签发token使用的secret之外无需在节点中存储额外信息，也就是节点是无状态的。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h4 id=&quot;了解azure云的资费方式&quot;&gt;了解azure云的资费方式&lt;/h4&gt;
 
-&lt;p&gt;任意节点收到jwt数据后，在server端只要拿到解密的秘钥即可。无需为每个链接在服务器中存储特殊数据，这也解决了session共享问题。&lt;/p&gt;</content>
+&lt;p&gt;国外(GCE, Aws)的计算资源都是按照per-hour收费的。所以在设计时，哪些是长期运行的几点，哪些是临时的job，需要分清楚。&lt;/p&gt;
+
+&lt;p&gt;azure提供了一个非常难用的&lt;a href=&quot;https://azure.microsoft.com/en-us/pricing/calculator/&quot;&gt;价格计算器&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;如果不是流量巨大的应用或者流量突发类型的应用， 设计指导方针是 先按照架构设计&lt;code class=&quot;highlighter-rouge&quot;&gt;跑一次&lt;/code&gt;试试看。&lt;/p&gt;
+
+&lt;p&gt;为什么？&lt;/p&gt;
+
+&lt;p&gt;azure的计算资源类型从A0-G5, 有50种以上的计算资源。&lt;/p&gt;
+
+&lt;p&gt;虽然每种类型有自己的计算能力(2 cores, 8G RAM), 也有对应的文档描述， 但是通过文档&lt;code class=&quot;highlighter-rouge&quot;&gt;很难区分&lt;/code&gt;具体型号的明确&lt;code class=&quot;highlighter-rouge&quot;&gt;界限&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;当选择的计算资源不适合时，可以实时热扩。 不用影响正在运行的进程。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;azure上的gateway，包括loadbalencer 后端是通过windows上的IIS实现的。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;我们曾经发生一个事故。
+曾经有一个项目部署了一套saas系统到azure上，当压力增加时(qps大约200左右) 会引发502 error。&lt;/p&gt;
+
+&lt;p&gt;投诉路线是这样的&lt;/p&gt;
+
+&lt;p&gt;中国上海 $→$  亚洲日本 $→$ 美国总部。&lt;/p&gt;
+
+&lt;p&gt;最终问题定位在application gateway上，升级以后问题才解决。&lt;/p&gt;
+
+&lt;h3 id=&quot;二-azure上的系统架构设计样例&quot;&gt;(二) azure上的系统架构设计样例&lt;/h3&gt;
+
+&lt;p&gt;开始设计之前，请参考一下这个lib。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://azure.microsoft.com/en-us/solutions/architecture/cross-cloud-scaling/&quot;&gt;https://azure.microsoft.com/en-us/solutions/architecture/cross-cloud-scaling/&lt;/a&gt;&lt;/p&gt;</content>
 
       
       
@@ -432,7 +909,7 @@ JWT 是在RFC 7519中定义的json对象, 包括头部，负荷，和一个签�
       
 
       <author>
-          <name></name>
+          <name>mikezhang</name>
         
         
       </author>
@@ -444,64 +921,7 @@ JWT 是在RFC 7519中定义的json对象, 包括头部，负荷，和一个签�
       
 
       
-        <summary type="html">Json Web Token</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">JWT的工作原理</title>
-      <link href="http://localhost:4000/devops-jwt-howto-2" rel="alternate" type="text/html" title="JWT的工作原理" />
-      <published>2016-07-21T10:06:10+08:00</published>
-      <updated>2016-07-21T10:06:10+08:00</updated>
-      <id>http://localhost:4000/devops-jwt-howto%202</id>
-      <content type="html" xml:base="http://localhost:4000/devops-jwt-howto-2">&lt;p&gt;Json Web Token&lt;/p&gt;
-
-&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A JSON Web Token (JWT) is a JSON object that is defined in RFC 7519 as a safe way to represent a set of information between two parties. The token is composed of a header, a payload, and a signature.
-
-JWT 是在RFC 7519中定义的json对象, 包括头部，负荷，和一个签名。
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;JWT是一个json格式的object, 包含了加密算法和加密后的数据。&lt;/p&gt;
-
-&lt;p&gt;JWT在spring中的使用流程&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/spring-security1.png&quot; alt=&quot;JWT HOW TO WORK&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;JWT相对于cookie-session验证机制的优势是, 它是无状态的。&lt;/p&gt;
-
-&lt;p&gt;具体含义是，&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;服务器端除了存储签发token使用的secret之外无需在节点中存储额外信息，也就是节点是无状态的。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;任意节点收到jwt数据后，在server端只要拿到解密的秘钥即可。无需为每个链接在服务器中存储特殊数据，这也解决了session共享问题。&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name></name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="automation" />
-      
-
-      
-        <summary type="html">Json Web Token</summary>
+        <summary type="html">公有云架构设计以及设计技巧</summary>
       
 
       
@@ -511,8 +931,8 @@ JWT 是在RFC 7519中定义的json对象, 包括头部，负荷，和一个签�
     <entry>
       <title type="html">aws中配置elastic beantalk的ssl证书</title>
       <link href="http://localhost:4000/devops-aws-ssl-csr" rel="alternate" type="text/html" title="aws中配置elastic beantalk的ssl证书" />
-      <published>2016-06-28T10:16:10+08:00</published>
-      <updated>2016-06-28T10:16:10+08:00</updated>
+      <published>2017-06-20T10:16:10+08:00</published>
+      <updated>2017-06-20T10:16:10+08:00</updated>
       <id>http://localhost:4000/devops-aws-ssl-csr</id>
       <content type="html" xml:base="http://localhost:4000/devops-aws-ssl-csr">&lt;p&gt;配置elastic beantalk的ssl证书&lt;/p&gt;
 
@@ -618,7 +1038,7 @@ JWT 是在RFC 7519中定义的json对象, 包括头部，负荷，和一个签�
       
 
       <author>
-          <name></name>
+          <name>mikezhang</name>
         
         
       </author>
@@ -631,6 +1051,206 @@ JWT 是在RFC 7519中定义的json对象, 包括头部，负荷，和一个签�
 
       
         <summary type="html">配置elastic beantalk的ssl证书</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">在tls数据传输中如何验证证书有效性</title>
+      <link href="http://localhost:4000/security-tls" rel="alternate" type="text/html" title="在tls数据传输中如何验证证书有效性" />
+      <published>2017-05-29T17:17:19+08:00</published>
+      <updated>2017-05-29T17:17:19+08:00</updated>
+      <id>http://localhost:4000/security-tls</id>
+      <content type="html" xml:base="http://localhost:4000/security-tls">&lt;h4 id=&quot;tls安全协议&quot;&gt;TLS安全协议&lt;/h4&gt;
+&lt;p&gt;TODO&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">TLS安全协议 TODO</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">ISTQB证书(QA)</title>
+      <link href="http://localhost:4000/devops-test-cer" rel="alternate" type="text/html" title="ISTQB证书(QA)" />
+      <published>2017-02-18T20:21:19+08:00</published>
+      <updated>2017-02-18T20:21:19+08:00</updated>
+      <id>http://localhost:4000/devops-test-cer</id>
+      <content type="html" xml:base="http://localhost:4000/devops-test-cer">&lt;p&gt;对质量的理解是优秀开发的基础。&lt;/p&gt;
+
+&lt;h4 id=&quot;certified-tester-owned&quot;&gt;Certified tester owned&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/istqb-cer-small.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">对质量的理解是优秀开发的基础。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">自动化测试工具-cucumber</title>
+      <link href="http://localhost:4000/devops-automation" rel="alternate" type="text/html" title="自动化测试工具-cucumber" />
+      <published>2016-09-18T23:10:19+08:00</published>
+      <updated>2016-09-18T23:10:19+08:00</updated>
+      <id>http://localhost:4000/devops-automation</id>
+      <content type="html" xml:base="http://localhost:4000/devops-automation">&lt;p&gt;Cucumber在自动化测试中的用法&lt;/p&gt;
+
+&lt;h2 id=&quot;与jenkins集成&quot;&gt;与jenkins集成&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cucumber-jvm.png&quot; alt=&quot;jenkins-cucumber-jvm&quot; /&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">Cucumber在自动化测试中的用法</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">mac OSX上安装Mysql</title>
+      <link href="http://localhost:4000/devops-mysql-mac-install" rel="alternate" type="text/html" title="mac OSX上安装Mysql" />
+      <published>2016-07-21T10:06:10+08:00</published>
+      <updated>2016-07-21T10:06:10+08:00</updated>
+      <id>http://localhost:4000/devops-mysql-mac-install</id>
+      <content type="html" xml:base="http://localhost:4000/devops-mysql-mac-install">&lt;p&gt;使用brew安装mysql(已更新至sierra)&lt;/p&gt;
+
+&lt;h2 id=&quot;install-mysql-on-macos&quot;&gt;Install MySQL on macOS&lt;/h2&gt;
+&lt;p&gt;This procedure explains how to install &lt;a href=&quot;https://www.mysql.com&quot;&gt;MySQL&lt;/a&gt; using &lt;a href=&quot;http://brew.sh&quot;&gt;Homebrew&lt;/a&gt; on macOS Sierra 10.12&lt;/p&gt;
+
+&lt;h3 id=&quot;install-homebrew&quot;&gt;Install Homebrew&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Installing Homebrew is effortless, open Terminal and enter :&lt;br /&gt;
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;$  /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Note:&lt;/strong&gt; Homebrew will download and install Command Line Tools for Xcode 8.0 as part of the installation process.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;install-mysql&quot;&gt;Install MySQL&lt;/h3&gt;
+&lt;p&gt;At this time of writing, Homebrew has MySQL version &lt;strong&gt;5.7.15&lt;/strong&gt; as default formulae in its main repository :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Enter the following command : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew info mysql&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Expected output: &lt;strong&gt;mysql: stable 5.7.15 (bottled)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To install MySQL enter : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew install mysql&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;additional-configuration&quot;&gt;Additional configuration&lt;/h2&gt;
+&lt;h3 id=&quot;homebrew&quot;&gt;Homebrew&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Install &lt;strong&gt;brew services&lt;/strong&gt; first : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew tap homebrew/services&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Load and start the MySQL service : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew services start mysql&lt;/code&gt;. &lt;br /&gt;
+Expected output : &lt;strong&gt;Successfully started &lt;code class=&quot;highlighter-rouge&quot;&gt;mysql&lt;/code&gt; (label: homebrew.mxcl.mysql)&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Check of the MySQL service has been loaded : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew services list&lt;/code&gt; &lt;sup&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Verify the installed MySQL instance : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ mysql -V&lt;/code&gt;. &lt;br /&gt;
+Expected output : &lt;strong&gt;Ver 14.14 Distrib 5.7.15, for osx10.12 (x86_64)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mysql&quot;&gt;MySQL&lt;/h3&gt;
+&lt;p&gt;Open Terminal and execute the following command to set the root password:&lt;br /&gt;
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;mysqladmin -u root password 'yourpassword'&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Important&lt;/strong&gt; : Use the single ‘quotes’ to surround the password and make sure to select a strong password!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;database-management&quot;&gt;Database Management&lt;/h3&gt;
+&lt;p&gt;To manage your databases, I recommend using &lt;a href=&quot;http://www.sequelpro.com&quot;&gt;Sequel Pro&lt;/a&gt;, a MySQL management tool designed for macOS. &lt;br /&gt;
+Current version available: &lt;strong&gt;1.1.2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;comments&quot;&gt;Comments&lt;/h5&gt;
+&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; The &lt;code class=&quot;highlighter-rouge&quot;&gt;brew services start mysql&lt;/code&gt; - instruction is equal to :&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+$ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">使用brew安装mysql(已更新至sierra)</summary>
       
 
       

@@ -45,24 +45,27 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="spring中的100个问题-(spring-beans)bean是如何创建的?" />
-    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:description" content="Bean container解决的核心问题是如何在运行时(run-time)动态获取或创建Java Object。 Bean Container的类图 spring提供了3中方式创建beans 函数调用堆栈 AutowireCapableBeanFactory 接口 Spring-beans模块中使用AutowireCapableBeanFactory接口实现bean的创建和销毁。 &lt;T&gt; T createBean(Class&lt;T&gt; beanClass) throws BeansException; void autowireBean(Object existingBean) throws BeansException; Object configureBean(Object existingBean, String beanName) throws BeansException; Object createBean(Class&lt;?&gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException; Object autowire(Class&lt;?&gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException; void autowireBeanProperties(Object existingBean, int" />
     <meta property="og:url" content="http://localhost:4000/springboot-how-bean-created" />
     <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
-    <meta property="article:tag" content="Springboot" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2016-03-10T07:50:11+08:00" />
+    <meta property="article:modified_time" content="2016-03-10T07:50:11+08:00" />
+    <meta property="article:tag" content="Jvm" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="spring中的100个问题-(spring-beans)bean是如何创建的?" />
-    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:description" content="Bean container解决的核心问题是如何在运行时(run-time)动态获取或创建Java Object。 Bean Container的类图 spring提供了3中方式创建beans 函数调用堆栈 AutowireCapableBeanFactory 接口 Spring-beans模块中使用AutowireCapableBeanFactory接口实现bean的创建和销毁。 &lt;T&gt; T createBean(Class&lt;T&gt; beanClass) throws BeansException; void autowireBean(Object existingBean) throws BeansException; Object configureBean(Object existingBean, String beanName) throws BeansException; Object createBean(Class&lt;?&gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException; Object autowire(Class&lt;?&gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException; void autowireBeanProperties(Object existingBean, int" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Springboot" />
+    <meta name="twitter:data2" content="Jvm" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
 
     <script type="application/ld+json">
 {
@@ -84,7 +87,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/springboot-how-bean-created"
     },
-    "description": "Learn, Innovate, Share - Business Based Vision."
+    "description": "Bean container解决的核心问题是如何在运行时(run-time)动态获取或创建Java Object。 Bean Container的类图 spring提供了3中方式创建beans 函数调用堆栈 AutowireCapableBeanFactory 接口 Spring-beans模块中使用AutowireCapableBeanFactory接口实现bean的创建和销毁。 &lt;T&gt; T createBean(Class&lt;T&gt; beanClass) throws BeansException; void autowireBean(Object existingBean) throws BeansException; Object configureBean(Object existingBean, String beanName) throws BeansException; Object createBean(Class&lt;?&gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException; Object autowire(Class&lt;?&gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException; void autowireBeanProperties(Object existingBean, int"
 }
     </script>
 
@@ -100,7 +103,7 @@
     <link rel="alternate" type="application/rss+xml" title="spring中的100个问题-(spring-beans)bean是如何创建的?" href="/feed.xml" />
 
 </head>
-<body class="home-template">
+<body class="distribution">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -115,6 +118,12 @@ into the {body} of the default.hbs template -->
                 <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
             
         
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
         
     </div>
     <div class="site-nav-right">
@@ -146,7 +155,7 @@ into the {body} of the default.hbs template -->
                         <span class="date-divider">分类: </span>
                         
                             
-                               <a href='/tag/springboot/'>SPRINGBOOT</a>
+                               <a href='/tag/jvm/'>JVM</a>
                             
                         
                     
@@ -276,7 +285,7 @@ String[] getAliases(String name);
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/springboot/">Springboot</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/jvm/">Jvm</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -370,31 +379,10 @@ String[] getAliases(String name);
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
-                                            <li><a href="/springboot-annotations">spring中的100个问题-注解是如何工作的(三)?</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/springboot-annotations">spring中的100个问题-注解是如何工作的(二)?</a></li>
+                                            <li><a href="/springboot-how-bean-managed">spring中的100个问题-bean是被透明化管理的?</a></li>
                                         
                                     
                                   
@@ -403,8 +391,21 @@ String[] getAliases(String name);
                                     
                                         
                                         
-                                            <li><a href="/springboot-annotations-2">spring中的100个问题-注解是如何工作的(二)?</a></li>
+                                            <li><a href="/jvm-jmm">JVM内部机制(七) Java内存模型(Java Momory Model)</a></li>
                                         
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/springboot-how-bean-type-created">spring中的100个问题-bean如何支持运行时类型解析的?</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
                                     
                                   
                                 
@@ -416,19 +417,17 @@ String[] getAliases(String name);
                                   
                                 
                                   
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
@@ -451,6 +450,83 @@ String[] getAliases(String name);
                                 
                                   
                                     
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
@@ -458,83 +534,24 @@ String[] getAliases(String name);
                                   
                                 
                                   
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
@@ -552,9 +569,9 @@ String[] getAliases(String name);
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/springboot/">
+                            <a href="/tag/jvm/">
                                 
-                                    See all 6 posts  →
+                                    See all 22 posts  →
                                 
                             </a>
                         </footer>
@@ -565,7 +582,7 @@ String[] getAliases(String name);
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card distribution no-image">
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/springboot-how-bean-type-created">
@@ -573,7 +590,7 @@ String[] getAliases(String name);
                     
                         
                             
-                                <span class="post-card-tags">Springboot</span>
+                                <span class="post-card-tags">Jvm</span>
                             
                         
                     
@@ -617,7 +634,7 @@ String[] getAliases(String name);
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card distribution no-image">
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/jvm-source-guide">
@@ -715,11 +732,16 @@ String[] getAliases(String name);
                 <section class="my_profile">
                     <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
                     <div class='profile_detail'>
-                        <h5>关于我</h5>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
                     </div>
                 </section>
-                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
             </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
         </footer>
     </div>
 

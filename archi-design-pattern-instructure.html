@@ -45,24 +45,27 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="设计模式之组件构造" />
-    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:description" content="架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。 画图不易，请勿转载。 对象构造类 适配器模式 代理模式 源码示例 import java.util.*; interface Image { public void displayImage(); } //on System A class RealImage implements Image { private String filename; public RealImage(String filename) { this.filename = filename; loadImageFromDisk(); } private void loadImageFromDisk() { System.out.println("Loading " + filename); } public void displayImage() { System.out.println("Displaying "" />
     <meta property="og:url" content="http://localhost:4000/archi-design-pattern-instructure" />
     <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
-    <meta property="article:tag" content="Architecture" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2017-01-27T10:12:19+08:00" />
+    <meta property="article:modified_time" content="2017-01-27T10:12:19+08:00" />
+    <meta property="article:tag" content="Design Pattern" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="设计模式之组件构造" />
-    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:description" content="架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。 画图不易，请勿转载。 对象构造类 适配器模式 代理模式 源码示例 import java.util.*; interface Image { public void displayImage(); } //on System A class RealImage implements Image { private String filename; public RealImage(String filename) { this.filename = filename; loadImageFromDisk(); } private void loadImageFromDisk() { System.out.println("Loading " + filename); } public void displayImage() { System.out.println("Displaying "" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Architecture" />
+    <meta name="twitter:data2" content="Design Pattern" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
 
     <script type="application/ld+json">
 {
@@ -84,7 +87,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/archi-design-pattern-instructure"
     },
-    "description": "Learn, Innovate, Share - Business Based Vision."
+    "description": "架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。 画图不易，请勿转载。 对象构造类 适配器模式 代理模式 源码示例 import java.util.*; interface Image { public void displayImage(); } //on System A class RealImage implements Image { private String filename; public RealImage(String filename) { this.filename = filename; loadImageFromDisk(); } private void loadImageFromDisk() { System.out.println("Loading " + filename); } public void displayImage() { System.out.println("Displaying ""
 }
     </script>
 
@@ -100,7 +103,7 @@
     <link rel="alternate" type="application/rss+xml" title="设计模式之组件构造" href="/feed.xml" />
 
 </head>
-<body class="home-template">
+<body class="designment">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -115,6 +118,12 @@ into the {body} of the default.hbs template -->
                 <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
             
         
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
         
     </div>
     <div class="site-nav-right">
@@ -146,7 +155,7 @@ into the {body} of the default.hbs template -->
                         <span class="date-divider">分类: </span>
                         
                             
-                               <a href='/tag/architecture/'>ARCHITECTURE</a>
+                               <a href='/tag/design-pattern/'>DESIGN PATTERN</a>
                             
                         
                     
@@ -475,7 +484,7 @@ public final class FontData {
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/architecture/">Architecture</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/design-pattern/">Design pattern</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -483,16 +492,6 @@ public final class FontData {
                         <div class="read-next-card-content">
                             <ul>
                                 
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                 
                                   
                                 
@@ -537,15 +536,6 @@ public final class FontData {
                                     
                                         
                                         
-                                            <li><a href="/archi-design-pattern-bahavior2-2">设计模式之组织行为(二)</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
                                             <li><a href="/archi-design-pattern-bahavior">设计模式之组织行为(一)</a></li>
                                         
                                     
@@ -555,12 +545,7 @@ public final class FontData {
                                     
                                         
                                         
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
+                                            <li><a href="/archi-design-pattern-createral">设计模式之对象创建</a></li>
                                         
                                     
                                   
@@ -570,8 +555,6 @@ public final class FontData {
                                   
                                 
                                   
-                                    
-                                  
                                 
                                   
                                 
@@ -603,74 +586,6 @@ public final class FontData {
                                 
                                   
                                 
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -758,9 +673,9 @@ public final class FontData {
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/architecture/">
+                            <a href="/tag/design-pattern/">
                                 
-                                    See all 8 posts  →
+                                    See all 3 posts  →
                                 
                             </a>
                         </footer>
@@ -771,15 +686,15 @@ public final class FontData {
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card designment no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/archi-design-pattern-createral-2">
+            <a class="post-card-content-link" href="/archi-design-pattern-createral">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Architecture</span>
+                                <span class="post-card-tags">Design pattern</span>
                             
                         
                     
@@ -823,20 +738,20 @@ public final class FontData {
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card devops no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/archi-design-pattern-instructure-2">
+            <a class="post-card-content-link" href="/devops-automation">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Architecture</span>
+                                <span class="post-card-tags">Automation</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">设计模式之组件构造</h2>
+                    <h2 class="post-card-title">自动化测试工具-cucumber</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -921,11 +836,16 @@ public final class FontData {
                 <section class="my_profile">
                     <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
                     <div class='profile_detail'>
-                        <h5>关于我</h5>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
                     </div>
                 </section>
-                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
             </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
         </footer>
     </div>
 

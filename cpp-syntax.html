@@ -45,24 +45,105 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="C++中的常用语法" />
-    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:description" content="Language is just like a puppet.
+
+Volatile
+
+Volatile在wiki中的定义
+
+Struct
+
+类型定义
+class Foo{ ... };
+typedef Foo * FooPtr;
+typedef const Foo * ConstFooPtr;
+typedef std::vector&lt;Foo&gt; FooVec; 
+
+
+算法复杂度 log(n)
+
+算法的时间复杂度很多都用包含O(logN)这样的描述，但是却没有明确说logN的底数究竟是多少。
+
+算法中log级别的时间复杂度都是由于使用了分治思想,这个底数直接由分治的复杂度决定。
+如果采用二分法,那么就会以2为底数,三分法就会以3为底数,其他亦然。
+不过无论底数是什么,log级别的渐进意义是一样的。
+也就是说该算法的时间复杂度的增长与处理数据多少的增长的关系是一样的。
+
+我们先考虑O(logx(n))和O(logy(n))，x!=y，我们是在考虑n趋于无穷的情况。
+求当n趋于无穷大时logx(n)/logy(n)的极限可以发现，极限等于lny/lnx，也就是一个常数，
+也就是说，在n趋于无穷大的时候，这两个东西仅差一个常数。
+所以从研究算法的角度log的底数不重要。
+
+最后，结合上面，我也说一下关于大O的定义（算法导论28页的定义），
+注意把这个定义和高等数学中的极限部分做比较，
+显然可以发现，这里的定义正是体现了一个极限的思想，
+假设我们将n0取一个非常大的数字，
+显然，当n大于n0的时候，我们可以发现任意底数的一个对数函数其实都相差一个常数倍而已。
+所以书上说写的O（logn）已经可以表达所有底数的对数了，就像O(n^2)一样。
+没有非常严格的证明，不过我觉得这样说比较好理解，如果有兴趣证明，完全可以参照高数上对极限趋于无穷的证明。
+
+[原文](https://blog.csdn.net/jdbc/article/details/42173751)
+
+" />
     <meta property="og:url" content="http://localhost:4000/cpp-syntax" />
     <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
-    <meta property="article:tag" content="C++" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2014-09-10T14:10:19+08:00" />
+    <meta property="article:modified_time" content="2014-09-10T14:10:19+08:00" />
+    <meta property="article:tag" content="Jvm" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="C++中的常用语法" />
-    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:description" content="Language is just like a puppet.
+
+Volatile
+
+Volatile在wiki中的定义
+
+Struct
+
+类型定义
+class Foo{ ... };
+typedef Foo * FooPtr;
+typedef const Foo * ConstFooPtr;
+typedef std::vector&lt;Foo&gt; FooVec; 
+
+
+算法复杂度 log(n)
+
+算法的时间复杂度很多都用包含O(logN)这样的描述，但是却没有明确说logN的底数究竟是多少。
+
+算法中log级别的时间复杂度都是由于使用了分治思想,这个底数直接由分治的复杂度决定。
+如果采用二分法,那么就会以2为底数,三分法就会以3为底数,其他亦然。
+不过无论底数是什么,log级别的渐进意义是一样的。
+也就是说该算法的时间复杂度的增长与处理数据多少的增长的关系是一样的。
+
+我们先考虑O(logx(n))和O(logy(n))，x!=y，我们是在考虑n趋于无穷的情况。
+求当n趋于无穷大时logx(n)/logy(n)的极限可以发现，极限等于lny/lnx，也就是一个常数，
+也就是说，在n趋于无穷大的时候，这两个东西仅差一个常数。
+所以从研究算法的角度log的底数不重要。
+
+最后，结合上面，我也说一下关于大O的定义（算法导论28页的定义），
+注意把这个定义和高等数学中的极限部分做比较，
+显然可以发现，这里的定义正是体现了一个极限的思想，
+假设我们将n0取一个非常大的数字，
+显然，当n大于n0的时候，我们可以发现任意底数的一个对数函数其实都相差一个常数倍而已。
+所以书上说写的O（logn）已经可以表达所有底数的对数了，就像O(n^2)一样。
+没有非常严格的证明，不过我觉得这样说比较好理解，如果有兴趣证明，完全可以参照高数上对极限趋于无穷的证明。
+
+[原文](https://blog.csdn.net/jdbc/article/details/42173751)
+
+" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="C++" />
+    <meta name="twitter:data2" content="Jvm" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
 
     <script type="application/ld+json">
 {
@@ -84,7 +165,46 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/cpp-syntax"
     },
-    "description": "Learn, Innovate, Share - Business Based Vision."
+    "description": "Language is just like a puppet.
+
+Volatile
+
+Volatile在wiki中的定义
+
+Struct
+
+类型定义
+class Foo{ ... };
+typedef Foo * FooPtr;
+typedef const Foo * ConstFooPtr;
+typedef std::vector&lt;Foo&gt; FooVec; 
+
+
+算法复杂度 log(n)
+
+算法的时间复杂度很多都用包含O(logN)这样的描述，但是却没有明确说logN的底数究竟是多少。
+
+算法中log级别的时间复杂度都是由于使用了分治思想,这个底数直接由分治的复杂度决定。
+如果采用二分法,那么就会以2为底数,三分法就会以3为底数,其他亦然。
+不过无论底数是什么,log级别的渐进意义是一样的。
+也就是说该算法的时间复杂度的增长与处理数据多少的增长的关系是一样的。
+
+我们先考虑O(logx(n))和O(logy(n))，x!=y，我们是在考虑n趋于无穷的情况。
+求当n趋于无穷大时logx(n)/logy(n)的极限可以发现，极限等于lny/lnx，也就是一个常数，
+也就是说，在n趋于无穷大的时候，这两个东西仅差一个常数。
+所以从研究算法的角度log的底数不重要。
+
+最后，结合上面，我也说一下关于大O的定义（算法导论28页的定义），
+注意把这个定义和高等数学中的极限部分做比较，
+显然可以发现，这里的定义正是体现了一个极限的思想，
+假设我们将n0取一个非常大的数字，
+显然，当n大于n0的时候，我们可以发现任意底数的一个对数函数其实都相差一个常数倍而已。
+所以书上说写的O（logn）已经可以表达所有底数的对数了，就像O(n^2)一样。
+没有非常严格的证明，不过我觉得这样说比较好理解，如果有兴趣证明，完全可以参照高数上对极限趋于无穷的证明。
+
+[原文](https://blog.csdn.net/jdbc/article/details/42173751)
+
+"
 }
     </script>
 
@@ -100,7 +220,7 @@
     <link rel="alternate" type="application/rss+xml" title="C++中的常用语法" href="/feed.xml" />
 
 </head>
-<body class="home-template">
+<body class="distribution">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -115,6 +235,12 @@ into the {body} of the default.hbs template -->
                 <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
             
         
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
         
     </div>
     <div class="site-nav-right">
@@ -146,7 +272,7 @@ into the {body} of the default.hbs template -->
                         <span class="date-divider">分类: </span>
                         
                             
-                               <a href='/tag/c++/'>C++</a>
+                               <a href='/tag/jvm/'>JVM</a>
                             
                         
                     
@@ -244,7 +370,7 @@ typedef std::vector&lt;Foo&gt; FooVec;
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/c++/">C++</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/jvm/">Jvm</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -338,124 +464,57 @@ typedef std::vector&lt;Foo&gt; FooVec;
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/springboot-how-bean-managed">spring中的100个问题-bean是被透明化管理的?</a></li>
+                                        
                                     
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                            <li><a href="/jvm-jmm">JVM内部机制(七) Java内存模型(Java Momory Model)</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/springboot-how-bean-type-created">spring中的100个问题-bean如何支持运行时类型解析的?</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
                                     
                                   
                                 
@@ -464,11 +523,120 @@ typedef std::vector&lt;Foo&gt; FooVec;
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                    
+                                  
                                 
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
                                 
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
                                   
                                 
                                   
@@ -486,9 +654,9 @@ typedef std::vector&lt;Foo&gt; FooVec;
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/c++/">
+                            <a href="/tag/jvm/">
                                 
-                                    See all 1 posts  →
+                                    See all 22 posts  →
                                 
                             </a>
                         </footer>
@@ -499,7 +667,7 @@ typedef std::vector&lt;Foo&gt; FooVec;
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card distribution no-image">
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/jvm-io">
@@ -551,20 +719,20 @@ typedef std::vector&lt;Foo&gt; FooVec;
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card devops no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/cpp-syntax-2">
+            <a class="post-card-content-link" href="/devops-junit-jenkins">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">C++</span>
+                                <span class="post-card-tags">Automation</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">C++中的常用语法</h2>
+                    <h2 class="post-card-title">Junit运行测试的几种方式</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -649,11 +817,16 @@ typedef std::vector&lt;Foo&gt; FooVec;
                 <section class="my_profile">
                     <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
                     <div class='profile_detail'>
-                        <h5>关于我</h5>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
                     </div>
                 </section>
-                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
             </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
         </footer>
     </div>
 

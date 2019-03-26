@@ -45,24 +45,27 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="设计模式之组织行为(二)" />
-    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:description" content="高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。 画图不易，请勿转载。 对象行为组织类 Iterator(迭代器) 代码示例 interface Iterator{ Object First(); Object Next(); boolean IsDone(); Object CurrentItem(); } abstract class Aggregate{ abstract Iterator CreateIterator(); } class ConcreteIterator implements Iterator{ private List&lt;Object&gt; list = new ArrayList&lt;Object&gt;(); private int curr=0; public ConcreteIterator(List&lt;Object&gt; list){ this.list = list; } public Object First(){ return list.get(0); } public" />
     <meta property="og:url" content="http://localhost:4000/archi-design-pattern-bahavior2" />
     <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
-    <meta property="article:tag" content="Architecture" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2017-02-07T10:02:11+08:00" />
+    <meta property="article:modified_time" content="2017-02-07T10:02:11+08:00" />
+    <meta property="article:tag" content="Design Pattern" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="设计模式之组织行为(二)" />
-    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:description" content="高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。 画图不易，请勿转载。 对象行为组织类 Iterator(迭代器) 代码示例 interface Iterator{ Object First(); Object Next(); boolean IsDone(); Object CurrentItem(); } abstract class Aggregate{ abstract Iterator CreateIterator(); } class ConcreteIterator implements Iterator{ private List&lt;Object&gt; list = new ArrayList&lt;Object&gt;(); private int curr=0; public ConcreteIterator(List&lt;Object&gt; list){ this.list = list; } public Object First(){ return list.get(0); } public" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Architecture" />
+    <meta name="twitter:data2" content="Design Pattern" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
 
     <script type="application/ld+json">
 {
@@ -84,7 +87,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/archi-design-pattern-bahavior2"
     },
-    "description": "Learn, Innovate, Share - Business Based Vision."
+    "description": "高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。 画图不易，请勿转载。 对象行为组织类 Iterator(迭代器) 代码示例 interface Iterator{ Object First(); Object Next(); boolean IsDone(); Object CurrentItem(); } abstract class Aggregate{ abstract Iterator CreateIterator(); } class ConcreteIterator implements Iterator{ private List&lt;Object&gt; list = new ArrayList&lt;Object&gt;(); private int curr=0; public ConcreteIterator(List&lt;Object&gt; list){ this.list = list; } public Object First(){ return list.get(0); } public"
 }
     </script>
 
@@ -100,7 +103,7 @@
     <link rel="alternate" type="application/rss+xml" title="设计模式之组织行为(二)" href="/feed.xml" />
 
 </head>
-<body class="home-template">
+<body class="designment">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -115,6 +118,12 @@ into the {body} of the default.hbs template -->
                 <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
             
         
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
         
     </div>
     <div class="site-nav-right">
@@ -146,7 +155,7 @@ into the {body} of the default.hbs template -->
                         <span class="date-divider">分类: </span>
                         
                             
-                               <a href='/tag/architecture/'>ARCHITECTURE</a>
+                               <a href='/tag/design-pattern/'>DESIGN PATTERN</a>
                             
                         
                     
@@ -162,9 +171,9 @@ into the {body} of the default.hbs template -->
 
 <p>画图不易，请勿转载。</p>
 
-<h1 id="对象行为组织类">对象行为组织类</h1>
+<h3 id="对象行为组织类">对象行为组织类</h3>
 
-<h2 id="iterator迭代器">Iterator(迭代器)</h2>
+<h4 id="iterator迭代器">Iterator(迭代器)</h4>
 
 <p><img src="http://blog.h5tube.com/design_patterns_iterator.png" alt="" /></p>
 
@@ -236,13 +245,13 @@ class client{
 }
 </code></pre></div></div>
 
-<h2 id="中介者mediator">中介者(Mediator)</h2>
+<h4 id="中介者mediator">中介者(Mediator)</h4>
 
 <p><img src="http://blog.h5tube.com/design_patterns_mediator.png" alt="" /></p>
 
 <p><a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F">代码示例</a></p>
 
-<h2 id="备忘录memento">备忘录(Memento)</h2>
+<h4 id="备忘录memento">备忘录(Memento)</h4>
 
 <p><img src="http://blog.h5tube.com/design_patterns_memento.png" alt="" /></p>
 
@@ -300,7 +309,7 @@ class Caretaker {
 }
 </code></pre></div></div>
 
-<h2 id="订阅观察者模式observe">订阅/观察者模式(Observe)</h2>
+<h4 id="订阅观察者模式observe">订阅/观察者模式(Observe)</h4>
 
 <p><img src="http://blog.h5tube.com/design_patterns_observe.png" alt="" /></p>
 
@@ -366,15 +375,15 @@ if __name__=="__main__":
     #     &lt;listener B&gt; received event hello
 </code></pre></div></div>
 
-<h2 id="状态state">状态(state)</h2>
+<h4 id="状态state">状态(state)</h4>
 
 <p><img src="http://blog.h5tube.com/design_patterns_state.png" alt="" /></p>
 
-<h2 id="策略模式strategy">策略模式(Strategy)</h2>
+<h4 id="策略模式strategy">策略模式(Strategy)</h4>
 
 <p><img src="http://blog.h5tube.com/design_patterns_strategy.png" alt="" /></p>
 
-<h1 id="模板方法template">模板方法(Template)</h1>
+<h4 id="模板方法template">模板方法(Template)</h4>
 
 <p><img src="http://blog.h5tube.com/design_patterns_template.png" alt="" /></p>
 
@@ -472,7 +481,7 @@ if __name__=="__main__":
      }
  }
 </code></pre></div></div>
-<h2 id="访问者visitor">访问者(visitor)</h2>
+<h4 id="访问者visitor">访问者(visitor)</h4>
 
 <p><img src="http://blog.h5tube.com/design_patterns_vistor.png" alt="" /></p>
 
@@ -548,7 +557,7 @@ if __name__=="__main__":
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/architecture/">Architecture</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/design-pattern/">Design pattern</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -588,20 +597,6 @@ if __name__=="__main__":
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                  
-                                
-                                  
                                     
                                   
                                 
@@ -627,21 +622,7 @@ if __name__=="__main__":
                                     
                                         
                                         
-                                            <li><a href="/archi-design-pattern-createral-2">设计模式之对象创建</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
+                                            <li><a href="/archi-design-pattern-instructure">设计模式之组件构造</a></li>
                                         
                                     
                                   
@@ -678,72 +659,6 @@ if __name__=="__main__":
                                 
                                   
                                 
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -831,9 +746,9 @@ if __name__=="__main__":
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/architecture/">
+                            <a href="/tag/design-pattern/">
                                 
-                                    See all 8 posts  →
+                                    See all 3 posts  →
                                 
                             </a>
                         </footer>
@@ -844,10 +759,10 @@ if __name__=="__main__":
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card devops no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/devops-test-cer-2">
+            <a class="post-card-content-link" href="/devops-test-cer">
                 <header class="post-card-header">
                     
                         
@@ -896,20 +811,20 @@ if __name__=="__main__":
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card designment no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/archi-design-pattern-bahavior2-2">
+            <a class="post-card-content-link" href="/archi-design-pattern-bahavior">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Architecture</span>
+                                <span class="post-card-tags">Design pattern</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">设计模式之组织行为(二)</h2>
+                    <h2 class="post-card-title">设计模式之组织行为(一)</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -994,11 +909,16 @@ if __name__=="__main__":
                 <section class="my_profile">
                     <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
                     <div class='profile_detail'>
-                        <h5>关于我</h5>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
                     </div>
                 </section>
-                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
             </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
         </footer>
     </div>
 

@@ -45,24 +45,27 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="azure云基础架构(infrastructure)" />
-    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:description" content="公有云架构设计以及设计技巧 (一) 资源选型策略 架构设计时充分利用云上基础设施。 azure提供了第7层(http)的application gateway, 它可以负责负载的分发，并可以通过sesssion affinity实现session的绑定。 这时候在设计infra的时候，可以考虑这一点避免重复设计session的共享机制。 灾备。 azure在设计的时候，存储已经考虑了跨大区的灾备。 Monitoring &amp;&amp; Health checking &amp;&amp; Alert Logging 以上工具不都是免费的，但是性价比比较高。 了解azure云的资费方式 国外(GCE, Aws)的计算资源都是按照per-hour收费的。所以在设计时，哪些是长期运行的几点，哪些是临时的job，需要分清楚。 azure提供了一个非常难用的价格计算器 如果不是流量巨大的应用或者流量突发类型的应用， 设计指导方针是 先按照架构设计跑一次试试看。 为什么？ azure的计算资源类型从A0-G5, 有50种以上的计算资源。 虽然每种类型有自己的计算能力(2 cores, 8G RAM), 也有对应的文档描述， 但是通过文档很难区分具体型号的明确界限。 当选择的计算资源不适合时，可以实时热扩。 不用影响正在运行的进程。 azure上的gateway，包括loadbalencer 后端是通过windows上的IIS实现的。 我们曾经发生一个事故。 曾经有一个项目部署了一套saas系统到azure上，当压力增加时(qps大约200左右) 会引发502 error。 投诉路线是这样的 中国上海 $→$ 亚洲日本 $→$ 美国总部。 最终问题定位在application" />
     <meta property="og:url" content="http://localhost:4000/archi-azure-architecture-design" />
     <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
-    <meta property="article:tag" content="Cloud" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2017-07-31T20:12:19+08:00" />
+    <meta property="article:modified_time" content="2017-07-31T20:12:19+08:00" />
+    <meta property="article:tag" content="Automation" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="azure云基础架构(infrastructure)" />
-    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:description" content="公有云架构设计以及设计技巧 (一) 资源选型策略 架构设计时充分利用云上基础设施。 azure提供了第7层(http)的application gateway, 它可以负责负载的分发，并可以通过sesssion affinity实现session的绑定。 这时候在设计infra的时候，可以考虑这一点避免重复设计session的共享机制。 灾备。 azure在设计的时候，存储已经考虑了跨大区的灾备。 Monitoring &amp;&amp; Health checking &amp;&amp; Alert Logging 以上工具不都是免费的，但是性价比比较高。 了解azure云的资费方式 国外(GCE, Aws)的计算资源都是按照per-hour收费的。所以在设计时，哪些是长期运行的几点，哪些是临时的job，需要分清楚。 azure提供了一个非常难用的价格计算器 如果不是流量巨大的应用或者流量突发类型的应用， 设计指导方针是 先按照架构设计跑一次试试看。 为什么？ azure的计算资源类型从A0-G5, 有50种以上的计算资源。 虽然每种类型有自己的计算能力(2 cores, 8G RAM), 也有对应的文档描述， 但是通过文档很难区分具体型号的明确界限。 当选择的计算资源不适合时，可以实时热扩。 不用影响正在运行的进程。 azure上的gateway，包括loadbalencer 后端是通过windows上的IIS实现的。 我们曾经发生一个事故。 曾经有一个项目部署了一套saas系统到azure上，当压力增加时(qps大约200左右) 会引发502 error。 投诉路线是这样的 中国上海 $→$ 亚洲日本 $→$ 美国总部。 最终问题定位在application" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Cloud" />
+    <meta name="twitter:data2" content="Automation" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
 
     <script type="application/ld+json">
 {
@@ -84,7 +87,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/archi-azure-architecture-design"
     },
-    "description": "Learn, Innovate, Share - Business Based Vision."
+    "description": "公有云架构设计以及设计技巧 (一) 资源选型策略 架构设计时充分利用云上基础设施。 azure提供了第7层(http)的application gateway, 它可以负责负载的分发，并可以通过sesssion affinity实现session的绑定。 这时候在设计infra的时候，可以考虑这一点避免重复设计session的共享机制。 灾备。 azure在设计的时候，存储已经考虑了跨大区的灾备。 Monitoring &amp;&amp; Health checking &amp;&amp; Alert Logging 以上工具不都是免费的，但是性价比比较高。 了解azure云的资费方式 国外(GCE, Aws)的计算资源都是按照per-hour收费的。所以在设计时，哪些是长期运行的几点，哪些是临时的job，需要分清楚。 azure提供了一个非常难用的价格计算器 如果不是流量巨大的应用或者流量突发类型的应用， 设计指导方针是 先按照架构设计跑一次试试看。 为什么？ azure的计算资源类型从A0-G5, 有50种以上的计算资源。 虽然每种类型有自己的计算能力(2 cores, 8G RAM), 也有对应的文档描述， 但是通过文档很难区分具体型号的明确界限。 当选择的计算资源不适合时，可以实时热扩。 不用影响正在运行的进程。 azure上的gateway，包括loadbalencer 后端是通过windows上的IIS实现的。 我们曾经发生一个事故。 曾经有一个项目部署了一套saas系统到azure上，当压力增加时(qps大约200左右) 会引发502 error。 投诉路线是这样的 中国上海 $→$ 亚洲日本 $→$ 美国总部。 最终问题定位在application"
 }
     </script>
 
@@ -100,7 +103,7 @@
     <link rel="alternate" type="application/rss+xml" title="azure云基础架构(infrastructure)" href="/feed.xml" />
 
 </head>
-<body class="home-template">
+<body class="devops">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -115,6 +118,12 @@ into the {body} of the default.hbs template -->
                 <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
             
         
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
         
     </div>
     <div class="site-nav-right">
@@ -146,7 +155,7 @@ into the {body} of the default.hbs template -->
                         <span class="date-divider">分类: </span>
                         
                             
-                               <a href='/tag/cloud/'>CLOUD</a>
+                               <a href='/tag/automation/'>AUTOMATION</a>
                             
                         
                     
@@ -268,7 +277,7 @@ into the {body} of the default.hbs template -->
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/cloud/">Cloud</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/automation/">Automation</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -282,6 +291,216 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                            <li><a href="/k8s-from-scrach">[GCE]单节点部署kubernetes集群</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/devops-docker-presentation">Devops那些事-虚拟化讲座讲义</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/archi-postgresql">PostgreSQL MySQL 数据类型映射</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
                                 
                                   
                                 
@@ -307,9 +526,8 @@ into the {body} of the default.hbs template -->
                                 
                                   
                                     
-                                  
-                                
-                                  
+                                        
+                                        
                                     
                                   
                                 
@@ -330,141 +548,19 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
@@ -476,25 +572,10 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
@@ -510,9 +591,9 @@ into the {body} of the default.hbs template -->
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/cloud/">
+                            <a href="/tag/automation/">
                                 
-                                    See all 1 posts  →
+                                    See all 28 posts  →
                                 
                             </a>
                         </footer>
@@ -523,15 +604,15 @@ into the {body} of the default.hbs template -->
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card devops no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/archi-postgresql-2">
+            <a class="post-card-content-link" href="/archi-postgresql">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Database</span>
+                                <span class="post-card-tags">Automation</span>
                             
                         
                     
@@ -575,20 +656,20 @@ into the {body} of the default.hbs template -->
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card devops no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/archi-azure-architecture-design-2">
+            <a class="post-card-content-link" href="/devops-aws-ssl-csr">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Cloud</span>
+                                <span class="post-card-tags">Automation</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">azure云基础架构(infrastructure)</h2>
+                    <h2 class="post-card-title">aws中配置elastic beantalk的ssl证书</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -673,11 +754,16 @@ into the {body} of the default.hbs template -->
                 <section class="my_profile">
                     <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
                     <div class='profile_detail'>
-                        <h5>关于我</h5>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
                     </div>
                 </section>
-                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
             </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
         </footer>
     </div>
 

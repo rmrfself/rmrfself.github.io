@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/nodejs/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-03-26T15:12:54+08:00</updated>
+  <updated>2019-03-26T20:43:04+08:00</updated>
   <id>http://localhost:4000/tag/nodejs/feed.xml</id>
 
   
@@ -44,10 +44,138 @@
 
   
     <entry>
+      <title type="html">搭建devops团队</title>
+      <link href="http://localhost:4000/devops-baseon-cloud" rel="alternate" type="text/html" title="搭建devops团队" />
+      <published>2018-09-20T00:11:15+08:00</published>
+      <updated>2018-09-20T00:11:15+08:00</updated>
+      <id>http://localhost:4000/devops-baseon-cloud</id>
+      <content type="html" xml:base="http://localhost:4000/devops-baseon-cloud">&lt;p&gt;基于价值的软件交付流程&lt;/p&gt;
+
+&lt;h3 id=&quot;devops-team&quot;&gt;Devops team&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/aws-delivery.png&quot; alt=&quot;devops&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;#TODO&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="nodejs" />
+      
+
+      
+        <summary type="html">基于价值的软件交付流程</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">前端工程中的测试模型</title>
+      <link href="http://localhost:4000/archi-vuejs-test-model" rel="alternate" type="text/html" title="前端工程中的测试模型" />
+      <published>2018-09-12T12:11:11+08:00</published>
+      <updated>2018-09-12T12:11:11+08:00</updated>
+      <id>http://localhost:4000/archi-vuejs-test-model</id>
+      <content type="html" xml:base="http://localhost:4000/archi-vuejs-test-model">&lt;h2 id=&quot;architecture-design&quot;&gt;Architecture Design&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h3&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="nodejs" />
+      
+
+      
+        <summary type="html">Architecture Design</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">如何快速的交付前端工程?</title>
+      <link href="http://localhost:4000/archi-vuejs-deploy" rel="alternate" type="text/html" title="如何快速的交付前端工程?" />
+      <published>2018-09-11T17:14:11+08:00</published>
+      <updated>2018-09-11T17:14:11+08:00</updated>
+      <id>http://localhost:4000/archi-vuejs-deploy</id>
+      <content type="html" xml:base="http://localhost:4000/archi-vuejs-deploy">&lt;p&gt;前端工程的持续交付模型。&lt;/p&gt;
+
+&lt;h3 id=&quot;designments&quot;&gt;Designments&lt;/h3&gt;
+
+&lt;h4 id=&quot;基于vuejs的前端工程&quot;&gt;基于vuejs的前端工程&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/vuejs-architecture.png&quot; alt=&quot;vuejs architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;测试方法端到端测试单元测试集成测试&quot;&gt;测试方法(端到端测试、单元测试、集成测试)&lt;/h4&gt;
+
+&lt;h4 id=&quot;云上交付&quot;&gt;云上交付&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h4&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="nodejs" />
+      
+
+      
+        <summary type="html">前端工程的持续交付模型。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
       <title type="html">Guideline-编写有效率的javascript代码</title>
       <link href="http://localhost:4000/archi-efficient-js" rel="alternate" type="text/html" title="Guideline-编写有效率的javascript代码" />
-      <published>2015-02-10T11:17:10+08:00</published>
-      <updated>2015-02-10T11:17:10+08:00</updated>
+      <published>2018-08-09T12:11:19+08:00</published>
+      <updated>2018-08-09T12:11:19+08:00</updated>
       <id>http://localhost:4000/archi-efficient-js</id>
       <content type="html" xml:base="http://localhost:4000/archi-efficient-js">&lt;p&gt;Trust yourself, not the VM。&lt;/p&gt;
 
@@ -210,7 +338,7 @@ add(&quot;a&quot;,&quot;b&quot;) // 多态 polymorphic
       
 
       <author>
-          <name></name>
+          <name>mikezhang</name>
         
         
       </author>

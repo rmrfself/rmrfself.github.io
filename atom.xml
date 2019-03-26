@@ -23,51 +23,6 @@
     
       
       <item>
-        <title>实现AI的基本策略</title>
-        
-          <description>&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Mon, 31 Dec 2018 16:11:01 +0800</pubDate>
-        <link>
-        http://localhost:4000/data-scientist-startup-2</link>
-        <guid isPermaLink="true">http://localhost:4000/data-scientist-startup-2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>关于创业的反思总结</title>
-        
-          <description>&lt;p&gt;能与不能&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Mon, 31 Dec 2018 16:11:01 +0800</pubDate>
-        <link>
-        http://localhost:4000/management-get</link>
-        <guid isPermaLink="true">http://localhost:4000/management-get</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>关于创业的反思总结</title>
-        
-          <description>&lt;p&gt;能与不能&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Mon, 31 Dec 2018 16:11:01 +0800</pubDate>
-        <link>
-        http://localhost:4000/management-get-2</link>
-        <guid isPermaLink="true">http://localhost:4000/management-get-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>[GCE]安装Kubernetes Dashboard</title>
         
           <description>&lt;p&gt;Kubeternetes Dashboatd 安装手记&lt;/p&gt;
@@ -85,7 +40,7 @@
       <item>
         <title>[GCE]单节点部署kubernetes集群</title>
         
-          <description>&lt;p&gt;使用kubeadm部署单master节点的k8s&lt;/p&gt;
+          <description>&lt;p&gt;使用kubeadm部署单master节点的k8s, 1个master + 2个minion&lt;/p&gt;
 
 </description>
         
@@ -98,16 +53,16 @@
     
       
       <item>
-        <title>[GCE]单节点部署kubernetes集群</title>
+        <title>搭建devops团队</title>
         
-          <description>&lt;p&gt;使用kubeadm部署单master节点的k8s&lt;/p&gt;
+          <description>&lt;p&gt;基于价值的软件交付流程&lt;/p&gt;
 
 </description>
         
-        <pubDate>Wed, 10 Oct 2018 19:20:11 +0800</pubDate>
+        <pubDate>Thu, 20 Sep 2018 00:11:15 +0800</pubDate>
         <link>
-        http://localhost:4000/k8s-from-scrach-2</link>
-        <guid isPermaLink="true">http://localhost:4000/k8s-from-scrach-2</guid>
+        http://localhost:4000/devops-baseon-cloud</link>
+        <guid isPermaLink="true">http://localhost:4000/devops-baseon-cloud</guid>
       </item>
       
     
@@ -119,7 +74,7 @@
 
 </description>
         
-        <pubDate>Tue, 11 Sep 2018 17:14:11 +0800</pubDate>
+        <pubDate>Wed, 12 Sep 2018 12:11:11 +0800</pubDate>
         <link>
         http://localhost:4000/archi-vuejs-test-model</link>
         <guid isPermaLink="true">http://localhost:4000/archi-vuejs-test-model</guid>
@@ -128,9 +83,9 @@
     
       
       <item>
-        <title>快速交付前端工程</title>
+        <title>如何快速的交付前端工程?</title>
         
-          <description>&lt;h2 id=&quot;designments&quot;&gt;Designments&lt;/h2&gt;
+          <description>&lt;p&gt;前端工程的持续交付模型。&lt;/p&gt;
 
 </description>
         
@@ -158,7 +113,22 @@
     
       
       <item>
-        <title>devops那些事-虚拟化讲座讲义</title>
+        <title>Guideline-编写有效率的javascript代码</title>
+        
+          <description>&lt;p&gt;Trust yourself, not the VM。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 09 Aug 2018 12:11:19 +0800</pubDate>
+        <link>
+        http://localhost:4000/archi-efficient-js</link>
+        <guid isPermaLink="true">http://localhost:4000/archi-efficient-js</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Devops那些事-虚拟化讲座讲义</title>
         
           <description>&lt;p&gt;docker基础讲座讲义&lt;/p&gt;
 
@@ -204,21 +174,6 @@
     
       
       <item>
-        <title>Postgres的流复制最佳实践</title>
-        
-          <description>&lt;p&gt;一主两从，介绍PG 9.5的主从最佳实践。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Fri, 11 Aug 2017 19:30:10 +0800</pubDate>
-        <link>
-        http://localhost:4000/archi-postgresql-2</link>
-        <guid isPermaLink="true">http://localhost:4000/archi-postgresql-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>azure云基础架构(infrastructure)</title>
         
           <description>&lt;p&gt;公有云架构设计以及设计技巧&lt;/p&gt;
@@ -234,16 +189,16 @@
     
       
       <item>
-        <title>azure云基础架构(infrastructure)</title>
+        <title>aws中配置elastic beantalk的ssl证书</title>
         
-          <description>&lt;p&gt;公有云架构设计以及设计技巧&lt;/p&gt;
+          <description>&lt;p&gt;配置elastic beantalk的ssl证书&lt;/p&gt;
 
 </description>
         
-        <pubDate>Mon, 31 Jul 2017 20:12:19 +0800</pubDate>
+        <pubDate>Tue, 20 Jun 2017 10:16:10 +0800</pubDate>
         <link>
-        http://localhost:4000/archi-azure-architecture-design-2</link>
-        <guid isPermaLink="true">http://localhost:4000/archi-azure-architecture-design-2</guid>
+        http://localhost:4000/devops-aws-ssl-csr</link>
+        <guid isPermaLink="true">http://localhost:4000/devops-aws-ssl-csr</guid>
       </item>
       
     
@@ -251,27 +206,14 @@
       <item>
         <title>在tls数据传输中如何验证证书有效性</title>
         
-          <description>&lt;h2 id=&quot;tls安全协议&quot;&gt;TLS安全协议&lt;/h2&gt;
+          <description>&lt;h4 id=&quot;tls安全协议&quot;&gt;TLS安全协议&lt;/h4&gt;
+&lt;p&gt;TODO&lt;/p&gt;
 </description>
         
         <pubDate>Mon, 29 May 2017 17:17:19 +0800</pubDate>
         <link>
         http://localhost:4000/security-tls</link>
         <guid isPermaLink="true">http://localhost:4000/security-tls</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>在tls数据传输中如何验证证书有效性</title>
-        
-          <description>&lt;h2 id=&quot;tls安全协议&quot;&gt;TLS安全协议&lt;/h2&gt;
-</description>
-        
-        <pubDate>Mon, 29 May 2017 17:17:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/security-tls-2</link>
-        <guid isPermaLink="true">http://localhost:4000/security-tls-2</guid>
       </item>
       
     
@@ -292,21 +234,6 @@
     
       
       <item>
-        <title>ISTQB证书(QA)</title>
-        
-          <description>&lt;p&gt;对质量的理解是优秀开发的基础。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sat, 18 Feb 2017 20:21:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-test-cer-2</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-test-cer-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>设计模式之组织行为(二)</title>
         
           <description>&lt;p&gt;高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。&lt;/p&gt;
@@ -317,21 +244,6 @@
         <link>
         http://localhost:4000/archi-design-pattern-bahavior2</link>
         <guid isPermaLink="true">http://localhost:4000/archi-design-pattern-bahavior2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>设计模式之组织行为(二)</title>
-        
-          <description>&lt;p&gt;高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Tue, 07 Feb 2017 10:02:11 +0800</pubDate>
-        <link>
-        http://localhost:4000/archi-design-pattern-bahavior2-2</link>
-        <guid isPermaLink="true">http://localhost:4000/archi-design-pattern-bahavior2-2</guid>
       </item>
       
     
@@ -367,21 +279,6 @@
     
       
       <item>
-        <title>设计模式之对象创建</title>
-        
-          <description>&lt;p&gt;类型的本质是一种约束。接口可以理解为一种行为类型。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Tue, 31 Jan 2017 19:09:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/archi-design-pattern-createral-2</link>
-        <guid isPermaLink="true">http://localhost:4000/archi-design-pattern-createral-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>设计模式之组件构造</title>
         
           <description>&lt;p&gt;架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。&lt;/p&gt;
@@ -392,36 +289,6 @@
         <link>
         http://localhost:4000/archi-design-pattern-instructure</link>
         <guid isPermaLink="true">http://localhost:4000/archi-design-pattern-instructure</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>设计模式之组件构造</title>
-        
-          <description>&lt;p&gt;架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Fri, 27 Jan 2017 10:12:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/archi-design-pattern-instructure-2</link>
-        <guid isPermaLink="true">http://localhost:4000/archi-design-pattern-instructure-2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>构建devops团队</title>
-        
-          <description>&lt;p&gt;基于价值的软件交付流程&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Tue, 20 Sep 2016 00:11:15 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-baseon-cloud</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-baseon-cloud</guid>
       </item>
       
     
@@ -442,22 +309,7 @@
     
       
       <item>
-        <title>自动化测试工具-cucumber</title>
-        
-          <description>&lt;p&gt;Cucumber在自动化测试中的用法&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sun, 18 Sep 2016 23:10:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-automation-2</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-automation-2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>install mysql on mac</title>
+        <title>mac OSX上安装Mysql</title>
         
           <description>&lt;p&gt;使用brew安装mysql(已更新至sierra)&lt;/p&gt;
 
@@ -487,76 +339,16 @@
     
       
       <item>
-        <title>JWT的工作原理</title>
+        <title>(aws)使用elastic beantalk遇到的问题</title>
         
-          <description>&lt;p&gt;Json Web Token&lt;/p&gt;
+          <description>&lt;p&gt;Elastic beantalk提供了可自由扩展部署、监控、api柯里化等一系列非常友好的工具。&lt;/p&gt;
 
 </description>
         
-        <pubDate>Thu, 21 Jul 2016 10:06:10 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-jwt-howto-2</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-jwt-howto-2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>aws中配置elastic beantalk的ssl证书</title>
-        
-          <description>&lt;p&gt;配置elastic beantalk的ssl证书&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Tue, 28 Jun 2016 10:16:10 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-aws-ssl-csr</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-aws-ssl-csr</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>aws中配置elastic beantalk的ssl证书</title>
-        
-          <description>&lt;p&gt;配置elastic beantalk的ssl证书&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Tue, 28 Jun 2016 10:16:10 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-aws-ssl-csr-2</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-aws-ssl-csr-2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>在Elastic beantalk部署单节点应用</title>
-        
-          <description>&lt;p&gt;Elastic beantalk&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Mon, 20 Jun 2016 20:16:10 +0800</pubDate>
+        <pubDate>Mon, 20 Jun 2016 23:10:19 +0800</pubDate>
         <link>
         http://localhost:4000/devops-aws-eb</link>
         <guid isPermaLink="true">http://localhost:4000/devops-aws-eb</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>在Elastic beantalk部署单节点应用</title>
-        
-          <description>&lt;p&gt;Elastic beantalk&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Mon, 20 Jun 2016 20:16:10 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-aws-eb-2</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-aws-eb-2</guid>
       </item>
       
     
@@ -577,22 +369,7 @@
     
       
       <item>
-        <title>ubuntu上的常用指令汇总</title>
-        
-          <description>&lt;p&gt;常用指令汇总&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sat, 18 Jun 2016 23:10:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-operation-commands-2</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-operation-commands-2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>张量模型中的基本定理</title>
+        <title>张量模型中的常用定理</title>
         
           <description>&lt;p&gt;#TODO&lt;/p&gt;
 </description>
@@ -606,27 +383,13 @@
     
       
       <item>
-        <title>张量模型中的基本定理</title>
-        
-          <description>&lt;p&gt;#TODO&lt;/p&gt;
-</description>
-        
-        <pubDate>Sat, 28 May 2016 16:16:01 +0800</pubDate>
-        <link>
-        http://localhost:4000/manifold-howto-2</link>
-        <guid isPermaLink="true">http://localhost:4000/manifold-howto-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>kubernetes中的基本概念(十) NodePort、Lb(Service)、Ingress的使用场景</title>
         
           <description>&lt;p&gt;理解kubernetes的关键是理解流量的走向。&lt;/p&gt;
 
 </description>
         
-        <pubDate>Tue, 10 May 2016 20:11:11 +0800</pubDate>
+        <pubDate>Sun, 15 May 2016 23:59:11 +0800</pubDate>
         <link>
         http://localhost:4000/devops-kubernetes-basic</link>
         <guid isPermaLink="true">http://localhost:4000/devops-kubernetes-basic</guid>
@@ -696,6 +459,21 @@
     
       
       <item>
+        <title>Spring中的100个问题-注解是如何工作的(二)</title>
+        
+          <description>&lt;p&gt;注解定义了很多影响编译器行为的方式,也使得bean的行为看起来不那么透明。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 12 Apr 2016 20:30:01 +0800</pubDate>
+        <link>
+        http://localhost:4000/springboot-annotations</link>
+        <guid isPermaLink="true">http://localhost:4000/springboot-annotations</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>kubernetes中的基本概念(六) service &amp;&amp; ingress</title>
         
           <description>&lt;p&gt;上层网络服务抽象过程。&lt;/p&gt;
@@ -711,7 +489,7 @@
     
       
       <item>
-        <title>kubernetes中的基本概念(五) pods的生命周期</title>
+        <title>Kubernetes中的基本概念(五) pods的生命周期</title>
         
           <description>&lt;p&gt;抽象能力是区分人和低等生物的重要特征。&lt;/p&gt;
 
@@ -726,61 +504,61 @@
     
       
       <item>
-        <title>kubernetes中的基本概念(五) pods的生命周期</title>
+        <title>kubernetes中的基本概念(四) linux命名空间</title>
         
-          <description>&lt;p&gt;抽象能力是区分人和低等生物的重要特征。&lt;/p&gt;
+          <description>&lt;p&gt;Linux内如何进行资源隔离?&lt;/p&gt;
 
 </description>
         
-        <pubDate>Sun, 10 Apr 2016 21:43:11 +0800</pubDate>
+        <pubDate>Fri, 08 Apr 2016 22:10:19 +0800</pubDate>
         <link>
-        http://localhost:4000/devops-kubernetes-basic-2</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-kubernetes-basic-2</guid>
+        http://localhost:4000/devops-kubernetes-basic</link>
+        <guid isPermaLink="true">http://localhost:4000/devops-kubernetes-basic</guid>
       </item>
       
     
       
       <item>
-        <title>spring中的100个问题-注解是如何工作的(二)?</title>
-        
-          <description>&lt;p&gt;注解定义了很多影响编译器行为的方式,也使得bean的行为看起来不那么透明。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sun, 10 Apr 2016 15:11:11 +0800</pubDate>
-        <link>
-        http://localhost:4000/springboot-annotations</link>
-        <guid isPermaLink="true">http://localhost:4000/springboot-annotations</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>spring中的100个问题-注解是如何工作的(二)?</title>
-        
-          <description>&lt;p&gt;注解定义了很多影响编译器行为的方式,也使得bean的行为看起来不那么透明。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sun, 10 Apr 2016 15:11:11 +0800</pubDate>
-        <link>
-        http://localhost:4000/springboot-annotations-2</link>
-        <guid isPermaLink="true">http://localhost:4000/springboot-annotations-2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>spring中的100个问题-注解是如何工作的(一)?</title>
+        <title>spring中的100个问题-注解是如何工作的(一)</title>
         
           <description>&lt;p&gt;注解类似class结构体中的&lt;code class=&quot;highlighter-rouge&quot;&gt;tag&lt;/code&gt;，它解决了class垂直继承机制和interface水平切分机制都无法解决的问题，那就是异构聚合问题。&lt;/p&gt;
 
 </description>
         
-        <pubDate>Fri, 08 Apr 2016 19:08:11 +0800</pubDate>
+        <pubDate>Fri, 08 Apr 2016 12:15:19 +0800</pubDate>
         <link>
         http://localhost:4000/springboot-annotations</link>
         <guid isPermaLink="true">http://localhost:4000/springboot-annotations</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Kubernetes中的基本概念(三) 容器编排模式</title>
+        
+          <description>&lt;p&gt;k8s带来的最大优势不是编排，而是&lt;code class=&quot;highlighter-rouge&quot;&gt;标准化的编排方式&lt;/code&gt;。一种设计，可以在GKE,AWS,私有云中运行。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 29 Mar 2016 09:50:19 +0800</pubDate>
+        <link>
+        http://localhost:4000/devops-kubernetes-basic</link>
+        <guid isPermaLink="true">http://localhost:4000/devops-kubernetes-basic</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Kubernetes中的基本概念(二)</title>
+        
+          <description>&lt;p&gt;对象是抽象的实例化。kubenetes是对”service“的多层抽象。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 28 Mar 2016 15:20:19 +0800</pubDate>
+        <link>
+        http://localhost:4000/devops-kubernetes-basic</link>
+        <guid isPermaLink="true">http://localhost:4000/devops-kubernetes-basic</guid>
       </item>
       
     
@@ -801,28 +579,13 @@
     
       
       <item>
-        <title>dns解析中常用记录的含义</title>
-        
-          <description>&lt;p&gt;DNS是信息系统中的”关节“&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sat, 26 Mar 2016 21:20:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-dns-basic</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-dns-basic</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>Miller-rabin算法</title>
         
           <description>&lt;p&gt;素数判定法则&lt;/p&gt;
 
 </description>
         
-        <pubDate>Sat, 26 Mar 2016 17:17:19 +0800</pubDate>
+        <pubDate>Sat, 26 Mar 2016 20:11:19 +0800</pubDate>
         <link>
         http://localhost:4000/archi-miller-rabin</link>
         <guid isPermaLink="true">http://localhost:4000/archi-miller-rabin</guid>
@@ -831,16 +594,16 @@
     
       
       <item>
-        <title>Miller-rabin算法</title>
+        <title>dns解析中常用记录的含义</title>
         
-          <description>&lt;p&gt;素数判定法则&lt;/p&gt;
+          <description>&lt;p&gt;DNS是信息系统中的”关节“&lt;/p&gt;
 
 </description>
         
-        <pubDate>Sat, 26 Mar 2016 17:17:19 +0800</pubDate>
+        <pubDate>Fri, 25 Mar 2016 21:20:19 +0800</pubDate>
         <link>
-        http://localhost:4000/archi-miller-rabin-2</link>
-        <guid isPermaLink="true">http://localhost:4000/archi-miller-rabin-2</guid>
+        http://localhost:4000/devops-dns-basic</link>
+        <guid isPermaLink="true">http://localhost:4000/devops-dns-basic</guid>
       </item>
       
     
@@ -852,7 +615,7 @@
 
 </description>
         
-        <pubDate>Sat, 26 Mar 2016 17:17:19 +0800</pubDate>
+        <pubDate>Thu, 24 Mar 2016 13:11:19 +0800</pubDate>
         <link>
         http://localhost:4000/archi-algorithm</link>
         <guid isPermaLink="true">http://localhost:4000/archi-algorithm</guid>
@@ -861,76 +624,16 @@
     
       
       <item>
-        <title>kubernetes中的基本概念(四) linux命名空间</title>
-        
-          <description>&lt;p&gt;linux内如何进行资源隔离?&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sun, 20 Mar 2016 09:50:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-kubernetes-basic</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-kubernetes-basic</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>kubernetes中的基本概念(三) 容器编排模式</title>
-        
-          <description>&lt;p&gt;k8s带来的最大优势不是编排，而是&lt;code class=&quot;highlighter-rouge&quot;&gt;标准化的编排方式&lt;/code&gt;。一种设计，可以在GKE,AWS,私有云中运行。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sun, 20 Mar 2016 09:50:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-kubernetes-basic</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-kubernetes-basic</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>kubernetes中的基本概念(二) </title>
-        
-          <description>&lt;p&gt;对象是抽象的实例化。kubenetes是对”service“的多层抽象。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sun, 20 Mar 2016 09:50:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-kubernetes-basic</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-kubernetes-basic</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>kubernetes中的基本概念(一)</title>
+        <title>Kubernetes中的基本概念(一)</title>
         
           <description>&lt;p&gt;容器的概念，简单理解就是把操作系统打包到“库”里。&lt;/p&gt;
 
 </description>
         
-        <pubDate>Sun, 20 Mar 2016 09:50:19 +0800</pubDate>
+        <pubDate>Sun, 20 Mar 2016 22:25:10 +0800</pubDate>
         <link>
         http://localhost:4000/devops-kubernetes-basic</link>
         <guid isPermaLink="true">http://localhost:4000/devops-kubernetes-basic</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>JVM内部机制(七) Java内存模型(Java Momory Model)</title>
-        
-          <description>&lt;script type=&quot;math/tex; mode=display&quot;&gt;e^{i\pi} + 1 = 0\\&lt;/script&gt;
-
-</description>
-        
-        <pubDate>Sat, 12 Mar 2016 01:30:15 +0800</pubDate>
-        <link>
-        http://localhost:4000/jvm-jmm</link>
-        <guid isPermaLink="true">http://localhost:4000/jvm-jmm</guid>
       </item>
       
     
@@ -942,10 +645,25 @@
 
 </description>
         
-        <pubDate>Thu, 10 Mar 2016 07:50:11 +0800</pubDate>
+        <pubDate>Sat, 12 Mar 2016 23:15:11 +0800</pubDate>
         <link>
         http://localhost:4000/springboot-how-bean-managed</link>
         <guid isPermaLink="true">http://localhost:4000/springboot-how-bean-managed</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>JVM内部机制(七) Java内存模型(Java Momory Model)</title>
+        
+          <description>&lt;p&gt;Jvm内存模型解析&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 12 Mar 2016 11:30:15 +0800</pubDate>
+        <link>
+        http://localhost:4000/jvm-jmm</link>
+        <guid isPermaLink="true">http://localhost:4000/jvm-jmm</guid>
       </item>
       
     
@@ -957,7 +675,7 @@
 
 </description>
         
-        <pubDate>Thu, 10 Mar 2016 07:50:11 +0800</pubDate>
+        <pubDate>Thu, 10 Mar 2016 22:50:11 +0800</pubDate>
         <link>
         http://localhost:4000/springboot-how-bean-type-created</link>
         <guid isPermaLink="true">http://localhost:4000/springboot-how-bean-type-created</guid>
@@ -996,21 +714,6 @@
     
       
       <item>
-        <title>JVM内部机制(六) HotSpot代码导读</title>
-        
-          <description>&lt;p&gt;Hotspot源码阅读顺序&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Tue, 08 Mar 2016 10:30:02 +0800</pubDate>
-        <link>
-        http://localhost:4000/jvm-source-guide-2</link>
-        <guid isPermaLink="true">http://localhost:4000/jvm-source-guide-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>JVM内部机制(五)多线程编程模型中的常见问题</title>
         
           <description>&lt;p&gt;已转移到java.util.concurrent使用方法解析。&lt;/p&gt;
@@ -1021,21 +724,6 @@
         <link>
         http://localhost:4000/jvm-multiple-threads</link>
         <guid isPermaLink="true">http://localhost:4000/jvm-multiple-threads</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>JVM内部机制(五)多线程编程模型中的常见问题</title>
-        
-          <description>&lt;p&gt;已转移到java.util.concurrent使用方法解析。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sat, 05 Mar 2016 12:08:12 +0800</pubDate>
-        <link>
-        http://localhost:4000/jvm-multiple-threads-2</link>
-        <guid isPermaLink="true">http://localhost:4000/jvm-multiple-threads-2</guid>
       </item>
       
     
@@ -1062,7 +750,7 @@
 
 </description>
         
-        <pubDate>Wed, 10 Feb 2016 20:29:11 +0800</pubDate>
+        <pubDate>Thu, 11 Feb 2016 22:10:11 +0800</pubDate>
         <link>
         http://localhost:4000/archi-architect-org</link>
         <guid isPermaLink="true">http://localhost:4000/archi-architect-org</guid>
@@ -1071,7 +759,7 @@
     
       
       <item>
-        <title>论什么是架构?</title>
+        <title>论什么是软件架构?</title>
         
           <description>&lt;p&gt;架构的核心内容是什么?&lt;/p&gt;
 
@@ -1161,21 +849,6 @@
     
       
       <item>
-        <title>自动化测试工具篇-cucumber</title>
-        
-          <description>&lt;p&gt;Cucumber在自动化测试中的用法&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sun, 20 Sep 2015 14:10:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-automation-2</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-automation-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>Java中的工具类-集合类异常fail safe 与 fail fast</title>
         
           <description>&lt;h3 id=&quot;问题&quot;&gt;问题&lt;/h3&gt;
@@ -1206,21 +879,6 @@
     
       
       <item>
-        <title>Java中的工具类-Map接口</title>
-        
-          <description>&lt;p&gt;Java语言中最重要的存贮形式: 基于hash值的散列桶的实现。它是二维形式下的仓库实现。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sat, 12 Sep 2015 21:40:35 +0800</pubDate>
-        <link>
-        http://localhost:4000/jvm-collections-2</link>
-        <guid isPermaLink="true">http://localhost:4000/jvm-collections-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>Java中的工具类-集合</title>
         
           <description>&lt;p&gt;Java的集合框架主要有&lt;a href=&quot;https://en.wikipedia.org/wiki/Joshua_Bloch&quot;&gt;Joshua Bloch&lt;/a&gt;实现。&lt;/p&gt;
@@ -1231,21 +889,6 @@
         <link>
         http://localhost:4000/jvm-collections</link>
         <guid isPermaLink="true">http://localhost:4000/jvm-collections</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Java中的工具类-集合</title>
-        
-          <description>&lt;p&gt;Java的集合框架主要有&lt;a href=&quot;https://en.wikipedia.org/wiki/Joshua_Bloch&quot;&gt;Joshua Bloch&lt;/a&gt;实现。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Thu, 10 Sep 2015 20:10:35 +0800</pubDate>
-        <link>
-        http://localhost:4000/jvm-collections-2</link>
-        <guid isPermaLink="true">http://localhost:4000/jvm-collections-2</guid>
       </item>
       
     
@@ -1281,24 +924,9 @@
     
       
       <item>
-        <title>Java中的hashCode()与equals()</title>
-        
-          <description>&lt;p&gt;hashcode相等, 不代表object相等。 但是如果object相等，它们的hashcode必相等。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Tue, 01 Sep 2015 21:11:31 +0800</pubDate>
-        <link>
-        http://localhost:4000/jvm-collections-2</link>
-        <guid isPermaLink="true">http://localhost:4000/jvm-collections-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>The Java® Virtual Machine Specification 笔记(一)</title>
         
-          <description>&lt;h2 id=&quot;data-types&quot;&gt;Data types&lt;/h2&gt;
+          <description>&lt;h3 id=&quot;data-types&quot;&gt;Data types&lt;/h3&gt;
 
 </description>
         
@@ -1306,21 +934,6 @@
         <link>
         http://localhost:4000/jvm-spcification-note</link>
         <guid isPermaLink="true">http://localhost:4000/jvm-spcification-note</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>The Java® Virtual Machine Specification 笔记(一)</title>
-        
-          <description>&lt;h2 id=&quot;data-types&quot;&gt;Data types&lt;/h2&gt;
-
-</description>
-        
-        <pubDate>Thu, 11 Jun 2015 10:15:11 +0800</pubDate>
-        <link>
-        http://localhost:4000/jvm-spcification-note-2</link>
-        <guid isPermaLink="true">http://localhost:4000/jvm-spcification-note-2</guid>
       </item>
       
     
@@ -1356,21 +969,6 @@
     
       
       <item>
-        <title>Java多线程实践总结</title>
-        
-          <description>&lt;p&gt;Multiple thread concept application.&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Mon, 01 Jun 2015 22:10:31 +0800</pubDate>
-        <link>
-        http://localhost:4000/jvm-multiple-threads-2</link>
-        <guid isPermaLink="true">http://localhost:4000/jvm-multiple-threads-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>自动化测试框架设计(一)</title>
         
           <description>&lt;p&gt;基于selenium的web page自动化框架&lt;/p&gt;
@@ -1392,7 +990,7 @@
 
 </description>
         
-        <pubDate>Wed, 01 Apr 2015 22:10:11 +0800</pubDate>
+        <pubDate>Wed, 01 Apr 2015 22:00:10 +0800</pubDate>
         <link>
         http://localhost:4000/jvm-function-lambda</link>
         <guid isPermaLink="true">http://localhost:4000/jvm-function-lambda</guid>
@@ -1401,46 +999,16 @@
     
       
       <item>
-        <title>Java中的函数式接口-Functional interface</title>
+        <title>Apache2.4中的反向代理配置</title>
         
-          <description>&lt;p&gt;lambda的使用方法介绍。&lt;/p&gt;
+          <description>&lt;p&gt;Apache按照路由规则同时解析php和反向代理到底层sockets&lt;/p&gt;
 
 </description>
         
-        <pubDate>Wed, 01 Apr 2015 22:10:11 +0800</pubDate>
-        <link>
-        http://localhost:4000/jvm-function-lambda-2</link>
-        <guid isPermaLink="true">http://localhost:4000/jvm-function-lambda-2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>apache中的反向代理配置</title>
-        
-          <description>&lt;p&gt;apache按照路由规则同时解析php和反向代理到底层sockets&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Wed, 18 Mar 2015 20:20:19 +0800</pubDate>
+        <pubDate>Wed, 18 Mar 2015 22:15:10 +0800</pubDate>
         <link>
         http://localhost:4000/devops-apache-proxy</link>
         <guid isPermaLink="true">http://localhost:4000/devops-apache-proxy</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Guideline-编写有效率的javascript代码</title>
-        
-          <description>&lt;p&gt;Trust yourself, not the VM。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Tue, 10 Feb 2015 11:17:10 +0800</pubDate>
-        <link>
-        http://localhost:4000/archi-efficient-js</link>
-        <guid isPermaLink="true">http://localhost:4000/archi-efficient-js</guid>
       </item>
       
     
@@ -1482,7 +1050,7 @@
 
 </description>
         
-        <pubDate>Thu, 18 Dec 2014 09:10:11 +0800</pubDate>
+        <pubDate>Thu, 11 Dec 2014 23:15:11 +0800</pubDate>
         <link>
         http://localhost:4000/jvm-io</link>
         <guid isPermaLink="true">http://localhost:4000/jvm-io</guid>
@@ -1506,21 +1074,6 @@
     
       
       <item>
-        <title>C++中的常用语法</title>
-        
-          <description>&lt;p&gt;Language is just like a puppet.&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Wed, 10 Sep 2014 14:10:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/cpp-syntax-2</link>
-        <guid isPermaLink="true">http://localhost:4000/cpp-syntax-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>Junit运行测试的几种方式</title>
         
           <description>&lt;p&gt;Junit&lt;/p&gt;
@@ -1536,21 +1089,6 @@
     
       
       <item>
-        <title>Junit运行测试的几种方式</title>
-        
-          <description>&lt;p&gt;Junit&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sat, 10 May 2014 10:21:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/devops-junit-jenkins-2</link>
-        <guid isPermaLink="true">http://localhost:4000/devops-junit-jenkins-2</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>概率统计基础理论学习笔记(三)</title>
         
           <description>&lt;p&gt;概率问题的分类&lt;/p&gt;
@@ -1561,51 +1099,6 @@
         <link>
         http://localhost:4000/statistical-and-probability-theory</link>
         <guid isPermaLink="true">http://localhost:4000/statistical-and-probability-theory</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>概率统计基础理论学习笔记(三)</title>
-        
-          <description>&lt;p&gt;概率问题的分类&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Wed, 06 Feb 2013 09:10:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/statistical-and-probability-theory-2</link>
-        <guid isPermaLink="true">http://localhost:4000/statistical-and-probability-theory-2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>概率统计基础理论学习笔记(二)</title>
-        
-          <description>&lt;p&gt;很多天才，Lapelace，惠更斯终其一生也不过贡献了一条公式而已。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sun, 20 Jan 2013 15:20:11 +0800</pubDate>
-        <link>
-        http://localhost:4000/statistical-and-probability-theory</link>
-        <guid isPermaLink="true">http://localhost:4000/statistical-and-probability-theory</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>概率统计基础理论学习笔记(二)</title>
-        
-          <description>&lt;p&gt;很多天才，Lapelace，惠更斯终其一生也不过贡献了一条公式而已。&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Sun, 20 Jan 2013 15:20:11 +0800</pubDate>
-        <link>
-        http://localhost:4000/statistical-and-probability-theory-2</link>
-        <guid isPermaLink="true">http://localhost:4000/statistical-and-probability-theory-2</guid>
       </item>
       
     
@@ -1613,10 +1106,11 @@
       <item>
         <title>(MIT)初等线性代数理论笔记(一)</title>
         
-          <description>&lt;p&gt;###&lt;/p&gt;
+          <description>&lt;p&gt;TODO&lt;/p&gt;
+
 </description>
         
-        <pubDate>Tue, 15 Jan 2013 22:01:19 +0800</pubDate>
+        <pubDate>Fri, 01 Feb 2013 09:20:19 +0800</pubDate>
         <link>
         http://localhost:4000/linaer-algebra-theory</link>
         <guid isPermaLink="true">http://localhost:4000/linaer-algebra-theory</guid>
@@ -1625,27 +1119,13 @@
     
       
       <item>
-        <title>(MIT)初等线性代数理论笔记(一)</title>
+        <title>概率统计基础理论学习笔记(二)</title>
         
-          <description>&lt;p&gt;###&lt;/p&gt;
-</description>
-        
-        <pubDate>Tue, 15 Jan 2013 22:01:19 +0800</pubDate>
-        <link>
-        http://localhost:4000/linaer-algebra-theory-2</link>
-        <guid isPermaLink="true">http://localhost:4000/linaer-algebra-theory-2</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>概率统计基础理论学习笔记(一)</title>
-        
-          <description>&lt;p&gt;概率是有利情况下的个数与所有可能个数之比。&lt;/p&gt;
+          <description>&lt;p&gt;很多天才，Lapelace，惠更斯终其一生也不过贡献了一条公式而已。&lt;/p&gt;
 
 </description>
         
-        <pubDate>Tue, 15 Jan 2013 22:01:19 +0800</pubDate>
+        <pubDate>Sun, 20 Jan 2013 15:20:11 +0800</pubDate>
         <link>
         http://localhost:4000/statistical-and-probability-theory</link>
         <guid isPermaLink="true">http://localhost:4000/statistical-and-probability-theory</guid>
@@ -1662,8 +1142,8 @@
         
         <pubDate>Tue, 15 Jan 2013 22:01:19 +0800</pubDate>
         <link>
-        http://localhost:4000/statistical-and-probability-theory-2</link>
-        <guid isPermaLink="true">http://localhost:4000/statistical-and-probability-theory-2</guid>
+        http://localhost:4000/statistical-and-probability-theory</link>
+        <guid isPermaLink="true">http://localhost:4000/statistical-and-probability-theory</guid>
       </item>
       
     
@@ -1679,21 +1159,6 @@
         <link>
         http://localhost:4000/natural-science-fundamenttals</link>
         <guid isPermaLink="true">http://localhost:4000/natural-science-fundamenttals</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>傅里叶级数与傅里叶积分</title>
-        
-          <description>&lt;p&gt;傅里叶级数学习过程笔记&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Fri, 11 Jan 2013 23:02:11 +0800</pubDate>
-        <link>
-        http://localhost:4000/natural-science-fundamenttals-2</link>
-        <guid isPermaLink="true">http://localhost:4000/natural-science-fundamenttals-2</guid>
       </item>
       
     

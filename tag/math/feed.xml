@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="http://localhost:4000/tag/math/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2019-03-26T20:43:04+08:00</updated>
+  <id>http://localhost:4000/tag/math/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">张庆华的个人日志 | </title>
+  
+
+  
+    <subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">实现AI的基本策略</title>
+      <link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" />
+      <published>2018-12-31T16:11:01+08:00</published>
+      <updated>2018-12-31T16:11:01+08:00</updated>
+      <id>http://localhost:4000/data-scientist-startup</id>
+      <content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
+
+&lt;h3 id=&quot;实现ai的基本策略&quot;&gt;实现AI的基本策略&lt;/h3&gt;
+
+&lt;h4 id=&quot;构建ai基础设施&quot;&gt;构建AI基础设施&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;矢量化的基础计算设施
+    &lt;ul&gt;
+      &lt;li&gt;可扩展的计算资源&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;构建基于ai的劳动力&quot;&gt;构建基于AI的&lt;code class=&quot;highlighter-rouge&quot;&gt;劳动力&lt;/code&gt;&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;机器人&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;机器设置&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;构建基于ai的可信任工具&quot;&gt;构建基于AI的可信任工具&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;智能识别，防篡改&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;基于ai的数据建模&quot;&gt;基于AI的数据建模&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;基于大数据的数据建模&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;使用ai驱动业务策略&quot;&gt;使用AI驱动业务策略&lt;/h4&gt;
+
+&lt;h4 id=&quot;构建基于ai的交互工具echosystem&quot;&gt;构建基于AI的交互工具(echosystem)&lt;/h4&gt;
+
+&lt;h4 id=&quot;机器学习的任务和目标&quot;&gt;机器学习的任务和目标&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;识别数据中的模式&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;预测未知数据&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;机器学习&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="math" />
+      
+
+      
+        <summary type="html">机器学习成功的地方在于它可以做到跨领域应用。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">张量模型中的常用定理</title>
+      <link href="http://localhost:4000/manifold-howto" rel="alternate" type="text/html" title="张量模型中的常用定理" />
+      <published>2016-05-28T16:16:01+08:00</published>
+      <updated>2016-05-28T16:16:01+08:00</updated>
+      <id>http://localhost:4000/manifold-howto</id>
+      <content type="html" xml:base="http://localhost:4000/manifold-howto">&lt;p&gt;#TODO&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="math" />
+      
+
+      
+        <summary type="html">#TODO</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">概率统计基础理论学习笔记(三)</title>
+      <link href="http://localhost:4000/statistical-and-probability-theory" rel="alternate" type="text/html" title="概率统计基础理论学习笔记(三)" />
+      <published>2013-02-06T09:10:19+08:00</published>
+      <updated>2013-02-06T09:10:19+08:00</updated>
+      <id>http://localhost:4000/statistical-and-probability-theory</id>
+      <content type="html" xml:base="http://localhost:4000/statistical-and-probability-theory">&lt;p&gt;概率问题的分类&lt;/p&gt;
+
+&lt;h3 id=&quot;独立试验型&quot;&gt;独立试验型&lt;/h3&gt;
+
+&lt;p&gt;重复的进行一系列完全同样的试验，每次试验结果与其他各次的试验结果无关。事件A在每次试验中的概率不变。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;伯努利试验&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;1) 每次试验都是独立的
+2) P(A) = p,  $P(\bar{A})$ = 1 - p = q     0 &amp;lt; p &amp;lt; 1&lt;/p&gt;
+
+&lt;p&gt;试验结论:&lt;/p&gt;
+
+&lt;p&gt;1) n次试验中事件A恰巧发生k次的概率为&lt;/p&gt;
+
+&lt;p&gt;b(k,n,p) = $C_n^kp^kq^{n-k}$&lt;/p&gt;
+
+&lt;h3 id=&quot;随机变量及其分布&quot;&gt;随机变量及其分布&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;离散型随机变量&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;连续性随机变量&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;有分布函数和密度函数决定&lt;/p&gt;
+
+&lt;p&gt;1) 一维连续型随机变量&lt;/p&gt;
+
+&lt;p&gt;定义&lt;/p&gt;
+
+&lt;p&gt;设ξ为随机变量且ξ有分布函数F(x) = P(ξ &amp;lt; x),  如果存在非负可积函数f(x),使得对任意x∈(-∞,x), 有&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;F(x) = ∫_{-∞}^x f(u) du&lt;/script&gt;
+
+&lt;p&gt;则称ξ为随机变量，  响应的F(x)为分布函数， f(x)为密度函数&lt;/p&gt;
+
+&lt;p&gt;2) 二维联合分布函数&lt;/p&gt;
+
+&lt;p&gt;二维随机变量(ξ,η)的联合分布函数为F(x,y), 若存在非负函数p(x,y),使得&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;F(x,y) = ∫_{-∞}^y∫_{-∞}^x f(u,v) dudv&lt;/script&gt;
+
+&lt;p&gt;则称 F(x,y)为联合分布随机变量(ξ,η)的分布函数，密度函数为f(x,y)&lt;/p&gt;
+
+&lt;p&gt;密度函数f(x,y) 和 分布函数的对应关系写成偏导数&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial^2 F(x,y)}{\partial x \partial y}&lt;/script&gt; = f(x,y)&lt;/p&gt;
+
+&lt;p&gt;3) 边际分布&lt;/p&gt;
+
+&lt;h4 id=&quot;分布的数字特征&quot;&gt;分布的数字特征&lt;/h4&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="math" />
+      
+
+      
+        <summary type="html">概率问题的分类</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">(MIT)初等线性代数理论笔记(一)</title>
+      <link href="http://localhost:4000/linaer-algebra-theory" rel="alternate" type="text/html" title="(MIT)初等线性代数理论笔记(一)" />
+      <published>2013-02-01T09:20:19+08:00</published>
+      <updated>2013-02-01T09:20:19+08:00</updated>
+      <id>http://localhost:4000/linaer-algebra-theory</id>
+      <content type="html" xml:base="http://localhost:4000/linaer-algebra-theory">&lt;p&gt;TODO&lt;/p&gt;
+
+&lt;p&gt;### 
+TODO&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="math" />
+      
+
+      
+        <summary type="html">TODO</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">概率统计基础理论学习笔记(二)</title>
+      <link href="http://localhost:4000/statistical-and-probability-theory" rel="alternate" type="text/html" title="概率统计基础理论学习笔记(二)" />
+      <published>2013-01-20T15:20:11+08:00</published>
+      <updated>2013-01-20T15:20:11+08:00</updated>
+      <id>http://localhost:4000/statistical-and-probability-theory</id>
+      <content type="html" xml:base="http://localhost:4000/statistical-and-probability-theory">&lt;p&gt;很多天才，Lapelace，惠更斯终其一生也不过贡献了一条公式而已。&lt;/p&gt;
+
+&lt;h3 id=&quot;概率的性质&quot;&gt;概率的性质&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;定义
+设样本空间Ω中的σ代表为F，定义在F上的实值集合P(A)成为概率，如果它满足一下条件:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;1) 非负
+2) 规范性 P(Ω) = 1
+3) 可列可加性， 设$A_i$ ∈ Ϝ(i = 1,2,3,..)且$A_i$∩$A_j$=Φ(i‡j) 则&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(⋃_{i=j}^{∞}A_i) = ∑_{i=j}^{∞}P(A_i)&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;性质&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;1) P(Φ) = 0，   不可能的事件概率等于0&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如何定义不可能?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;2) 有限可加性&lt;/p&gt;
+
+&lt;p&gt;3) 逆事件概率&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(\bar{A}) = 1 - P(A)&lt;/script&gt;
+
+&lt;p&gt;4)单调性 若 A⊂B, 则 P(A) ≤ P(B),且&lt;/p&gt;
+
+&lt;p&gt;P(B - A) = P(B) - P(A)&lt;/p&gt;
+
+&lt;p&gt;5) 加法定理  若A、B是任意两个事件，则&lt;/p&gt;
+
+&lt;p&gt;P(A∪B) = P(A) + B(B) - P(AB)&lt;/p&gt;
+
+&lt;p&gt;定理5 证明&lt;/p&gt;
+
+&lt;p&gt;将A∪B 表示成 互斥事件之并&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;A∪B = A∪(B-AB)&lt;/script&gt;
+
+&lt;p&gt;P(A∪B) = P(A) + P(B - AB) = P(A) + P(B) - P(AB)&lt;/p&gt;
+
+&lt;p&gt;6) 证明 $ P(A) = 1 - P(\bar{A}) $&lt;/p&gt;
+
+&lt;p&gt;因为$A\bar{A}$ = Φ,  A∪B = Ω, 所以 由概率的性质&lt;/p&gt;
+
+&lt;p&gt;1 = P(Ω) = $P(A∪\bar{A})$ = P(A) + $P(\bar{A})$&lt;/p&gt;
+
+&lt;p&gt;7) 证明 P(AB) = 1 - $P(\bar{A})$ - $P(\bar{B})$ + $P(\bar{AB})$&lt;/p&gt;
+
+&lt;p&gt;P(AB) = 1 - $P(\bar{AB})$ =  1 - $P(\bar{A} ∪ \bar{B})$
+= 1 - [$P(\bar{A})$ + $P(\bar{B})$ - P((\bar{A}(\bar{B})]&lt;/p&gt;
+
+&lt;p&gt;8) 已知事件$A_1$,$A_2$同时发生，则A发生，证明:&lt;/p&gt;
+
+&lt;p&gt;P(A) ≧ P($A_1$) + P($A_2$) - 1&lt;/p&gt;
+
+&lt;p&gt;证明过程&lt;/p&gt;
+
+&lt;p&gt;$A_1&lt;script type=&quot;math/tex&quot;&gt;A_2$ ⊂ A， 所以  P(A) ≥ P($A_1&lt;/script&gt;A_2$) ≥ P($A_1$) + P($A_2$) - P($A_1$$A_2$) ≥ P($A_1$) + P($A_2$) - 1&lt;/p&gt;
+
+&lt;p&gt;上式最后一步成立，是因为 1 ≥ P($A_1$$A_2$) ≥ 0&lt;/p&gt;
+
+&lt;p&gt;9) 设P(A) = p,  P(B) = q,  P(AB) = r,  用 p,q,r表示下列事件的概率:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;ul&gt;
+      &lt;li&gt;$P(\bar{A}∪\bar{B})$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$P(\bar{A}∪\bar{B})$ = $P(\bar{AB})$ = 1 - P(AB) = 1 - r&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;ul&gt;
+      &lt;li&gt;$求P(\bar{A}B)$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$\bar{A}B$ = B - AB // 这个公式很重要&lt;/p&gt;
+
+&lt;p&gt;所以，$P(\bar{A}∪\bar{B})$ = P(B - AB) = P(B) - P(AB) = q - r&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="math" />
+      
+
+      
+        <summary type="html">很多天才，Lapelace，惠更斯终其一生也不过贡献了一条公式而已。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">概率统计基础理论学习笔记(一)</title>
+      <link href="http://localhost:4000/statistical-and-probability-theory" rel="alternate" type="text/html" title="概率统计基础理论学习笔记(一)" />
+      <published>2013-01-15T22:01:19+08:00</published>
+      <updated>2013-01-15T22:01:19+08:00</updated>
+      <id>http://localhost:4000/statistical-and-probability-theory</id>
+      <content type="html" xml:base="http://localhost:4000/statistical-and-probability-theory">&lt;p&gt;概率是有利情况下的个数与所有可能个数之比。&lt;/p&gt;
+
+&lt;h3 id=&quot;一-问题域&quot;&gt;(一) 问题域&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;概率论的研究的对象和目的?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;统计学的研究对象和目的?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;两者之间的联系。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;参考&lt;/p&gt;
+
+&lt;p&gt;陈希孺教授«概率论与数理统计»
+«概率论思想方法的历史研究»&lt;/p&gt;
+
+&lt;h4 id=&quot;二-一点历史&quot;&gt;(二) 一点历史&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;统计是推动概率理论的重要因素&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;资本主义的发展不断提出新的统计问题。也是推动力之一&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;保险公司收集的原始数据成为概率论早起发展利用的原始材料&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;赌博 - 股本分配问题&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;排列组合公式最早出现在公元8世纪(唐朝末期)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;概率论的研究的对象和目的&quot;&gt;概率论的研究的对象和目的&lt;/h4&gt;
+
+&lt;p&gt;概率研究的是随机过程的规律。&lt;/p&gt;
+
+&lt;h4 id=&quot;统计学的研究对象和目的&quot;&gt;统计学的研究对象和目的&lt;/h4&gt;
+
+&lt;p&gt;统计学是研究样本以及样本空间的内蕴规律。&lt;/p&gt;
+
+&lt;h4 id=&quot;经典场景分析&quot;&gt;经典场景分析&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;事件与集合&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;不论概率还是统计，其基础是集合以及其子集之间的关系。&lt;/p&gt;
+
+&lt;p&gt;一个子集成为一个事件。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;事件&lt;/code&gt;的本质是在特定条件下生成一个子集。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;特定条件&lt;/code&gt;通常通过观察或假设实现的。&lt;/p&gt;
+
+&lt;p&gt;一个经典&lt;code class=&quot;highlighter-rouge&quot;&gt;实例&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;甲乙二人赌技相同(排除影响因素)，各出赌注500元。&lt;/p&gt;
+
+&lt;p&gt;约定: 谁先赢三局，则谁拿走全部的赌注1000元。&lt;/p&gt;
+
+&lt;p&gt;现在已赌了3局，甲2胜1负而因故中止赌博。&lt;/p&gt;
+
+&lt;p&gt;问 1000元应该如何分?&lt;/p&gt;
+
+&lt;p&gt;直接分法是按照当前结果分： 甲分2/3， 乙分1/3。&lt;/p&gt;
+
+&lt;p&gt;进一步，更&lt;code class=&quot;highlighter-rouge&quot;&gt;合理&lt;/code&gt;的分法是，&lt;/p&gt;
+
+&lt;p&gt;如果扩大抽样空间，继续赌2局，结果可以预期:&lt;/p&gt;
+
+&lt;p&gt;甲甲、甲乙、乙甲、乙乙&lt;/p&gt;
+
+&lt;p&gt;可见，甲方有3/4的概率会赢。另外一种分法是 甲分得1000*3/4&lt;/p&gt;
+
+&lt;h4 id=&quot;概率统计的学习方法或者价值倾向&quot;&gt;概率统计的学习方法或者价值倾向&lt;/h4&gt;
+
+&lt;p&gt;为什么会有&lt;code class=&quot;highlighter-rouge&quot;&gt;价值倾向&lt;/code&gt;或者学习方法?&lt;/p&gt;
+
+&lt;p&gt;在数理统计的学科中，不存在一个&lt;code class=&quot;highlighter-rouge&quot;&gt;统一而精确&lt;/code&gt;的公理体系。&lt;/p&gt;
+
+&lt;p&gt;欧式几何的公理体系建立在 平行理论基础之上。&lt;/p&gt;
+
+&lt;p&gt;后续的推理或定理都建立在公理的基础之上。&lt;/p&gt;
+
+&lt;p&gt;数理统计不存在这样的最基础的公理体系。&lt;/p&gt;
+
+&lt;p&gt;本质原因是 概率统计描述的是事件之间的&lt;code class=&quot;highlighter-rouge&quot;&gt;依赖&lt;/code&gt;关系，而这种依赖是动态的。&lt;/p&gt;
+
+&lt;p&gt;因此，非常赞同陈教授的观点:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不存在一个确切的对概率的«定义»,  使得，利用这个定义，你可以精确地得出任何事件的概率。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这是&lt;code class=&quot;highlighter-rouge&quot;&gt;概率&lt;/code&gt;与&lt;code class=&quot;highlighter-rouge&quot;&gt;定义&lt;/code&gt;在质上的却别。 概率是相对的。&lt;/p&gt;
+
+&lt;p&gt;根据陈教授的观点，数理统计的价值有两点:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;提供了一种估计概率的方法&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;提供了检验理论的一种准则或者出发点，使得&lt;code class=&quot;highlighter-rouge&quot;&gt;某种活动&lt;/code&gt;更有方向。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;概率论的公理化定义&quot;&gt;概率论的公理化定义&lt;/h4&gt;
+
+&lt;p&gt;实现概率公理化的奠基人是 前苏联 科尔莫格罗夫。&lt;/p&gt;
+
+&lt;p&gt;他提出(抽象)了&lt;code class=&quot;highlighter-rouge&quot;&gt;事件&lt;/code&gt;和概率之间的关系。&lt;/p&gt;
+
+&lt;p&gt;它有一个函数来表示。对于概率函数P和事件A，&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;0 ≤ P(A) ≤ 1,  对于 Ϝ任何成员A，对应的概率在0，1之间。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;对于集合本身(Ω), P(Ω) = 1。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;对于空集Φ,  P(Φ) = 0。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;以上是科式公理的基础。 跟&lt;code class=&quot;highlighter-rouge&quot;&gt;两条平行线没有交点&lt;/code&gt;属于一个性质。&lt;/p&gt;
+
+&lt;h4 id=&quot;古典概率计算方法&quot;&gt;古典概率计算方法&lt;/h4&gt;
+
+&lt;p&gt;经典问题(有放回)&lt;/p&gt;
+
+&lt;p&gt;一批产品用N个， 其中废品数M，现从中随机抽取n个，  问其中恰好m个废品的概率是多少?&lt;/p&gt;
+
+&lt;p&gt;分析思路&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;样品空间 (N,n)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;命中事件所在空间(M,n) * (N-M,n-m)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;概率 [(M,n) * (N-M,n-m)] / (N,n)&lt;/p&gt;
+
+&lt;p&gt;经典问题2(无放回)&lt;/p&gt;
+
+&lt;p&gt;n双相异的鞋工2n只，随机的分成n堆，每堆2只， 问各堆自成一双这个事件E的概率是多少?&lt;/p&gt;
+
+&lt;p&gt;容易懂的算法&lt;/p&gt;
+
+&lt;p&gt;把2n只鞋子排成1排， 共有(2n)!中排法。&lt;/p&gt;
+
+&lt;p&gt;要点&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;第一只鞋子的取法有2n中， 第二只鞋子的取法是常数1，因为需要配对&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;第3只鞋子的取法是2n-2,依次类推 2n-4, 2n-6,  … 2&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;所以，样品空间是(2n-2)(2n-4)(2n-6)…2 = 2^n * n!&lt;/p&gt;
+
+&lt;h4 id=&quot;正态概率曲线和中心极限定理&quot;&gt;正态概率曲线和中心极限定理&lt;/h4&gt;
+
+&lt;p&gt;相关人物:  棣莫弗(De Moivre)&lt;/p&gt;
+
+&lt;p&gt;相关事件: 正态概率曲线的推导过程和二项分布的验证过程。&lt;/p&gt;
+
+&lt;p&gt;棣莫弗在发现正态概率曲线之前，做了大量的统计工作(建立在二项分布建设的基础之上)，最后在他的朋友斯特林的帮助下，最终发现了这条曲线。&lt;/p&gt;
+
+&lt;p&gt;文本描述如下&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;n次独立重复的试验中，事件出现m次的概率的期望值满足De Moivre 公式&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;1774年，拉普拉斯推广了这个公式到无穷区间。&lt;/p&gt;
+
+&lt;h4 id=&quot;古典概率的定义&quot;&gt;古典概率的定义&lt;/h4&gt;
+
+&lt;p&gt;1) 有限性， 只有有限个样本点($ω_1$,$ω_2$,… $ω_n$)&lt;/p&gt;
+
+&lt;p&gt;2) 等可能性&lt;/p&gt;
+
+&lt;p&gt;P($ω_1$) = P($ω_2$) = P($ω_3$) = $\frac{1}{n}$&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(A) = \frac{事件A包含的样本点数}{样本总点数}&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;两个原理&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;加法原理&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;完成一件事情需要m类方法，第一类有n1中方法，第二类有n2中 .. 第m类方法有$n_{m}$种方法， 那么完成这件事情一共需要&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;N = $n_1$ + $n_2$ + … + $n_m$&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;乘法原理&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;完成一件事情需要m个步骤，完成第一步需要$n_1$种方法，第二步需要$n_2$种方法 .. 依次完成m个步骤&lt;/p&gt;
+
+&lt;p&gt;共有&lt;/p&gt;
+
+&lt;p&gt;N = $n_1$ * $n_2$ * … * $n_m$&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="math" />
+      
+
+      
+        <summary type="html">概率是有利情况下的个数与所有可能个数之比。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">傅里叶级数与傅里叶积分</title>
+      <link href="http://localhost:4000/natural-science-fundamenttals" rel="alternate" type="text/html" title="傅里叶级数与傅里叶积分" />
+      <published>2013-01-11T23:02:11+08:00</published>
+      <updated>2013-01-11T23:02:11+08:00</updated>
+      <id>http://localhost:4000/natural-science-fundamenttals</id>
+      <content type="html" xml:base="http://localhost:4000/natural-science-fundamenttals">&lt;p&gt;傅里叶级数学习过程笔记&lt;/p&gt;
+
+&lt;p&gt;参考&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.thefouriertransform.com/&quot;&gt;http://www.thefouriertransform.com/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.57.8720&amp;amp;rep=rep1&amp;amp;type=pdf&quot;&gt;On Fourier’s discovery
+of Fourier series and Fourier integrals&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.ias.ac.in/article/fulltext/reso/001/10/0044-0055&quot;&gt;https://www.ias.ac.in/article/fulltext/reso/001/10/0044-0055&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;一-傅里叶级数和傅里叶积分的起源fourier-series-and-integrals&quot;&gt;(一) 傅里叶级数和傅里叶积分的起源(Fourier Series and Integrals)&lt;/h3&gt;
+
+&lt;p&gt;1807年，法国数学家Joseph Fourier在巴黎科技大学提交了一个热力学推导方面的论文，同时发表了一个观点&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;任何函数都可以展开为一个三角级数(infinite)的和&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;意料之外的是 论文被拒，大部分人不相信这个推断。&lt;/p&gt;
+
+&lt;p&gt;慢慢地，大部分数学家开始重新思考他们观点的理论基础。&lt;/p&gt;
+
+&lt;p&gt;$f(x) = \frac{a_{0}}{2} + ∑&lt;em&gt;{k=1}^{∞}[a&lt;/em&gt;{k}cos(kx) + b_{k}sin(kx)]$&lt;/p&gt;
+
+&lt;p&gt;傅里叶级数源于一个猜想或假设:&lt;/p&gt;
+
+&lt;p&gt;对于区间上(-π, π) 任意函数(arbitrary function) f(x), 可以被写成如下形式:&lt;/p&gt;
+
+&lt;p&gt;f(x) = $\frac{a_0}{b} + a_{1}cosx + a_{2}cos2x + b_{2}sin2x + …$&lt;/p&gt;
+
+&lt;p&gt;其中， 系数(coefficient)由以下等式决定:&lt;/p&gt;
+
+&lt;p&gt;$a_{n} = \frac{1}{π}∫^{π}_{-\pi} f(x)cosnx dx$ (n = 0,1,2,…)&lt;/p&gt;
+
+&lt;p&gt;$b_{n} = \frac{1}{π}∫^{π}_{-\pi} f(x)sinnx dx$ (n = 0,1,2,…)&lt;/p&gt;
+
+&lt;p&gt;上述等式(eular-fourier)可以描述为&lt;/p&gt;
+
+&lt;p&gt;对于任意[已知]函数(锯齿函数、矩形函数、三角函数), 它可以被展开为某一级数的形式， 其中系数部分($a_{n}、b_{n}$) 由原函数和三角函数的积分决定。&lt;/p&gt;
+
+&lt;p&gt;傅里叶级数成功的一个主要理论依据是，cos(nx) 和 sin(nx) 为一组标准正交基(complete orthogonal bias)&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="math" />
+      
+
+      
+        <summary type="html">傅里叶级数学习过程笔记</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>

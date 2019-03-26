@@ -2,10 +2,10 @@
 
 <feed xmlns="http://www.w3.org/2005/Atom" >
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
-  <link href="http://localhost:4000/tag/springboot/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/tag/spring/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-03-26T15:12:54+08:00</updated>
-  <id>http://localhost:4000/tag/springboot/feed.xml</id>
+  <updated>2019-03-26T20:43:04+08:00</updated>
+  <id>http://localhost:4000/tag/spring/feed.xml</id>
 
   
   
@@ -61,7 +61,7 @@
       
 
       <author>
-          <name></name>
+          <name>mikezhang</name>
         
         
       </author>
@@ -69,7 +69,7 @@
       
 
       
-        <category term="springboot" />
+        <category term="spring" />
       
 
       
@@ -81,10 +81,10 @@
     </entry>
   
     <entry>
-      <title type="html">spring中的100个问题-注解是如何工作的(二)?</title>
-      <link href="http://localhost:4000/springboot-annotations" rel="alternate" type="text/html" title="spring中的100个问题-注解是如何工作的(二)?" />
-      <published>2016-04-10T15:11:11+08:00</published>
-      <updated>2016-04-10T15:11:11+08:00</updated>
+      <title type="html">Spring中的100个问题-注解是如何工作的(二)</title>
+      <link href="http://localhost:4000/springboot-annotations" rel="alternate" type="text/html" title="Spring中的100个问题-注解是如何工作的(二)" />
+      <published>2016-04-12T20:30:01+08:00</published>
+      <updated>2016-04-12T20:30:01+08:00</updated>
       <id>http://localhost:4000/springboot-annotations</id>
       <content type="html" xml:base="http://localhost:4000/springboot-annotations">&lt;p&gt;注解定义了很多影响编译器行为的方式,也使得bean的行为看起来不那么透明。&lt;/p&gt;
 
@@ -431,7 +431,7 @@ demo git:(master) ✗ javac -Xprint  -XprintRounds  -XprintProcessorInfo   -clas
       
 
       <author>
-          <name></name>
+          <name>mikezhang</name>
         
         
       </author>
@@ -439,7 +439,7 @@ demo git:(master) ✗ javac -Xprint  -XprintRounds  -XprintProcessorInfo   -clas
       
 
       
-        <category term="springboot" />
+        <category term="spring" />
       
 
       
@@ -451,380 +451,10 @@ demo git:(master) ✗ javac -Xprint  -XprintRounds  -XprintProcessorInfo   -clas
     </entry>
   
     <entry>
-      <title type="html">spring中的100个问题-注解是如何工作的(二)?</title>
-      <link href="http://localhost:4000/springboot-annotations-2" rel="alternate" type="text/html" title="spring中的100个问题-注解是如何工作的(二)?" />
-      <published>2016-04-10T15:11:11+08:00</published>
-      <updated>2016-04-10T15:11:11+08:00</updated>
-      <id>http://localhost:4000/springboot-annotations%202</id>
-      <content type="html" xml:base="http://localhost:4000/springboot-annotations-2">&lt;p&gt;注解定义了很多影响编译器行为的方式,也使得bean的行为看起来不那么透明。&lt;/p&gt;
-
-&lt;h3 id=&quot;注解是从编译阶段开始的&quot;&gt;注解是从编译阶段开始的&lt;/h3&gt;
-
-&lt;p&gt;Java编译器(java compiler)工作时要经过几个阶段:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;解析(Parse)阶段[词法、语法解析阶段]&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;扫描 *.java 源文件, 映射源代码为AST-Nodes(抽象树)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;生成符号表(symbol table)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;处理注解(process annotations)&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;javac默认会处理针对特定语法单位上的注解,比如 class，function，field&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;处理语法树的的属性&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这个过程包括名称解析，类型检查和常量打包等&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;数据流(dataflow analysis)分析&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;desugar-重写语法书（AST Rewrite), 翻译一些语法糖&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;最后生成classfile&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;从java6开始, 在JSR269中定义了如何在编译阶段自定义可插拔（pluggable)的注解API。&lt;/p&gt;
-
-&lt;p&gt;在javac的默认输出中可以确认到这个信息&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-g                         生成所有调试信息
-  -g:none                    不生成任何调试信息
-  -g:{lines,vars,source}     只生成某些调试信息
-  -nowarn                    不生成任何警告
-  -verbose                   输出有关编译器正在执行的操作的消息
-  -deprecation               输出使用已过时的 API 的源位置
-  -classpath &amp;lt;路径&amp;gt;            指定查找用户类文件和注释处理程序的位置
-  -cp &amp;lt;路径&amp;gt;                   指定查找用户类文件和注释处理程序的位置
-  -sourcepath &amp;lt;路径&amp;gt;           指定查找输入源文件的位置
-  -bootclasspath &amp;lt;路径&amp;gt;        覆盖引导类文件的位置
-  -extdirs &amp;lt;目录&amp;gt;              覆盖所安装扩展的位置
-  -endorseddirs &amp;lt;目录&amp;gt;         覆盖签名的标准路径的位置
-  -proc:{none,only}          控制是否执行注释处理和/或编译。
-  -processor &amp;lt;class1&amp;gt;[,&amp;lt;class2&amp;gt;,&amp;lt;class3&amp;gt;...] 要运行的注释处理程序的名称; 绕过默认的搜索进程
-  -processorpath &amp;lt;路径&amp;gt;        指定查找注释处理程序的位置
-  -parameters                生成元数据以用于方法参数的反射
-  -d &amp;lt;目录&amp;gt;                    指定放置生成的类文件的位置
-  -s &amp;lt;目录&amp;gt;                    指定放置生成的源文件的位置
-  -h &amp;lt;目录&amp;gt;                    指定放置生成的本机标头文件的位置
-  -implicit:{none,class}     指定是否为隐式引用文件生成类文件
-  -encoding &amp;lt;编码&amp;gt;             指定源文件使用的字符编码
-  -source &amp;lt;发行版&amp;gt;              提供与指定发行版的源兼容性
-  -target &amp;lt;发行版&amp;gt;              生成特定 VM 版本的类文件
-  -profile &amp;lt;配置文件&amp;gt;            请确保使用的 API 在指定的配置文件中可用
-  -version                   版本信息
-  -help                      输出标准选项的提要
-  -A关键字[=值]                  传递给注释处理程序的选项
-  -X                         输出非标准选项的提要
-  -J&amp;lt;标记&amp;gt;                     直接将 &amp;lt;标记&amp;gt; 传递给运行时系统
-  -Werror                    出现警告时终止编译
-  @&amp;lt;文件名&amp;gt;                     从文件读取选项和文件名
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;以下两个输入参数与注解有关。&lt;/p&gt;
-
-&lt;p&gt;-processor &lt;class1&gt;[,&lt;class2&gt;,&lt;class3&gt;...] 要运行的注释处理程序的名称; 绕过默认的搜索进程&lt;/class3&gt;&lt;/class2&gt;&lt;/class1&gt;&lt;/p&gt;
-
-&lt;p&gt;-processorpath &lt;路径&gt;        指定查找注释处理程序的位置&lt;/路径&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;如何实现一个注解处理器annotation-procssors&quot;&gt;如何实现一个注解处理器（annotation procssors)&lt;/h3&gt;
-
-&lt;p&gt;定义一个继承自AbstractProcessor的子类，同时必须包含两个注解(SupportedAnnotationTypes、SupportedSourceVersion)&lt;/p&gt;
-
-&lt;p&gt;必须覆盖的两个接口:&lt;/p&gt;
-
-&lt;p&gt;public synchronized void init(ProcessingEnvironment processingEnv)&lt;/p&gt;
-
-&lt;p&gt;public boolean process(Set&amp;lt;? extends TypeElement&amp;gt; annotations,
-RoundEnvironment roundEnv)&lt;/p&gt;
-
-&lt;p&gt;这两个方法在编译阶段被java compiler 调用(仅调用一次)&lt;/p&gt;
-
-&lt;p&gt;在maven编译阶段(compiler:compile),显式指定processor可以通过&lt;annotationProcessorPaths&gt;、&lt;annotationProcessors&gt; 这两个可选项实现 [compiler:compile](https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html)&lt;/annotationProcessors&gt;&lt;/annotationProcessorPaths&gt;&lt;/p&gt;
-
-&lt;p&gt;编译阶段检查代码格式的例子&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-@Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.METHOD)
-public @interface Setter {
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.util.Set;
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Messager;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.lang.model.SourceVersion;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.TypeElement;
-import javax.tools.Diagnostic;
-
-@SupportedAnnotationTypes({&quot;annotation.Setter&quot;})
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class SetterProcessor extends AbstractProcessor {
-
-    private Messager messager;
-
-    @Override
-    public boolean process(Set&amp;lt;? extends TypeElement&amp;gt; annotations, RoundEnvironment roundEnv) {
-        // get elements annotated with the @Setter annotation
-        Set&amp;lt;? extends Element&amp;gt; annotatedElements = roundEnv.getElementsAnnotatedWith(Setter.class);
-
-        for (Element element : annotatedElements) {
-            if (element.getKind() == ElementKind.METHOD) {
-                // only handle methods as targets
-                checkMethod((ExecutableElement) element);
-            }
-        }
-
-        // don't claim annotations to allow other processors to process them
-        return false;
-    }
-
-    private void checkMethod(ExecutableElement method) {
-        // check for valid name
-        String name = method.getSimpleName().toString();
-        if (!name.startsWith(&quot;set&quot;)) {
-            printError(method, &quot;setter name must start with \&quot;set\&quot;&quot;);
-        } else if (name.length() == 3) {
-            printError(method, &quot;the method name must contain more than just \&quot;set\&quot;&quot;);
-        } else if (Character.isLowerCase(name.charAt(3))) {
-            if (method.getParameters().size() != 1) {
-                printError(method, &quot;character following \&quot;set\&quot; must be upper case&quot;);
-            }
-        }
-
-        // check, if setter is public
-        if (!method.getModifiers().contains(Modifier.PUBLIC)) {
-            printError(method, &quot;setter must be public&quot;);
-        }
-
-        // check, if method is static
-        if (method.getModifiers().contains(Modifier.STATIC)) {
-            printError(method, &quot;setter must not be static&quot;);
-        }
-    }
-
-    private void printError(Element element, String message) {
-        messager.printMessage(Diagnostic.Kind.ERROR, message, element);
-    }
-
-    @Override
-    public void init(ProcessingEnvironment processingEnvironment) {
-        super.init(processingEnvironment);
-
-        // get messager for printing errors
-        messager = processingEnvironment.getMessager();
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class AnnotationProcessorTest {
-    
-    @Setter
-    private void noValue(String value) {}
-
-    @Setter
-    public void setString(String value) {}
-    
-    @Setter
-    public static void main(String[] args) {}
-    
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;执行以上代码&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;javac -Xprint  -XprintRounds  -XprintProcessorInfo   -classpath . -processor SetterProcessor  AnnotationProcessorTest.java 
-
-demo git:(master) ✗ javac -Xprint  -XprintRounds  -XprintProcessorInfo   -classpath . -processor SetterProcessor  AnnotationProcessorTest.java
-循环 1:
-	输入文件: {AnnotationProcessorTest}
-	注释: [Setter]
-	最后一个循环: false
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;openjdk8对注解的支持&quot;&gt;OpenJDK8对注解的支持&lt;/h3&gt;
-
-&lt;p&gt;jdk8u/langtools/src/share/classes/javax&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
-├── annotation
-│   └── processing
-│       ├── AbstractProcessor.java
-│       ├── Completion.java
-│       ├── Completions.java
-│       ├── Filer.java
-│       ├── FilerException.java
-│       ├── Messager.java
-│       ├── ProcessingEnvironment.java
-│       ├── Processor.java
-│       ├── RoundEnvironment.java
-│       ├── SupportedAnnotationTypes.java
-│       ├── SupportedOptions.java
-│       ├── SupportedSourceVersion.java
-│       └── package-info.java
-├── lang
-│   └── model
-│       ├── AnnotatedConstruct.java
-│       ├── SourceVersion.java
-│       ├── UnknownEntityException.java
-│       ├── element
-│       │   ├── AnnotationMirror.java
-│       │   ├── AnnotationValue.java
-│       │   ├── AnnotationValueVisitor.java
-│       │   ├── Element.java
-│       │   ├── ElementKind.java
-│       │   ├── ElementVisitor.java
-│       │   ├── ExecutableElement.java
-│       │   ├── Modifier.java
-│       │   ├── Name.java
-│       │   ├── NestingKind.java
-│       │   ├── PackageElement.java
-│       │   ├── Parameterizable.java
-│       │   ├── QualifiedNameable.java
-│       │   ├── TypeElement.java
-│       │   ├── TypeParameterElement.java
-│       │   ├── UnknownAnnotationValueException.java
-│       │   ├── UnknownElementException.java
-│       │   ├── VariableElement.java
-│       │   └── package-info.java
-│       ├── overview.html
-│       ├── package-info.java
-│       ├── type
-│       │   ├── ArrayType.java
-│       │   ├── DeclaredType.java
-│       │   ├── ErrorType.java
-│       │   ├── ExecutableType.java
-│       │   ├── IntersectionType.java
-│       │   ├── MirroredTypeException.java
-│       │   ├── MirroredTypesException.java
-│       │   ├── NoType.java
-│       │   ├── NullType.java
-│       │   ├── PrimitiveType.java
-│       │   ├── ReferenceType.java
-│       │   ├── TypeKind.java
-│       │   ├── TypeMirror.java
-│       │   ├── TypeVariable.java
-│       │   ├── TypeVisitor.java
-│       │   ├── UnionType.java
-│       │   ├── UnknownTypeException.java
-│       │   ├── WildcardType.java
-│       │   └── package-info.java
-│       └── util
-│           ├── AbstractAnnotationValueVisitor6.java
-│           ├── AbstractAnnotationValueVisitor7.java
-│           ├── AbstractAnnotationValueVisitor8.java
-│           ├── AbstractElementVisitor6.java
-│           ├── AbstractElementVisitor7.java
-│           ├── AbstractElementVisitor8.java
-│           ├── AbstractTypeVisitor6.java
-│           ├── AbstractTypeVisitor7.java
-│           ├── AbstractTypeVisitor8.java
-│           ├── ElementFilter.java
-│           ├── ElementKindVisitor6.java
-│           ├── ElementKindVisitor7.java
-│           ├── ElementKindVisitor8.java
-│           ├── ElementScanner6.java
-│           ├── ElementScanner7.java
-│           ├── ElementScanner8.java
-│           ├── Elements.java
-│           ├── SimpleAnnotationValueVisitor6.java
-│           ├── SimpleAnnotationValueVisitor7.java
-│           ├── SimpleAnnotationValueVisitor8.java
-│           ├── SimpleElementVisitor6.java
-│           ├── SimpleElementVisitor7.java
-│           ├── SimpleElementVisitor8.java
-│           ├── SimpleTypeVisitor6.java
-│           ├── SimpleTypeVisitor7.java
-│           ├── SimpleTypeVisitor8.java
-│           ├── TypeKindVisitor6.java
-│           ├── TypeKindVisitor7.java
-│           ├── TypeKindVisitor8.java
-│           ├── Types.java
-│           └── package-info.java
-└── tools
-    ├── Diagnostic.java
-    ├── DiagnosticCollector.java
-    ├── DiagnosticListener.java
-    ├── DocumentationTool.java
-    ├── FileObject.java
-    ├── ForwardingFileObject.java
-    ├── ForwardingJavaFileManager.java
-    ├── ForwardingJavaFileObject.java
-    ├── JavaCompiler.java
-    ├── JavaFileManager.java
-    ├── JavaFileObject.java
-    ├── OptionChecker.java
-    ├── SimpleJavaFileObject.java
-    ├── StandardJavaFileManager.java
-    ├── StandardLocation.java
-    ├── Tool.java
-    ├── ToolProvider.java
-    ├── overview.html
-    └── package-info.java
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;篇幅原因，下一篇分析spring中的注解。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/bean-life-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name></name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="springboot" />
-      
-
-      
-        <summary type="html">注解定义了很多影响编译器行为的方式,也使得bean的行为看起来不那么透明。</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">spring中的100个问题-注解是如何工作的(一)?</title>
-      <link href="http://localhost:4000/springboot-annotations" rel="alternate" type="text/html" title="spring中的100个问题-注解是如何工作的(一)?" />
-      <published>2016-04-08T19:08:11+08:00</published>
-      <updated>2016-04-08T19:08:11+08:00</updated>
+      <title type="html">spring中的100个问题-注解是如何工作的(一)</title>
+      <link href="http://localhost:4000/springboot-annotations" rel="alternate" type="text/html" title="spring中的100个问题-注解是如何工作的(一)" />
+      <published>2016-04-08T12:15:19+08:00</published>
+      <updated>2016-04-08T12:15:19+08:00</updated>
       <id>http://localhost:4000/springboot-annotations</id>
       <content type="html" xml:base="http://localhost:4000/springboot-annotations">&lt;p&gt;注解类似class结构体中的&lt;code class=&quot;highlighter-rouge&quot;&gt;tag&lt;/code&gt;，它解决了class垂直继承机制和interface水平切分机制都无法解决的问题，那就是异构聚合问题。&lt;/p&gt;
 
@@ -981,7 +611,7 @@ callMethodByAnnotation(foo,map);
       
 
       <author>
-          <name></name>
+          <name>mikezhang</name>
         
         
       </author>
@@ -989,192 +619,11 @@ callMethodByAnnotation(foo,map);
       
 
       
-        <category term="springboot" />
+        <category term="spring" />
       
 
       
         <summary type="html">注解类似class结构体中的tag，它解决了class垂直继承机制和interface水平切分机制都无法解决的问题，那就是异构聚合问题。</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">spring中的100个问题-bean是被透明化管理的?</title>
-      <link href="http://localhost:4000/springboot-how-bean-managed" rel="alternate" type="text/html" title="spring中的100个问题-bean是被透明化管理的?" />
-      <published>2016-03-10T07:50:11+08:00</published>
-      <updated>2016-03-10T07:50:11+08:00</updated>
-      <id>http://localhost:4000/springboot-how-bean-managed</id>
-      <content type="html" xml:base="http://localhost:4000/springboot-how-bean-managed">&lt;h2 id=&quot;spring-bean的实现路线图&quot;&gt;Spring bean的实现路线图&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/spring-beans-managed.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;bean在spring内部的表示形式&quot;&gt;bean在spring内部的表示形式&lt;/h4&gt;
-
-&lt;h5 id=&quot;如何理解bean&quot;&gt;如何理解bean&lt;/h5&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/spring-beans-managed01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name></name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="springboot" />
-      
-
-      
-        <summary type="html">Spring bean的实现路线图</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">spring中的100个问题-bean如何支持运行时类型解析的?</title>
-      <link href="http://localhost:4000/springboot-how-bean-type-created" rel="alternate" type="text/html" title="spring中的100个问题-bean如何支持运行时类型解析的?" />
-      <published>2016-03-10T07:50:11+08:00</published>
-      <updated>2016-03-10T07:50:11+08:00</updated>
-      <id>http://localhost:4000/springboot-how-bean-type-created</id>
-      <content type="html" xml:base="http://localhost:4000/springboot-how-bean-type-created">&lt;p&gt;什么是spring中的bean? 如何定义或描述?&lt;/p&gt;
-
-&lt;h4 id=&quot;beans&quot;&gt;beans&lt;/h4&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name></name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="springboot" />
-      
-
-      
-        <summary type="html">什么是spring中的bean? 如何定义或描述?</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">spring中的100个问题-(spring-beans)bean是如何创建的?</title>
-      <link href="http://localhost:4000/springboot-how-bean-created" rel="alternate" type="text/html" title="spring中的100个问题-(spring-beans)bean是如何创建的?" />
-      <published>2016-03-10T07:50:11+08:00</published>
-      <updated>2016-03-10T07:50:11+08:00</updated>
-      <id>http://localhost:4000/springboot-how-bean-created</id>
-      <content type="html" xml:base="http://localhost:4000/springboot-how-bean-created">&lt;p&gt;Bean container解决的核心问题是如何在运行时(run-time)动态获取或创建Java Object。&lt;/p&gt;
-
-&lt;h2 id=&quot;bean-container的类图&quot;&gt;Bean Container的类图&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/factory-bean.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;spring提供了3中方式创建beans&quot;&gt;spring提供了3中方式创建beans&lt;/h4&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/bean-create-instance.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;函数调用堆栈&quot;&gt;函数调用堆栈&lt;/h4&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/bean-instance-create.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;autowirecapablebeanfactory-接口&quot;&gt;AutowireCapableBeanFactory 接口&lt;/h4&gt;
-
-&lt;p&gt;Spring-beans模块中使用AutowireCapableBeanFactory接口实现bean的创建和销毁。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;T&amp;gt; T createBean(Class&amp;lt;T&amp;gt; beanClass) throws BeansException;
-
-void autowireBean(Object existingBean) throws BeansException;
-
-Object configureBean(Object existingBean, String beanName) throws BeansException;
-
-Object createBean(Class&amp;lt;?&amp;gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException;
-
-Object autowire(Class&amp;lt;?&amp;gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException;
-void autowireBeanProperties(Object existingBean, int autowireMode, boolean dependencyCheck)
-			throws BeansException;
-
-void applyBeanPropertyValues(Object existingBean, String beanName) throws BeansException;
-
-Object initializeBean(Object existingBean, String beanName) throws BeansException;
-
-Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName)
-			throws BeansException;
-
-Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName)
-			throws BeansException;
-
-void destroyBean(Object existingBean);
-
-&amp;lt;T&amp;gt; NamedBeanHolder&amp;lt;T&amp;gt; resolveNamedBean(Class&amp;lt;T&amp;gt; requiredType) throws BeansException;
-
-Object resolveDependency(DependencyDescriptor descriptor, String requestingBeanName) throws BeansException;
-
-Object resolveDependency(DependencyDescriptor descriptor, String requestingBeanName,
-			Set&amp;lt;String&amp;gt; autowiredBeanNames, TypeConverter typeConverter) throws BeansException;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;beanfactory-接口&quot;&gt;BeanFactory 接口&lt;/h4&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;访问spring container的根接口(根界面)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;接口列表&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;T&amp;gt; T getBean(String name, Class&amp;lt;T&amp;gt; requiredType) throws BeansException;
-&amp;lt;T&amp;gt; T getBean(Class&amp;lt;T&amp;gt; requiredType) throws BeansException;
-Object getBean(String name, Object... args) throws BeansException;
-&amp;lt;T&amp;gt; T getBean(Class&amp;lt;T&amp;gt; requiredType, Object... args) throws BeansException;
-boolean containsBean(String name);
-boolean isSingleton(String name) throws NoSuchBeanDefinitionException;
-boolean isPrototype(String name) throws NoSuchBeanDefinitionException;
-boolean isTypeMatch(String name, ResolvableType typeToMatch) throws NoSuchBeanDefinitionException;
-boolean isTypeMatch(String name, Class&amp;lt;?&amp;gt; typeToMatch) throws NoSuchBeanDefinitionException;
-Class&amp;lt;?&amp;gt; getType(String name) throws NoSuchBeanDefinitionException;
-String[] getAliases(String name);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name></name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="springboot" />
-      
-
-      
-        <summary type="html">Bean container解决的核心问题是如何在运行时(run-time)动态获取或创建Java Object。</summary>
       
 
       

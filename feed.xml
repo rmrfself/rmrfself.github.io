@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-26T15:12:54+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-26T20:43:04+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
 
 &lt;h3 id=&quot;实现ai的基本策略&quot;&gt;实现AI的基本策略&lt;/h3&gt;
 
@@ -39,7 +39,7 @@
 
 &lt;h4 id=&quot;构建基于ai的交互工具echosystem&quot;&gt;构建基于AI的交互工具(echosystem)&lt;/h4&gt;
 
-&lt;h2 id=&quot;机器学习的任务和目标&quot;&gt;机器学习的任务和目标&lt;/h2&gt;
+&lt;h4 id=&quot;机器学习的任务和目标&quot;&gt;机器学习的任务和目标&lt;/h4&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -50,79 +50,7 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;机器学习&lt;/p&gt;</content><author><name></name></author><category term="howto" /><summary type="html">机器学习成功的地方在于它可以做到跨领域应用。</summary></entry><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup-2" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup%202</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup-2">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
-
-&lt;h3 id=&quot;实现ai的基本策略&quot;&gt;实现AI的基本策略&lt;/h3&gt;
-
-&lt;h4 id=&quot;构建ai基础设施&quot;&gt;构建AI基础设施&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;矢量化的基础计算设施
-    &lt;ul&gt;
-      &lt;li&gt;可扩展的计算资源&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;构建基于ai的劳动力&quot;&gt;构建基于AI的&lt;code class=&quot;highlighter-rouge&quot;&gt;劳动力&lt;/code&gt;&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;机器人&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;机器设置&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;构建基于ai的可信任工具&quot;&gt;构建基于AI的可信任工具&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;智能识别，防篡改&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;基于ai的数据建模&quot;&gt;基于AI的数据建模&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;基于大数据的数据建模&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;使用ai驱动业务策略&quot;&gt;使用AI驱动业务策略&lt;/h4&gt;
-
-&lt;h4 id=&quot;构建基于ai的交互工具echosystem&quot;&gt;构建基于AI的交互工具(echosystem)&lt;/h4&gt;
-
-&lt;h2 id=&quot;机器学习的任务和目标&quot;&gt;机器学习的任务和目标&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;识别数据中的模式&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;预测未知数据&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;机器学习&lt;/p&gt;</content><author><name></name></author><category term="howto" /><summary type="html">机器学习成功的地方在于它可以做到跨领域应用。</summary></entry><entry><title type="html">关于创业的反思总结</title><link href="http://localhost:4000/management-get" rel="alternate" type="text/html" title="关于创业的反思总结" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/management-get</id><content type="html" xml:base="http://localhost:4000/management-get">&lt;p&gt;能与不能&lt;/p&gt;
-
-&lt;h2 id=&quot;问题域&quot;&gt;问题域&lt;/h2&gt;
-
-&lt;h3 id=&quot;依靠什么&quot;&gt;依靠什么?&lt;/h3&gt;
-
-&lt;h3 id=&quot;目标在哪里&quot;&gt;目标在哪里?&lt;/h3&gt;
-
-&lt;h3 id=&quot;底线在哪里&quot;&gt;底线在哪里？&lt;/h3&gt;
-
-&lt;h3 id=&quot;怎么做&quot;&gt;怎么做?&lt;/h3&gt;</content><author><name></name></author><category term="howto" /><summary type="html">能与不能</summary></entry><entry><title type="html">关于创业的反思总结</title><link href="http://localhost:4000/management-get-2" rel="alternate" type="text/html" title="关于创业的反思总结" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/management-get%202</id><content type="html" xml:base="http://localhost:4000/management-get-2">&lt;p&gt;能与不能&lt;/p&gt;
-
-&lt;h2 id=&quot;问题域&quot;&gt;问题域&lt;/h2&gt;
-
-&lt;h3 id=&quot;依靠什么&quot;&gt;依靠什么?&lt;/h3&gt;
-
-&lt;h3 id=&quot;目标在哪里&quot;&gt;目标在哪里?&lt;/h3&gt;
-
-&lt;h3 id=&quot;底线在哪里&quot;&gt;底线在哪里？&lt;/h3&gt;
-
-&lt;h3 id=&quot;怎么做&quot;&gt;怎么做?&lt;/h3&gt;</content><author><name></name></author><category term="howto" /><summary type="html">能与不能</summary></entry><entry><title type="html">[GCE]安装Kubernetes Dashboard</title><link href="http://localhost:4000/k8s-dashboard-install" rel="alternate" type="text/html" title="[GCE]安装Kubernetes Dashboard" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/k8s-dashboard-install</id><content type="html" xml:base="http://localhost:4000/k8s-dashboard-install">&lt;p&gt;Kubeternetes Dashboatd 安装手记&lt;/p&gt;
+&lt;p&gt;机器学习&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="math" /><summary type="html">机器学习成功的地方在于它可以做到跨领域应用。</summary></entry><entry><title type="html">[GCE]安装Kubernetes Dashboard</title><link href="http://localhost:4000/k8s-dashboard-install" rel="alternate" type="text/html" title="[GCE]安装Kubernetes Dashboard" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/k8s-dashboard-install</id><content type="html" xml:base="http://localhost:4000/k8s-dashboard-install">&lt;p&gt;Kubeternetes Dashboatd 安装手记&lt;/p&gt;
 
 &lt;h3 id=&quot;安装&quot;&gt;安装&lt;/h3&gt;
 
@@ -362,16 +290,7 @@ Events:            &amp;lt;none&amp;gt;
 
 输出
 Starting to serve on 127.0.0.1:8001 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="kubernetes" /><summary type="html">Kubeternetes Dashboatd 安装手记</summary></entry><entry><title type="html">[GCE]单节点部署kubernetes集群</title><link href="http://localhost:4000/k8s-from-scrach" rel="alternate" type="text/html" title="[GCE]单节点部署kubernetes集群" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/k8s-from-scrach</id><content type="html" xml:base="http://localhost:4000/k8s-from-scrach">&lt;p&gt;使用kubeadm部署单master节点的k8s&lt;/p&gt;
-
-&lt;p&gt;\———————-&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Unbuntu18.04
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;\———————-&lt;/p&gt;
-
-&lt;p&gt;1个master + 2个minion&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="kubernetes" /><summary type="html">Kubeternetes Dashboatd 安装手记</summary></entry><entry><title type="html">[GCE]单节点部署kubernetes集群</title><link href="http://localhost:4000/k8s-from-scrach" rel="alternate" type="text/html" title="[GCE]单节点部署kubernetes集群" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/k8s-from-scrach</id><content type="html" xml:base="http://localhost:4000/k8s-from-scrach">&lt;p&gt;使用kubeadm部署单master节点的k8s, 1个master + 2个minion&lt;/p&gt;
 
 &lt;h3 id=&quot;1-安装docker以及master节点初始化&quot;&gt;1. 安装Docker以及Master节点初始化&lt;/h3&gt;
 
@@ -489,155 +408,602 @@ kubectl get pods –all-namespaces&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/&quot;&gt;Creating a single master cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="kubernetes" /><summary type="html">使用kubeadm部署单master节点的k8s</summary></entry><entry><title type="html">[GCE]单节点部署kubernetes集群</title><link href="http://localhost:4000/k8s-from-scrach-2" rel="alternate" type="text/html" title="[GCE]单节点部署kubernetes集群" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/k8s-from-scrach%202</id><content type="html" xml:base="http://localhost:4000/k8s-from-scrach-2">&lt;p&gt;使用kubeadm部署单master节点的k8s&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">使用kubeadm部署单master节点的k8s, 1个master + 2个minion</summary></entry><entry><title type="html">搭建devops团队</title><link href="http://localhost:4000/devops-baseon-cloud" rel="alternate" type="text/html" title="搭建devops团队" /><published>2018-09-20T00:11:15+08:00</published><updated>2018-09-20T00:11:15+08:00</updated><id>http://localhost:4000/devops-baseon-cloud</id><content type="html" xml:base="http://localhost:4000/devops-baseon-cloud">&lt;p&gt;基于价值的软件交付流程&lt;/p&gt;
 
-&lt;p&gt;\———————-&lt;/p&gt;
+&lt;h3 id=&quot;devops-team&quot;&gt;Devops team&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Unbuntu18.04
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/aws-delivery.png&quot; alt=&quot;devops&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;\———————-&lt;/p&gt;
-
-&lt;p&gt;1个master + 2个minion&lt;/p&gt;
-
-&lt;h3 id=&quot;1-安装docker以及master节点初始化&quot;&gt;1. 安装Docker以及Master节点初始化&lt;/h3&gt;
-
-&lt;p&gt;安装docker&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install docker.io
-
-sudo systemctl enable docker
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;安装kubeadm&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get update \
-  &amp;amp;&amp;amp; sudo apt-get install -y apt-transport-https \
-  &amp;amp;&amp;amp; curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-
-# k8s的资源暂不可用,使用16.04的更新资源 (xenial)
-echo &quot;deb http://apt.kubernetes.io/ kubernetes-xenial main&quot; \
-  | sudo tee -a /etc/apt/sources.list.d/kubernetes.list \
-  &amp;amp;&amp;amp; sudo apt-get update
-
-sudo apt install -y kubeadm  kubelet kubernetes-cni
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;关闭交换分区&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo swapoff -a 
-sudo rm -f /swapfile
-sudo vi /etc/fstab   # 注释点 /swapfile 入口
-
-sudo swapon --summary # 确认，如果没有输出，表明已经关闭
-cat /proc/swaps
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;关闭交换分区的原因，官方的说法是为了性能，设计者希望每个kubelet都可以实时响应&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/kubernetes/kubernetes/issues/53533&quot;&gt;Kubelet/Kubernetes should work with Swap Enabled&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;2-初始化master节点&quot;&gt;2. 初始化master节点&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IP_ADDR=$(ip addr show eno1 | grep -Po 'inet \K[\d.]+')
-echo $IP_ADDR
-
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=${IP_ADDR} --kubernetes-version stable-1.2.1
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;cidr是一个很重要的概念，&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%97%A0%E7%B1%BB%E5%88%AB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1&quot;&gt;推荐阅读&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;CIDR分配的网络资源是网段，而不是具体的地址。所以在AWS或常见云平台上申请网络资源时，先输入CIDR，比如10.1.0.0/16。16对应的子网掩码是255.255.0.0。&lt;/p&gt;
-
-&lt;p&gt;默认的情况下，单个master节点是无法正常工作的，它不会分配pods资源。这里有个命令可以使master工作&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl taint nodes --all node-role.kubernetes.io/master-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;master节点被加入到了资源调度里面去。&lt;/p&gt;
-
-&lt;h3 id=&quot;3-安装pod-network插件&quot;&gt;3. 安装Pod Network插件&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;The network must be deployed before any applications. Also, CoreDNS will not start up before a network is installed. kubeadm only supports Container Network Interface (CNI) based networks (and does not support kubenet).
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;网络组件有很多种，Flannel， Weave Net,Calico 等&lt;/p&gt;
-
-&lt;p&gt;这里选择calico&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
-kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;输出结果确认
-kubectl get pods –all-namespaces&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;coredns在网络组建没有安装或者没有初始化完毕前是pending的状态&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;4-加入minion节点&quot;&gt;4. 加入Minion节点&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubeadm join 192.168.12.39:6443 --token 9uqyzo.y773su1b99kolayf --discovery-token-ca-cert-hash sha256:10ca82d1b6e3d9402b5243fa360e9c11a05320c1bd39989ab24aea1fcd6f8629
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这段命令是kubeadm init以后给出的。&lt;/p&gt;
-
-&lt;p&gt;–token 是节点加入凭证，如果忘记了，在master节点上可以重新获取&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubeadm token list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;顺利的话， join命令在几秒内就完成了。&lt;/p&gt;
-
-&lt;p&gt;加入节点确认&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl get nodes
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;5-遇到的问题&quot;&gt;5. 遇到的问题&lt;/h3&gt;
-
-&lt;p&gt;在ubuntu18.04的版本里，默认CNI插件不兼容k8s 1.12,需要重新编译, 插件地址&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://github.com/containernetworking/plugins
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;参考&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://k8smeetup.github.io/docs/admin/kubeadm/&quot;&gt;kubeadm 设置工具参考指南&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/qq_34463875/article/details/78042852&quot;&gt;Kubenetes中的证书&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%97%A0%E7%B1%BB%E5%88%AB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1s&quot;&gt;无类别域间路由&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/&quot;&gt;Creating a single master cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="kubernetes" /><summary type="html">使用kubeadm部署单master节点的k8s</summary></entry><entry><title type="html">前端工程中的测试模型</title><link href="http://localhost:4000/archi-vuejs-test-model" rel="alternate" type="text/html" title="前端工程中的测试模型" /><published>2018-09-11T17:14:11+08:00</published><updated>2018-09-11T17:14:11+08:00</updated><id>http://localhost:4000/archi-vuejs-test-model</id><content type="html" xml:base="http://localhost:4000/archi-vuejs-test-model">&lt;h2 id=&quot;architecture-design&quot;&gt;Architecture Design&lt;/h2&gt;
+&lt;p&gt;#TODO&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">基于价值的软件交付流程</summary></entry><entry><title type="html">前端工程中的测试模型</title><link href="http://localhost:4000/archi-vuejs-test-model" rel="alternate" type="text/html" title="前端工程中的测试模型" /><published>2018-09-12T12:11:11+08:00</published><updated>2018-09-12T12:11:11+08:00</updated><id>http://localhost:4000/archi-vuejs-test-model</id><content type="html" xml:base="http://localhost:4000/archi-vuejs-test-model">&lt;h2 id=&quot;architecture-design&quot;&gt;Architecture Design&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h3&gt;
 
-&lt;p&gt;TODO&lt;/p&gt;</content><author><name></name></author><category term="frontend" /><summary type="html">Architecture Design</summary></entry><entry><title type="html">快速交付前端工程</title><link href="http://localhost:4000/archi-vuejs-deploy" rel="alternate" type="text/html" title="快速交付前端工程" /><published>2018-09-11T17:14:11+08:00</published><updated>2018-09-11T17:14:11+08:00</updated><id>http://localhost:4000/archi-vuejs-deploy</id><content type="html" xml:base="http://localhost:4000/archi-vuejs-deploy">&lt;h2 id=&quot;designments&quot;&gt;Designments&lt;/h2&gt;
+&lt;p&gt;TODO&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">Architecture Design</summary></entry><entry><title type="html">如何快速的交付前端工程?</title><link href="http://localhost:4000/archi-vuejs-deploy" rel="alternate" type="text/html" title="如何快速的交付前端工程?" /><published>2018-09-11T17:14:11+08:00</published><updated>2018-09-11T17:14:11+08:00</updated><id>http://localhost:4000/archi-vuejs-deploy</id><content type="html" xml:base="http://localhost:4000/archi-vuejs-deploy">&lt;p&gt;前端工程的持续交付模型。&lt;/p&gt;
 
-&lt;h3 id=&quot;基于vuejs的前端工程&quot;&gt;基于vuejs的前端工程&lt;/h3&gt;
+&lt;h3 id=&quot;designments&quot;&gt;Designments&lt;/h3&gt;
+
+&lt;h4 id=&quot;基于vuejs的前端工程&quot;&gt;基于vuejs的前端工程&lt;/h4&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/vuejs-architecture.png&quot; alt=&quot;vuejs architecture&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;测试方法端到端测试单元测试集成测试&quot;&gt;测试方法(端到端测试、单元测试、集成测试)&lt;/h3&gt;
+&lt;h4 id=&quot;测试方法端到端测试单元测试集成测试&quot;&gt;测试方法(端到端测试、单元测试、集成测试)&lt;/h4&gt;
 
-&lt;h3 id=&quot;云上交付&quot;&gt;云上交付&lt;/h3&gt;
+&lt;h4 id=&quot;云上交付&quot;&gt;云上交付&lt;/h4&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h3&gt;</content><author><name></name></author><category term="frontend" /><summary type="html">Designments</summary></entry><entry><title type="html">Ethereum开发笔记1-1: Blockchain简介</title><link href="http://localhost:4000/ethereum-dapp-develop" rel="alternate" type="text/html" title="Ethereum开发笔记1-1: Blockchain简介" /><published>2018-09-06T11:11:11+08:00</published><updated>2018-09-06T11:11:11+08:00</updated><id>http://localhost:4000/ethereum-dapp-develop</id><content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop">&lt;p&gt;区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。&lt;/p&gt;
+&lt;h4 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h4&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">前端工程的持续交付模型。</summary></entry><entry><title type="html">Ethereum开发笔记1-1: Blockchain简介</title><link href="http://localhost:4000/ethereum-dapp-develop" rel="alternate" type="text/html" title="Ethereum开发笔记1-1: Blockchain简介" /><published>2018-09-06T11:11:11+08:00</published><updated>2018-09-06T11:11:11+08:00</updated><id>http://localhost:4000/ethereum-dapp-develop</id><content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop">&lt;p&gt;区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。&lt;/p&gt;
 
 &lt;h3 id=&quot;历史&quot;&gt;历史&lt;/h3&gt;
 
 &lt;p&gt;参考论文&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://nakamotoinstitute.org/finney/rpow/&quot;&gt;RPOW - 可重用的工作证明(Reusable Proofs of Work)&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="develop" /><summary type="html">区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://nakamotoinstitute.org/finney/rpow/&quot;&gt;RPOW - 可重用的工作证明(Reusable Proofs of Work)&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="ethereum" /><summary type="html">区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。</summary></entry><entry><title type="html">Guideline-编写有效率的javascript代码</title><link href="http://localhost:4000/archi-efficient-js" rel="alternate" type="text/html" title="Guideline-编写有效率的javascript代码" /><published>2018-08-09T12:11:19+08:00</published><updated>2018-08-09T12:11:19+08:00</updated><id>http://localhost:4000/archi-efficient-js</id><content type="html" xml:base="http://localhost:4000/archi-efficient-js">&lt;p&gt;Trust yourself, not the VM。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;对象的初始化顺序&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    function Point(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    var p1 = new Point(11,12);
+    var p1 = new Point(33,34);
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://&quot;&gt;nodejs中的隐藏类的生成方式&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Checklist:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;成员变量写在构造函数内&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;不要在其他地方任意添加成员变量或者方法&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Why:&lt;/p&gt;
+
+&lt;p&gt;每当有新变量添加的时候, 编译器会生成一个新的隐藏类。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-hiddenclass.png&quot; alt=&quot;Google I/O 2012&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;整数变量的使用&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var a = 1;
+...
+a = 1.5;
+...
+a = 'abcd';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Checklist:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a变量的重新赋值会引起 object a在内存中的被重新 allocation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;数组的用法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Checklist:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用从0开始的连续下标&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a[5000] = 1;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面表达式将促使编译器把变量a转化为一个字典类型&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不要删除数组中的元素，特别是numberic类型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var data = [1,2,3,4];
+
+delete data[2];
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面delete表达式会促使编译器把data转化为dictionary。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不要使用未初始化的数组元素&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var a = [];
+
+for(var i = 0; i &amp;lt; 10; i ++) {
+    a[0] = i; //   
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var a = [];
+
+a[0] = 0; // ⬲⬲ 至少快2倍
+
+for(var i = 0; i &amp;lt; 10; i ++) {
+    a[0] = i; //   
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;注意数组元素的类型转化&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// First step
+var a = new array();
+
+a[0] = 77;
+a[1] = 88;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-array-class-01.png&quot; alt=&quot;integer in array&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Second step
+a[2] = 0.5;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-array-class-02.png&quot; alt=&quot;integer in array&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Third step
+a[3] = true
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-array-class-03.png&quot; alt=&quot;bad thing&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;更好的方法:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//一次性初始化
+var data = [1,2,0.5, true];
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;方法的使用&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;充分利用IC(inline cache)&lt;/p&gt;
+
+&lt;p&gt;Checklist:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;避免多态&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function add(x, y) {
+    return x + y;
+}
+
+add(1, 2) // 生成单态隐藏类 monomorphic
+add(&quot;a&quot;,&quot;b&quot;) // 多态 polymorphic
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UJPdhx5zTaw&quot;&gt;Google I/O 2012 - Breaking the JavaScript Speed Limit with V8&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">Trust yourself, not the VM。</summary></entry><entry><title type="html">Devops那些事-虚拟化讲座讲义</title><link href="http://localhost:4000/devops-docker-presentation" rel="alternate" type="text/html" title="Devops那些事-虚拟化讲座讲义" /><published>2017-11-22T10:01:19+08:00</published><updated>2017-11-22T10:01:19+08:00</updated><id>http://localhost:4000/devops-docker-presentation</id><content type="html" xml:base="http://localhost:4000/devops-docker-presentation">&lt;p&gt;docker基础讲座讲义&lt;/p&gt;
+
+&lt;h4 id=&quot;讲座内容&quot;&gt;讲座内容&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/01.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/02.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/03.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/04.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/05.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/06.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/07.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/08.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/09.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/10.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/11.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/12.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/13.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/14.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">docker基础讲座讲义</summary></entry><entry><title type="html">PostgreSQL MySQL 数据类型映射</title><link href="http://localhost:4000/archi-postgresql" rel="alternate" type="text/html" title="PostgreSQL MySQL 数据类型映射" /><published>2017-08-15T18:31:11+08:00</published><updated>2017-08-15T18:31:11+08:00</updated><id>http://localhost:4000/archi-postgresql</id><content type="html" xml:base="http://localhost:4000/archi-postgresql">&lt;p&gt;参考
+&lt;a href=&quot;https://dev.mysql.com/doc/workbench/en/wb-migration-database-postgresql-typemapping.html&quot;&gt;PostgreSQL Type Mapping&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;postgresql类型-转换为-mysql类型&quot;&gt;PostgreSQL类型 转换为 MySQL类型&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;PostgreSQL Type&lt;/th&gt;
+      &lt;th&gt;MySQL Type&lt;/th&gt;
+      &lt;th&gt;Comment&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;INT&lt;/td&gt;
+      &lt;td&gt;INT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SMALLINT&lt;/td&gt;
+      &lt;td&gt;SMALLINT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BIGINT&lt;/td&gt;
+      &lt;td&gt;BIGINT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SERIAL&lt;/td&gt;
+      &lt;td&gt;INT&lt;/td&gt;
+      &lt;td&gt;Sets AUTO_INCREMENT in its table definition.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SMALLSERIAL&lt;/td&gt;
+      &lt;td&gt;SMALLINT&lt;/td&gt;
+      &lt;td&gt;Sets AUTO_INCREMENT in its table definition.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BIGSERIAL&lt;/td&gt;
+      &lt;td&gt;BIGINT&lt;/td&gt;
+      &lt;td&gt;Sets AUTO_INCREMENT in its table definition.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BIT&lt;/td&gt;
+      &lt;td&gt;BIT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BOOLEAN&lt;/td&gt;
+      &lt;td&gt;TINYINT(1)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;REAL&lt;/td&gt;
+      &lt;td&gt;FLOAT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DOUBLE PRECISION&lt;/td&gt;
+      &lt;td&gt;DOUBLE&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NUMERIC&lt;/td&gt;
+      &lt;td&gt;DECIMAL&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DECIMAL&lt;/td&gt;
+      &lt;td&gt;DECIMAL&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MONEY&lt;/td&gt;
+      &lt;td&gt;DECIMAL(19,2)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CHAR&lt;/td&gt;
+      &lt;td&gt;CHAR/LONGTEXT&lt;/td&gt;
+      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have CHAR columns with a length up to 255 characters. Anything larger is migrated as LONGTEXT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NATIONAL CHARACTER&lt;/td&gt;
+      &lt;td&gt;CHAR/LONGTEXT&lt;/td&gt;
+      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types. In MySQL, character set of strings depend on the column character set instead of the datatype.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;VARCHAR&lt;/td&gt;
+      &lt;td&gt;VARCHAR/MEDIUMTEXT/LONGTEXT&lt;/td&gt;
+      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NATIONAL CHARACTER VARYING&lt;/td&gt;
+      &lt;td&gt;VARCHAR/MEDIUMTEXT/LONGTEXT&lt;/td&gt;
+      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types. In MySQL, character set of strings depend on the column character set instead of the datatype.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DATE&lt;/td&gt;
+      &lt;td&gt;DATE&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TIME&lt;/td&gt;
+      &lt;td&gt;TIME&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TIMESTAMP&lt;/td&gt;
+      &lt;td&gt;DATETIME&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;INTERVAL&lt;/td&gt;
+      &lt;td&gt;TIME&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BYTEA&lt;/td&gt;
+      &lt;td&gt;LONGBLOB&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TEXT&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CIDR&lt;/td&gt;
+      &lt;td&gt;VARCHAR(43)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;INET&lt;/td&gt;
+      &lt;td&gt;VARCHAR(43)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MACADDR&lt;/td&gt;
+      &lt;td&gt;VARCHAR(17)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;UUID&lt;/td&gt;
+      &lt;td&gt;VARCHAR(36)&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;XML&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;JSON&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TSVECTOR&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TSQUERY&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ARRAY&lt;/td&gt;
+      &lt;td&gt;LONGTEXT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;POINT&lt;/td&gt;
+      &lt;td&gt;POINT&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LINE&lt;/td&gt;
+      &lt;td&gt;LINESTRING&lt;/td&gt;
+      &lt;td&gt;Although LINE length is infinite, and LINESTRING is finite in MySQL, it is approximated&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LSEG&lt;/td&gt;
+      &lt;td&gt;LINESTRING&lt;/td&gt;
+      &lt;td&gt;A LSEG is like a LINESTRING with only two points&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BOX&lt;/td&gt;
+      &lt;td&gt;POLYGON&lt;/td&gt;
+      &lt;td&gt;A BOX is a POLYGON with five points and right angles&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;PATH&lt;/td&gt;
+      &lt;td&gt;LINESTRING&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;POLYGON&lt;/td&gt;
+      &lt;td&gt;POLYGON&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CIRCLE&lt;/td&gt;
+      &lt;td&gt;POLYGON&lt;/td&gt;
+      &lt;td&gt;A POLYGON is used to approximate a CIRCLE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TXID_SNAPSHOT&lt;/td&gt;
+      &lt;td&gt;VARCHAR&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;类型&quot;&gt;类型&lt;/h3&gt;
+&lt;p&gt;1. 数据类型&lt;/p&gt;
+
+&lt;p&gt;1.1 PostgreSQL&lt;/p&gt;
+
+&lt;p&gt;高精度numeric, 浮点, 自增序列，货币，字节流，时间，日期，时间戳，布尔，枚举，平面几何，立体几何，多维几何，地球，PostGIS，网络，比特流，全文检索，UUID，XML，JSON，数组，复合类型，域类型，范围，树类型，化学类型，基因序列，FDW, 大对象, 图像&lt;/p&gt;
+
+&lt;p&gt;1.2 MySQL&lt;/p&gt;
+
+&lt;p&gt;数字，时间，字符串，简单的GIS，JSON&lt;/p&gt;
+
+&lt;p&gt;2. 支持索引的数据类型&lt;/p&gt;
+
+&lt;p&gt;2.1 PostgreSQL&lt;/p&gt;
+
+&lt;p&gt;高精度numeric, 浮点, 自增序列，货币，字节流，时间，日期，时间戳，布尔，枚举，平面几何，立体几何，多维几何，地球，PostGIS，网络，比特流，全文检索，UUID，XML，JSON，数组，复合类型，域类型，范围，树类型，化学，基因序列&lt;/p&gt;
+
+&lt;p&gt;2.2 MySQL&lt;/p&gt;
+
+&lt;p&gt;数字，字符串，比特流，时间，全文检索，GIS&lt;/p&gt;
+
+&lt;h3 id=&quot;索引支持&quot;&gt;索引支持&lt;/h3&gt;
+&lt;p&gt;1. 索引方法&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持 btree, hash, gist, sp-gist, gin, brin , bloom , rum 索引&lt;/p&gt;
+
+&lt;p&gt;MySQL 支持 btree, gis类型索引&lt;/p&gt;
+
+&lt;p&gt;2. 规则表达式、前后模糊查询，支持索引检索&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;3. 数组支持索引&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;4. 全文检索支持索引&lt;/p&gt;
+
+&lt;p&gt;5. 索引扩展功能&lt;/p&gt;
+
+&lt;p&gt;5.1 PostgreSQL 支持 表达式索引，部分索引，联合索引&lt;/p&gt;
+
+&lt;p&gt;5.2 PostgreSQL 支持图像相似度、文本相似度搜索&lt;/p&gt;
+
+&lt;p&gt;5.3 自定义索引访问方法(bloom, rum, ……)&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL支持&lt;/p&gt;
+
+&lt;h3 id=&quot;多引擎和外部源支持&quot;&gt;多引擎和外部源支持&lt;/h3&gt;
+&lt;p&gt;1. 多引擎支持&lt;/p&gt;
+
+&lt;p&gt;1.1 PostgreSQL&lt;/p&gt;
+
+&lt;p&gt;内置heap, 通过插件实现内存表, 列存储, 压缩存储, 流式存储, 非关系存储等。&lt;/p&gt;
+
+&lt;p&gt;1.2 MySQL&lt;/p&gt;
+
+&lt;p&gt;MyISAM, innodb, …&lt;/p&gt;
+
+&lt;p&gt;2. 外部表&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL支持任意外部数据源, (例如jdbc, file, odbc, oracle, mysql, db2, redis, mongo, ES, hadoop……)&lt;/p&gt;
+
+&lt;p&gt;https://wiki.postgresql.org/wiki/Fdw&lt;/p&gt;
+
+&lt;p&gt;3. dblink&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;4. 内存表&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 通过外部表支持，或者通过插件支持&lt;/p&gt;
+
+&lt;p&gt;5. ES(弹性搜索引擎) 引擎&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;h3 id=&quot;安全&quot;&gt;安全&lt;/h3&gt;
+&lt;p&gt;1. 数据加密&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持加密数据类型，可选GPG加密算法&lt;/p&gt;
+
+&lt;p&gt;2. 认证方法&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持 密码、LDAP、AD、GSSAPI、SSPI、Ident、Peer、RADIUS、PAM、签名认证&lt;/p&gt;
+
+&lt;p&gt;3. 数据传输加密&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;4. 行安全策略&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;5. 数据库内部支持libselinux接口, (美国国家安全局制定的安全加强标准)&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;h3 id=&quot;优化器&quot;&gt;优化器&lt;/h3&gt;
+&lt;p&gt;http://www.postgresql.org/docs/9.5/static/runtime-config-query.html&lt;/p&gt;
+
+&lt;p&gt;1. GPU 并行计算支持&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;2. 遗传优化器算法&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持CBO、CRO、遗传算法&lt;/p&gt;
+
+&lt;p&gt;3. HINT PLAN&lt;/p&gt;
+
+&lt;p&gt;4. CPU 并行计算&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持 (线性性能提升)&lt;/p&gt;
+
+&lt;p&gt;5. 自定义成本因子&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;h3 id=&quot;编程扩展&quot;&gt;编程扩展&lt;/h3&gt;
+&lt;p&gt;1. 是否支持采样查询&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;2. 是否支持扩展采样算法&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;3. 自定义数据类型&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;4. 自定义索引方法&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;5. 字符集自动转换, C扩展接口&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;6. 自定义聚合&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;7. 自定义窗口&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;h3 id=&quot;扩展能力&quot;&gt;扩展能力&lt;/h3&gt;
+&lt;p&gt;1. 类型扩展，操作符扩展，函数扩展，索引方法扩展，索引扩展，&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;2. C触发器函数， C事件触发器函数&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;3. 函数语言扩展&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持扩展函数支持接口, erlang, ….&lt;/p&gt;
+
+&lt;p&gt;4. 机器学习库&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
+
+&lt;p&gt;5. 流式计算&lt;/p&gt;
+
+&lt;p&gt;PostgreSQL 支持&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">参考 PostgreSQL Type Mapping</summary></entry></feed>

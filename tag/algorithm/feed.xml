@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/algorithm/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-03-26T15:12:54+08:00</updated>
+  <updated>2019-03-26T20:43:04+08:00</updated>
   <id>http://localhost:4000/tag/algorithm/feed.xml</id>
 
   
@@ -44,10 +44,135 @@
 
   
     <entry>
+      <title type="html">Miller-rabin算法</title>
+      <link href="http://localhost:4000/archi-miller-rabin" rel="alternate" type="text/html" title="Miller-rabin算法" />
+      <published>2016-03-26T20:11:19+08:00</published>
+      <updated>2016-03-26T20:11:19+08:00</updated>
+      <id>http://localhost:4000/archi-miller-rabin</id>
+      <content type="html" xml:base="http://localhost:4000/archi-miller-rabin">&lt;p&gt;素数判定法则&lt;/p&gt;
+
+&lt;h2 id=&quot;辅助定理&quot;&gt;辅助定理&lt;/h2&gt;
+
+&lt;h3 id=&quot;fermats-little-theorem费马小定理&quot;&gt;Fermat’s little theorem（费马小定理)&lt;/h3&gt;
+
+&lt;p&gt;如果p是素数, a是正整数且不能被p整除&lt;/p&gt;
+
+&lt;p&gt;$a^{p - 1}$ ≡ 1 (mod p)&lt;/p&gt;
+
+&lt;p&gt;这个定理和欧拉定理的结论一致&lt;/p&gt;
+
+&lt;p&gt;对于任意互素的两个数a和n，设𝜑(n)为小于n且与n互素的正整数的个数，则有&lt;/p&gt;
+
+&lt;p&gt;对于 P = 𝜑(n)&lt;/p&gt;
+
+&lt;p&gt;$a^{P}$ ≡ 1 (mod p)&lt;/p&gt;
+
+&lt;h3 id=&quot;性质的证明&quot;&gt;性质的证明&lt;/h3&gt;
+
+&lt;p&gt;对于小于p的正整数的集合x&lt;/p&gt;
+
+&lt;p&gt;{1,….,p-1}, p与集合中的所有元素互素&lt;/p&gt;
+
+&lt;p&gt;用a乘以x中的元素并对p取模，我们可以得到集合X。&lt;/p&gt;
+
+&lt;p&gt;这里a为定理中定义的整数&lt;/p&gt;
+
+&lt;p&gt;{a mod p, 2a mod p,…, (p-1)a mod p}&lt;/p&gt;
+
+&lt;p&gt;集合X的性质为&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;任意元素都小于p&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;所有元素不等于0，而且互不相等&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这与x的定义相同，从而可以得出&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;x ≌ X&lt;/script&gt;
+
+&lt;p&gt;也就是两个集合相等，从而两个集合中的元素相乘的后结果的对p模余也相等，可以得出等式&lt;/p&gt;
+
+&lt;p&gt;(p - 1)! mod p = $a^{p-1}$ * (p - 1) mod p&lt;/p&gt;
+
+&lt;p&gt;两边约去 (p - 1)!,从而得到等式&lt;/p&gt;
+
+&lt;p&gt;1 mod p = $a^{p-1}$ mod p。&lt;/p&gt;
+
+&lt;p&gt;自然语言描述的结果就是如果a与p互素，&lt;/p&gt;
+
+&lt;p&gt;$a^{p-1}$ 的结果与1的模余相同。&lt;/p&gt;
+
+&lt;p&gt;等式两边乘以 a， 得到定理的扩展:&lt;/p&gt;
+
+&lt;p&gt;a mod p = $a^{p}$ mod p&lt;/p&gt;
+
+&lt;h2 id=&quot;miller-rabin-素数判定法则&quot;&gt;Miller-rabin 素数判定法则&lt;/h2&gt;
+
+&lt;h3 id=&quot;欧拉函数&quot;&gt;欧拉函数&lt;/h3&gt;
+
+&lt;p&gt;欧拉函数φ(n):&lt;/p&gt;
+
+&lt;p&gt;对于正整数n，小于或等于n且与n互质的正整数的个数。&lt;/p&gt;
+
+&lt;p&gt;比如φ(6)，不超过6并且跟6互质的有1和5两个数，则φ(6)=2。&lt;/p&gt;
+
+&lt;p&gt;对于任意素数p，所有小于p的正整数都跟它互质，所以φ(p)=p−1。&lt;/p&gt;
+
+&lt;p&gt;另外，如果p和q均为素数，那么对于整数n=pq，有&lt;/p&gt;
+
+&lt;p&gt;φ(n)=φ(p)φ(q)=(p−1)(q−1)。&lt;/p&gt;
+
+&lt;h3 id=&quot;欧拉定理&quot;&gt;欧拉定理&lt;/h3&gt;
+
+&lt;p&gt;如果a和m都是整数，并且互质，那么有：&lt;/p&gt;
+
+&lt;p&gt;$a^{φ(m)}$ ≡ 1 (mod m)&lt;/p&gt;
+
+&lt;h3 id=&quot;判定法则&quot;&gt;判定法则&lt;/h3&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;
+
+&lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86&quot;&gt;費馬小定理&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/qq_31805821/article/details/80271147&quot;&gt;费马小定理和欧拉定理及其证明&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="algorithm" />
+      
+
+      
+        <summary type="html">素数判定法则</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
       <title type="html">常用工具类算法</title>
       <link href="http://localhost:4000/archi-algorithm" rel="alternate" type="text/html" title="常用工具类算法" />
-      <published>2016-03-26T17:17:19+08:00</published>
-      <updated>2016-03-26T17:17:19+08:00</updated>
+      <published>2016-03-24T13:11:19+08:00</published>
+      <updated>2016-03-24T13:11:19+08:00</updated>
       <id>http://localhost:4000/archi-algorithm</id>
       <content type="html" xml:base="http://localhost:4000/archi-algorithm">&lt;p&gt;“你不解决问题，你和问题同归于寂。解决了问题，你和问题都明了起来”&lt;/p&gt;
 
@@ -132,7 +257,7 @@ private static int calculateStringDistance(String s1, String s2) {
       
 
       <author>
-          <name></name>
+          <name>mikezhang</name>
         
         
       </author>

@@ -2,10 +2,10 @@
 
 <feed xmlns="http://www.w3.org/2005/Atom" >
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
-  <link href="http://localhost:4000/tag/develop/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/tag/ethereum/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-03-26T15:12:54+08:00</updated>
-  <id>http://localhost:4000/tag/develop/feed.xml</id>
+  <updated>2019-03-26T20:43:04+08:00</updated>
+  <id>http://localhost:4000/tag/ethereum/feed.xml</id>
 
   
   
@@ -64,7 +64,7 @@
       
 
       <author>
-          <name></name>
+          <name>mikezhang</name>
         
         
       </author>
@@ -72,7 +72,7 @@
       
 
       
-        <category term="develop" />
+        <category term="ethereum" />
       
 
       

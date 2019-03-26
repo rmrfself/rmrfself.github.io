@@ -45,14 +45,17 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="JVM内部机制(七) Java内存模型(Java Momory Model)" />
-    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:description" content="Jvm内存模型解析 什么是内存模型 Java的内存模型和jvm中的内存layout是两个不同的概念。 Jvm中的Memory Layout，栈、栈帧、Heap[新生代(New Generation)、旧生代、MetaData区域]是一种内存结构，是为实现Java语言而设计的一种存储结构，它与jvm的运行时状态无关，只要运行Java程序，这种存贮结构就会被用到。 而JSR133中定义的Java内存模型是Java语言层面的，讨论的核心是指令集(Instruction Set)如何在N个线程(并行执行序列)的背景下，使得每个单一线程以正确、符合预期的方式表达。 那么，问题来了。 在什么情况下，指令集会以符合预期的方式运行？相反，什么条件使得结果让人难以接受，为什么？ Java的内存模型讨论的正是这种问题边界存在原因，以及最佳实践。 数据同步的两大问题类型 判断程序是否被正确同步,有两种方法: Data Race 对共享的字段或者数组元素同时进行R-W(读写)操作,这种情况被称为“数据竞争”(data race) ⇒ Happen Before Relationship happened-before 关系定义为: 如果一个事件(event) 发生在另外一个事件前， 那么， 它们的结果也是如此。 数学描述为 传递性(transitivity): ∀ a,b,c,如果 a → b, b → c, 那么 a → c 对任意的a,b,c, 如果a发生在b之前，b发生在c之前， 那么， a 发生在c之前 不自反特性: ∀a, a ↛" />
     <meta property="og:url" content="http://localhost:4000/jvm-jmm" />
     <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2016-03-12T11:30:15+08:00" />
+    <meta property="article:modified_time" content="2016-03-12T11:30:15+08:00" />
     <meta property="article:tag" content="Jvm" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="JVM内部机制(七) Java内存模型(Java Momory Model)" />
-    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:description" content="Jvm内存模型解析 什么是内存模型 Java的内存模型和jvm中的内存layout是两个不同的概念。 Jvm中的Memory Layout，栈、栈帧、Heap[新生代(New Generation)、旧生代、MetaData区域]是一种内存结构，是为实现Java语言而设计的一种存储结构，它与jvm的运行时状态无关，只要运行Java程序，这种存贮结构就会被用到。 而JSR133中定义的Java内存模型是Java语言层面的，讨论的核心是指令集(Instruction Set)如何在N个线程(并行执行序列)的背景下，使得每个单一线程以正确、符合预期的方式表达。 那么，问题来了。 在什么情况下，指令集会以符合预期的方式运行？相反，什么条件使得结果让人难以接受，为什么？ Java的内存模型讨论的正是这种问题边界存在原因，以及最佳实践。 数据同步的两大问题类型 判断程序是否被正确同步,有两种方法: Data Race 对共享的字段或者数组元素同时进行R-W(读写)操作,这种情况被称为“数据竞争”(data race) ⇒ Happen Before Relationship happened-before 关系定义为: 如果一个事件(event) 发生在另外一个事件前， 那么， 它们的结果也是如此。 数学描述为 传递性(transitivity): ∀ a,b,c,如果 a → b, b → c, 那么 a → c 对任意的a,b,c, 如果a发生在b之前，b发生在c之前， 那么， a 发生在c之前 不自反特性: ∀a, a ↛" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -61,8 +64,8 @@
     <meta name="twitter:data2" content="Jvm" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
 
     <script type="application/ld+json">
 {
@@ -84,7 +87,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/jvm-jmm"
     },
-    "description": "Learn, Innovate, Share - Business Based Vision."
+    "description": "Jvm内存模型解析 什么是内存模型 Java的内存模型和jvm中的内存layout是两个不同的概念。 Jvm中的Memory Layout，栈、栈帧、Heap[新生代(New Generation)、旧生代、MetaData区域]是一种内存结构，是为实现Java语言而设计的一种存储结构，它与jvm的运行时状态无关，只要运行Java程序，这种存贮结构就会被用到。 而JSR133中定义的Java内存模型是Java语言层面的，讨论的核心是指令集(Instruction Set)如何在N个线程(并行执行序列)的背景下，使得每个单一线程以正确、符合预期的方式表达。 那么，问题来了。 在什么情况下，指令集会以符合预期的方式运行？相反，什么条件使得结果让人难以接受，为什么？ Java的内存模型讨论的正是这种问题边界存在原因，以及最佳实践。 数据同步的两大问题类型 判断程序是否被正确同步,有两种方法: Data Race 对共享的字段或者数组元素同时进行R-W(读写)操作,这种情况被称为“数据竞争”(data race) ⇒ Happen Before Relationship happened-before 关系定义为: 如果一个事件(event) 发生在另外一个事件前， 那么， 它们的结果也是如此。 数学描述为 传递性(transitivity): ∀ a,b,c,如果 a → b, b → c, 那么 a → c 对任意的a,b,c, 如果a发生在b之前，b发生在c之前， 那么， a 发生在c之前 不自反特性: ∀a, a ↛"
 }
     </script>
 
@@ -100,7 +103,7 @@
     <link rel="alternate" type="application/rss+xml" title="JVM内部机制(七) Java内存模型(Java Momory Model)" href="/feed.xml" />
 
 </head>
-<body class="home-template">
+<body class="distribution">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -115,6 +118,12 @@ into the {body} of the default.hbs template -->
                 <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
             
         
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
         
     </div>
     <div class="site-nav-right">
@@ -150,13 +159,13 @@ into the {body} of the default.hbs template -->
                             
                         
                     
-                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="12 March 2016">2016-03-12 01:30</time>
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="12 March 2016">2016-03-12 11:30</time>
                 </section>
             </header>
             
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <script type="math/tex; mode=display">e^{i\pi} + 1 = 0\\</script>
+                    <p>Jvm内存模型解析</p>
 
 <h2 id="什么是内存模型">什么是内存模型</h2>
 
@@ -568,41 +577,12 @@ W(r).v == r.v
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
+                                        
+                                        
+                                            <li><a href="/springboot-how-bean-managed">spring中的100个问题-bean是被透明化管理的?</a></li>
+                                        
+                                    
                                   
                                 
                                   
@@ -610,16 +590,10 @@ W(r).v == r.v
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
-                                            <li><a href="/jvm-source-guide">JVM内部机制(六) HotSpot代码导读</a></li>
+                                            <li><a href="/springboot-how-bean-type-created">spring中的100个问题-bean如何支持运行时类型解析的?</a></li>
                                         
                                     
                                   
@@ -628,41 +602,7 @@ W(r).v == r.v
                                     
                                         
                                         
-                                            <li><a href="/jvm-source-guide-2">JVM内部机制(六) HotSpot代码导读</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/jvm-multiple-threads">JVM内部机制(五)多线程编程模型中的常见问题</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
+                                            <li><a href="/springboot-how-bean-created">spring中的100个问题-(spring-beans)bean是如何创建的?</a></li>
                                         
                                     
                                   
@@ -720,11 +660,6 @@ W(r).v == r.v
                                     
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -793,15 +728,6 @@ W(r).v == r.v
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
                                 
                                   
                                 
@@ -820,19 +746,10 @@ W(r).v == r.v
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
@@ -852,7 +769,7 @@ W(r).v == r.v
                         <footer class="read-next-card-footer">
                             <a href="/tag/jvm/">
                                 
-                                    See all 26 posts  →
+                                    See all 22 posts  →
                                 
                             </a>
                         </footer>
@@ -863,20 +780,20 @@ W(r).v == r.v
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card distribution no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/devops-kubernetes-basic">
+            <a class="post-card-content-link" href="/springboot-how-bean-managed">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Automation</span>
+                                <span class="post-card-tags">Jvm</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">kubernetes中的基本概念(一)</h2>
+                    <h2 class="post-card-title">spring中的100个问题-bean是被透明化管理的?</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -915,20 +832,20 @@ W(r).v == r.v
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card distribution no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/springboot-how-bean-managed">
+            <a class="post-card-content-link" href="/springboot-how-bean-type-created">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Springboot</span>
+                                <span class="post-card-tags">Jvm</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">spring中的100个问题-bean是被透明化管理的?</h2>
+                    <h2 class="post-card-title">spring中的100个问题-bean如何支持运行时类型解析的?</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -1013,11 +930,16 @@ W(r).v == r.v
                 <section class="my_profile">
                     <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
                     <div class='profile_detail'>
-                        <h5>关于我</h5>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
                     </div>
                 </section>
-                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
             </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
         </footer>
     </div>
 

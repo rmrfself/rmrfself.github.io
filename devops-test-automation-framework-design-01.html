@@ -45,14 +45,17 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="自动化测试框架设计(一)" />
-    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:description" content="基于selenium的web page自动化框架 需求分析 case 组织模块化 可在jenkins中运行(无头浏览 定时，每天一次) 兼容主流浏览器(IE,Chrome,Firefox) 面向对象实现，易于使用，可扩展 报告友好，易读 无编程经验者可清晰描述测试用例 api(json,xml,soap)可测试 适配常规web组件(弹窗、js) 可配置，自适应不同环境(develop,staging,product) 优秀的BDD框架-Cucumber 选用cucumber-jvm 基本解决了框架级别的问题: 运行时环境 - java 测试用例编写 - cucumber中的自然语言描述语法gerkin 使用mvn profile 解决运行时环境问题 page object 实现页面元素封装 使用cucumber-jvm-reports-plugin解决插件问题，兼容jenkins 使用feature file组织case 使用selenium java 驱动浏览器。jenkins中headless[方案待定] 框架组成 行为驱动框架cucumber java 版本 https://github.com/cucumber/cucumber-jvm 完整支持cucumber的特性 报告 https://github.com/jenkinsci/cucumber-jvm-reports-plugin 报告兼容jenkins， 清晰易读，并包含异常信息 支持数据驱动 实现简单 // Why doesn't" />
     <meta property="og:url" content="http://localhost:4000/devops-test-automation-framework-design-01" />
     <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2015-05-18T18:21:19+08:00" />
+    <meta property="article:modified_time" content="2015-05-18T18:21:19+08:00" />
     <meta property="article:tag" content="Automation" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="自动化测试框架设计(一)" />
-    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:description" content="基于selenium的web page自动化框架 需求分析 case 组织模块化 可在jenkins中运行(无头浏览 定时，每天一次) 兼容主流浏览器(IE,Chrome,Firefox) 面向对象实现，易于使用，可扩展 报告友好，易读 无编程经验者可清晰描述测试用例 api(json,xml,soap)可测试 适配常规web组件(弹窗、js) 可配置，自适应不同环境(develop,staging,product) 优秀的BDD框架-Cucumber 选用cucumber-jvm 基本解决了框架级别的问题: 运行时环境 - java 测试用例编写 - cucumber中的自然语言描述语法gerkin 使用mvn profile 解决运行时环境问题 page object 实现页面元素封装 使用cucumber-jvm-reports-plugin解决插件问题，兼容jenkins 使用feature file组织case 使用selenium java 驱动浏览器。jenkins中headless[方案待定] 框架组成 行为驱动框架cucumber java 版本 https://github.com/cucumber/cucumber-jvm 完整支持cucumber的特性 报告 https://github.com/jenkinsci/cucumber-jvm-reports-plugin 报告兼容jenkins， 清晰易读，并包含异常信息 支持数据驱动 实现简单 // Why doesn't" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -61,8 +64,8 @@
     <meta name="twitter:data2" content="Automation" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
 
     <script type="application/ld+json">
 {
@@ -84,7 +87,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/devops-test-automation-framework-design-01"
     },
-    "description": "Learn, Innovate, Share - Business Based Vision."
+    "description": "基于selenium的web page自动化框架 需求分析 case 组织模块化 可在jenkins中运行(无头浏览 定时，每天一次) 兼容主流浏览器(IE,Chrome,Firefox) 面向对象实现，易于使用，可扩展 报告友好，易读 无编程经验者可清晰描述测试用例 api(json,xml,soap)可测试 适配常规web组件(弹窗、js) 可配置，自适应不同环境(develop,staging,product) 优秀的BDD框架-Cucumber 选用cucumber-jvm 基本解决了框架级别的问题: 运行时环境 - java 测试用例编写 - cucumber中的自然语言描述语法gerkin 使用mvn profile 解决运行时环境问题 page object 实现页面元素封装 使用cucumber-jvm-reports-plugin解决插件问题，兼容jenkins 使用feature file组织case 使用selenium java 驱动浏览器。jenkins中headless[方案待定] 框架组成 行为驱动框架cucumber java 版本 https://github.com/cucumber/cucumber-jvm 完整支持cucumber的特性 报告 https://github.com/jenkinsci/cucumber-jvm-reports-plugin 报告兼容jenkins， 清晰易读，并包含异常信息 支持数据驱动 实现简单 // Why doesn't"
 }
     </script>
 
@@ -100,7 +103,7 @@
     <link rel="alternate" type="application/rss+xml" title="自动化测试框架设计(一)" href="/feed.xml" />
 
 </head>
-<body class="home-template">
+<body class="devops">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -115,6 +118,12 @@ into the {body} of the default.hbs template -->
                 <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
             
         
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
         
     </div>
     <div class="site-nav-right">
@@ -329,32 +338,12 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
-                                            <li><a href="/devops-docker-presentation">devops那些事-虚拟化讲座讲义</a></li>
+                                            <li><a href="/k8s-from-scrach">[GCE]单节点部署kubernetes集群</a></li>
                                         
                                     
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
@@ -371,7 +360,7 @@ into the {body} of the default.hbs template -->
                                     
                                         
                                         
-                                            <li><a href="/devops-test-cer">ISTQB证书(QA)</a></li>
+                                            <li><a href="/devops-docker-presentation">Devops那些事-虚拟化讲座讲义</a></li>
                                         
                                     
                                   
@@ -380,26 +369,12 @@ into the {body} of the default.hbs template -->
                                     
                                         
                                         
-                                            <li><a href="/devops-test-cer-2">ISTQB证书(QA)</a></li>
+                                            <li><a href="/archi-postgresql">PostgreSQL MySQL 数据类型映射</a></li>
                                         
                                     
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
@@ -435,17 +410,11 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
@@ -481,8 +450,6 @@ into the {body} of the default.hbs template -->
                                         
                                         
                                     
-                                  
-                                
                                   
                                 
                                   
@@ -517,11 +484,6 @@ into the {body} of the default.hbs template -->
                                     
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -536,12 +498,6 @@ into the {body} of the default.hbs template -->
                                         
                                         
                                     
-                                  
-                                
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
@@ -552,11 +508,6 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
                                 
                                   
                                     
@@ -570,8 +521,6 @@ into the {body} of the default.hbs template -->
                                         
                                         
                                     
-                                  
-                                
                                   
                                 
                                   
@@ -582,17 +531,14 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
                                 
                                   
                                     
                                         
                                         
                                     
+                                  
+                                
                                   
                                 
                                   
@@ -629,25 +575,10 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
                                     
-                                  
-                                
-                                  
-                                    
                                         
                                         
                                     
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
@@ -667,15 +598,7 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
-                                  
-                                
                                   
                                 
                                   
@@ -685,12 +608,6 @@ into the {body} of the default.hbs template -->
                                         
                                         
                                     
-                                  
-                                
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
@@ -700,27 +617,12 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
                                 
                                   
                                     
                                         
                                         
                                     
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
@@ -738,7 +640,7 @@ into the {body} of the default.hbs template -->
                         <footer class="read-next-card-footer">
                             <a href="/tag/automation/">
                                 
-                                    See all 35 posts  →
+                                    See all 28 posts  →
                                 
                             </a>
                         </footer>
@@ -749,10 +651,10 @@ into the {body} of the default.hbs template -->
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card distribution no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/jvm-multiple-threads-2">
+            <a class="post-card-content-link" href="/jvm-multiple-threads">
                 <header class="post-card-header">
                     
                         
@@ -801,7 +703,7 @@ into the {body} of the default.hbs template -->
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card distribution no-image">
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/jvm-function-lambda">
@@ -899,11 +801,16 @@ into the {body} of the default.hbs template -->
                 <section class="my_profile">
                     <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
                     <div class='profile_detail'>
-                        <h5>关于我</h5>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
                     </div>
                 </section>
-                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
             </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
         </footer>
     </div>
 

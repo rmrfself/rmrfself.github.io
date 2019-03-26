@@ -45,24 +45,27 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Miller-rabin算法" />
-    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:description" content="素数判定法则 辅助定理 Fermat’s little theorem（费马小定理) 如果p是素数, a是正整数且不能被p整除 $a^{p - 1}$ ≡ 1 (mod p) 这个定理和欧拉定理的结论一致 对于任意互素的两个数a和n，设𝜑(n)为小于n且与n互素的正整数的个数，则有 对于 P = 𝜑(n) $a^{P}$ ≡ 1 (mod p) 性质的证明 对于小于p的正整数的集合x {1,….,p-1}, p与集合中的所有元素互素 用a乘以x中的元素并对p取模，我们可以得到集合X。 这里a为定理中定义的整数 {a mod p, 2a mod p,…, (p-1)a mod p} 集合X的性质为 任意元素都小于p 所有元素不等于0，而且互不相等 这与x的定义相同，从而可以得出 也就是两个集合相等，从而两个集合中的元素相乘的后结果的对p模余也相等，可以得出等式 (p - 1)! mod p" />
     <meta property="og:url" content="http://localhost:4000/archi-miller-rabin" />
     <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
-    <meta property="article:tag" content="Automation" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2016-03-26T20:11:19+08:00" />
+    <meta property="article:modified_time" content="2016-03-26T20:11:19+08:00" />
+    <meta property="article:tag" content="Algorithm" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Miller-rabin算法" />
-    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:description" content="素数判定法则 辅助定理 Fermat’s little theorem（费马小定理) 如果p是素数, a是正整数且不能被p整除 $a^{p - 1}$ ≡ 1 (mod p) 这个定理和欧拉定理的结论一致 对于任意互素的两个数a和n，设𝜑(n)为小于n且与n互素的正整数的个数，则有 对于 P = 𝜑(n) $a^{P}$ ≡ 1 (mod p) 性质的证明 对于小于p的正整数的集合x {1,….,p-1}, p与集合中的所有元素互素 用a乘以x中的元素并对p取模，我们可以得到集合X。 这里a为定理中定义的整数 {a mod p, 2a mod p,…, (p-1)a mod p} 集合X的性质为 任意元素都小于p 所有元素不等于0，而且互不相等 这与x的定义相同，从而可以得出 也就是两个集合相等，从而两个集合中的元素相乘的后结果的对p模余也相等，可以得出等式 (p - 1)! mod p" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Automation" />
+    <meta name="twitter:data2" content="Algorithm" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
 
     <script type="application/ld+json">
 {
@@ -84,7 +87,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/archi-miller-rabin"
     },
-    "description": "Learn, Innovate, Share - Business Based Vision."
+    "description": "素数判定法则 辅助定理 Fermat’s little theorem（费马小定理) 如果p是素数, a是正整数且不能被p整除 $a^{p - 1}$ ≡ 1 (mod p) 这个定理和欧拉定理的结论一致 对于任意互素的两个数a和n，设𝜑(n)为小于n且与n互素的正整数的个数，则有 对于 P = 𝜑(n) $a^{P}$ ≡ 1 (mod p) 性质的证明 对于小于p的正整数的集合x {1,….,p-1}, p与集合中的所有元素互素 用a乘以x中的元素并对p取模，我们可以得到集合X。 这里a为定理中定义的整数 {a mod p, 2a mod p,…, (p-1)a mod p} 集合X的性质为 任意元素都小于p 所有元素不等于0，而且互不相等 这与x的定义相同，从而可以得出 也就是两个集合相等，从而两个集合中的元素相乘的后结果的对p模余也相等，可以得出等式 (p - 1)! mod p"
 }
     </script>
 
@@ -100,7 +103,7 @@
     <link rel="alternate" type="application/rss+xml" title="Miller-rabin算法" href="/feed.xml" />
 
 </head>
-<body class="home-template">
+<body class="designment">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -115,6 +118,12 @@ into the {body} of the default.hbs template -->
                 <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
             
         
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
         
     </div>
     <div class="site-nav-right">
@@ -146,11 +155,11 @@ into the {body} of the default.hbs template -->
                         <span class="date-divider">分类: </span>
                         
                             
-                               <a href='/tag/automation/'>AUTOMATION</a>
+                               <a href='/tag/algorithm/'>ALGORITHM</a>
                             
                         
                     
-                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="26 March 2016">2016-03-26 17:17</time>
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="26 March 2016">2016-03-26 20:11</time>
                 </section>
             </header>
             
@@ -297,7 +306,7 @@ into the {body} of the default.hbs template -->
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/automation/">Automation</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/algorithm/">Algorithm</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -327,197 +336,41 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                            <li><a href="/devops-docker-presentation">devops那些事-虚拟化讲座讲义</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/devops-test-cer">ISTQB证书(QA)</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/devops-test-cer-2">ISTQB证书(QA)</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
                                 
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -526,100 +379,33 @@ into the {body} of the default.hbs template -->
                                 
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
                                   
                                 
                                   
-                                    
-                                  
                                 
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
                                     
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
                                     
                                         
                                         
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                    
+                                            <li><a href="/archi-algorithm">常用工具类算法</a></li>
                                         
-                                        
                                     
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -648,22 +434,12 @@ into the {body} of the default.hbs template -->
                                 
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
                                 
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -678,18 +454,8 @@ into the {body} of the default.hbs template -->
                                 
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -715,9 +481,9 @@ into the {body} of the default.hbs template -->
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/automation/">
+                            <a href="/tag/algorithm/">
                                 
-                                    See all 35 posts  →
+                                    See all 1 posts  →
                                 
                             </a>
                         </footer>
@@ -728,10 +494,10 @@ into the {body} of the default.hbs template -->
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card devops no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/devops-dns-basic">
+            <a class="post-card-content-link" href="/devops-cryptography-rsa">
                 <header class="post-card-header">
                     
                         
@@ -741,7 +507,7 @@ into the {body} of the default.hbs template -->
                         
                     
 
-                    <h2 class="post-card-title">dns解析中常用记录的含义</h2>
+                    <h2 class="post-card-title">数据安全基础-RSA算法</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -780,10 +546,10 @@ into the {body} of the default.hbs template -->
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card devops no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/archi-miller-rabin-2">
+            <a class="post-card-content-link" href="/devops-dns-basic">
                 <header class="post-card-header">
                     
                         
@@ -793,7 +559,7 @@ into the {body} of the default.hbs template -->
                         
                     
 
-                    <h2 class="post-card-title">Miller-rabin算法</h2>
+                    <h2 class="post-card-title">dns解析中常用记录的含义</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -878,11 +644,16 @@ into the {body} of the default.hbs template -->
                 <section class="my_profile">
                     <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
                     <div class='profile_detail'>
-                        <h5>关于我</h5>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
                     </div>
                 </section>
-                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
             </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
         </footer>
     </div>
 

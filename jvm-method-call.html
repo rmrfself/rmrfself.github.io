@@ -45,14 +45,17 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="JVM内部机制(二)Java方法调用" />
-    <meta property="og:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta property="og:description" content="封装、继承、多态。 封装做为继承奠定基础，继承又为多态的表达奠定基础。 堆栈 堆的索引保存在栈上。 堆栈是一种数据结构,但更准确的说法是它是一种算法。 方法调用过程中, 堆栈的作用: 存储方法用到的参数。用BP+偏移量的方法,把参数引入到方法作用域内。 存储方法的返回值。把返回值重新放回到调用方的栈中。 存储下一条指令的地址, 以便方法调用返回后继续执行。 存储机器指令用到的操作数。 堆栈先进后出、后进先出的性质, 契合了函数嵌套调用的过程。 就像拉皮筋,被动伸展（这个过程消耗生物体能量）,却可自动收缩。递归表达了更高级的调用形式- 自动伸缩。 方法调用的技术实现可通过两个寄存器(bp,sp)交替赋值做到。这样形式是为传参和带值返回设计的，因为参数的数量和类型是不固定的。 如果不考虑传参，直接jmp也可以模拟函数调用。在数字电路的实现程序中存在很多的goto或者直接跳转。 进程加载后,加载器在table中默认寻找代码段main标签指向的地址，并放入寄存器(CS:IP),开始拉皮筋式的函数调用。 CS:IP 和 BP:SP 张开了一个至少2个维度的空间。随着指令指针IP的往前推进,BP和SP像两个用弹簧连在一起的滑块,上下移动。 在Hotspot中通过解析字节码实现的函数调用,在宏观上也是基于上面的认识。 JVM中java函数的执行过程 JVM中执行Java方法经历了两个大的阶段: JVM为执行java函数配备堆栈模型，然后JMP到调用Main函数。 这一步实现了从C++到Java的跨越。 虚拟机的设计目标就是为了做到这一步，JVM中所有的设计都是为了高效、准确的执行java字节码中的方法。 从字节码中解析字节码函数调用指令，eg. invoke_virtual，通过解释器或者JIT的指令分发函数去执行java函数。 从这个角度讲，java函数完成了‘函数’的定义，这个阶段的函数是抽象命令的集合。当被JIT解释执行的时候，才对应到了不同CPU架构下的具体指令的函数实现。Java的函数实现过程是用具体CPU架构下的指令去拟合的过程。 从抽象到具体的实现过程中，存在各种映射关系。这种映射可以有不同类型的解释器或者编译器完成。 第一阶段 使用JNI接口调用Main函数 下面是一个长途跋涉的分析过程。 在jvm的加载过程中，InvocationFunctions* ifn 这个结构体是libjvm动态库加载过程的精华所在。InvocationFunctions 是由3个函数指针组成的结构体。分别指向三个JNI接口。 启动步骤包括 JLI_Launch -&gt; LoadJavaVM -&gt; JVMInit 第一步，启动器中的main函数 int main(int argc," />
     <meta property="og:url" content="http://localhost:4000/jvm-method-call" />
     <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2016-01-22T22:10:11+08:00" />
+    <meta property="article:modified_time" content="2016-01-22T22:10:11+08:00" />
     <meta property="article:tag" content="Jvm" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="JVM内部机制(二)Java方法调用" />
-    <meta name="twitter:description" content="Learn, Innovate, Share - Business Based Vision." />
+    <meta name="twitter:description" content="封装、继承、多态。 封装做为继承奠定基础，继承又为多态的表达奠定基础。 堆栈 堆的索引保存在栈上。 堆栈是一种数据结构,但更准确的说法是它是一种算法。 方法调用过程中, 堆栈的作用: 存储方法用到的参数。用BP+偏移量的方法,把参数引入到方法作用域内。 存储方法的返回值。把返回值重新放回到调用方的栈中。 存储下一条指令的地址, 以便方法调用返回后继续执行。 存储机器指令用到的操作数。 堆栈先进后出、后进先出的性质, 契合了函数嵌套调用的过程。 就像拉皮筋,被动伸展（这个过程消耗生物体能量）,却可自动收缩。递归表达了更高级的调用形式- 自动伸缩。 方法调用的技术实现可通过两个寄存器(bp,sp)交替赋值做到。这样形式是为传参和带值返回设计的，因为参数的数量和类型是不固定的。 如果不考虑传参，直接jmp也可以模拟函数调用。在数字电路的实现程序中存在很多的goto或者直接跳转。 进程加载后,加载器在table中默认寻找代码段main标签指向的地址，并放入寄存器(CS:IP),开始拉皮筋式的函数调用。 CS:IP 和 BP:SP 张开了一个至少2个维度的空间。随着指令指针IP的往前推进,BP和SP像两个用弹簧连在一起的滑块,上下移动。 在Hotspot中通过解析字节码实现的函数调用,在宏观上也是基于上面的认识。 JVM中java函数的执行过程 JVM中执行Java方法经历了两个大的阶段: JVM为执行java函数配备堆栈模型，然后JMP到调用Main函数。 这一步实现了从C++到Java的跨越。 虚拟机的设计目标就是为了做到这一步，JVM中所有的设计都是为了高效、准确的执行java字节码中的方法。 从字节码中解析字节码函数调用指令，eg. invoke_virtual，通过解释器或者JIT的指令分发函数去执行java函数。 从这个角度讲，java函数完成了‘函数’的定义，这个阶段的函数是抽象命令的集合。当被JIT解释执行的时候，才对应到了不同CPU架构下的具体指令的函数实现。Java的函数实现过程是用具体CPU架构下的指令去拟合的过程。 从抽象到具体的实现过程中，存在各种映射关系。这种映射可以有不同类型的解释器或者编译器完成。 第一阶段 使用JNI接口调用Main函数 下面是一个长途跋涉的分析过程。 在jvm的加载过程中，InvocationFunctions* ifn 这个结构体是libjvm动态库加载过程的精华所在。InvocationFunctions 是由3个函数指针组成的结构体。分别指向三个JNI接口。 启动步骤包括 JLI_Launch -&gt; LoadJavaVM -&gt; JVMInit 第一步，启动器中的main函数 int main(int argc," />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -61,8 +64,8 @@
     <meta name="twitter:data2" content="Jvm" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
 
     <script type="application/ld+json">
 {
@@ -84,7 +87,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/jvm-method-call"
     },
-    "description": "Learn, Innovate, Share - Business Based Vision."
+    "description": "封装、继承、多态。 封装做为继承奠定基础，继承又为多态的表达奠定基础。 堆栈 堆的索引保存在栈上。 堆栈是一种数据结构,但更准确的说法是它是一种算法。 方法调用过程中, 堆栈的作用: 存储方法用到的参数。用BP+偏移量的方法,把参数引入到方法作用域内。 存储方法的返回值。把返回值重新放回到调用方的栈中。 存储下一条指令的地址, 以便方法调用返回后继续执行。 存储机器指令用到的操作数。 堆栈先进后出、后进先出的性质, 契合了函数嵌套调用的过程。 就像拉皮筋,被动伸展（这个过程消耗生物体能量）,却可自动收缩。递归表达了更高级的调用形式- 自动伸缩。 方法调用的技术实现可通过两个寄存器(bp,sp)交替赋值做到。这样形式是为传参和带值返回设计的，因为参数的数量和类型是不固定的。 如果不考虑传参，直接jmp也可以模拟函数调用。在数字电路的实现程序中存在很多的goto或者直接跳转。 进程加载后,加载器在table中默认寻找代码段main标签指向的地址，并放入寄存器(CS:IP),开始拉皮筋式的函数调用。 CS:IP 和 BP:SP 张开了一个至少2个维度的空间。随着指令指针IP的往前推进,BP和SP像两个用弹簧连在一起的滑块,上下移动。 在Hotspot中通过解析字节码实现的函数调用,在宏观上也是基于上面的认识。 JVM中java函数的执行过程 JVM中执行Java方法经历了两个大的阶段: JVM为执行java函数配备堆栈模型，然后JMP到调用Main函数。 这一步实现了从C++到Java的跨越。 虚拟机的设计目标就是为了做到这一步，JVM中所有的设计都是为了高效、准确的执行java字节码中的方法。 从字节码中解析字节码函数调用指令，eg. invoke_virtual，通过解释器或者JIT的指令分发函数去执行java函数。 从这个角度讲，java函数完成了‘函数’的定义，这个阶段的函数是抽象命令的集合。当被JIT解释执行的时候，才对应到了不同CPU架构下的具体指令的函数实现。Java的函数实现过程是用具体CPU架构下的指令去拟合的过程。 从抽象到具体的实现过程中，存在各种映射关系。这种映射可以有不同类型的解释器或者编译器完成。 第一阶段 使用JNI接口调用Main函数 下面是一个长途跋涉的分析过程。 在jvm的加载过程中，InvocationFunctions* ifn 这个结构体是libjvm动态库加载过程的精华所在。InvocationFunctions 是由3个函数指针组成的结构体。分别指向三个JNI接口。 启动步骤包括 JLI_Launch -&gt; LoadJavaVM -&gt; JVMInit 第一步，启动器中的main函数 int main(int argc,"
 }
     </script>
 
@@ -100,7 +103,7 @@
     <link rel="alternate" type="application/rss+xml" title="JVM内部机制(二)Java方法调用" href="/feed.xml" />
 
 </head>
-<body class="home-template">
+<body class="distribution">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -115,6 +118,12 @@ into the {body} of the default.hbs template -->
                 <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
             
         
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
         
     </div>
     <div class="site-nav-right">
@@ -1072,41 +1081,12 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
+                                        
+                                        
+                                            <li><a href="/springboot-how-bean-managed">spring中的100个问题-bean是被透明化管理的?</a></li>
+                                        
+                                    
                                   
                                 
                                   
@@ -1119,16 +1099,10 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
-                                            <li><a href="/jvm-source-guide">JVM内部机制(六) HotSpot代码导读</a></li>
+                                            <li><a href="/springboot-how-bean-type-created">spring中的100个问题-bean如何支持运行时类型解析的?</a></li>
                                         
                                     
                                   
@@ -1136,8 +1110,6 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
                                   
                                     
                                         
-                                        
-                                            <li><a href="/jvm-source-guide-2">JVM内部机制(六) HotSpot代码导读</a></li>
                                         
                                     
                                   
@@ -1192,43 +1164,6 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
                                     
                                   
                                 
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -1297,15 +1232,6 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
                                 
                                   
                                 
@@ -1324,19 +1250,10 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
@@ -1356,7 +1273,7 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
                         <footer class="read-next-card-footer">
                             <a href="/tag/jvm/">
                                 
-                                    See all 26 posts  →
+                                    See all 22 posts  →
                                 
                             </a>
                         </footer>
@@ -1367,7 +1284,7 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card distribution no-image">
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/jvm-internals">
@@ -1419,7 +1336,7 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
             
                 
 
-    <article class="post-card  no-image">
+    <article class="post-card distribution no-image">
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/jvm-class-loader">
@@ -1517,11 +1434,16 @@ address InterpreterGenerator::generate_normal_entry(bool synchronized) {
                 <section class="my_profile">
                     <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
                     <div class='profile_detail'>
-                        <h5>关于我</h5>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
                     </div>
                 </section>
-                <p class="copyright"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月</p>
             </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
         </footer>
     </div>
 
