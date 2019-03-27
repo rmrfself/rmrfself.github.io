@@ -47,7 +47,7 @@
     <meta property="og:title" content="设计模式之组织行为(二)" />
     <meta property="og:description" content="高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。 画图不易，请勿转载。 对象行为组织类 Iterator(迭代器) 代码示例 interface Iterator{ Object First(); Object Next(); boolean IsDone(); Object CurrentItem(); } abstract class Aggregate{ abstract Iterator CreateIterator(); } class ConcreteIterator implements Iterator{ private List&lt;Object&gt; list = new ArrayList&lt;Object&gt;(); private int curr=0; public ConcreteIterator(List&lt;Object&gt; list){ this.list = list; } public Object First(){ return list.get(0); } public" />
     <meta property="og:url" content="http://localhost:4000/archi-design-pattern-bahavior2" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/design_pattern.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
     <meta property="article:published_time" content="2017-02-07T10:02:11+08:00" />
@@ -57,7 +57,7 @@
     <meta name="twitter:title" content="设计模式之组织行为(二)" />
     <meta name="twitter:description" content="高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。 画图不易，请勿转载。 对象行为组织类 Iterator(迭代器) 代码示例 interface Iterator{ Object First(); Object Next(); boolean IsDone(); Object CurrentItem(); } abstract class Aggregate{ abstract Iterator CreateIterator(); } class ConcreteIterator implements Iterator{ private List&lt;Object&gt; list = new ArrayList&lt;Object&gt;(); private int curr=0; public ConcreteIterator(List&lt;Object&gt; list){ this.list = list; } public Object First(){ return list.get(0); } public" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/design_pattern.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
@@ -79,7 +79,7 @@
     "url": "http://localhost:4000/archi-design-pattern-bahavior2",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "url": "http://localhost:4000/assets/images/design_pattern.jpg",
         "width": 2000,
         "height": 666
     },
@@ -147,7 +147,7 @@ into the {body} of the default.hbs template -->
 <!-- #post -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
-        <article class="post-full  no-image">
+        <article class="post-full  ">
             <header class="post-full-header">
                 <h1 class="post-full-title">设计模式之组织行为(二)</h1>
                 <section class="post-full-meta">
@@ -810,7 +810,11 @@ if __name__=="__main__":
             
                 
 
-    <article class="post-card designment no-image">
+    <article class="post-card designment">
+        
+            <a class="post-card-image-link" href="/archi-design-pattern-bahavior">
+                <div class="post-card-image" style="background-image: url(/assets/images/design_pattern.jpg)"></div>
+            </a>
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/archi-design-pattern-bahavior">

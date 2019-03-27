@@ -47,7 +47,7 @@
     <meta property="og:title" content="设计模式之组件构造" />
     <meta property="og:description" content="架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。 画图不易，请勿转载。 对象构造类 适配器模式 代理模式 源码示例 import java.util.*; interface Image { public void displayImage(); } //on System A class RealImage implements Image { private String filename; public RealImage(String filename) { this.filename = filename; loadImageFromDisk(); } private void loadImageFromDisk() { System.out.println("Loading " + filename); } public void displayImage() { System.out.println("Displaying "" />
     <meta property="og:url" content="http://localhost:4000/archi-design-pattern-instructure" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/design_pattern.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
     <meta property="article:published_time" content="2017-01-27T10:12:19+08:00" />
@@ -57,7 +57,7 @@
     <meta name="twitter:title" content="设计模式之组件构造" />
     <meta name="twitter:description" content="架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。 画图不易，请勿转载。 对象构造类 适配器模式 代理模式 源码示例 import java.util.*; interface Image { public void displayImage(); } //on System A class RealImage implements Image { private String filename; public RealImage(String filename) { this.filename = filename; loadImageFromDisk(); } private void loadImageFromDisk() { System.out.println("Loading " + filename); } public void displayImage() { System.out.println("Displaying "" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/design_pattern.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
@@ -79,7 +79,7 @@
     "url": "http://localhost:4000/archi-design-pattern-instructure",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "url": "http://localhost:4000/assets/images/design_pattern.jpg",
         "width": 2000,
         "height": 666
     },
@@ -147,7 +147,7 @@ into the {body} of the default.hbs template -->
 <!-- #post -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
-        <article class="post-full  no-image">
+        <article class="post-full  ">
             <header class="post-full-header">
                 <h1 class="post-full-title">设计模式之组件构造</h1>
                 <section class="post-full-meta">
@@ -685,7 +685,11 @@ public final class FontData {
             
                 
 
-    <article class="post-card designment no-image">
+    <article class="post-card designment">
+        
+            <a class="post-card-image-link" href="/archi-design-pattern-createral">
+                <div class="post-card-image" style="background-image: url(/assets/images/design_pattern.jpg)"></div>
+            </a>
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/archi-design-pattern-createral">

@@ -47,7 +47,7 @@
     <meta property="og:title" content="Java中的工具类-集合类异常fail safe 与 fail fast" />
     <meta property="og:description" content="问题 collection接口实现类(arraylist,hashmap中的entry)的迭代过程中面临一个问题: 迭代过程中，集合类的元素被修改了会发生什么? 这个问题在java中有两种解决办法: fail fast 和 fail safe Fail Fast 迭代器内部原理 Fail Fast的理念是维护迭代过程中的强一致性(迭代前后的一致性比较) ArrayList&lt;Integer&gt; integers = new ArrayList&lt;&gt;(); integers.add(1); integers.add(2); integers.add(3); Iterator&lt;Integer&gt; itr = integers.iterator(); while (itr.hasNext()) { Integer a = itr.next(); integers.remove(a); } 这种情况下, 在迭代过程中移除被迭代集合中的元素，会ArrayList内部会抛出ConcurrentModificationException 异常。 内部原理是,ArrayList内部维持了1个变量 modCount，这个变量会增加，当: 集合元素增加时 集合元素移除、替换时 集合元素被重新排序时 在迭代器(iterator)中也维护了一个变量 expectedModCount 这个变量当生成迭代器时被赋值为集合的modCount， 当集合类被修改时，两个变量就不同，此时 会抛出异常。 Fail Safe" />
     <meta property="og:url" content="http://localhost:4000/jvm-collections" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/spring_java8.jpg" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/spring_java8.png" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
     <meta property="article:published_time" content="2015-09-13T22:11:35+08:00" />
@@ -57,7 +57,7 @@
     <meta name="twitter:title" content="Java中的工具类-集合类异常fail safe 与 fail fast" />
     <meta name="twitter:description" content="问题 collection接口实现类(arraylist,hashmap中的entry)的迭代过程中面临一个问题: 迭代过程中，集合类的元素被修改了会发生什么? 这个问题在java中有两种解决办法: fail fast 和 fail safe Fail Fast 迭代器内部原理 Fail Fast的理念是维护迭代过程中的强一致性(迭代前后的一致性比较) ArrayList&lt;Integer&gt; integers = new ArrayList&lt;&gt;(); integers.add(1); integers.add(2); integers.add(3); Iterator&lt;Integer&gt; itr = integers.iterator(); while (itr.hasNext()) { Integer a = itr.next(); integers.remove(a); } 这种情况下, 在迭代过程中移除被迭代集合中的元素，会ArrayList内部会抛出ConcurrentModificationException 异常。 内部原理是,ArrayList内部维持了1个变量 modCount，这个变量会增加，当: 集合元素增加时 集合元素移除、替换时 集合元素被重新排序时 在迭代器(iterator)中也维护了一个变量 expectedModCount 这个变量当生成迭代器时被赋值为集合的modCount， 当集合类被修改时，两个变量就不同，此时 会抛出异常。 Fail Safe" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/spring_java8.jpg" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/spring_java8.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
@@ -79,7 +79,7 @@
     "url": "http://localhost:4000/jvm-collections",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/spring_java8.jpg",
+        "url": "http://localhost:4000/assets/images/spring_java8.png",
         "width": 2000,
         "height": 666
     },
@@ -631,7 +631,7 @@ while (itr.hasNext()) {
     <article class="post-card distribution">
         
             <a class="post-card-image-link" href="/jvm-collections">
-                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.jpg)"></div>
+                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.png)"></div>
             </a>
         
         <div class="post-card-content">
