@@ -47,7 +47,7 @@
     <meta property="og:title" content="[GCE]安装Kubernetes Dashboard" />
     <meta property="og:description" content="Kubeternetes Dashboatd 安装手记 安装 部署之前,确认一下yaml文件是来自master分支。 下面这个链接是来自dashboard在github上的最新代码 https://sourcegraph.com/github.com/kubernetes/dashboard@master/-/blob/src/deploy/recommended/kubernetes-dashboard.yaml?diff=cfc62d86f67b70771dfc0798f10a891aa329b9c4&amp;utm_source=chrome-extension#L11 点击查看 文件内容分为一下几个部分 Dashboard Secret &amp;&amp; ServiceAccount 定义 apiVersion: v1 kind: Secret metadata: labels: k8s-app: kubernetes-dashboard name: kubernetes-dashboard-certs namespace: kube-system type: Opaque Secret 在负责的网络环境中是很重要的角色,它是k8s世界里资源流通的凭证。 Secret类型的k8s资源把敏感数据比如秘钥,密码,token中从配置文件中拿了出来。 如果没有secret这个类型的抽象类型, 在k8s的yaml配置文件中将到处都是关于password,token,secret 这样的字样,而且密码修改后非常不容易维护。 这就是secret这类资源的价值吧。 Secret是一个Map数据类型,附加了一些行为,比如可以以volume mount的方式导入到Pods定义文件中去。 Secret 存储后的类型有3种 Opaque 类型 中文意思是,以base64格式存储。 base64是一种可逆的加密方式。 echo -n 'zhangqinghua' | base64 输出 emhhbmdxaW5naHVh," />
     <meta property="og:url" content="http://localhost:4000/k8s-dashboard-install" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/deployments.png" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
     <meta property="article:published_time" content="2018-10-10T19:20:11+08:00" />
@@ -57,7 +57,7 @@
     <meta name="twitter:title" content="[GCE]安装Kubernetes Dashboard" />
     <meta name="twitter:description" content="Kubeternetes Dashboatd 安装手记 安装 部署之前,确认一下yaml文件是来自master分支。 下面这个链接是来自dashboard在github上的最新代码 https://sourcegraph.com/github.com/kubernetes/dashboard@master/-/blob/src/deploy/recommended/kubernetes-dashboard.yaml?diff=cfc62d86f67b70771dfc0798f10a891aa329b9c4&amp;utm_source=chrome-extension#L11 点击查看 文件内容分为一下几个部分 Dashboard Secret &amp;&amp; ServiceAccount 定义 apiVersion: v1 kind: Secret metadata: labels: k8s-app: kubernetes-dashboard name: kubernetes-dashboard-certs namespace: kube-system type: Opaque Secret 在负责的网络环境中是很重要的角色,它是k8s世界里资源流通的凭证。 Secret类型的k8s资源把敏感数据比如秘钥,密码,token中从配置文件中拿了出来。 如果没有secret这个类型的抽象类型, 在k8s的yaml配置文件中将到处都是关于password,token,secret 这样的字样,而且密码修改后非常不容易维护。 这就是secret这类资源的价值吧。 Secret是一个Map数据类型,附加了一些行为,比如可以以volume mount的方式导入到Pods定义文件中去。 Secret 存储后的类型有3种 Opaque 类型 中文意思是,以base64格式存储。 base64是一种可逆的加密方式。 echo -n 'zhangqinghua' | base64 输出 emhhbmdxaW5naHVh," />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/deployments.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
@@ -79,7 +79,7 @@
     "url": "http://localhost:4000/k8s-dashboard-install",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "url": "http://localhost:4000/assets/images/deployments.png",
         "width": 2000,
         "height": 666
     },
@@ -147,7 +147,7 @@ into the {body} of the default.hbs template -->
 <!-- #post -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
-        <article class="post-full  no-image">
+        <article class="post-full  ">
             <header class="post-full-header">
                 <h1 class="post-full-title">[GCE]安装Kubernetes Dashboard</h1>
                 <section class="post-full-meta">
@@ -162,7 +162,6 @@ into the {body} of the default.hbs template -->
                     <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="10 October 2018">2018-10-10 19:20</time>
                 </section>
             </header>
-            
             <section class="post-full-content">
                 <div class="kg-card-markdown">
                     <p>Kubeternetes Dashboatd 安装手记</p>
@@ -453,7 +452,11 @@ Starting to serve on 127.0.0.1:8001
             
                 
 
-    <article class="post-card science no-image">
+    <article class="post-card science">
+        
+            <a class="post-card-image-link" href="/data-scientist-startup">
+                <div class="post-card-image" style="background-image: url(/assets/images/csm_business-intelligence.jpg)"></div>
+            </a>
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/data-scientist-startup">
