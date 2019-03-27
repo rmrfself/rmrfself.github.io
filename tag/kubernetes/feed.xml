@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/kubernetes/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-03-27T10:49:08+08:00</updated>
+  <updated>2019-03-27T15:56:44+08:00</updated>
   <id>http://localhost:4000/tag/kubernetes/feed.xml</id>
 
   
@@ -311,6 +311,115 @@ Starting to serve on 127.0.0.1:8001
 
       
         <summary type="html">Kubeternetes Dashboatd 安装手记</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">在容器中使用Nuxt框架(docker-compose版)</title>
+      <link href="http://localhost:4000/vuejs-nuxjs-docker" rel="alternate" type="text/html" title="在容器中使用Nuxt框架(docker-compose版)" />
+      <published>2018-10-10T19:20:11+08:00</published>
+      <updated>2018-10-10T19:20:11+08:00</updated>
+      <id>http://localhost:4000/vuejs-nuxjs-docker</id>
+      <content type="html" xml:base="http://localhost:4000/vuejs-nuxjs-docker">&lt;p&gt;为前端开发者提供一个boilerplate,内部持续推进版&lt;/p&gt;
+
+&lt;h3 id=&quot;代码地址&quot;&gt;代码地址&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/rmrfself/nuxt-docker&quot;&gt;https://github.com/rmrfself/nuxt-docker&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;特点&quot;&gt;特点&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;生产环境与开发环境隔离&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用nginx反向代理，转发后端node&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;通过shell脚本生成ssl使用的自签名证书&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用docker-compose一键启动&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;使用方法&quot;&gt;使用方法&lt;/h3&gt;
+
+&lt;p&gt;1) 生成自签名证书&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;bash selfsigned.sh&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;输入自签名证书需要的组织信息。&lt;/p&gt;
+
+&lt;p&gt;2) 把证书文件移到 ./certs 下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
+├── zqh_CA.pem
+├── zqh.crt.pem
+├── zqh.csr
+└── zqh.key.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;3) 修改 ./config下的.env 文件&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ENVIRONMENT=dev
+SSL_CERT_PATH=./certs/zqh.crt.pem
+SSL_CERT_KEY_PATH=./certs/zqh.key.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;4) 安装 node_modules&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;docker-compose run npm install&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;5) 启动容器服务&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;docker-compose -f docker-compose.yml -f docker-compose.dev.yml up&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;启动生产环境&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;cp config/dev.conf  config/prod.conf&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;docker-compose up&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;6) docker-compse ps 查看启动后的服务&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nuxt-js      npm run buildStart   Up       0.0.0.0:3000-&amp;gt;3000/tcp
+nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:80-&amp;gt;80/tcp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="kubernetes" />
+      
+
+      
+        <summary type="html">为前端开发者提供一个boilerplate,内部持续推进版</summary>
       
 
       

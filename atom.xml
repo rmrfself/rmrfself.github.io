@@ -53,6 +53,21 @@
     
       
       <item>
+        <title>在容器中使用Nuxt框架(docker-compose版)</title>
+        
+          <description>&lt;p&gt;为前端开发者提供一个boilerplate,内部持续推进版&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 10 Oct 2018 19:20:11 +0800</pubDate>
+        <link>
+        http://localhost:4000/vuejs-nuxjs-docker</link>
+        <guid isPermaLink="true">http://localhost:4000/vuejs-nuxjs-docker</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>搭建devops团队</title>
         
           <description>&lt;p&gt;基于价值的软件交付流程&lt;/p&gt;

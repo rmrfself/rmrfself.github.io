@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-27T10:49:08+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-27T15:56:44+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
 
 &lt;h3 id=&quot;实现ai的基本策略&quot;&gt;实现AI的基本策略&lt;/h3&gt;
 
@@ -408,7 +408,82 @@ kubectl get pods –all-namespaces&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/&quot;&gt;Creating a single master cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">使用kubeadm部署单master节点的k8s, 1个master + 2个minion</summary></entry><entry><title type="html">搭建devops团队</title><link href="http://localhost:4000/devops-baseon-cloud" rel="alternate" type="text/html" title="搭建devops团队" /><published>2018-09-20T00:11:15+08:00</published><updated>2018-09-20T00:11:15+08:00</updated><id>http://localhost:4000/devops-baseon-cloud</id><content type="html" xml:base="http://localhost:4000/devops-baseon-cloud">&lt;p&gt;基于价值的软件交付流程&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">使用kubeadm部署单master节点的k8s, 1个master + 2个minion</summary></entry><entry><title type="html">在容器中使用Nuxt框架(docker-compose版)</title><link href="http://localhost:4000/vuejs-nuxjs-docker" rel="alternate" type="text/html" title="在容器中使用Nuxt框架(docker-compose版)" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/vuejs-nuxjs-docker</id><content type="html" xml:base="http://localhost:4000/vuejs-nuxjs-docker">&lt;p&gt;为前端开发者提供一个boilerplate,内部持续推进版&lt;/p&gt;
+
+&lt;h3 id=&quot;代码地址&quot;&gt;代码地址&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/rmrfself/nuxt-docker&quot;&gt;https://github.com/rmrfself/nuxt-docker&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;特点&quot;&gt;特点&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;生产环境与开发环境隔离&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用nginx反向代理，转发后端node&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;通过shell脚本生成ssl使用的自签名证书&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用docker-compose一键启动&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;使用方法&quot;&gt;使用方法&lt;/h3&gt;
+
+&lt;p&gt;1) 生成自签名证书&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;bash selfsigned.sh&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;输入自签名证书需要的组织信息。&lt;/p&gt;
+
+&lt;p&gt;2) 把证书文件移到 ./certs 下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
+├── zqh_CA.pem
+├── zqh.crt.pem
+├── zqh.csr
+└── zqh.key.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;3) 修改 ./config下的.env 文件&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ENVIRONMENT=dev
+SSL_CERT_PATH=./certs/zqh.crt.pem
+SSL_CERT_KEY_PATH=./certs/zqh.key.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;4) 安装 node_modules&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;docker-compose run npm install&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;5) 启动容器服务&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;docker-compose -f docker-compose.yml -f docker-compose.dev.yml up&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;启动生产环境&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;cp config/dev.conf  config/prod.conf&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;docker-compose up&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;6) docker-compse ps 查看启动后的服务&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nuxt-js      npm run buildStart   Up       0.0.0.0:3000-&amp;gt;3000/tcp
+nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:80-&amp;gt;80/tcp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="kubernetes" /><summary type="html">为前端开发者提供一个boilerplate,内部持续推进版</summary></entry><entry><title type="html">搭建devops团队</title><link href="http://localhost:4000/devops-baseon-cloud" rel="alternate" type="text/html" title="搭建devops团队" /><published>2018-09-20T00:11:15+08:00</published><updated>2018-09-20T00:11:15+08:00</updated><id>http://localhost:4000/devops-baseon-cloud</id><content type="html" xml:base="http://localhost:4000/devops-baseon-cloud">&lt;p&gt;基于价值的软件交付流程&lt;/p&gt;
 
 &lt;h3 id=&quot;devops-team&quot;&gt;Devops team&lt;/h3&gt;
 
@@ -622,388 +697,4 @@ add(&quot;a&quot;,&quot;b&quot;) // 多态 polymorphic
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/13.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/14.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">docker基础讲座讲义</summary></entry><entry><title type="html">PostgreSQL MySQL 数据类型映射</title><link href="http://localhost:4000/archi-postgresql" rel="alternate" type="text/html" title="PostgreSQL MySQL 数据类型映射" /><published>2017-08-15T18:31:11+08:00</published><updated>2017-08-15T18:31:11+08:00</updated><id>http://localhost:4000/archi-postgresql</id><content type="html" xml:base="http://localhost:4000/archi-postgresql">&lt;p&gt;参考
-&lt;a href=&quot;https://dev.mysql.com/doc/workbench/en/wb-migration-database-postgresql-typemapping.html&quot;&gt;PostgreSQL Type Mapping&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;postgresql类型-转换为-mysql类型&quot;&gt;PostgreSQL类型 转换为 MySQL类型&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;PostgreSQL Type&lt;/th&gt;
-      &lt;th&gt;MySQL Type&lt;/th&gt;
-      &lt;th&gt;Comment&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;INT&lt;/td&gt;
-      &lt;td&gt;INT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;SMALLINT&lt;/td&gt;
-      &lt;td&gt;SMALLINT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;BIGINT&lt;/td&gt;
-      &lt;td&gt;BIGINT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;SERIAL&lt;/td&gt;
-      &lt;td&gt;INT&lt;/td&gt;
-      &lt;td&gt;Sets AUTO_INCREMENT in its table definition.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;SMALLSERIAL&lt;/td&gt;
-      &lt;td&gt;SMALLINT&lt;/td&gt;
-      &lt;td&gt;Sets AUTO_INCREMENT in its table definition.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;BIGSERIAL&lt;/td&gt;
-      &lt;td&gt;BIGINT&lt;/td&gt;
-      &lt;td&gt;Sets AUTO_INCREMENT in its table definition.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;BIT&lt;/td&gt;
-      &lt;td&gt;BIT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;BOOLEAN&lt;/td&gt;
-      &lt;td&gt;TINYINT(1)&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;REAL&lt;/td&gt;
-      &lt;td&gt;FLOAT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;DOUBLE PRECISION&lt;/td&gt;
-      &lt;td&gt;DOUBLE&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;NUMERIC&lt;/td&gt;
-      &lt;td&gt;DECIMAL&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;DECIMAL&lt;/td&gt;
-      &lt;td&gt;DECIMAL&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;MONEY&lt;/td&gt;
-      &lt;td&gt;DECIMAL(19,2)&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CHAR&lt;/td&gt;
-      &lt;td&gt;CHAR/LONGTEXT&lt;/td&gt;
-      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have CHAR columns with a length up to 255 characters. Anything larger is migrated as LONGTEXT&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;NATIONAL CHARACTER&lt;/td&gt;
-      &lt;td&gt;CHAR/LONGTEXT&lt;/td&gt;
-      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types. In MySQL, character set of strings depend on the column character set instead of the datatype.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;VARCHAR&lt;/td&gt;
-      &lt;td&gt;VARCHAR/MEDIUMTEXT/LONGTEXT&lt;/td&gt;
-      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;NATIONAL CHARACTER VARYING&lt;/td&gt;
-      &lt;td&gt;VARCHAR/MEDIUMTEXT/LONGTEXT&lt;/td&gt;
-      &lt;td&gt;Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types. In MySQL, character set of strings depend on the column character set instead of the datatype.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;DATE&lt;/td&gt;
-      &lt;td&gt;DATE&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TIME&lt;/td&gt;
-      &lt;td&gt;TIME&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TIMESTAMP&lt;/td&gt;
-      &lt;td&gt;DATETIME&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;INTERVAL&lt;/td&gt;
-      &lt;td&gt;TIME&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;BYTEA&lt;/td&gt;
-      &lt;td&gt;LONGBLOB&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TEXT&lt;/td&gt;
-      &lt;td&gt;LONGTEXT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CIDR&lt;/td&gt;
-      &lt;td&gt;VARCHAR(43)&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;INET&lt;/td&gt;
-      &lt;td&gt;VARCHAR(43)&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;MACADDR&lt;/td&gt;
-      &lt;td&gt;VARCHAR(17)&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;UUID&lt;/td&gt;
-      &lt;td&gt;VARCHAR(36)&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;XML&lt;/td&gt;
-      &lt;td&gt;LONGTEXT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;JSON&lt;/td&gt;
-      &lt;td&gt;LONGTEXT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TSVECTOR&lt;/td&gt;
-      &lt;td&gt;LONGTEXT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TSQUERY&lt;/td&gt;
-      &lt;td&gt;LONGTEXT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ARRAY&lt;/td&gt;
-      &lt;td&gt;LONGTEXT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;POINT&lt;/td&gt;
-      &lt;td&gt;POINT&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;LINE&lt;/td&gt;
-      &lt;td&gt;LINESTRING&lt;/td&gt;
-      &lt;td&gt;Although LINE length is infinite, and LINESTRING is finite in MySQL, it is approximated&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;LSEG&lt;/td&gt;
-      &lt;td&gt;LINESTRING&lt;/td&gt;
-      &lt;td&gt;A LSEG is like a LINESTRING with only two points&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;BOX&lt;/td&gt;
-      &lt;td&gt;POLYGON&lt;/td&gt;
-      &lt;td&gt;A BOX is a POLYGON with five points and right angles&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;PATH&lt;/td&gt;
-      &lt;td&gt;LINESTRING&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;POLYGON&lt;/td&gt;
-      &lt;td&gt;POLYGON&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CIRCLE&lt;/td&gt;
-      &lt;td&gt;POLYGON&lt;/td&gt;
-      &lt;td&gt;A POLYGON is used to approximate a CIRCLE&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TXID_SNAPSHOT&lt;/td&gt;
-      &lt;td&gt;VARCHAR&lt;/td&gt;
-      &lt;td&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;类型&quot;&gt;类型&lt;/h3&gt;
-&lt;p&gt;1. 数据类型&lt;/p&gt;
-
-&lt;p&gt;1.1 PostgreSQL&lt;/p&gt;
-
-&lt;p&gt;高精度numeric, 浮点, 自增序列，货币，字节流，时间，日期，时间戳，布尔，枚举，平面几何，立体几何，多维几何，地球，PostGIS，网络，比特流，全文检索，UUID，XML，JSON，数组，复合类型，域类型，范围，树类型，化学类型，基因序列，FDW, 大对象, 图像&lt;/p&gt;
-
-&lt;p&gt;1.2 MySQL&lt;/p&gt;
-
-&lt;p&gt;数字，时间，字符串，简单的GIS，JSON&lt;/p&gt;
-
-&lt;p&gt;2. 支持索引的数据类型&lt;/p&gt;
-
-&lt;p&gt;2.1 PostgreSQL&lt;/p&gt;
-
-&lt;p&gt;高精度numeric, 浮点, 自增序列，货币，字节流，时间，日期，时间戳，布尔，枚举，平面几何，立体几何，多维几何，地球，PostGIS，网络，比特流，全文检索，UUID，XML，JSON，数组，复合类型，域类型，范围，树类型，化学，基因序列&lt;/p&gt;
-
-&lt;p&gt;2.2 MySQL&lt;/p&gt;
-
-&lt;p&gt;数字，字符串，比特流，时间，全文检索，GIS&lt;/p&gt;
-
-&lt;h3 id=&quot;索引支持&quot;&gt;索引支持&lt;/h3&gt;
-&lt;p&gt;1. 索引方法&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持 btree, hash, gist, sp-gist, gin, brin , bloom , rum 索引&lt;/p&gt;
-
-&lt;p&gt;MySQL 支持 btree, gis类型索引&lt;/p&gt;
-
-&lt;p&gt;2. 规则表达式、前后模糊查询，支持索引检索&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;3. 数组支持索引&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;4. 全文检索支持索引&lt;/p&gt;
-
-&lt;p&gt;5. 索引扩展功能&lt;/p&gt;
-
-&lt;p&gt;5.1 PostgreSQL 支持 表达式索引，部分索引，联合索引&lt;/p&gt;
-
-&lt;p&gt;5.2 PostgreSQL 支持图像相似度、文本相似度搜索&lt;/p&gt;
-
-&lt;p&gt;5.3 自定义索引访问方法(bloom, rum, ……)&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL支持&lt;/p&gt;
-
-&lt;h3 id=&quot;多引擎和外部源支持&quot;&gt;多引擎和外部源支持&lt;/h3&gt;
-&lt;p&gt;1. 多引擎支持&lt;/p&gt;
-
-&lt;p&gt;1.1 PostgreSQL&lt;/p&gt;
-
-&lt;p&gt;内置heap, 通过插件实现内存表, 列存储, 压缩存储, 流式存储, 非关系存储等。&lt;/p&gt;
-
-&lt;p&gt;1.2 MySQL&lt;/p&gt;
-
-&lt;p&gt;MyISAM, innodb, …&lt;/p&gt;
-
-&lt;p&gt;2. 外部表&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL支持任意外部数据源, (例如jdbc, file, odbc, oracle, mysql, db2, redis, mongo, ES, hadoop……)&lt;/p&gt;
-
-&lt;p&gt;https://wiki.postgresql.org/wiki/Fdw&lt;/p&gt;
-
-&lt;p&gt;3. dblink&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;4. 内存表&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 通过外部表支持，或者通过插件支持&lt;/p&gt;
-
-&lt;p&gt;5. ES(弹性搜索引擎) 引擎&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;h3 id=&quot;安全&quot;&gt;安全&lt;/h3&gt;
-&lt;p&gt;1. 数据加密&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持加密数据类型，可选GPG加密算法&lt;/p&gt;
-
-&lt;p&gt;2. 认证方法&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持 密码、LDAP、AD、GSSAPI、SSPI、Ident、Peer、RADIUS、PAM、签名认证&lt;/p&gt;
-
-&lt;p&gt;3. 数据传输加密&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;4. 行安全策略&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;5. 数据库内部支持libselinux接口, (美国国家安全局制定的安全加强标准)&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;h3 id=&quot;优化器&quot;&gt;优化器&lt;/h3&gt;
-&lt;p&gt;http://www.postgresql.org/docs/9.5/static/runtime-config-query.html&lt;/p&gt;
-
-&lt;p&gt;1. GPU 并行计算支持&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;2. 遗传优化器算法&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持CBO、CRO、遗传算法&lt;/p&gt;
-
-&lt;p&gt;3. HINT PLAN&lt;/p&gt;
-
-&lt;p&gt;4. CPU 并行计算&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持 (线性性能提升)&lt;/p&gt;
-
-&lt;p&gt;5. 自定义成本因子&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;h3 id=&quot;编程扩展&quot;&gt;编程扩展&lt;/h3&gt;
-&lt;p&gt;1. 是否支持采样查询&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;2. 是否支持扩展采样算法&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;3. 自定义数据类型&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;4. 自定义索引方法&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;5. 字符集自动转换, C扩展接口&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;6. 自定义聚合&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;7. 自定义窗口&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;h3 id=&quot;扩展能力&quot;&gt;扩展能力&lt;/h3&gt;
-&lt;p&gt;1. 类型扩展，操作符扩展，函数扩展，索引方法扩展，索引扩展，&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;2. C触发器函数， C事件触发器函数&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;3. 函数语言扩展&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持扩展函数支持接口, erlang, ….&lt;/p&gt;
-
-&lt;p&gt;4. 机器学习库&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;
-
-&lt;p&gt;5. 流式计算&lt;/p&gt;
-
-&lt;p&gt;PostgreSQL 支持&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">参考 PostgreSQL Type Mapping</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/14.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">docker基础讲座讲义</summary></entry></feed>

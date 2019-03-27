@@ -9,7 +9,7 @@
 
 
 
-    <title>论什么是软件架构?</title>
+    <title>在容器中使用Nuxt框架(docker-compose版)</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -38,200 +38,30 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="Learn, Innovate, Share - Business Based Vision." />
     <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="http://localhost:4000/archi-architect-who" />
+    <link rel="canonical" href="http://localhost:4000/vuejs-nuxjs-docker" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="论什么是软件架构?" />
-    <meta property="og:description" content="架构的核心内容是什么?
-
-架构的原则(Objectives)
-
-总体原则
-
-
-
-从架构的角度看(下面箭头方向)，推荐的架构原则
-
-
-  
-    (1) 面向变化设计
-  
-  
-    (2) 面向风险设计
-  
-  
-    (3) 模型化 + 可视化(这是为什么mvc经久不衰的原因，它同时满足了两个要求)
-  
-  
-    (4) 面向进化设计
-  
-
-
-架构的过程
-
-架构不是一个东西(not a thing, not a tool)，它是一个最优路径规划和设计的过程。
-
-
-  
-    (1) 组织过程。 它为团队成员(stakeholders)提供沟通桥梁。
-  
-  
-    (2) 早期决策，架构价值的重要体现。
-  
-
-
-好的架构表现
-
-
-  
-    (1) 测试的完整性，满足质量要求
-  
-  
-    (2) 安全。
-  
-
-
-
-  安全的竞争壁垒的保障，属于“守”的一方。
-
-
-
-  (3) 满足性能能要求。
-
-
-
-  架构必须满足时空要求
-
-
-
-  (4) 用户友好
-
-
-
-  使用者友好，满足人类情感要求，至少不排斥。
-
-
-
-  (5) 可扩展
-
-
-
-  潜在的满足时空要求
-
-
-
-  (6) 可维护
-
-
-
-  使异常可控制， 满足内部安全性要求。
-
-
-" />
-    <meta property="og:url" content="http://localhost:4000/archi-architect-who" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="og:title" content="在容器中使用Nuxt框架(docker-compose版)" />
+    <meta property="og:description" content="为前端开发者提供一个boilerplate,内部持续推进版 代码地址 https://github.com/rmrfself/nuxt-docker 特点 生产环境与开发环境隔离 使用nginx反向代理，转发后端node 通过shell脚本生成ssl使用的自签名证书 使用docker-compose一键启动 使用方法 1) 生成自签名证书 bash selfsigned.sh 输入自签名证书需要的组织信息。 2) 把证书文件移到 ./certs 下 . ├── zqh_CA.pem ├── zqh.crt.pem ├── zqh.csr └── zqh.key.pem 3) 修改 ./config下的.env 文件 ENVIRONMENT=dev SSL_CERT_PATH=./certs/zqh.crt.pem SSL_CERT_KEY_PATH=./certs/zqh.key.pem 4) 安装 node_modules docker-compose run npm install 5) 启动容器服务 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up 启动生产环境" />
+    <meta property="og:url" content="http://localhost:4000/vuejs-nuxjs-docker" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/vuejs.png" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
-    <meta property="article:published_time" content="2016-02-10T20:29:11+08:00" />
-    <meta property="article:modified_time" content="2016-02-10T20:29:11+08:00" />
-    <meta property="article:tag" content="Architecture" />
+    <meta property="article:published_time" content="2018-10-10T19:20:11+08:00" />
+    <meta property="article:modified_time" content="2018-10-10T19:20:11+08:00" />
+    <meta property="article:tag" content="Kubernetes" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="论什么是软件架构?" />
-    <meta name="twitter:description" content="架构的核心内容是什么?
-
-架构的原则(Objectives)
-
-总体原则
-
-
-
-从架构的角度看(下面箭头方向)，推荐的架构原则
-
-
-  
-    (1) 面向变化设计
-  
-  
-    (2) 面向风险设计
-  
-  
-    (3) 模型化 + 可视化(这是为什么mvc经久不衰的原因，它同时满足了两个要求)
-  
-  
-    (4) 面向进化设计
-  
-
-
-架构的过程
-
-架构不是一个东西(not a thing, not a tool)，它是一个最优路径规划和设计的过程。
-
-
-  
-    (1) 组织过程。 它为团队成员(stakeholders)提供沟通桥梁。
-  
-  
-    (2) 早期决策，架构价值的重要体现。
-  
-
-
-好的架构表现
-
-
-  
-    (1) 测试的完整性，满足质量要求
-  
-  
-    (2) 安全。
-  
-
-
-
-  安全的竞争壁垒的保障，属于“守”的一方。
-
-
-
-  (3) 满足性能能要求。
-
-
-
-  架构必须满足时空要求
-
-
-
-  (4) 用户友好
-
-
-
-  使用者友好，满足人类情感要求，至少不排斥。
-
-
-
-  (5) 可扩展
-
-
-
-  潜在的满足时空要求
-
-
-
-  (6) 可维护
-
-
-
-  使异常可控制， 满足内部安全性要求。
-
-
-" />
+    <meta name="twitter:title" content="在容器中使用Nuxt框架(docker-compose版)" />
+    <meta name="twitter:description" content="为前端开发者提供一个boilerplate,内部持续推进版 代码地址 https://github.com/rmrfself/nuxt-docker 特点 生产环境与开发环境隔离 使用nginx反向代理，转发后端node 通过shell脚本生成ssl使用的自签名证书 使用docker-compose一键启动 使用方法 1) 生成自签名证书 bash selfsigned.sh 输入自签名证书需要的组织信息。 2) 把证书文件移到 ./certs 下 . ├── zqh_CA.pem ├── zqh.crt.pem ├── zqh.csr └── zqh.key.pem 3) 修改 ./config下的.env 文件 ENVIRONMENT=dev SSL_CERT_PATH=./certs/zqh.crt.pem SSL_CERT_KEY_PATH=./certs/zqh.key.pem 4) 安装 node_modules docker-compose run npm install 5) 启动容器服务 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up 启动生产环境" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/vuejs.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Architecture" />
+    <meta name="twitter:data2" content="Kubernetes" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
     <meta property="og:image:width" content="1400" />
@@ -246,103 +76,18 @@
         "name": "张庆华的个人日志",
         "logo": "http://localhost:4000/assets/images/blog-icon.svg"
     },
-    "url": "http://localhost:4000/archi-architect-who",
+    "url": "http://localhost:4000/vuejs-nuxjs-docker",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "url": "http://localhost:4000/assets/images/vuejs.png",
         "width": 2000,
         "height": 666
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://localhost:4000/archi-architect-who"
+        "@id": "http://localhost:4000/vuejs-nuxjs-docker"
     },
-    "description": "架构的核心内容是什么?
-
-架构的原则(Objectives)
-
-总体原则
-
-
-
-从架构的角度看(下面箭头方向)，推荐的架构原则
-
-
-  
-    (1) 面向变化设计
-  
-  
-    (2) 面向风险设计
-  
-  
-    (3) 模型化 + 可视化(这是为什么mvc经久不衰的原因，它同时满足了两个要求)
-  
-  
-    (4) 面向进化设计
-  
-
-
-架构的过程
-
-架构不是一个东西(not a thing, not a tool)，它是一个最优路径规划和设计的过程。
-
-
-  
-    (1) 组织过程。 它为团队成员(stakeholders)提供沟通桥梁。
-  
-  
-    (2) 早期决策，架构价值的重要体现。
-  
-
-
-好的架构表现
-
-
-  
-    (1) 测试的完整性，满足质量要求
-  
-  
-    (2) 安全。
-  
-
-
-
-  安全的竞争壁垒的保障，属于“守”的一方。
-
-
-
-  (3) 满足性能能要求。
-
-
-
-  架构必须满足时空要求
-
-
-
-  (4) 用户友好
-
-
-
-  使用者友好，满足人类情感要求，至少不排斥。
-
-
-
-  (5) 可扩展
-
-
-
-  潜在的满足时空要求
-
-
-
-  (6) 可维护
-
-
-
-  使异常可控制， 满足内部安全性要求。
-
-
-"
+    "description": "为前端开发者提供一个boilerplate,内部持续推进版 代码地址 https://github.com/rmrfself/nuxt-docker 特点 生产环境与开发环境隔离 使用nginx反向代理，转发后端node 通过shell脚本生成ssl使用的自签名证书 使用docker-compose一键启动 使用方法 1) 生成自签名证书 bash selfsigned.sh 输入自签名证书需要的组织信息。 2) 把证书文件移到 ./certs 下 . ├── zqh_CA.pem ├── zqh.crt.pem ├── zqh.csr └── zqh.key.pem 3) 修改 ./config下的.env 文件 ENVIRONMENT=dev SSL_CERT_PATH=./certs/zqh.crt.pem SSL_CERT_KEY_PATH=./certs/zqh.key.pem 4) 安装 node_modules docker-compose run npm install 5) 启动容器服务 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up 启动生产环境"
 }
     </script>
 
@@ -355,10 +100,10 @@
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="论什么是软件架构?" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="在容器中使用Nuxt框架(docker-compose版)" href="/feed.xml" />
 
 </head>
-<body class="designment">
+<body class="devops">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -402,107 +147,99 @@ into the {body} of the default.hbs template -->
 <!-- #post -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
-        <article class="post-full  no-image">
+        <article class="post-full  ">
             <header class="post-full-header">
-                <h1 class="post-full-title">论什么是软件架构?</h1>
+                <h1 class="post-full-title">在容器中使用Nuxt框架(docker-compose版)</h1>
                 <section class="post-full-meta">
                     
                         <span class="date-divider">分类: </span>
                         
                             
-                               <a href='/tag/architecture/'>ARCHITECTURE</a>
+                               <a href='/tag/kubernetes/'>KUBERNETES</a>
                             
                         
                     
-                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="10 February 2016">2016-02-10 20:29</time>
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="10 October 2018">2018-10-10 19:20</time>
                 </section>
             </header>
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>架构的核心内容是什么?</p>
+                    <p>为前端开发者提供一个boilerplate,内部持续推进版</p>
 
-<h4 id="架构的原则objectives">架构的原则(Objectives)</h4>
+<h3 id="代码地址">代码地址</h3>
 
-<p>总体原则</p>
+<p><a href="https://github.com/rmrfself/nuxt-docker">https://github.com/rmrfself/nuxt-docker</a></p>
 
-<p><img src="http://blog.h5tube.com/architecture-01.png" alt="" /></p>
-
-<p>从架构的角度看(下面箭头方向)，推荐的架构原则</p>
+<h3 id="特点">特点</h3>
 
 <ul>
   <li>
-    <p>(1) 面向变化设计</p>
+    <p>生产环境与开发环境隔离</p>
   </li>
   <li>
-    <p>(2) 面向风险设计</p>
+    <p>使用nginx反向代理，转发后端node</p>
   </li>
   <li>
-    <p>(3) 模型化 + 可视化(这是为什么mvc经久不衰的原因，它同时满足了两个要求)</p>
+    <p>通过shell脚本生成ssl使用的自签名证书</p>
   </li>
   <li>
-    <p>(4) 面向进化设计</p>
+    <p>使用docker-compose一键启动</p>
   </li>
 </ul>
 
-<h4 id="架构的过程">架构的过程</h4>
+<h3 id="使用方法">使用方法</h3>
 
-<p>架构不是一个东西(not a thing, not a tool)，它是一个最优路径规划和设计的过程。</p>
-
-<ul>
-  <li>
-    <p>(1) 组织过程。 它为团队成员(stakeholders)提供沟通桥梁。</p>
-  </li>
-  <li>
-    <p>(2) 早期决策，架构价值的重要体现。</p>
-  </li>
-</ul>
-
-<h4 id="好的架构表现">好的架构表现</h4>
-
-<ul>
-  <li>
-    <p>(1) 测试的完整性，满足质量要求</p>
-  </li>
-  <li>
-    <p>(2) 安全。</p>
-  </li>
-</ul>
+<p>1) 生成自签名证书</p>
 
 <blockquote>
-  <p>安全的竞争壁垒的保障，属于“守”的一方。</p>
+  <p>bash selfsigned.sh</p>
 </blockquote>
 
-<ul>
-  <li>(3) 满足性能能要求。</li>
-</ul>
+<p>输入自签名证书需要的组织信息。</p>
+
+<p>2) 把证书文件移到 ./certs 下</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── zqh_CA.pem
+├── zqh.crt.pem
+├── zqh.csr
+└── zqh.key.pem
+</code></pre></div></div>
+
+<p>3) 修改 ./config下的.env 文件</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENVIRONMENT=dev
+SSL_CERT_PATH=./certs/zqh.crt.pem
+SSL_CERT_KEY_PATH=./certs/zqh.key.pem
+</code></pre></div></div>
+
+<p>4) 安装 node_modules</p>
 
 <blockquote>
-  <p>架构必须满足时空要求</p>
+  <p>docker-compose run npm install</p>
 </blockquote>
 
-<ul>
-  <li>(4) 用户友好</li>
-</ul>
+<p>5) 启动容器服务</p>
 
 <blockquote>
-  <p>使用者友好，满足人类情感要求，至少不排斥。</p>
+  <p>docker-compose -f docker-compose.yml -f docker-compose.dev.yml up</p>
 </blockquote>
 
-<ul>
-  <li>(5) 可扩展</li>
-</ul>
+<p>启动生产环境</p>
 
 <blockquote>
-  <p>潜在的满足时空要求</p>
+  <p>cp config/dev.conf  config/prod.conf</p>
 </blockquote>
-
-<ul>
-  <li>(6) 可维护</li>
-</ul>
 
 <blockquote>
-  <p>使异常可控制， 满足内部安全性要求。</p>
+  <p>docker-compose up</p>
 </blockquote>
+
+<p>6) docker-compse ps 查看启动后的服务</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nuxt-js      npm run buildStart   Up       0.0.0.0:3000-&gt;3000/tcp
+nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&gt;443/tcp, 0.0.0.0:80-&gt;80/tcp
+</code></pre></div></div>
 
 
                 </div>
@@ -553,7 +290,7 @@ into the {body} of the default.hbs template -->
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/architecture/">Architecture</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/kubernetes/">Kubernetes</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -565,110 +302,14 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
-                                            <li><a href="/archi-architect-org">对开发方式的思考</a></li>
+                                            <li><a href="/k8s-dashboard-install">[GCE]安装Kubernetes Dashboard</a></li>
                                         
                                     
+                                  
+                                
                                   
                                 
                                   
@@ -708,12 +349,101 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                            <li><a href="/archi-postgresql">Postgres的流复制</a></li>
-                                        
-                                    
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                                   
@@ -737,9 +467,9 @@ into the {body} of the default.hbs template -->
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/architecture/">
+                            <a href="/tag/kubernetes/">
                                 
-                                    See all 2 posts  →
+                                    See all 1 posts  →
                                 
                             </a>
                         </footer>
@@ -750,20 +480,24 @@ into the {body} of the default.hbs template -->
             
                 
 
-    <article class="post-card designment no-image">
+    <article class="post-card devops">
+        
+            <a class="post-card-image-link" href="/k8s-from-scrach">
+                <div class="post-card-image" style="background-image: url(/assets/images/deployments.png)"></div>
+            </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/archi-architect-org">
+            <a class="post-card-content-link" href="/k8s-from-scrach">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Architecture</span>
+                                <span class="post-card-tags">Automation</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">对开发方式的思考</h2>
+                    <h2 class="post-card-title">[GCE]单节点部署kubernetes集群</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -802,24 +536,24 @@ into the {body} of the default.hbs template -->
             
                 
 
-    <article class="post-card distribution">
+    <article class="post-card javaee">
         
-            <a class="post-card-image-link" href="/jvm-debug-tool">
-                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.png)"></div>
+            <a class="post-card-image-link" href="/devops-baseon-cloud">
+                <div class="post-card-image" style="background-image: url(/assets/images/devops-gears-team.jpg)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/jvm-debug-tool">
+            <a class="post-card-content-link" href="/devops-baseon-cloud">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Jvm</span>
+                                <span class="post-card-tags">Nodejs</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">JVM 内部机制(三)调试工具集</h2>
+                    <h2 class="post-card-title">搭建devops团队</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -868,18 +602,18 @@ into the {body} of the default.hbs template -->
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">论什么是软件架构?</div>
+    <div class="floating-header-title">在容器中使用Nuxt框架(docker-compose版)</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%E8%AE%BA%E4%BB%80%E4%B9%88%E6%98%AF%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%3F&amp;url=https://rmrfself.github.io/archi-architect-who"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E4%BD%BF%E7%94%A8Nuxt%E6%A1%86%E6%9E%B6%28docker-compose%E7%89%88%29&amp;url=https://rmrfself.github.io/vuejs-nuxjs-docker"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/archi-architect-who"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/vuejs-nuxjs-docker"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
