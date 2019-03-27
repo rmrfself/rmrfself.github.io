@@ -47,7 +47,7 @@
     <meta property="og:title" content="spring中的100个问题-(spring-beans)bean是如何创建的?" />
     <meta property="og:description" content="Bean container解决的核心问题是如何在运行时(run-time)动态获取或创建Java Object。 Bean Container的类图 spring提供了3中方式创建beans 函数调用堆栈 AutowireCapableBeanFactory 接口 Spring-beans模块中使用AutowireCapableBeanFactory接口实现bean的创建和销毁。 &lt;T&gt; T createBean(Class&lt;T&gt; beanClass) throws BeansException; void autowireBean(Object existingBean) throws BeansException; Object configureBean(Object existingBean, String beanName) throws BeansException; Object createBean(Class&lt;?&gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException; Object autowire(Class&lt;?&gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException; void autowireBeanProperties(Object existingBean, int" />
     <meta property="og:url" content="http://localhost:4000/springboot-how-bean-created" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/spring_java8.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
     <meta property="article:published_time" content="2016-03-10T07:50:11+08:00" />
@@ -57,7 +57,7 @@
     <meta name="twitter:title" content="spring中的100个问题-(spring-beans)bean是如何创建的?" />
     <meta name="twitter:description" content="Bean container解决的核心问题是如何在运行时(run-time)动态获取或创建Java Object。 Bean Container的类图 spring提供了3中方式创建beans 函数调用堆栈 AutowireCapableBeanFactory 接口 Spring-beans模块中使用AutowireCapableBeanFactory接口实现bean的创建和销毁。 &lt;T&gt; T createBean(Class&lt;T&gt; beanClass) throws BeansException; void autowireBean(Object existingBean) throws BeansException; Object configureBean(Object existingBean, String beanName) throws BeansException; Object createBean(Class&lt;?&gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException; Object autowire(Class&lt;?&gt; beanClass, int autowireMode, boolean dependencyCheck) throws BeansException; void autowireBeanProperties(Object existingBean, int" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/spring_java8.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
@@ -79,7 +79,7 @@
     "url": "http://localhost:4000/springboot-how-bean-created",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "url": "http://localhost:4000/assets/images/spring_java8.jpg",
         "width": 2000,
         "height": 666
     },
@@ -147,7 +147,7 @@ into the {body} of the default.hbs template -->
 <!-- #post -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
-        <article class="post-full  no-image">
+        <article class="post-full  ">
             <header class="post-full-header">
                 <h1 class="post-full-title">spring中的100个问题-(spring-beans)bean是如何创建的?</h1>
                 <section class="post-full-meta">
@@ -581,7 +581,11 @@ String[] getAliases(String name);
             
                 
 
-    <article class="post-card distribution no-image">
+    <article class="post-card distribution">
+        
+            <a class="post-card-image-link" href="/springboot-how-bean-type-created">
+                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.jpg)"></div>
+            </a>
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/springboot-how-bean-type-created">
@@ -633,7 +637,11 @@ String[] getAliases(String name);
             
                 
 
-    <article class="post-card distribution no-image">
+    <article class="post-card distribution">
+        
+            <a class="post-card-image-link" href="/jvm-source-guide">
+                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.jpg)"></div>
+            </a>
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/jvm-source-guide">

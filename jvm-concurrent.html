@@ -47,7 +47,7 @@
     <meta property="og:title" content="Java中的并发编程框架(一)" />
     <meta property="og:description" content="并行计算是计算机历史上的一个伤疤。 Java并行执行框架 线程可执行体的几种形式 Runnable Callable 直接集成Thread Runnable 和 Callable 接口的异同 都代表一个可执行任务(task) Runnable 接口可以当做Thread的构造参数传入Thread实例，Callable不可以。 Runnable 和 Callable 都可以被ExecutorService调度管理 返回值 Runnable 接口的run函数没有参数，没有返回值。 public interface Runnable { public void run(); } 被executor调度时，future没有值 public void executeTask() { executorService = Executors.newSingleThreadExecutor(); Future future = executorService.submit(new EventLoggingTask()); executorService.shutdown(); } Callable接口的定义 Callable定义中包含了泛型的返回值。 public interface Callable&lt;V&gt; { V" />
     <meta property="og:url" content="http://localhost:4000/jvm-concurrent" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/spring_java8.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
     <meta property="article:published_time" content="2015-09-08T11:11:11+08:00" />
@@ -57,7 +57,7 @@
     <meta name="twitter:title" content="Java中的并发编程框架(一)" />
     <meta name="twitter:description" content="并行计算是计算机历史上的一个伤疤。 Java并行执行框架 线程可执行体的几种形式 Runnable Callable 直接集成Thread Runnable 和 Callable 接口的异同 都代表一个可执行任务(task) Runnable 接口可以当做Thread的构造参数传入Thread实例，Callable不可以。 Runnable 和 Callable 都可以被ExecutorService调度管理 返回值 Runnable 接口的run函数没有参数，没有返回值。 public interface Runnable { public void run(); } 被executor调度时，future没有值 public void executeTask() { executorService = Executors.newSingleThreadExecutor(); Future future = executorService.submit(new EventLoggingTask()); executorService.shutdown(); } Callable接口的定义 Callable定义中包含了泛型的返回值。 public interface Callable&lt;V&gt; { V" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/spring_java8.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
@@ -79,7 +79,7 @@
     "url": "http://localhost:4000/jvm-concurrent",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "url": "http://localhost:4000/assets/images/spring_java8.jpg",
         "width": 2000,
         "height": 666
     },
@@ -147,7 +147,7 @@ into the {body} of the default.hbs template -->
 <!-- #post -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
-        <article class="post-full  no-image">
+        <article class="post-full  ">
             <header class="post-full-header">
                 <h1 class="post-full-title">Java中的并发编程框架(一)</h1>
                 <section class="post-full-meta">
@@ -670,7 +670,11 @@ public void runtest(){
             
                 
 
-    <article class="post-card distribution no-image">
+    <article class="post-card distribution">
+        
+            <a class="post-card-image-link" href="/jvm-collections">
+                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.jpg)"></div>
+            </a>
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/jvm-collections">
@@ -722,7 +726,11 @@ public void runtest(){
             
                 
 
-    <article class="post-card distribution no-image">
+    <article class="post-card distribution">
+        
+            <a class="post-card-image-link" href="/jvm-collections">
+                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.jpg)"></div>
+            </a>
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/jvm-collections">

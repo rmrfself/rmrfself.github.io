@@ -47,7 +47,7 @@
     <meta property="og:title" content="[GCE]单节点部署kubernetes集群" />
     <meta property="og:description" content="使用kubeadm部署单master节点的k8s, 1个master + 2个minion 1. 安装Docker以及Master节点初始化 安装docker sudo apt install docker.io sudo systemctl enable docker 安装kubeadm sudo apt-get update \ &amp;&amp; sudo apt-get install -y apt-transport-https \ &amp;&amp; curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - # k8s的资源暂不可用,使用16.04的更新资源 (xenial) echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" \ | sudo tee -a /etc/apt/sources.list.d/kubernetes.list" />
     <meta property="og:url" content="http://localhost:4000/k8s-from-scrach" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/deployments.png" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
     <meta property="article:published_time" content="2018-10-10T19:20:11+08:00" />
@@ -57,7 +57,7 @@
     <meta name="twitter:title" content="[GCE]单节点部署kubernetes集群" />
     <meta name="twitter:description" content="使用kubeadm部署单master节点的k8s, 1个master + 2个minion 1. 安装Docker以及Master节点初始化 安装docker sudo apt install docker.io sudo systemctl enable docker 安装kubeadm sudo apt-get update \ &amp;&amp; sudo apt-get install -y apt-transport-https \ &amp;&amp; curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - # k8s的资源暂不可用,使用16.04的更新资源 (xenial) echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" \ | sudo tee -a /etc/apt/sources.list.d/kubernetes.list" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/deployments.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
@@ -79,7 +79,7 @@
     "url": "http://localhost:4000/k8s-from-scrach",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "url": "http://localhost:4000/assets/images/deployments.png",
         "width": 2000,
         "height": 666
     },
@@ -147,7 +147,7 @@ into the {body} of the default.hbs template -->
 <!-- #post -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
-        <article class="post-full  no-image">
+        <article class="post-full  ">
             <header class="post-full-header">
                 <h1 class="post-full-title">[GCE]单节点部署kubernetes集群</h1>
                 <section class="post-full-meta">

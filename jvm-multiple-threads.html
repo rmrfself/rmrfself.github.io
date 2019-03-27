@@ -47,7 +47,7 @@
     <meta property="og:title" content="JVM内部机制(五)多线程编程模型中的常见问题" />
     <meta property="og:description" content="已转移到java.util.concurrent使用方法解析。 什么是ThreadLocal? 它有什么用? ThreadLocal 是为存储线程独立的数据而设计的。 volatile 关键字的作用是什么? 在java实现的volatile版本中(区别于c++中的volatile[易挥发物])，使用这个关键字用来确保所有的读和写在所有线程之间是串行(顺序执行)的。它也确保了读出的值是实际的值而不是工作区缓存的值 sleep和wait的区别 wait() 是object类的实例方法 sleep(milliseconds)是线程的静态方法 wait()的设计目的是线程间同步(synchronization) Thread.sleep的设计目的是暂停当前执行线程，与同步或者锁没有直接关系 唤醒方式不同 wait()的使用方法: 被包围在同步块中，线程a调用线程b synchronized (b) { while (b.sum == 0) { System.out.println("Waiting for ThreadB to complete..."); b.wait(); } System.out.println("ThreadB has completed. " + "Sum from that thread is: " + b.sum); } 唤醒方法 int sum; @Override" />
     <meta property="og:url" content="http://localhost:4000/jvm-multiple-threads" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/spring_java8.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
     <meta property="article:published_time" content="2016-03-05T12:08:12+08:00" />
@@ -57,7 +57,7 @@
     <meta name="twitter:title" content="JVM内部机制(五)多线程编程模型中的常见问题" />
     <meta name="twitter:description" content="已转移到java.util.concurrent使用方法解析。 什么是ThreadLocal? 它有什么用? ThreadLocal 是为存储线程独立的数据而设计的。 volatile 关键字的作用是什么? 在java实现的volatile版本中(区别于c++中的volatile[易挥发物])，使用这个关键字用来确保所有的读和写在所有线程之间是串行(顺序执行)的。它也确保了读出的值是实际的值而不是工作区缓存的值 sleep和wait的区别 wait() 是object类的实例方法 sleep(milliseconds)是线程的静态方法 wait()的设计目的是线程间同步(synchronization) Thread.sleep的设计目的是暂停当前执行线程，与同步或者锁没有直接关系 唤醒方式不同 wait()的使用方法: 被包围在同步块中，线程a调用线程b synchronized (b) { while (b.sum == 0) { System.out.println("Waiting for ThreadB to complete..."); b.wait(); } System.out.println("ThreadB has completed. " + "Sum from that thread is: " + b.sum); } 唤醒方法 int sum; @Override" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/spring_java8.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
@@ -79,7 +79,7 @@
     "url": "http://localhost:4000/jvm-multiple-threads",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "url": "http://localhost:4000/assets/images/spring_java8.jpg",
         "width": 2000,
         "height": 666
     },
@@ -147,7 +147,7 @@ into the {body} of the default.hbs template -->
 <!-- #post -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
-        <article class="post-full  no-image">
+        <article class="post-full  ">
             <header class="post-full-header">
                 <h1 class="post-full-title">JVM内部机制(五)多线程编程模型中的常见问题</h1>
                 <section class="post-full-meta">
@@ -571,7 +571,11 @@ public void run() {
             
                 
 
-    <article class="post-card distribution no-image">
+    <article class="post-card distribution">
+        
+            <a class="post-card-image-link" href="/jvm-source-guide">
+                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.jpg)"></div>
+            </a>
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/jvm-source-guide">
@@ -623,7 +627,11 @@ public void run() {
             
                 
 
-    <article class="post-card distribution no-image">
+    <article class="post-card distribution">
+        
+            <a class="post-card-image-link" href="/jvm-thread">
+                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.jpg)"></div>
+            </a>
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/jvm-thread">
