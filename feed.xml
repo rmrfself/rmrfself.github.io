@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-27T16:32:37+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-02T17:25:56+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
 
 &lt;h3 id=&quot;实现ai的基本策略&quot;&gt;实现AI的基本策略&lt;/h3&gt;
 
@@ -511,11 +511,199 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
 
 &lt;h4 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h4&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">前端工程的持续交付模型。</summary></entry><entry><title type="html">Ethereum开发笔记1-1: Blockchain简介</title><link href="http://localhost:4000/ethereum-dapp-develop" rel="alternate" type="text/html" title="Ethereum开发笔记1-1: Blockchain简介" /><published>2018-09-06T11:11:11+08:00</published><updated>2018-09-06T11:11:11+08:00</updated><id>http://localhost:4000/ethereum-dapp-develop</id><content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop">&lt;p&gt;区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。&lt;/p&gt;
 
-&lt;h3 id=&quot;历史&quot;&gt;历史&lt;/h3&gt;
+&lt;h3 id=&quot;比特币中的区块链&quot;&gt;比特币中的区块链&lt;/h3&gt;
 
-&lt;p&gt;参考论文&lt;/p&gt;
+&lt;h4 id=&quot;比特币提出的背景&quot;&gt;比特币提出的背景&lt;/h4&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://nakamotoinstitute.org/finney/rpow/&quot;&gt;RPOW - 可重用的工作证明(Reusable Proofs of Work)&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="ethereum" /><summary type="html">区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。</summary></entry><entry><title type="html">Guideline-编写有效率的javascript代码</title><link href="http://localhost:4000/archi-efficient-js" rel="alternate" type="text/html" title="Guideline-编写有效率的javascript代码" /><published>2018-08-09T12:11:19+08:00</published><updated>2018-08-09T12:11:19+08:00</updated><id>http://localhost:4000/archi-efficient-js</id><content type="html" xml:base="http://localhost:4000/archi-efficient-js">&lt;p&gt;Trust yourself, not the VM。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;互联网上的贸易，几乎都需要借助金融机构作为可资信赖的第三方来处理电子支付信息。
+虽然这类系统在绝大多数情况下都运作良好，但是这类系统仍然内生性地受制于“基于信用的
+模式”(trust based model)的弱点。我们无法实现完全不可逆的交易，因为金融机构总是不可避
+免地会出面协调争端。而金融中介的存在，也会增加交易的成本，并且限制了实际可行的最小
+交易规模，也限制了日常的小额支付交易。并且潜在的损失还在于，很多商品和服务本身是无
+法退货的，如果缺乏不可逆的支付手段，互联网的贸易就大大受限。因为有潜在的退款的可能，
+就需要交易双方拥有信任。而商家也必须提防自己的客户，因此会向客户索取完全不必要的个
+人信息。而实际的商业行为中，一定比例的欺诈性客户也被认为是不可避免的，相关损失视作
+销售费用处理。而在使用物理现金的情况下，这些销售费用和支付问题上的不确定性却是可以
+避免的，因为此时没有第三方信用中介的存在。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;比特币系统背后的相关概念&quot;&gt;比特币系统背后的相关概念&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;交易(transactions): 区块链的存储属性&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;相关概念&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;电子货币(electronic coin)是一串数字签名(digital signature):&lt;/p&gt;
+
+&lt;p&gt;每一位所有者，通过对前一次交易(previous transactions)和下一位拥有者的公钥&lt;code class=&quot;highlighter-rouge&quot;&gt;签署&lt;/code&gt;一个数字签名，并将这个签名附加在货币的末尾， 电子货币就发送给了下一位所有者。&lt;/p&gt;
+
+&lt;p&gt;收款人对签名进行检验，就可验证数字货币的拥有者。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;交易的唯一性确定&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;通过Hash方法确保在交易期间，绝大多数节点认同该交易是首次出现。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;时间戳服务器:  链条是如何形成的?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;顾名思义， 对区块的内容实施随机散列，并且加上时间戳。&lt;/p&gt;
+
+&lt;p&gt;该时间戳能够证实特定数据必然于某特定时间是的确存在的，因为只有在该时刻存在了才能获取相应的随机散列值。&lt;/p&gt;
+
+&lt;p&gt;每个时间戳应当将前一个时间戳纳入其随机散列值中，每一个随后的时间戳都对之前的一个时间戳进行增强(reinforcing)，
+这样就形成了一个链条（Chain）。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;工作量证明(proof of work), 区块链不可篡改性背后的逻辑&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bitcoint中的实现方法是，增加一个nounce随机数字段:&lt;/p&gt;
+
+&lt;p&gt;这个nounce的散列值具备这样的特性:  前N位是0。 通过这种形式的计算，挖矿者才不断的猜测这个nounce，一旦符合定义的条件(前N位是0)，它讲获得区块的记账权(数据&lt;code class=&quot;highlighter-rouge&quot;&gt;入链&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;所谓记账权，就是把交易(是全网内没有打包入块的交易)列表打包入区块。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;区块链网络&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;网络的运行方式如下:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;新的交易面向全网广播&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;每一个节点都将收到的交易信息纳入一个区块中&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;每个节点都尝试在自己的区块中找到一个具有足够难度的工作量证明&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;当一个节点找到了一个工作量证明，它就向全网进行广播&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;当且仅当包含在该区块中的所有交易都是有效的且之前未存在过的，其他节点才认同
+该区块的有效性&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;其他节点表示他们接受该区块，而表示接受的方法，则是在跟随该区块的末尾，制造
+新的区块以延长该链条，而将被接受区块的随机散列值视为先于新区快的随机散列值&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;激励&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;比特币内存在如此约定:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;对每一笔区块的&lt;code class=&quot;highlighter-rouge&quot;&gt;第一笔交易&lt;/code&gt;进行特殊化处理,该交易产生一枚有区块创造者(挖矿人)拥有的新的电子货币(bitcoin)。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;增加了节点支持该网络的激励。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;提供了一种在没有中央集权机构发行货币的情况下，将电子货币分配到流通领域的一种方法。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;另外一个激励来源是交易费。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/blockchain.png&quot; alt=&quot;区块链结构&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;以太坊网络中的区块链&quot;&gt;以太坊网络中的区块链&lt;/h3&gt;
+
+&lt;p&gt;以太坊项目提出的背景&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;本项目旨在提取上述协议中的创新并将其通用化-创造一个功能完善的，图灵完备的（但是可深度自由调整的）加密账簿，它允许参与者编写任意复杂的完全存在于并且被块链传递的合约，自治代理和关系。用户可以把以太坊当成一种“金融积木”来用，而不是受限于某一特定的交易类型集合。
+
+... 成为一个提供超强脚本系统的优秀底层协议，在其上可以创建任意高级的合约，货币及其它去中心化应用...
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;以太坊的设计原则&quot;&gt;以太坊的设计原则&lt;/h4&gt;
+
+&lt;p&gt;#TODO&lt;/p&gt;
+
+&lt;p&gt;区块链是&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;由Satoshi Nakamoto(中本聪)在比特币白皮书的提出。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;一个使用加密学手段链接在一起的，增长的记录列表。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;每个Block包含了上一个Block的哈希值，时间戳，和交易数据&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;参照&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;开放的、分布式的(distributed)、去中心化的(Decentrilized)钱包。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;是一个点对点(peer to peer)的交易网络&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Blockchain&quot;&gt;https://en.wikipedia.org/wiki/Blockchain&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nakamotoinstitute.org/static/docs/bitcoin-zh-cn.pdf&quot;&gt;比特币：一种点对点的电子现金系统&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;加密学基础概念&quot;&gt;加密学基础概念&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Paths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;KeyFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PublicKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X509EncodedKeySpec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VerifyDigitalSignature&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publicKeyEncoded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readAllBytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Paths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;publickey&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;digitalSignature&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readAllBytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Paths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;signature&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;X509EncodedKeySpec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publicKeySpec&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X509EncodedKeySpec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;publicKeyEncoded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;KeyFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keyFactory&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KeyFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;DSA&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;SUN&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;PublicKey&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publicKey&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keyFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;generatePublic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;publicKeySpec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Signature&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;SHA1withDSA&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;SUN&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;initVerify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;publicKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bytes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readAllBytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Paths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;README&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verified&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;verify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;digitalSignature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;verified&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Data verified.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Cannot verify data.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="ethereum" /><summary type="html">区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。</summary></entry><entry><title type="html">Guideline-编写有效率的javascript代码</title><link href="http://localhost:4000/archi-efficient-js" rel="alternate" type="text/html" title="Guideline-编写有效率的javascript代码" /><published>2018-08-09T12:11:19+08:00</published><updated>2018-08-09T12:11:19+08:00</updated><id>http://localhost:4000/archi-efficient-js</id><content type="html" xml:base="http://localhost:4000/archi-efficient-js">&lt;p&gt;Trust yourself, not the VM。&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;对象的初始化顺序&lt;/li&gt;

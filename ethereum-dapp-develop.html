@@ -48,15 +48,7 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Ethereum开发笔记1-1: Blockchain简介" />
-    <meta property="og:description" content="区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。
-
-历史
-
-参考论文
-
-RPOW - 可重用的工作证明(Reusable Proofs of Work)
-
-" />
+    <meta property="og:description" content="区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。 比特币中的区块链 比特币提出的背景 互联网上的贸易，几乎都需要借助金融机构作为可资信赖的第三方来处理电子支付信息。 虽然这类系统在绝大多数情况下都运作良好，但是这类系统仍然内生性地受制于“基于信用的 模式”(trust based model)的弱点。我们无法实现完全不可逆的交易，因为金融机构总是不可避 免地会出面协调争端。而金融中介的存在，也会增加交易的成本，并且限制了实际可行的最小 交易规模，也限制了日常的小额支付交易。并且潜在的损失还在于，很多商品和服务本身是无 法退货的，如果缺乏不可逆的支付手段，互联网的贸易就大大受限。因为有潜在的退款的可能， 就需要交易双方拥有信任。而商家也必须提防自己的客户，因此会向客户索取完全不必要的个 人信息。而实际的商业行为中，一定比例的欺诈性客户也被认为是不可避免的，相关损失视作 销售费用处理。而在使用物理现金的情况下，这些销售费用和支付问题上的不确定性却是可以 避免的，因为此时没有第三方信用中介的存在。 比特币系统背后的相关概念 交易(transactions): 区块链的存储属性 相关概念 电子货币(electronic coin)是一串数字签名(digital signature): 每一位所有者，通过对前一次交易(previous transactions)和下一位拥有者的公钥签署一个数字签名，并将这个签名附加在货币的末尾， 电子货币就发送给了下一位所有者。 收款人对签名进行检验，就可验证数字货币的拥有者。 交易的唯一性确定 通过Hash方法确保在交易期间，绝大多数节点认同该交易是首次出现。 时间戳服务器: 链条是如何形成的? 顾名思义， 对区块的内容实施随机散列，并且加上时间戳。 该时间戳能够证实特定数据必然于某特定时间是的确存在的，因为只有在该时刻存在了才能获取相应的随机散列值。 每个时间戳应当将前一个时间戳纳入其随机散列值中，每一个随后的时间戳都对之前的一个时间戳进行增强(reinforcing)， 这样就形成了一个链条（Chain）。 工作量证明(proof of work), 区块链不可篡改性背后的逻辑 Bitcoint中的实现方法是，增加一个nounce随机数字段: 这个nounce的散列值具备这样的特性: 前N位是0。 通过这种形式的计算，挖矿者才不断的猜测这个nounce，一旦符合定义的条件(前N位是0)，它讲获得区块的记账权(数据入链) 所谓记账权，就是把交易(是全网内没有打包入块的交易)列表打包入区块。 区块链网络 网络的运行方式如下: 新的交易面向全网广播 每一个节点都将收到的交易信息纳入一个区块中" />
     <meta property="og:url" content="http://localhost:4000/ethereum-dapp-develop" />
     <meta property="og:image" content="http://localhost:4000/assets/images/deployments.png" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
@@ -66,15 +58,7 @@ RPOW - 可重用的工作证明(Reusable Proofs of Work)
     <meta property="article:tag" content="Ethereum" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Ethereum开发笔记1-1: Blockchain简介" />
-    <meta name="twitter:description" content="区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。
-
-历史
-
-参考论文
-
-RPOW - 可重用的工作证明(Reusable Proofs of Work)
-
-" />
+    <meta name="twitter:description" content="区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。 比特币中的区块链 比特币提出的背景 互联网上的贸易，几乎都需要借助金融机构作为可资信赖的第三方来处理电子支付信息。 虽然这类系统在绝大多数情况下都运作良好，但是这类系统仍然内生性地受制于“基于信用的 模式”(trust based model)的弱点。我们无法实现完全不可逆的交易，因为金融机构总是不可避 免地会出面协调争端。而金融中介的存在，也会增加交易的成本，并且限制了实际可行的最小 交易规模，也限制了日常的小额支付交易。并且潜在的损失还在于，很多商品和服务本身是无 法退货的，如果缺乏不可逆的支付手段，互联网的贸易就大大受限。因为有潜在的退款的可能， 就需要交易双方拥有信任。而商家也必须提防自己的客户，因此会向客户索取完全不必要的个 人信息。而实际的商业行为中，一定比例的欺诈性客户也被认为是不可避免的，相关损失视作 销售费用处理。而在使用物理现金的情况下，这些销售费用和支付问题上的不确定性却是可以 避免的，因为此时没有第三方信用中介的存在。 比特币系统背后的相关概念 交易(transactions): 区块链的存储属性 相关概念 电子货币(electronic coin)是一串数字签名(digital signature): 每一位所有者，通过对前一次交易(previous transactions)和下一位拥有者的公钥签署一个数字签名，并将这个签名附加在货币的末尾， 电子货币就发送给了下一位所有者。 收款人对签名进行检验，就可验证数字货币的拥有者。 交易的唯一性确定 通过Hash方法确保在交易期间，绝大多数节点认同该交易是首次出现。 时间戳服务器: 链条是如何形成的? 顾名思义， 对区块的内容实施随机散列，并且加上时间戳。 该时间戳能够证实特定数据必然于某特定时间是的确存在的，因为只有在该时刻存在了才能获取相应的随机散列值。 每个时间戳应当将前一个时间戳纳入其随机散列值中，每一个随后的时间戳都对之前的一个时间戳进行增强(reinforcing)， 这样就形成了一个链条（Chain）。 工作量证明(proof of work), 区块链不可篡改性背后的逻辑 Bitcoint中的实现方法是，增加一个nounce随机数字段: 这个nounce的散列值具备这样的特性: 前N位是0。 通过这种形式的计算，挖矿者才不断的猜测这个nounce，一旦符合定义的条件(前N位是0)，它讲获得区块的记账权(数据入链) 所谓记账权，就是把交易(是全网内没有打包入块的交易)列表打包入区块。 区块链网络 网络的运行方式如下: 新的交易面向全网广播 每一个节点都将收到的交易信息纳入一个区块中" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/deployments.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -106,15 +90,7 @@ RPOW - 可重用的工作证明(Reusable Proofs of Work)
         "@type": "WebPage",
         "@id": "http://localhost:4000/ethereum-dapp-develop"
     },
-    "description": "区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。
-
-历史
-
-参考论文
-
-RPOW - 可重用的工作证明(Reusable Proofs of Work)
-
-"
+    "description": "区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。 比特币中的区块链 比特币提出的背景 互联网上的贸易，几乎都需要借助金融机构作为可资信赖的第三方来处理电子支付信息。 虽然这类系统在绝大多数情况下都运作良好，但是这类系统仍然内生性地受制于“基于信用的 模式”(trust based model)的弱点。我们无法实现完全不可逆的交易，因为金融机构总是不可避 免地会出面协调争端。而金融中介的存在，也会增加交易的成本，并且限制了实际可行的最小 交易规模，也限制了日常的小额支付交易。并且潜在的损失还在于，很多商品和服务本身是无 法退货的，如果缺乏不可逆的支付手段，互联网的贸易就大大受限。因为有潜在的退款的可能， 就需要交易双方拥有信任。而商家也必须提防自己的客户，因此会向客户索取完全不必要的个 人信息。而实际的商业行为中，一定比例的欺诈性客户也被认为是不可避免的，相关损失视作 销售费用处理。而在使用物理现金的情况下，这些销售费用和支付问题上的不确定性却是可以 避免的，因为此时没有第三方信用中介的存在。 比特币系统背后的相关概念 交易(transactions): 区块链的存储属性 相关概念 电子货币(electronic coin)是一串数字签名(digital signature): 每一位所有者，通过对前一次交易(previous transactions)和下一位拥有者的公钥签署一个数字签名，并将这个签名附加在货币的末尾， 电子货币就发送给了下一位所有者。 收款人对签名进行检验，就可验证数字货币的拥有者。 交易的唯一性确定 通过Hash方法确保在交易期间，绝大多数节点认同该交易是首次出现。 时间戳服务器: 链条是如何形成的? 顾名思义， 对区块的内容实施随机散列，并且加上时间戳。 该时间戳能够证实特定数据必然于某特定时间是的确存在的，因为只有在该时刻存在了才能获取相应的随机散列值。 每个时间戳应当将前一个时间戳纳入其随机散列值中，每一个随后的时间戳都对之前的一个时间戳进行增强(reinforcing)， 这样就形成了一个链条（Chain）。 工作量证明(proof of work), 区块链不可篡改性背后的逻辑 Bitcoint中的实现方法是，增加一个nounce随机数字段: 这个nounce的散列值具备这样的特性: 前N位是0。 通过这种形式的计算，挖矿者才不断的猜测这个nounce，一旦符合定义的条件(前N位是0)，它讲获得区块的记账权(数据入链) 所谓记账权，就是把交易(是全网内没有打包入块的交易)列表打包入区块。 区块链网络 网络的运行方式如下: 新的交易面向全网广播 每一个节点都将收到的交易信息纳入一个区块中"
 }
     </script>
 
@@ -193,11 +169,199 @@ into the {body} of the default.hbs template -->
                 <div class="kg-card-markdown">
                     <p>区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。</p>
 
-<h3 id="历史">历史</h3>
+<h3 id="比特币中的区块链">比特币中的区块链</h3>
 
-<p>参考论文</p>
+<h4 id="比特币提出的背景">比特币提出的背景</h4>
 
-<p><a href="https://nakamotoinstitute.org/finney/rpow/">RPOW - 可重用的工作证明(Reusable Proofs of Work)</a></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>互联网上的贸易，几乎都需要借助金融机构作为可资信赖的第三方来处理电子支付信息。
+虽然这类系统在绝大多数情况下都运作良好，但是这类系统仍然内生性地受制于“基于信用的
+模式”(trust based model)的弱点。我们无法实现完全不可逆的交易，因为金融机构总是不可避
+免地会出面协调争端。而金融中介的存在，也会增加交易的成本，并且限制了实际可行的最小
+交易规模，也限制了日常的小额支付交易。并且潜在的损失还在于，很多商品和服务本身是无
+法退货的，如果缺乏不可逆的支付手段，互联网的贸易就大大受限。因为有潜在的退款的可能，
+就需要交易双方拥有信任。而商家也必须提防自己的客户，因此会向客户索取完全不必要的个
+人信息。而实际的商业行为中，一定比例的欺诈性客户也被认为是不可避免的，相关损失视作
+销售费用处理。而在使用物理现金的情况下，这些销售费用和支付问题上的不确定性却是可以
+避免的，因为此时没有第三方信用中介的存在。
+</code></pre></div></div>
+
+<h4 id="比特币系统背后的相关概念">比特币系统背后的相关概念</h4>
+
+<ul>
+  <li>
+    <p>交易(transactions): 区块链的存储属性</p>
+  </li>
+  <li>
+    <p>相关概念</p>
+  </li>
+</ul>
+
+<p>电子货币(electronic coin)是一串数字签名(digital signature):</p>
+
+<p>每一位所有者，通过对前一次交易(previous transactions)和下一位拥有者的公钥<code class="highlighter-rouge">签署</code>一个数字签名，并将这个签名附加在货币的末尾， 电子货币就发送给了下一位所有者。</p>
+
+<p>收款人对签名进行检验，就可验证数字货币的拥有者。</p>
+
+<ul>
+  <li>交易的唯一性确定</li>
+</ul>
+
+<p>通过Hash方法确保在交易期间，绝大多数节点认同该交易是首次出现。</p>
+
+<ul>
+  <li>时间戳服务器:  链条是如何形成的?</li>
+</ul>
+
+<p>顾名思义， 对区块的内容实施随机散列，并且加上时间戳。</p>
+
+<p>该时间戳能够证实特定数据必然于某特定时间是的确存在的，因为只有在该时刻存在了才能获取相应的随机散列值。</p>
+
+<p>每个时间戳应当将前一个时间戳纳入其随机散列值中，每一个随后的时间戳都对之前的一个时间戳进行增强(reinforcing)，
+这样就形成了一个链条（Chain）。</p>
+
+<ul>
+  <li>工作量证明(proof of work), 区块链不可篡改性背后的逻辑</li>
+</ul>
+
+<p>Bitcoint中的实现方法是，增加一个nounce随机数字段:</p>
+
+<p>这个nounce的散列值具备这样的特性:  前N位是0。 通过这种形式的计算，挖矿者才不断的猜测这个nounce，一旦符合定义的条件(前N位是0)，它讲获得区块的记账权(数据<code class="highlighter-rouge">入链</code>)</p>
+
+<p>所谓记账权，就是把交易(是全网内没有打包入块的交易)列表打包入区块。</p>
+
+<ul>
+  <li>区块链网络</li>
+</ul>
+
+<p>网络的运行方式如下:</p>
+
+<ul>
+  <li>
+    <p>新的交易面向全网广播</p>
+  </li>
+  <li>
+    <p>每一个节点都将收到的交易信息纳入一个区块中</p>
+  </li>
+  <li>
+    <p>每个节点都尝试在自己的区块中找到一个具有足够难度的工作量证明</p>
+  </li>
+  <li>
+    <p>当一个节点找到了一个工作量证明，它就向全网进行广播</p>
+  </li>
+  <li>
+    <p>当且仅当包含在该区块中的所有交易都是有效的且之前未存在过的，其他节点才认同
+该区块的有效性</p>
+  </li>
+  <li>
+    <p>其他节点表示他们接受该区块，而表示接受的方法，则是在跟随该区块的末尾，制造
+新的区块以延长该链条，而将被接受区块的随机散列值视为先于新区快的随机散列值</p>
+  </li>
+  <li>
+    <p>激励</p>
+  </li>
+</ul>
+
+<p>比特币内存在如此约定:</p>
+
+<ul>
+  <li>
+    <p>对每一笔区块的<code class="highlighter-rouge">第一笔交易</code>进行特殊化处理,该交易产生一枚有区块创造者(挖矿人)拥有的新的电子货币(bitcoin)。</p>
+  </li>
+  <li>
+    <p>增加了节点支持该网络的激励。</p>
+  </li>
+  <li>
+    <p>提供了一种在没有中央集权机构发行货币的情况下，将电子货币分配到流通领域的一种方法。</p>
+  </li>
+  <li>
+    <p>另外一个激励来源是交易费。</p>
+  </li>
+</ul>
+
+<p><img src="/assets/images/blockchain.png" alt="区块链结构" /></p>
+
+<h3 id="以太坊网络中的区块链">以太坊网络中的区块链</h3>
+
+<p>以太坊项目提出的背景</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>本项目旨在提取上述协议中的创新并将其通用化-创造一个功能完善的，图灵完备的（但是可深度自由调整的）加密账簿，它允许参与者编写任意复杂的完全存在于并且被块链传递的合约，自治代理和关系。用户可以把以太坊当成一种“金融积木”来用，而不是受限于某一特定的交易类型集合。
+
+... 成为一个提供超强脚本系统的优秀底层协议，在其上可以创建任意高级的合约，货币及其它去中心化应用...
+
+</code></pre></div></div>
+
+<h4 id="以太坊的设计原则">以太坊的设计原则</h4>
+
+<p>#TODO</p>
+
+<p>区块链是</p>
+
+<ul>
+  <li>
+    <p>由Satoshi Nakamoto(中本聪)在比特币白皮书的提出。</p>
+  </li>
+  <li>
+    <p>一个使用加密学手段链接在一起的，增长的记录列表。</p>
+  </li>
+  <li>
+    <p>每个Block包含了上一个Block的哈希值，时间戳，和交易数据</p>
+  </li>
+</ul>
+
+<p>参照</p>
+
+<ul>
+  <li>
+    <p>开放的、分布式的(distributed)、去中心化的(Decentrilized)钱包。</p>
+  </li>
+  <li>
+    <p>是一个点对点(peer to peer)的交易网络</p>
+  </li>
+</ul>
+
+<p><a href="https://en.wikipedia.org/wiki/Blockchain">https://en.wikipedia.org/wiki/Blockchain</a></p>
+
+<p><a href="https://nakamotoinstitute.org/static/docs/bitcoin-zh-cn.pdf">比特币：一种点对点的电子现金系统</a></p>
+
+<h3 id="加密学基础概念">加密学基础概念</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">security</span><span class="p">;</span>
+
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">nio</span><span class="p">.</span><span class="n">file</span><span class="p">.</span><span class="n">Files</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">nio</span><span class="p">.</span><span class="n">file</span><span class="p">.</span><span class="n">Paths</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">security</span><span class="p">.</span><span class="n">KeyFactory</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">security</span><span class="p">.</span><span class="n">PublicKey</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">security</span><span class="p">.</span><span class="n">Signature</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">java</span><span class="p">.</span><span class="n">security</span><span class="p">.</span><span class="n">spec</span><span class="p">.</span><span class="n">X509EncodedKeySpec</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="n">class</span> <span class="n">VerifyDigitalSignature</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">try</span> <span class="p">{</span>
+            <span class="n">byte</span><span class="p">[]</span> <span class="n">publicKeyEncoded</span> <span class="p">=</span> <span class="n">Files</span><span class="p">.</span><span class="n">readAllBytes</span><span class="p">(</span><span class="n">Paths</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"publickey"</span><span class="p">));</span>
+            <span class="n">byte</span><span class="p">[]</span> <span class="n">digitalSignature</span> <span class="p">=</span> <span class="n">Files</span><span class="p">.</span><span class="n">readAllBytes</span><span class="p">(</span><span class="n">Paths</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"signature"</span><span class="p">));</span>
+
+            <span class="n">X509EncodedKeySpec</span> <span class="n">publicKeySpec</span> <span class="p">=</span> <span class="n">new</span> <span class="n">X509EncodedKeySpec</span><span class="p">(</span><span class="n">publicKeyEncoded</span><span class="p">);</span>
+            <span class="n">KeyFactory</span> <span class="n">keyFactory</span> <span class="p">=</span> <span class="n">KeyFactory</span><span class="p">.</span><span class="n">getInstance</span><span class="p">(</span><span class="s2">"DSA"</span><span class="p">,</span> <span class="s2">"SUN"</span><span class="p">);</span>
+
+            <span class="n">PublicKey</span> <span class="n">publicKey</span> <span class="p">=</span> <span class="n">keyFactory</span><span class="p">.</span><span class="n">generatePublic</span><span class="p">(</span><span class="n">publicKeySpec</span><span class="p">);</span>
+            <span class="n">Signature</span> <span class="n">signature</span> <span class="p">=</span> <span class="n">Signature</span><span class="p">.</span><span class="n">getInstance</span><span class="p">(</span><span class="s2">"SHA1withDSA"</span><span class="p">,</span> <span class="s2">"SUN"</span><span class="p">);</span>
+            <span class="n">signature</span><span class="p">.</span><span class="n">initVerify</span><span class="p">(</span><span class="n">publicKey</span><span class="p">);</span>
+
+            <span class="n">byte</span><span class="p">[]</span> <span class="n">bytes</span> <span class="p">=</span> <span class="n">Files</span><span class="p">.</span><span class="n">readAllBytes</span><span class="p">(</span><span class="n">Paths</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"README"</span><span class="p">));</span>
+            <span class="n">signature</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>
+
+            <span class="k">boolean</span> <span class="n">verified</span> <span class="p">=</span> <span class="n">signature</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="n">digitalSignature</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">verified</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Data verified."</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Cannot verify data."</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="n">printStackTrace</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
                 </div>
