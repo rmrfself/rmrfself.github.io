@@ -115,7 +115,7 @@
       <item>
         <title>Ethereum开发笔记1-1: Blockchain简介</title>
         
-          <description>&lt;p&gt;区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。&lt;/p&gt;
+          <description>&lt;p&gt;共识就是一起检查一个区块&lt;code class=&quot;highlighter-rouge&quot;&gt;是否&lt;/code&gt;有效。&lt;/p&gt;
 
 </description>
         

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-02T17:25:56+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-03T11:31:09+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
 
 &lt;h3 id=&quot;实现ai的基本策略&quot;&gt;实现AI的基本策略&lt;/h3&gt;
 
@@ -509,7 +509,60 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
 
 &lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h4&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">前端工程的持续交付模型。</summary></entry><entry><title type="html">Ethereum开发笔记1-1: Blockchain简介</title><link href="http://localhost:4000/ethereum-dapp-develop" rel="alternate" type="text/html" title="Ethereum开发笔记1-1: Blockchain简介" /><published>2018-09-06T11:11:11+08:00</published><updated>2018-09-06T11:11:11+08:00</updated><id>http://localhost:4000/ethereum-dapp-develop</id><content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop">&lt;p&gt;区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。&lt;/p&gt;
+&lt;h4 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h4&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">前端工程的持续交付模型。</summary></entry><entry><title type="html">Ethereum开发笔记1-1: Blockchain简介</title><link href="http://localhost:4000/ethereum-dapp-develop" rel="alternate" type="text/html" title="Ethereum开发笔记1-1: Blockchain简介" /><published>2018-09-06T11:11:11+08:00</published><updated>2018-09-06T11:11:11+08:00</updated><id>http://localhost:4000/ethereum-dapp-develop</id><content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop">&lt;p&gt;共识就是一起检查一个区块&lt;code class=&quot;highlighter-rouge&quot;&gt;是否&lt;/code&gt;有效。&lt;/p&gt;
+
+&lt;h3 id=&quot;什么是工作量证明proof-of-work&quot;&gt;什么是工作量证明(proof of work)？&lt;/h3&gt;
+
+&lt;p&gt;工作量证明的目的是使区块的创建变得困难，从而阻止女巫攻击者恶意重新生成区块链。&lt;/p&gt;
+
+&lt;p&gt;从而确保了&lt;code class=&quot;highlighter-rouge&quot;&gt;链上&lt;/code&gt;价值存储的稳定性和不可篡改性。&lt;/p&gt;
+
+&lt;p&gt;去中心化的各个节点之间是&lt;code class=&quot;highlighter-rouge&quot;&gt;通过异构体之间的共识&lt;/code&gt;机制来确保&lt;code class=&quot;highlighter-rouge&quot;&gt;不可篡改性&lt;/code&gt;。这是区块链的根。&lt;/p&gt;
+
+&lt;p&gt;但是，问题是，单个节点通过什么手段来判定区块的合法性？&lt;/p&gt;
+
+&lt;p&gt;目前主流有2种方法:&lt;/p&gt;
+
+&lt;p&gt;1) 比特币使用POW,也就是工作量证明。&lt;/p&gt;
+
+&lt;p&gt;只要一个台机器成功的按照规则(比特币是猜测前面含有N个0的Hash串)做到一件事情。把证据(nounce + 它对应的hash)打包入区块中。&lt;/p&gt;
+
+&lt;p&gt;广播后，每个节点验证nounce 和 它对应的Hash是否正确，并唯一。 如果是，peer投赞同票。 否则拒绝了。&lt;/p&gt;
+
+&lt;p&gt;这样的动作实现了一类共识。&lt;/p&gt;
+
+&lt;p&gt;2）还有另外一种共识，基于权益的证明(Proof of stake)&lt;/p&gt;
+
+&lt;p&gt;POS也是一种共识机制，用于区块的校验工作。它通过&lt;code class=&quot;highlighter-rouge&quot;&gt;下注&lt;/code&gt;的方式实现。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;验证者必须锁定一些他们拥有的币作为保证金。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在此之后，他们将开始验证区块。同时，当他们发现一个他们认为可以被加到链上的区块时，他们会通过下赌注来验证它。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果该区块成功上链，验证者就将得到一个与他们的赌注成比例的奖励。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;POS的优势&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;帮助实现分散化&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;高能效&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;经济安全&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;扩展性&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;比特币中的区块链&quot;&gt;比特币中的区块链&lt;/h3&gt;
 
@@ -626,84 +679,103 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
 
 &lt;p&gt;以太坊项目提出的背景&lt;/p&gt;
 
+&lt;p&gt;Etherem项目的提出是源与比特币的UTXO的不足之处。&lt;/p&gt;
+
+&lt;p&gt;比特币系统的脚本语言存在一些严重的限制：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;缺少图灵完备性， 简单理解是，可编程的能力非常弱。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Value-blindness，简单理解是，UTXO与复杂场景下的脚本不能友好地协作。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;缺少状态，简单理解是，UTXO是个简单对象，为复杂可编程的脚本预留的空间很小。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Blockchain-blindness, 简单理解是， UTXO对象不包含链相关的上下文，无法与链上数据交互。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;所以，为了弥补以上比特币脚本的缺陷， 以太坊实现了更复杂的脚本执行上下文， 这种脚本的另外一个名字是&lt;code class=&quot;highlighter-rouge&quot;&gt;智能合约&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;引用白皮书的一段概述&lt;/p&gt;
+
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;本项目旨在提取上述协议中的创新并将其通用化-创造一个功能完善的，图灵完备的（但是可深度自由调整的）加密账簿，它允许参与者编写任意复杂的完全存在于并且被块链传递的合约，自治代理和关系。用户可以把以太坊当成一种“金融积木”来用，而不是受限于某一特定的交易类型集合。
 
 ... 成为一个提供超强脚本系统的优秀底层协议，在其上可以创建任意高级的合约，货币及其它去中心化应用...
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;以太坊的设计原则&quot;&gt;以太坊的设计原则&lt;/h4&gt;
+&lt;h4 id=&quot;ethereum区块链上的概念模型&quot;&gt;Ethereum区块链上的概念模型&lt;/h4&gt;
 
-&lt;p&gt;#TODO&lt;/p&gt;
+&lt;h5 id=&quot;以太坊账户模型&quot;&gt;以太坊账户模型&lt;/h5&gt;
 
-&lt;p&gt;区块链是&lt;/p&gt;
+&lt;p&gt;比特币也有账户的概念，就是UTXO. 它包含所有者以及价值信息。 系统中的交易有UTXO INPUT 和 UTXO OUTPUT 组成。&lt;/p&gt;
+
+&lt;p&gt;比特币中一个账户的余额就是该用户的私钥能有效签名的所有UTXO的总和。&lt;/p&gt;
+
+&lt;p&gt;Eth系统中，账户是一个20字节的地址，包含四个部分:&lt;/p&gt;
+
+&lt;p&gt;1) 随机数， 用户确定每笔交易只能被处理一次。&lt;/p&gt;
+
+&lt;p&gt;2) 余额&lt;/p&gt;
+
+&lt;p&gt;3) 账户的合约代码&lt;/p&gt;
+
+&lt;p&gt;4) 账户的存储&lt;/p&gt;
+
+&lt;p&gt;它有两种类型的账户:&lt;/p&gt;
+
+&lt;p&gt;1) 合约以外的账户，也成为外部账户，由私钥控制。外部账户没有代码，需要手动创建和签名一笔交易，然后发送消息。&lt;/p&gt;
+
+&lt;p&gt;2) 合约账户。&lt;/p&gt;
+
+&lt;p&gt;合约账户的能力比外部账户强大:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;由Satoshi Nakamoto(中本聪)在比特币白皮书的提出。&lt;/p&gt;
+    &lt;p&gt;它可以对内部存储进行读写。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;一个使用加密学手段链接在一起的，增长的记录列表。&lt;/p&gt;
+    &lt;p&gt;发送消息&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;每个Block包含了上一个Block的哈希值，时间戳，和交易数据&lt;/p&gt;
+    &lt;p&gt;创建合约&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;参照&lt;/p&gt;
+&lt;h5 id=&quot;eth的交易模型transactions&quot;&gt;Eth的交易模型(Transactions)&lt;/h5&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;开放的、分布式的(distributed)、去中心化的(Decentrilized)钱包。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;是一个点对点(peer to peer)的交易网络&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;以太坊中“交易”是指存储从外部账户发出的消息的签名数据包。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Blockchain&quot;&gt;https://en.wikipedia.org/wiki/Blockchain&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Eth的交易是签名后的消息。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://nakamotoinstitute.org/static/docs/bitcoin-zh-cn.pdf&quot;&gt;比特币：一种点对点的电子现金系统&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1) 以太坊的消息可以由外部实体或者合约创建，然而比特币的交易只能从外部创建。&lt;/p&gt;
 
-&lt;h3 id=&quot;加密学基础概念&quot;&gt;加密学基础概念&lt;/h3&gt;
+&lt;p&gt;2) 以太坊消息可以选择包含数据。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;p&gt;3) 如果以太坊消息的接受者是合约账户，可以选择进行回应，这意味着以太坊消息也包含函数概念。&lt;/p&gt;
 
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Paths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;KeyFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PublicKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X509EncodedKeySpec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;h5 id=&quot;eth中的状态转换函数&quot;&gt;Eth中的状态转换函数&lt;/h5&gt;
 
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VerifyDigitalSignature&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publicKeyEncoded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readAllBytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Paths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;publickey&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;digitalSignature&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readAllBytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Paths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;signature&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;p&gt;简单理解，这个eth处理交易的一个&lt;code class=&quot;highlighter-rouge&quot;&gt;事务&lt;/code&gt;。 步骤是固定的:&lt;/p&gt;
 
-            &lt;span class=&quot;n&quot;&gt;X509EncodedKeySpec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publicKeySpec&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X509EncodedKeySpec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;publicKeyEncoded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;KeyFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keyFactory&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KeyFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;DSA&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;SUN&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1) 检查交易的格式是否正确（即有正确数值）、签名是否有效和随机数是否与发送者账户的随机数匹配。如否，返回错误。
 
-            &lt;span class=&quot;n&quot;&gt;PublicKey&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publicKey&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keyFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;generatePublic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;publicKeySpec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;Signature&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;SHA1withDSA&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;SUN&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;initVerify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;publicKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+2) 计算交易费用:fee=STARTGAS * GASPRICE，并从签名中确定发送者的地址。从发送者的账户中减去交易费用和增加发送者的随机数。如果账户余额不足，返回错误。
+3) 设定初值GAS = STARTGAS，并根据交易中的字节数减去一定量的瓦斯值。
 
-            &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bytes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readAllBytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Paths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;README&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+4) 从发送者的账户转移价值到接收者账户。如果接收账户还不存在，创建此账户。
 
-            &lt;span class=&quot;k&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verified&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;verify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;digitalSignature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;verified&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;nf&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Data verified.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;nf&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Cannot verify data.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="ethereum" /><summary type="html">区块链是一个政治上和架构上去中心化的系统，但逻辑上是中心化的(from Vitalik Buterin)。</summary></entry><entry><title type="html">Guideline-编写有效率的javascript代码</title><link href="http://localhost:4000/archi-efficient-js" rel="alternate" type="text/html" title="Guideline-编写有效率的javascript代码" /><published>2018-08-09T12:11:19+08:00</published><updated>2018-08-09T12:11:19+08:00</updated><id>http://localhost:4000/archi-efficient-js</id><content type="html" xml:base="http://localhost:4000/archi-efficient-js">&lt;p&gt;Trust yourself, not the VM。&lt;/p&gt;
+5) 如果接收账户是一个合约，运行合约的代码，直到代码运行结束或者瓦斯用完。
+
+如果因为发送者账户没有足够的钱或者代码执行耗尽瓦斯导致价值转移失败，恢复原来的状态，但是还需要支付交易费用，交易费用加至矿工账户。
+否则，将所有剩余的瓦斯归还给发送者，消耗掉的瓦斯作为交易费用发送给矿工。 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="ethereum" /><summary type="html">共识就是一起检查一个区块是否有效。</summary></entry><entry><title type="html">Guideline-编写有效率的javascript代码</title><link href="http://localhost:4000/archi-efficient-js" rel="alternate" type="text/html" title="Guideline-编写有效率的javascript代码" /><published>2018-08-09T12:11:19+08:00</published><updated>2018-08-09T12:11:19+08:00</updated><id>http://localhost:4000/archi-efficient-js</id><content type="html" xml:base="http://localhost:4000/archi-efficient-js">&lt;p&gt;Trust yourself, not the VM。&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;对象的初始化顺序&lt;/li&gt;
