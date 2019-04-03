@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-03T11:31:09+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-03T11:42:14+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
 
 &lt;h3 id=&quot;实现ai的基本策略&quot;&gt;实现AI的基本策略&lt;/h3&gt;
 
@@ -511,7 +511,7 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
 
 &lt;h4 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h4&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">前端工程的持续交付模型。</summary></entry><entry><title type="html">Ethereum开发笔记1-1: Blockchain简介</title><link href="http://localhost:4000/ethereum-dapp-develop" rel="alternate" type="text/html" title="Ethereum开发笔记1-1: Blockchain简介" /><published>2018-09-06T11:11:11+08:00</published><updated>2018-09-06T11:11:11+08:00</updated><id>http://localhost:4000/ethereum-dapp-develop</id><content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop">&lt;p&gt;共识就是一起检查一个区块&lt;code class=&quot;highlighter-rouge&quot;&gt;是否&lt;/code&gt;有效。&lt;/p&gt;
 
-&lt;h3 id=&quot;什么是工作量证明proof-of-work&quot;&gt;什么是工作量证明(proof of work)？&lt;/h3&gt;
+&lt;h4 id=&quot;什么是工作量证明proof-of-work&quot;&gt;什么是工作量证明(proof of work)？&lt;/h4&gt;
 
 &lt;p&gt;工作量证明的目的是使区块的创建变得困难，从而阻止女巫攻击者恶意重新生成区块链。&lt;/p&gt;
 
@@ -564,32 +564,39 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;比特币中的区块链&quot;&gt;比特币中的区块链&lt;/h3&gt;
+&lt;h4 id=&quot;比特币中的区块链&quot;&gt;比特币中的区块链&lt;/h4&gt;
 
-&lt;h4 id=&quot;比特币提出的背景&quot;&gt;比特币提出的背景&lt;/h4&gt;
+&lt;h5 id=&quot;比特币提出的背景&quot;&gt;比特币提出的背景&lt;/h5&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;互联网上的贸易，几乎都需要借助金融机构作为可资信赖的第三方来处理电子支付信息。
+
 虽然这类系统在绝大多数情况下都运作良好，但是这类系统仍然内生性地受制于“基于信用的
-模式”(trust based model)的弱点。我们无法实现完全不可逆的交易，因为金融机构总是不可避
-免地会出面协调争端。而金融中介的存在，也会增加交易的成本，并且限制了实际可行的最小
-交易规模，也限制了日常的小额支付交易。并且潜在的损失还在于，很多商品和服务本身是无
-法退货的，如果缺乏不可逆的支付手段，互联网的贸易就大大受限。因为有潜在的退款的可能，
-就需要交易双方拥有信任。而商家也必须提防自己的客户，因此会向客户索取完全不必要的个
-人信息。而实际的商业行为中，一定比例的欺诈性客户也被认为是不可避免的，相关损失视作
-销售费用处理。而在使用物理现金的情况下，这些销售费用和支付问题上的不确定性却是可以
-避免的，因为此时没有第三方信用中介的存在。
+模式”(trust based model)的弱点。
+
+我们无法实现完全不可逆的交易，因为金融机构总是不可避免地会出面协调争端。
+
+而金融中介的存在，也会增加交易的成本，并且限制了实际可行的最小交易规模，也限制了日常的小额支付交易。
+
+并且潜在的损失还在于，很多商品和服务本身是无法退货的，
+如果缺乏不可逆的支付手段，互联网的贸易就大大受限。
+
+因为有潜在的退款的可能，就需要交易双方拥有信任。
+
+而商家也必须提防自己的客户，因此会向客户索取完全不必要的个人信息。
+
+而实际的商业行为中，一定比例的欺诈性客户也被认为是不可避免的，相关损失视作销售费用处理。
+
+而在使用物理现金的情况下，这些销售费用和支付问题上的不确定性却是可以避免的，因为此时没有第三方信用中介的存在。
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;比特币系统背后的相关概念&quot;&gt;比特币系统背后的相关概念&lt;/h4&gt;
+&lt;h5 id=&quot;比特币系统背后的相关概念&quot;&gt;比特币系统背后的相关概念&lt;/h5&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;交易(transactions): 区块链的存储属性&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;相关概念&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;交易(transactions): 区块链的存储属性&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;相关概念&lt;/p&gt;
 
 &lt;p&gt;电子货币(electronic coin)是一串数字签名(digital signature):&lt;/p&gt;
 
@@ -597,9 +604,7 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
 
 &lt;p&gt;收款人对签名进行检验，就可验证数字货币的拥有者。&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;交易的唯一性确定&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;交易的唯一性确定&lt;/p&gt;
 
 &lt;p&gt;通过Hash方法确保在交易期间，绝大多数节点认同该交易是首次出现。&lt;/p&gt;
 
@@ -675,7 +680,7 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/blockchain.png&quot; alt=&quot;区块链结构&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;以太坊网络中的区块链&quot;&gt;以太坊网络中的区块链&lt;/h3&gt;
+&lt;h4 id=&quot;以太坊网络中的区块链&quot;&gt;以太坊网络中的区块链&lt;/h4&gt;
 
 &lt;p&gt;以太坊项目提出的背景&lt;/p&gt;
 
@@ -764,16 +769,24 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
 
 &lt;p&gt;简单理解，这个eth处理交易的一个&lt;code class=&quot;highlighter-rouge&quot;&gt;事务&lt;/code&gt;。 步骤是固定的:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1) 检查交易的格式是否正确（即有正确数值）、签名是否有效和随机数是否与发送者账户的随机数匹配。如否，返回错误。
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1) 检查交易的格式是否正确（即有正确数值）、签名是否有效和随机数是否与发送者账户的随机数匹配。
 
-2) 计算交易费用:fee=STARTGAS * GASPRICE，并从签名中确定发送者的地址。从发送者的账户中减去交易费用和增加发送者的随机数。如果账户余额不足，返回错误。
+如否，返回错误。
+
+2) 计算交易费用:fee=STARTGAS * GASPRICE，并从签名中确定发送者的地址。
+
+从发送者的账户中减去交易费用和增加发送者的随机数。如果账户余额不足，返回错误。
+
 3) 设定初值GAS = STARTGAS，并根据交易中的字节数减去一定量的瓦斯值。
 
 4) 从发送者的账户转移价值到接收者账户。如果接收账户还不存在，创建此账户。
 
 5) 如果接收账户是一个合约，运行合约的代码，直到代码运行结束或者瓦斯用完。
 
-如果因为发送者账户没有足够的钱或者代码执行耗尽瓦斯导致价值转移失败，恢复原来的状态，但是还需要支付交易费用，交易费用加至矿工账户。
+如果因为发送者账户没有足够的钱或者代码执行耗尽瓦斯导致价值转移失败，
+
+恢复原来的状态，但是还需要支付交易费用，交易费用加至矿工账户。
+
 否则，将所有剩余的瓦斯归还给发送者，消耗掉的瓦斯作为交易费用发送给矿工。 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="ethereum" /><summary type="html">共识就是一起检查一个区块是否有效。</summary></entry><entry><title type="html">Guideline-编写有效率的javascript代码</title><link href="http://localhost:4000/archi-efficient-js" rel="alternate" type="text/html" title="Guideline-编写有效率的javascript代码" /><published>2018-08-09T12:11:19+08:00</published><updated>2018-08-09T12:11:19+08:00</updated><id>http://localhost:4000/archi-efficient-js</id><content type="html" xml:base="http://localhost:4000/archi-efficient-js">&lt;p&gt;Trust yourself, not the VM。&lt;/p&gt;
 
