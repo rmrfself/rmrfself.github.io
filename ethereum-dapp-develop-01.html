@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Ethereum开发笔记1-1: Blockchain简介</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markdown.min.js"></script>
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="Learn, Innovate, Share - Business Based Vision." />
+    <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="http://localhost:4000/ethereum-dapp-develop-01" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="张庆华的个人日志" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ethereum开发笔记1-1: Blockchain简介" />
+    <meta property="og:description" content="共识就是一起检查一个区块是否有效。 什么是工作量证明(proof of work)？ 工作量证明的目的是使区块的创建变得困难，从而阻止女巫攻击者恶意重新生成区块链。 从而确保了链上价值存储的稳定性和不可篡改性。 去中心化的各个节点之间是通过异构体之间的共识机制来确保不可篡改性。这是区块链的根。 但是，问题是，单个节点通过什么手段来判定区块的合法性？ 目前主流有2种方法: 1) 比特币使用POW,也就是工作量证明。 只要一个台机器成功的按照规则(比特币是猜测前面含有N个0的Hash串)做到一件事情。把证据(nounce + 它对应的hash)打包入区块中。 广播后，每个节点验证nounce 和 它对应的Hash是否正确，并唯一。 如果是，peer投赞同票。 否则拒绝了。 这样的动作实现了一类共识。 2）还有另外一种共识，基于权益的证明(Proof of stake) POS也是一种共识机制，用于区块的校验工作。它通过下注的方式实现。 验证者必须锁定一些他们拥有的币作为保证金。 在此之后，他们将开始验证区块。同时，当他们发现一个他们认为可以被加到链上的区块时，他们会通过下赌注来验证它。 如果该区块成功上链，验证者就将得到一个与他们的赌注成比例的奖励。 POS的优势 帮助实现分散化 高能效 经济安全 扩展性 比特币中的区块链 比特币提出的背景 互联网上的贸易，几乎都需要借助金融机构作为可资信赖的第三方来处理电子支付信息。 虽然这类系统在绝大多数情况下都运作良好，但是这类系统仍然内生性地受制于“基于信用的 模式”(trust based model)的弱点。 我们无法实现完全不可逆的交易，因为金融机构总是不可避免地会出面协调争端。 而金融中介的存在，也会增加交易的成本，并且限制了实际可行的最小交易规模，也限制了日常的小额支付交易。 并且潜在的损失还在于，很多商品和服务本身是无法退货的， 如果缺乏不可逆的支付手段，互联网的贸易就大大受限。 因为有潜在的退款的可能，就需要交易双方拥有信任。 而商家也必须提防自己的客户，因此会向客户索取完全不必要的个人信息。 而实际的商业行为中，一定比例的欺诈性客户也被认为是不可避免的，相关损失视作销售费用处理。 而在使用物理现金的情况下，这些销售费用和支付问题上的不确定性却是可以避免的，因为此时没有第三方信用中介的存在。 比特币系统背后的相关概念 交易(transactions): 区块链的存储属性" />
+    <meta property="og:url" content="http://localhost:4000/ethereum-dapp-develop-01" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/th.jpeg" />
+    <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2018-09-06T11:11:11+08:00" />
+    <meta property="article:modified_time" content="2018-09-06T11:11:11+08:00" />
+    <meta property="article:tag" content="Ethereum" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ethereum开发笔记1-1: Blockchain简介" />
+    <meta name="twitter:description" content="共识就是一起检查一个区块是否有效。 什么是工作量证明(proof of work)？ 工作量证明的目的是使区块的创建变得困难，从而阻止女巫攻击者恶意重新生成区块链。 从而确保了链上价值存储的稳定性和不可篡改性。 去中心化的各个节点之间是通过异构体之间的共识机制来确保不可篡改性。这是区块链的根。 但是，问题是，单个节点通过什么手段来判定区块的合法性？ 目前主流有2种方法: 1) 比特币使用POW,也就是工作量证明。 只要一个台机器成功的按照规则(比特币是猜测前面含有N个0的Hash串)做到一件事情。把证据(nounce + 它对应的hash)打包入区块中。 广播后，每个节点验证nounce 和 它对应的Hash是否正确，并唯一。 如果是，peer投赞同票。 否则拒绝了。 这样的动作实现了一类共识。 2）还有另外一种共识，基于权益的证明(Proof of stake) POS也是一种共识机制，用于区块的校验工作。它通过下注的方式实现。 验证者必须锁定一些他们拥有的币作为保证金。 在此之后，他们将开始验证区块。同时，当他们发现一个他们认为可以被加到链上的区块时，他们会通过下赌注来验证它。 如果该区块成功上链，验证者就将得到一个与他们的赌注成比例的奖励。 POS的优势 帮助实现分散化 高能效 经济安全 扩展性 比特币中的区块链 比特币提出的背景 互联网上的贸易，几乎都需要借助金融机构作为可资信赖的第三方来处理电子支付信息。 虽然这类系统在绝大多数情况下都运作良好，但是这类系统仍然内生性地受制于“基于信用的 模式”(trust based model)的弱点。 我们无法实现完全不可逆的交易，因为金融机构总是不可避免地会出面协调争端。 而金融中介的存在，也会增加交易的成本，并且限制了实际可行的最小交易规模，也限制了日常的小额支付交易。 并且潜在的损失还在于，很多商品和服务本身是无法退货的， 如果缺乏不可逆的支付手段，互联网的贸易就大大受限。 因为有潜在的退款的可能，就需要交易双方拥有信任。 而商家也必须提防自己的客户，因此会向客户索取完全不必要的个人信息。 而实际的商业行为中，一定比例的欺诈性客户也被认为是不可避免的，相关损失视作销售费用处理。 而在使用物理现金的情况下，这些销售费用和支付问题上的不确定性却是可以避免的，因为此时没有第三方信用中介的存在。 比特币系统背后的相关概念 交易(transactions): 区块链的存储属性" />
+    <meta name="twitter:url" content="http://localhost:4000/" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/th.jpeg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="张庆华的个人日志" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Ethereum" />
+    <meta name="twitter:site" content="@rmrfself" />
+    <meta name="twitter:creator" content="@rmrfself" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "张庆华的个人日志",
+        "logo": "http://localhost:4000/assets/images/blog-icon.svg"
+    },
+    "url": "http://localhost:4000/ethereum-dapp-develop-01",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:4000/assets/images/th.jpeg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:4000/ethereum-dapp-develop-01"
+    },
+    "description": "共识就是一起检查一个区块是否有效。 什么是工作量证明(proof of work)？ 工作量证明的目的是使区块的创建变得困难，从而阻止女巫攻击者恶意重新生成区块链。 从而确保了链上价值存储的稳定性和不可篡改性。 去中心化的各个节点之间是通过异构体之间的共识机制来确保不可篡改性。这是区块链的根。 但是，问题是，单个节点通过什么手段来判定区块的合法性？ 目前主流有2种方法: 1) 比特币使用POW,也就是工作量证明。 只要一个台机器成功的按照规则(比特币是猜测前面含有N个0的Hash串)做到一件事情。把证据(nounce + 它对应的hash)打包入区块中。 广播后，每个节点验证nounce 和 它对应的Hash是否正确，并唯一。 如果是，peer投赞同票。 否则拒绝了。 这样的动作实现了一类共识。 2）还有另外一种共识，基于权益的证明(Proof of stake) POS也是一种共识机制，用于区块的校验工作。它通过下注的方式实现。 验证者必须锁定一些他们拥有的币作为保证金。 在此之后，他们将开始验证区块。同时，当他们发现一个他们认为可以被加到链上的区块时，他们会通过下赌注来验证它。 如果该区块成功上链，验证者就将得到一个与他们的赌注成比例的奖励。 POS的优势 帮助实现分散化 高能效 经济安全 扩展性 比特币中的区块链 比特币提出的背景 互联网上的贸易，几乎都需要借助金融机构作为可资信赖的第三方来处理电子支付信息。 虽然这类系统在绝大多数情况下都运作良好，但是这类系统仍然内生性地受制于“基于信用的 模式”(trust based model)的弱点。 我们无法实现完全不可逆的交易，因为金融机构总是不可避免地会出面协调争端。 而金融中介的存在，也会增加交易的成本，并且限制了实际可行的最小交易规模，也限制了日常的小额支付交易。 并且潜在的损失还在于，很多商品和服务本身是无法退货的， 如果缺乏不可逆的支付手段，互联网的贸易就大大受限。 因为有潜在的退款的可能，就需要交易双方拥有信任。 而商家也必须提防自己的客户，因此会向客户索取完全不必要的个人信息。 而实际的商业行为中，一定比例的欺诈性客户也被认为是不可避免的，相关损失视作销售费用处理。 而在使用物理现金的情况下，这些销售费用和支付问题上的不确定性却是可以避免的，因为此时没有第三方信用中介的存在。 比特币系统背后的相关概念 交易(transactions): 区块链的存储属性"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Ethereum开发笔记1-1: Blockchain简介" href="/feed.xml" />
+
+</head>
+<body class="blockchain">
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-fb" href="https://facebook.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+</a>
+            
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <article class="post-full  ">
+            <header class="post-full-header">
+                <h1 class="post-full-title">Ethereum开发笔记1-1: Blockchain简介</h1>
+                <section class="post-full-meta">
+                    
+                        <span class="date-divider">分类: </span>
+                        
+                            
+                               <a href='/tag/ethereum/'>ETHEREUM</a>
+                            
+                        
+                    
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime=" 6 September 2018">2018-09-06 11:11</time>
+                </section>
+            </header>
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>共识就是一起检查一个区块<code class="highlighter-rouge">是否</code>有效。</p>
+
+<h4 id="什么是工作量证明proof-of-work">什么是工作量证明(proof of work)？</h4>
+
+<p>工作量证明的目的是使区块的创建变得困难，从而阻止女巫攻击者恶意重新生成区块链。</p>
+
+<p>从而确保了<code class="highlighter-rouge">链上</code>价值存储的稳定性和不可篡改性。</p>
+
+<p>去中心化的各个节点之间是<code class="highlighter-rouge">通过异构体之间的共识</code>机制来确保<code class="highlighter-rouge">不可篡改性</code>。这是区块链的根。</p>
+
+<p>但是，问题是，单个节点通过什么手段来判定区块的合法性？</p>
+
+<p>目前主流有2种方法:</p>
+
+<p>1) 比特币使用POW,也就是工作量证明。</p>
+
+<p>只要一个台机器成功的按照规则(比特币是猜测前面含有N个0的Hash串)做到一件事情。把证据(nounce + 它对应的hash)打包入区块中。</p>
+
+<p>广播后，每个节点验证nounce 和 它对应的Hash是否正确，并唯一。 如果是，peer投赞同票。 否则拒绝了。</p>
+
+<p>这样的动作实现了一类共识。</p>
+
+<p>2）还有另外一种共识，基于权益的证明(Proof of stake)</p>
+
+<p>POS也是一种共识机制，用于区块的校验工作。它通过<code class="highlighter-rouge">下注</code>的方式实现。</p>
+
+<ul>
+  <li>
+    <p>验证者必须锁定一些他们拥有的币作为保证金。</p>
+  </li>
+  <li>
+    <p>在此之后，他们将开始验证区块。同时，当他们发现一个他们认为可以被加到链上的区块时，他们会通过下赌注来验证它。</p>
+  </li>
+  <li>
+    <p>如果该区块成功上链，验证者就将得到一个与他们的赌注成比例的奖励。</p>
+  </li>
+</ul>
+
+<p>POS的优势</p>
+
+<ul>
+  <li>
+    <p>帮助实现分散化</p>
+  </li>
+  <li>
+    <p>高能效</p>
+  </li>
+  <li>
+    <p>经济安全</p>
+  </li>
+  <li>
+    <p>扩展性</p>
+  </li>
+</ul>
+
+<h4 id="比特币中的区块链">比特币中的区块链</h4>
+
+<h5 id="比特币提出的背景">比特币提出的背景</h5>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>互联网上的贸易，几乎都需要借助金融机构作为可资信赖的第三方来处理电子支付信息。
+
+虽然这类系统在绝大多数情况下都运作良好，但是这类系统仍然内生性地受制于“基于信用的
+模式”(trust based model)的弱点。
+
+我们无法实现完全不可逆的交易，因为金融机构总是不可避免地会出面协调争端。
+
+而金融中介的存在，也会增加交易的成本，并且限制了实际可行的最小交易规模，也限制了日常的小额支付交易。
+
+并且潜在的损失还在于，很多商品和服务本身是无法退货的，
+如果缺乏不可逆的支付手段，互联网的贸易就大大受限。
+
+因为有潜在的退款的可能，就需要交易双方拥有信任。
+
+而商家也必须提防自己的客户，因此会向客户索取完全不必要的个人信息。
+
+而实际的商业行为中，一定比例的欺诈性客户也被认为是不可避免的，相关损失视作销售费用处理。
+
+而在使用物理现金的情况下，这些销售费用和支付问题上的不确定性却是可以避免的，因为此时没有第三方信用中介的存在。
+
+</code></pre></div></div>
+
+<h5 id="比特币系统背后的相关概念">比特币系统背后的相关概念</h5>
+
+<ul>
+  <li>交易(transactions): 区块链的存储属性</li>
+</ul>
+
+<p>相关概念</p>
+
+<p>电子货币(electronic coin)是一串数字签名(digital signature):</p>
+
+<p>每一位所有者，通过对前一次交易(previous transactions)和下一位拥有者的公钥<code class="highlighter-rouge">签署</code>一个数字签名，并将这个签名附加在货币的末尾， 电子货币就发送给了下一位所有者。</p>
+
+<p>收款人对签名进行检验，就可验证数字货币的拥有者。</p>
+
+<p>交易的唯一性确定</p>
+
+<p>通过Hash方法确保在交易期间，绝大多数节点认同该交易是首次出现。</p>
+
+<ul>
+  <li>时间戳服务器:  链条是如何形成的?</li>
+</ul>
+
+<p>顾名思义， 对区块的内容实施随机散列，并且加上时间戳。</p>
+
+<p>该时间戳能够证实特定数据必然于某特定时间是的确存在的，因为只有在该时刻存在了才能获取相应的随机散列值。</p>
+
+<p>每个时间戳应当将前一个时间戳纳入其随机散列值中，每一个随后的时间戳都对之前的一个时间戳进行增强(reinforcing)，
+这样就形成了一个链条（Chain）。</p>
+
+<ul>
+  <li>工作量证明(proof of work), 区块链不可篡改性背后的逻辑</li>
+</ul>
+
+<p>Bitcoint中的实现方法是，增加一个nounce随机数字段:</p>
+
+<p>这个nounce的散列值具备这样的特性:  前N位是0。 通过这种形式的计算，挖矿者才不断的猜测这个nounce，一旦符合定义的条件(前N位是0)，它讲获得区块的记账权(数据<code class="highlighter-rouge">入链</code>)</p>
+
+<p>所谓记账权，就是把交易(是全网内没有打包入块的交易)列表打包入区块。</p>
+
+<ul>
+  <li>区块链网络</li>
+</ul>
+
+<p>网络的运行方式如下:</p>
+
+<ul>
+  <li>
+    <p>新的交易面向全网广播</p>
+  </li>
+  <li>
+    <p>每一个节点都将收到的交易信息纳入一个区块中</p>
+  </li>
+  <li>
+    <p>每个节点都尝试在自己的区块中找到一个具有足够难度的工作量证明</p>
+  </li>
+  <li>
+    <p>当一个节点找到了一个工作量证明，它就向全网进行广播</p>
+  </li>
+  <li>
+    <p>当且仅当包含在该区块中的所有交易都是有效的且之前未存在过的，其他节点才认同
+该区块的有效性</p>
+  </li>
+  <li>
+    <p>其他节点表示他们接受该区块，而表示接受的方法，则是在跟随该区块的末尾，制造
+新的区块以延长该链条，而将被接受区块的随机散列值视为先于新区快的随机散列值</p>
+  </li>
+  <li>
+    <p>激励</p>
+  </li>
+</ul>
+
+<p>比特币内存在如此约定:</p>
+
+<ul>
+  <li>
+    <p>对每一笔区块的<code class="highlighter-rouge">第一笔交易</code>进行特殊化处理,该交易产生一枚有区块创造者(挖矿人)拥有的新的电子货币(bitcoin)。</p>
+  </li>
+  <li>
+    <p>增加了节点支持该网络的激励。</p>
+  </li>
+  <li>
+    <p>提供了一种在没有中央集权机构发行货币的情况下，将电子货币分配到流通领域的一种方法。</p>
+  </li>
+  <li>
+    <p>另外一个激励来源是交易费。</p>
+  </li>
+</ul>
+
+<p><img src="/assets/images/blockchain.png" alt="区块链结构" /></p>
+
+<h4 id="以太坊网络中的区块链">以太坊网络中的区块链</h4>
+
+<p>以太坊项目提出的背景</p>
+
+<p>Etherem项目的提出是源与比特币的UTXO的不足之处。</p>
+
+<p>比特币系统的脚本语言存在一些严重的限制：</p>
+
+<ul>
+  <li>
+    <p>缺少图灵完备性， 简单理解是，可编程的能力非常弱。</p>
+  </li>
+  <li>
+    <p>Value-blindness，简单理解是，UTXO与复杂场景下的脚本不能友好地协作。</p>
+  </li>
+  <li>
+    <p>缺少状态，简单理解是，UTXO是个简单对象，为复杂可编程的脚本预留的空间很小。</p>
+  </li>
+  <li>
+    <p>Blockchain-blindness, 简单理解是， UTXO对象不包含链相关的上下文，无法与链上数据交互。</p>
+  </li>
+</ul>
+
+<p>所以，为了弥补以上比特币脚本的缺陷， 以太坊实现了更复杂的脚本执行上下文， 这种脚本的另外一个名字是<code class="highlighter-rouge">智能合约</code>。</p>
+
+<p>引用白皮书的一段概述</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>本项目旨在提取上述协议中的创新并将其通用化-创造一个功能完善的，图灵完备的（但是可深度自由调整的）加密账簿，它允许参与者编写任意复杂的完全存在于并且被块链传递的合约，自治代理和关系。用户可以把以太坊当成一种“金融积木”来用，而不是受限于某一特定的交易类型集合。
+
+... 成为一个提供超强脚本系统的优秀底层协议，在其上可以创建任意高级的合约，货币及其它去中心化应用...
+
+</code></pre></div></div>
+
+<h4 id="ethereum区块链上的概念模型">Ethereum区块链上的概念模型</h4>
+
+<h5 id="以太坊账户模型">以太坊账户模型</h5>
+
+<p>比特币也有账户的概念，就是UTXO. 它包含所有者以及价值信息。 系统中的交易有UTXO INPUT 和 UTXO OUTPUT 组成。</p>
+
+<p>比特币中一个账户的余额就是该用户的私钥能有效签名的所有UTXO的总和。</p>
+
+<p>Eth系统中，账户是一个20字节的地址，包含四个部分:</p>
+
+<p>1) 随机数， 用户确定每笔交易只能被处理一次。</p>
+
+<p>2) 余额</p>
+
+<p>3) 账户的合约代码</p>
+
+<p>4) 账户的存储</p>
+
+<p>它有两种类型的账户:</p>
+
+<p>1) 合约以外的账户，也成为外部账户，由私钥控制。外部账户没有代码，需要手动创建和签名一笔交易，然后发送消息。</p>
+
+<p>2) 合约账户。</p>
+
+<p>合约账户的能力比外部账户强大:</p>
+
+<ul>
+  <li>
+    <p>它可以对内部存储进行读写。</p>
+  </li>
+  <li>
+    <p>发送消息</p>
+  </li>
+  <li>
+    <p>创建合约</p>
+  </li>
+</ul>
+
+<h5 id="eth的交易模型transactions">Eth的交易模型(Transactions)</h5>
+
+<ul>
+  <li>以太坊中“交易”是指存储从外部账户发出的消息的签名数据包。</li>
+</ul>
+
+<p>Eth的交易是签名后的消息。</p>
+
+<p>1) 以太坊的消息可以由外部实体或者合约创建，然而比特币的交易只能从外部创建。</p>
+
+<p>2) 以太坊消息可以选择包含数据。</p>
+
+<p>3) 如果以太坊消息的接受者是合约账户，可以选择进行回应，这意味着以太坊消息也包含函数概念。</p>
+
+<h5 id="eth中的状态转换函数">Eth中的状态转换函数</h5>
+
+<p>简单理解，这个eth处理交易的一个<code class="highlighter-rouge">事务</code>。 步骤是固定的:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1) 检查交易的格式是否正确（即有正确数值）、签名是否有效和随机数是否与发送者账户的随机数匹配。
+
+如否，返回错误。
+
+2) 计算交易费用:fee=STARTGAS * GASPRICE，并从签名中确定发送者的地址。
+
+从发送者的账户中减去交易费用和增加发送者的随机数。如果账户余额不足，返回错误。
+
+3) 设定初值GAS = STARTGAS，并根据交易中的字节数减去一定量的瓦斯值。
+
+4) 从发送者的账户转移价值到接收者账户。如果接收账户还不存在，创建此账户。
+
+5) 如果接收账户是一个合约，运行合约的代码，直到代码运行结束或者瓦斯用完。
+
+如果因为发送者账户没有足够的钱或者代码执行耗尽瓦斯导致价值转移失败，
+
+恢复原来的状态，但是还需要支付交易费用，交易费用加至矿工账户。
+
+否则，将所有剩余的瓦斯归还给发送者，消耗掉的瓦斯作为交易费用发送给矿工。 
+</code></pre></div></div>
+
+                </div>
+            </section>
+            <!-- Email subscribe form at the bottom of the page -->
+            
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+        </article>
+    </div>
+</main>
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/ethereum/">Ethereum</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/ethereum-dapp-develop-00">Ethereum开发笔记1-0: 智能合约</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/ethereum/">
+                                
+                                    See all 1 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card javaee">
+        
+            <a class="post-card-image-link" href="/archi-vuejs-deploy">
+                <div class="post-card-image" style="background-image: url(/assets/images/AmazonWebservices_Logo.png)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/archi-vuejs-deploy">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Nodejs</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">如何快速的交付前端工程?</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card javaee no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/archi-efficient-js">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Nodejs</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Guideline-编写有效率的javascript代码</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+        </div>
+    </div>
+</aside>
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://localhost:4000/">
+            
+                <img src="/assets/images/favicon.png" alt="张庆华的个人日志 icon" />
+            
+            <span>张庆华的个人日志</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Ethereum开发笔记1-1: Blockchain简介</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Ethereum%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B01-1%3A+Blockchain%E7%AE%80%E4%BB%8B&amp;url=https://rmrfself.github.io/ethereum-dapp-develop-01"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/ethereum-dapp-develop-01"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+<!-- /post -->
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="my_profile">
+                    <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
+                    <div class='profile_detail'>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
+                    </div>
+                </section>
+            </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
+        </footer>
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+    
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-126286097-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+</body>
+</html>

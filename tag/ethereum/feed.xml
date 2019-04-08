@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/ethereum/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-08T15:46:00+08:00</updated>
+  <updated>2019-04-08T16:07:11+08:00</updated>
   <id>http://localhost:4000/tag/ethereum/feed.xml</id>
 
   
@@ -45,11 +45,11 @@
   
     <entry>
       <title type="html">Ethereum开发笔记1-1: Blockchain简介</title>
-      <link href="http://localhost:4000/ethereum-dapp-develop" rel="alternate" type="text/html" title="Ethereum开发笔记1-1: Blockchain简介" />
+      <link href="http://localhost:4000/ethereum-dapp-develop-01" rel="alternate" type="text/html" title="Ethereum开发笔记1-1: Blockchain简介" />
       <published>2018-09-06T11:11:11+08:00</published>
       <updated>2018-09-06T11:11:11+08:00</updated>
-      <id>http://localhost:4000/ethereum-dapp-develop</id>
-      <content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop">&lt;p&gt;共识就是一起检查一个区块&lt;code class=&quot;highlighter-rouge&quot;&gt;是否&lt;/code&gt;有效。&lt;/p&gt;
+      <id>http://localhost:4000/ethereum-dapp-develop-01</id>
+      <content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop-01">&lt;p&gt;共识就是一起检查一个区块&lt;code class=&quot;highlighter-rouge&quot;&gt;是否&lt;/code&gt;有效。&lt;/p&gt;
 
 &lt;h4 id=&quot;什么是工作量证明proof-of-work&quot;&gt;什么是工作量证明(proof of work)？&lt;/h4&gt;
 
@@ -358,11 +358,11 @@
   
     <entry>
       <title type="html">Ethereum开发笔记1-0: 智能合约</title>
-      <link href="http://localhost:4000/ethereum-dapp-develop" rel="alternate" type="text/html" title="Ethereum开发笔记1-0: 智能合约" />
+      <link href="http://localhost:4000/ethereum-dapp-develop-00" rel="alternate" type="text/html" title="Ethereum开发笔记1-0: 智能合约" />
       <published>2018-01-01T22:10:11+08:00</published>
       <updated>2018-01-01T22:10:11+08:00</updated>
-      <id>http://localhost:4000/ethereum-dapp-develop</id>
-      <content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop">&lt;p&gt;交易(Transaction)是人类社会迈向文明的最重要的一步。以前都是靠抢的。&lt;/p&gt;
+      <id>http://localhost:4000/ethereum-dapp-develop-00</id>
+      <content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop-00">&lt;p&gt;交易(Transaction)是人类社会迈向文明的最重要的一步。以前都是靠抢的。&lt;/p&gt;
 
 &lt;h4 id=&quot;智能合约的产生背景&quot;&gt;智能合约的产生背景&lt;/h4&gt;
 
@@ -383,6 +383,9 @@
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;POS&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;RAFT&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -426,7 +429,7 @@
 
 &lt;p&gt;当条件满足时，合约自动执行。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/sc02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/smartcontract01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;2) 交易执行原子化(All or Nothing)。&lt;/p&gt;
 
@@ -444,7 +447,6 @@
       &lt;th&gt; &lt;/th&gt;
       &lt;th&gt;传统合约(tracditional)&lt;/th&gt;
       &lt;th&gt;智能合约(smart contract)&lt;/th&gt;
-      &lt;th&gt; &lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
@@ -452,25 +454,21 @@
       &lt;td&gt;合约表述方式&lt;/td&gt;
       &lt;td&gt;自然语言 + 法律术语&lt;/td&gt;
       &lt;td&gt;代码(code)&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;身份标识&lt;/td&gt;
       &lt;td&gt;署名&lt;/td&gt;
       &lt;td&gt;密码学数字签名&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;争端解决方式&lt;/td&gt;
       &lt;td&gt;法院，律师&lt;/td&gt;
       &lt;td&gt;分布式平台投票&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;合约的托管方式&lt;/td&gt;
       &lt;td&gt;第三方&lt;/td&gt;
       &lt;td&gt;区块链内&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;</content>
