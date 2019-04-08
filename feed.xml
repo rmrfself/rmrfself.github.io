@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-03T14:13:12+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-08T14:12:59+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">实现AI的基本策略</title><link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" /><published>2018-12-31T16:11:01+08:00</published><updated>2018-12-31T16:11:01+08:00</updated><id>http://localhost:4000/data-scientist-startup</id><content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
 
 &lt;h3 id=&quot;实现ai的基本策略&quot;&gt;实现AI的基本策略&lt;/h3&gt;
 
@@ -940,34 +940,113 @@ add(&quot;a&quot;,&quot;b&quot;) // 多态 polymorphic
 
 &lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UJPdhx5zTaw&quot;&gt;Google I/O 2012 - Breaking the JavaScript Speed Limit with V8&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">Trust yourself, not the VM。</summary></entry><entry><title type="html">Devops那些事-虚拟化讲座讲义</title><link href="http://localhost:4000/devops-docker-presentation" rel="alternate" type="text/html" title="Devops那些事-虚拟化讲座讲义" /><published>2017-11-22T10:01:19+08:00</published><updated>2017-11-22T10:01:19+08:00</updated><id>http://localhost:4000/devops-docker-presentation</id><content type="html" xml:base="http://localhost:4000/devops-docker-presentation">&lt;p&gt;docker基础讲座讲义&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UJPdhx5zTaw&quot;&gt;Google I/O 2012 - Breaking the JavaScript Speed Limit with V8&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">Trust yourself, not the VM。</summary></entry><entry><title type="html">Ethereum开发笔记1.0: 智能合约</title><link href="http://localhost:4000/ethereum-dapp-develop" rel="alternate" type="text/html" title="Ethereum开发笔记1.0: 智能合约" /><published>2018-01-01T22:10:11+08:00</published><updated>2018-01-01T22:10:11+08:00</updated><id>http://localhost:4000/ethereum-dapp-develop</id><content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop">&lt;p&gt;交易(Transaction)是人类社会迈向文明的最重要的一步。以前都是靠抢的。&lt;/p&gt;
 
-&lt;h4 id=&quot;讲座内容&quot;&gt;讲座内容&lt;/h4&gt;
+&lt;h4 id=&quot;智能合约的产生背景&quot;&gt;智能合约的产生背景&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/01.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;blockchain最重要的最基础的两个特征&quot;&gt;Blockchain最重要的、最基础的两个特征&lt;/h5&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/02.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;1) 数据不可变(Immutable)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/03.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;旧的、已经验证过的区块是不可修改的。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/04.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;2) 在一个分布式网络(P2P)中运行一个共识协议(consensus protocol)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/05.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;拜占庭(Byzantine agreement) 一致算法&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;POW&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;POS&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/06.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;…&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/07.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;作为一种分布式数据库，它包含了2中独有的特征:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/08.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;通过共识算法验证区块的过程，它不依赖于任何第三方。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;参与共识的各方彼此不需互相依赖。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/09.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;智能合约基于上面两个特征之上。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/10.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;合约的提出&quot;&gt;合约的提出&lt;/h5&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/11.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;作者 Nick Szabo&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/12.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.fon.hum.uva.nl/rob/Courses/InformationInSpeech/CDROM/Literature/LOTwinterschool2006/szabo.best.vwh.net/smart.contracts.html&quot;&gt;http://www.fon.hum.uva.nl/rob/Courses/InformationInSpeech/CDROM/Literature/LOTwinterschool2006/szabo.best.vwh.net/smart.contracts.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/13.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Nick把Smart Contract定义为&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/rmrfself/devpos-presentation-01/master/14.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">docker基础讲座讲义</summary></entry></feed>
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;一组数字形式的承诺(可执行),以及协议方为执行承诺所达成的协议。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;简单理解，&lt;/p&gt;
+
+&lt;p&gt;智能合约是可用代码描述的、运行在区块链之上的交易过程。&lt;/p&gt;
+
+&lt;h5 id=&quot;智能合约最重要的特征&quot;&gt;智能合约最重要的特征&lt;/h5&gt;
+
+&lt;p&gt;1) 合约必须强制地、正确地被执行(enforced)。&lt;/p&gt;
+
+&lt;p&gt;因为合约运行在各个分布式的Peer之中，自然避免了对第三方的依赖和参与。&lt;/p&gt;
+
+&lt;p&gt;当条件满足时，合约自动执行。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/sc02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2) 交易执行原子化(All or Nothing)。&lt;/p&gt;
+
+&lt;p&gt;合约内容的执行，要么全部成功，要么全部失败。&lt;/p&gt;
+
+&lt;p&gt;3) 交易历史可审计(auditable)&lt;/p&gt;
+
+&lt;p&gt;所以数据必须存储在链上(不依赖于Off Chain的数据)&lt;/p&gt;
+
+&lt;h5 id=&quot;传统合约和智能合约的对比&quot;&gt;传统合约和智能合约的对比&lt;/h5&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;传统合约(tracditional)&lt;/th&gt;
+      &lt;th&gt;智能合约(smart contract)&lt;/th&gt;
+      &lt;th&gt; &lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;合约表述方式&lt;/td&gt;
+      &lt;td&gt;自然语言 + 法律术语&lt;/td&gt;
+      &lt;td&gt;代码(code)&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;身份标识&lt;/td&gt;
+      &lt;td&gt;署名&lt;/td&gt;
+      &lt;td&gt;密码学数字签名&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;争端解决方式&lt;/td&gt;
+      &lt;td&gt;法院，律师&lt;/td&gt;
+      &lt;td&gt;分布式平台投票&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;合约的托管方式&lt;/td&gt;
+      &lt;td&gt;第三方&lt;/td&gt;
+      &lt;td&gt;区块链内&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name>mikezhang</name></author><category term="ethereum" /><summary type="html">交易(Transaction)是人类社会迈向文明的最重要的一步。以前都是靠抢的。</summary></entry></feed>
