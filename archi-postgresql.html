@@ -9,7 +9,7 @@
 
 
 
-    <title>PostgreSQL MySQL 数据类型映射</title>
+    <title>Postgres的流复制</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -47,24 +47,124 @@
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="PostgreSQL MySQL 数据类型映射" />
-    <meta property="og:description" content="参考 PostgreSQL Type Mapping PostgreSQL类型 转换为 MySQL类型 PostgreSQL Type MySQL Type Comment INT INT - SMALLINT SMALLINT - BIGINT BIGINT - SERIAL INT Sets AUTO_INCREMENT in its table definition. SMALLSERIAL SMALLINT Sets AUTO_INCREMENT in its table definition. BIGSERIAL BIGINT Sets AUTO_INCREMENT in its table definition. BIT BIT - BOOLEAN TINYINT(1)" />
+    <meta property="og:title" content="Postgres的流复制" />
+    <meta property="og:description" content="流复制起源
+
+PostgreSQL 自从2010年推出的9.0版本开始，支持流式物理复制，用户可以通过流式复制，构建只读备库(主备物理复制，块级别一致)。流式物理复制可以做到极低的延迟（通常在1毫秒以内）。
+
+同步流复制
+
+2011年推出的9.1版本，支持同步复制，当时只支持一个同步流复制备节点（例如配置了3个备，只有一个是同步模式的，其他都是异步模式）。
+
+在同步复制模式下，当用户提交事务时，需要等待这笔事务的WAL日志复制到同步流复制备节点，才会返回提交成功的ACK给客户端。
+
+同步模式下，可以确保数据的0丢失。（只要客户端收到了事务提交成功的ACK，这笔事务的WAL就有两份。）
+
+级联流复制
+
+2012年推出的9.2版本，支持级联流复制。意思是备库还可以再连备库。
+
+级联复制特别适合跨机房的使用，例如主库在A机房，备库在B机房，但是B机房需要建立多个备库时，那么B机房只需要建立一个直连主库的备库，其他的备库可以通过B机房的这个备库级联产生。从而减少网络开销。
+
+流式虚拟备库
+
+2012年推出的9.2版本，除了支持级联复制，还支持虚拟备库，什么是虚拟备库呢？就是只有WAL，没有数据文件的备库。
+
+通过虚拟备库，可以流式的接收WAL，进行实时的流式WAL归档。提高备份或归档的实时性。
+
+逻辑复制的基础
+
+2014年推出的9.4版本，在WAL中增加了逻辑复制需要的基础信息，通过插件，可以实现逻辑复制。
+
+逻辑复制可以做到对主库的部分复制，例如表级复制，而不是整个集群的块级一致复制。
+
+逻辑复制的备库不仅仅是只读的，也可以执行写操作。
+
+增加几种同步级别
+
+2016年推出的9.6版本，PG的流式复制，通过复制WAL达到同步的目的，因此同步级别也和WAL有关。通过synchronous_commit参数，可以配置事务的同步级别。
+
+1、on, 表示本地WAL fsync，同步standby WAL fsync。即两份持久化的WAL。
+
+2、remote_apply, 表示本地WAL fsync，同步standby WAL 已恢复。这个带来的RT最高。
+
+3、remote_write, 表示本地WAL fsync，同步standby WAL 异步write完成。一份持久化，备库的WAL可能还在OS CACHE中。
+
+4、local, 表示本地WAL fsync。
+
+5、off, 表示本地WAL写到wal buffer中即返回客户端事务提交成功的ACK，为异步提交（数据库CRASH可能导致事务丢失，但不会导致数据库不一致）。
+
+RT影响，从低到高如下：
+
+off, local, remote_write, on, remote_apply。
+
+" />
     <meta property="og:url" content="http://localhost:4000/archi-postgresql" />
     <meta property="og:image" content="http://localhost:4000/assets/images/database.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
-    <meta property="article:published_time" content="2017-08-15T18:31:11+08:00" />
-    <meta property="article:modified_time" content="2017-08-15T18:31:11+08:00" />
-    <meta property="article:tag" content="Automation" />
+    <meta property="article:published_time" content="2015-02-10T11:17:10+08:00" />
+    <meta property="article:modified_time" content="2015-02-10T11:17:10+08:00" />
+    <meta property="article:tag" content="Architecture" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="PostgreSQL MySQL 数据类型映射" />
-    <meta name="twitter:description" content="参考 PostgreSQL Type Mapping PostgreSQL类型 转换为 MySQL类型 PostgreSQL Type MySQL Type Comment INT INT - SMALLINT SMALLINT - BIGINT BIGINT - SERIAL INT Sets AUTO_INCREMENT in its table definition. SMALLSERIAL SMALLINT Sets AUTO_INCREMENT in its table definition. BIGSERIAL BIGINT Sets AUTO_INCREMENT in its table definition. BIT BIT - BOOLEAN TINYINT(1)" />
+    <meta name="twitter:title" content="Postgres的流复制" />
+    <meta name="twitter:description" content="流复制起源
+
+PostgreSQL 自从2010年推出的9.0版本开始，支持流式物理复制，用户可以通过流式复制，构建只读备库(主备物理复制，块级别一致)。流式物理复制可以做到极低的延迟（通常在1毫秒以内）。
+
+同步流复制
+
+2011年推出的9.1版本，支持同步复制，当时只支持一个同步流复制备节点（例如配置了3个备，只有一个是同步模式的，其他都是异步模式）。
+
+在同步复制模式下，当用户提交事务时，需要等待这笔事务的WAL日志复制到同步流复制备节点，才会返回提交成功的ACK给客户端。
+
+同步模式下，可以确保数据的0丢失。（只要客户端收到了事务提交成功的ACK，这笔事务的WAL就有两份。）
+
+级联流复制
+
+2012年推出的9.2版本，支持级联流复制。意思是备库还可以再连备库。
+
+级联复制特别适合跨机房的使用，例如主库在A机房，备库在B机房，但是B机房需要建立多个备库时，那么B机房只需要建立一个直连主库的备库，其他的备库可以通过B机房的这个备库级联产生。从而减少网络开销。
+
+流式虚拟备库
+
+2012年推出的9.2版本，除了支持级联复制，还支持虚拟备库，什么是虚拟备库呢？就是只有WAL，没有数据文件的备库。
+
+通过虚拟备库，可以流式的接收WAL，进行实时的流式WAL归档。提高备份或归档的实时性。
+
+逻辑复制的基础
+
+2014年推出的9.4版本，在WAL中增加了逻辑复制需要的基础信息，通过插件，可以实现逻辑复制。
+
+逻辑复制可以做到对主库的部分复制，例如表级复制，而不是整个集群的块级一致复制。
+
+逻辑复制的备库不仅仅是只读的，也可以执行写操作。
+
+增加几种同步级别
+
+2016年推出的9.6版本，PG的流式复制，通过复制WAL达到同步的目的，因此同步级别也和WAL有关。通过synchronous_commit参数，可以配置事务的同步级别。
+
+1、on, 表示本地WAL fsync，同步standby WAL fsync。即两份持久化的WAL。
+
+2、remote_apply, 表示本地WAL fsync，同步standby WAL 已恢复。这个带来的RT最高。
+
+3、remote_write, 表示本地WAL fsync，同步standby WAL 异步write完成。一份持久化，备库的WAL可能还在OS CACHE中。
+
+4、local, 表示本地WAL fsync。
+
+5、off, 表示本地WAL写到wal buffer中即返回客户端事务提交成功的ACK，为异步提交（数据库CRASH可能导致事务丢失，但不会导致数据库不一致）。
+
+RT影响，从低到高如下：
+
+off, local, remote_write, on, remote_apply。
+
+" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/database.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Automation" />
+    <meta name="twitter:data2" content="Architecture" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
     <meta property="og:image:width" content="1400" />
@@ -90,7 +190,57 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/archi-postgresql"
     },
-    "description": "参考 PostgreSQL Type Mapping PostgreSQL类型 转换为 MySQL类型 PostgreSQL Type MySQL Type Comment INT INT - SMALLINT SMALLINT - BIGINT BIGINT - SERIAL INT Sets AUTO_INCREMENT in its table definition. SMALLSERIAL SMALLINT Sets AUTO_INCREMENT in its table definition. BIGSERIAL BIGINT Sets AUTO_INCREMENT in its table definition. BIT BIT - BOOLEAN TINYINT(1)"
+    "description": "流复制起源
+
+PostgreSQL 自从2010年推出的9.0版本开始，支持流式物理复制，用户可以通过流式复制，构建只读备库(主备物理复制，块级别一致)。流式物理复制可以做到极低的延迟（通常在1毫秒以内）。
+
+同步流复制
+
+2011年推出的9.1版本，支持同步复制，当时只支持一个同步流复制备节点（例如配置了3个备，只有一个是同步模式的，其他都是异步模式）。
+
+在同步复制模式下，当用户提交事务时，需要等待这笔事务的WAL日志复制到同步流复制备节点，才会返回提交成功的ACK给客户端。
+
+同步模式下，可以确保数据的0丢失。（只要客户端收到了事务提交成功的ACK，这笔事务的WAL就有两份。）
+
+级联流复制
+
+2012年推出的9.2版本，支持级联流复制。意思是备库还可以再连备库。
+
+级联复制特别适合跨机房的使用，例如主库在A机房，备库在B机房，但是B机房需要建立多个备库时，那么B机房只需要建立一个直连主库的备库，其他的备库可以通过B机房的这个备库级联产生。从而减少网络开销。
+
+流式虚拟备库
+
+2012年推出的9.2版本，除了支持级联复制，还支持虚拟备库，什么是虚拟备库呢？就是只有WAL，没有数据文件的备库。
+
+通过虚拟备库，可以流式的接收WAL，进行实时的流式WAL归档。提高备份或归档的实时性。
+
+逻辑复制的基础
+
+2014年推出的9.4版本，在WAL中增加了逻辑复制需要的基础信息，通过插件，可以实现逻辑复制。
+
+逻辑复制可以做到对主库的部分复制，例如表级复制，而不是整个集群的块级一致复制。
+
+逻辑复制的备库不仅仅是只读的，也可以执行写操作。
+
+增加几种同步级别
+
+2016年推出的9.6版本，PG的流式复制，通过复制WAL达到同步的目的，因此同步级别也和WAL有关。通过synchronous_commit参数，可以配置事务的同步级别。
+
+1、on, 表示本地WAL fsync，同步standby WAL fsync。即两份持久化的WAL。
+
+2、remote_apply, 表示本地WAL fsync，同步standby WAL 已恢复。这个带来的RT最高。
+
+3、remote_write, 表示本地WAL fsync，同步standby WAL 异步write完成。一份持久化，备库的WAL可能还在OS CACHE中。
+
+4、local, 表示本地WAL fsync。
+
+5、off, 表示本地WAL写到wal buffer中即返回客户端事务提交成功的ACK，为异步提交（数据库CRASH可能导致事务丢失，但不会导致数据库不一致）。
+
+RT影响，从低到高如下：
+
+off, local, remote_write, on, remote_apply。
+
+"
 }
     </script>
 
@@ -103,10 +253,10 @@
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="PostgreSQL MySQL 数据类型映射" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Postgres的流复制" href="/feed.xml" />
 
 </head>
-<body class="devops">
+<body class="designment">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -152,406 +302,70 @@ into the {body} of the default.hbs template -->
     <div class="inner">
         <article class="post-full  ">
             <header class="post-full-header">
-                <h1 class="post-full-title">PostgreSQL MySQL 数据类型映射</h1>
+                <h1 class="post-full-title">Postgres的流复制</h1>
                 <section class="post-full-meta">
                     
                         <span class="date-divider">分类: </span>
                         
                             
-                               <a href='/tag/automation/'>AUTOMATION</a>
+                               <a href='/tag/architecture/'>ARCHITECTURE</a>
                             
                         
                     
-                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="15 August 2017">2017-08-15 18:31</time>
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="10 February 2015">2015-02-10 11:17</time>
                 </section>
             </header>
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>参考
-<a href="https://dev.mysql.com/doc/workbench/en/wb-migration-database-postgresql-typemapping.html">PostgreSQL Type Mapping</a></p>
-
-<h3 id="postgresql类型-转换为-mysql类型">PostgreSQL类型 转换为 MySQL类型</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>PostgreSQL Type</th>
-      <th>MySQL Type</th>
-      <th>Comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>INT</td>
-      <td>INT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>SMALLINT</td>
-      <td>SMALLINT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>BIGINT</td>
-      <td>BIGINT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>SERIAL</td>
-      <td>INT</td>
-      <td>Sets AUTO_INCREMENT in its table definition.</td>
-    </tr>
-    <tr>
-      <td>SMALLSERIAL</td>
-      <td>SMALLINT</td>
-      <td>Sets AUTO_INCREMENT in its table definition.</td>
-    </tr>
-    <tr>
-      <td>BIGSERIAL</td>
-      <td>BIGINT</td>
-      <td>Sets AUTO_INCREMENT in its table definition.</td>
-    </tr>
-    <tr>
-      <td>BIT</td>
-      <td>BIT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>BOOLEAN</td>
-      <td>TINYINT(1)</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>REAL</td>
-      <td>FLOAT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>DOUBLE PRECISION</td>
-      <td>DOUBLE</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>NUMERIC</td>
-      <td>DECIMAL</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>DECIMAL</td>
-      <td>DECIMAL</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>MONEY</td>
-      <td>DECIMAL(19,2)</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>CHAR</td>
-      <td>CHAR/LONGTEXT</td>
-      <td>Depending on its length. MySQL Server 5.5 and above can have CHAR columns with a length up to 255 characters. Anything larger is migrated as LONGTEXT</td>
-    </tr>
-    <tr>
-      <td>NATIONAL CHARACTER</td>
-      <td>CHAR/LONGTEXT</td>
-      <td>Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types. In MySQL, character set of strings depend on the column character set instead of the datatype.</td>
-    </tr>
-    <tr>
-      <td>VARCHAR</td>
-      <td>VARCHAR/MEDIUMTEXT/LONGTEXT</td>
-      <td>Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types.</td>
-    </tr>
-    <tr>
-      <td>NATIONAL CHARACTER VARYING</td>
-      <td>VARCHAR/MEDIUMTEXT/LONGTEXT</td>
-      <td>Depending on its length. MySQL Server 5.5 and above can have VARCHAR columns with a length up to 65535 characters. Anything larger is migrated to one of the TEXT blob types. In MySQL, character set of strings depend on the column character set instead of the datatype.</td>
-    </tr>
-    <tr>
-      <td>DATE</td>
-      <td>DATE</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>TIME</td>
-      <td>TIME</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>TIMESTAMP</td>
-      <td>DATETIME</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>INTERVAL</td>
-      <td>TIME</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>BYTEA</td>
-      <td>LONGBLOB</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>TEXT</td>
-      <td>LONGTEXT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>CIDR</td>
-      <td>VARCHAR(43)</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>INET</td>
-      <td>VARCHAR(43)</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>MACADDR</td>
-      <td>VARCHAR(17)</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>UUID</td>
-      <td>VARCHAR(36)</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>XML</td>
-      <td>LONGTEXT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>JSON</td>
-      <td>LONGTEXT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>TSVECTOR</td>
-      <td>LONGTEXT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>TSQUERY</td>
-      <td>LONGTEXT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>ARRAY</td>
-      <td>LONGTEXT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>POINT</td>
-      <td>POINT</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>LINE</td>
-      <td>LINESTRING</td>
-      <td>Although LINE length is infinite, and LINESTRING is finite in MySQL, it is approximated</td>
-    </tr>
-    <tr>
-      <td>LSEG</td>
-      <td>LINESTRING</td>
-      <td>A LSEG is like a LINESTRING with only two points</td>
-    </tr>
-    <tr>
-      <td>BOX</td>
-      <td>POLYGON</td>
-      <td>A BOX is a POLYGON with five points and right angles</td>
-    </tr>
-    <tr>
-      <td>PATH</td>
-      <td>LINESTRING</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>POLYGON</td>
-      <td>POLYGON</td>
-      <td>-</td>
-    </tr>
-    <tr>
-      <td>CIRCLE</td>
-      <td>POLYGON</td>
-      <td>A POLYGON is used to approximate a CIRCLE</td>
-    </tr>
-    <tr>
-      <td>TXID_SNAPSHOT</td>
-      <td>VARCHAR</td>
-      <td>-</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="类型">类型</h3>
-<p>1. 数据类型</p>
-
-<p>1.1 PostgreSQL</p>
-
-<p>高精度numeric, 浮点, 自增序列，货币，字节流，时间，日期，时间戳，布尔，枚举，平面几何，立体几何，多维几何，地球，PostGIS，网络，比特流，全文检索，UUID，XML，JSON，数组，复合类型，域类型，范围，树类型，化学类型，基因序列，FDW, 大对象, 图像</p>
-
-<p>1.2 MySQL</p>
-
-<p>数字，时间，字符串，简单的GIS，JSON</p>
-
-<p>2. 支持索引的数据类型</p>
-
-<p>2.1 PostgreSQL</p>
-
-<p>高精度numeric, 浮点, 自增序列，货币，字节流，时间，日期，时间戳，布尔，枚举，平面几何，立体几何，多维几何，地球，PostGIS，网络，比特流，全文检索，UUID，XML，JSON，数组，复合类型，域类型，范围，树类型，化学，基因序列</p>
-
-<p>2.2 MySQL</p>
-
-<p>数字，字符串，比特流，时间，全文检索，GIS</p>
-
-<h3 id="索引支持">索引支持</h3>
-<p>1. 索引方法</p>
-
-<p>PostgreSQL 支持 btree, hash, gist, sp-gist, gin, brin , bloom , rum 索引</p>
-
-<p>MySQL 支持 btree, gis类型索引</p>
+                    <h3 id="流复制起源">流复制起源</h3>
 
-<p>2. 规则表达式、前后模糊查询，支持索引检索</p>
+<p>PostgreSQL 自从2010年推出的9.0版本开始，支持流式物理复制，用户可以通过流式复制，构建只读备库(主备物理复制，块级别一致)。流式物理复制可以做到极低的延迟（通常在1毫秒以内）。</p>
 
-<p>PostgreSQL 支持</p>
+<h3 id="同步流复制">同步流复制</h3>
 
-<p>3. 数组支持索引</p>
+<p>2011年推出的9.1版本，支持同步复制，当时只支持一个同步流复制备节点（例如配置了3个备，只有一个是同步模式的，其他都是异步模式）。</p>
 
-<p>PostgreSQL 支持</p>
+<p>在同步复制模式下，当用户提交事务时，需要等待这笔事务的WAL日志复制到同步流复制备节点，才会返回提交成功的ACK给客户端。</p>
 
-<p>4. 全文检索支持索引</p>
+<p>同步模式下，可以确保数据的0丢失。（只要客户端收到了事务提交成功的ACK，这笔事务的WAL就有两份。）</p>
 
-<p>5. 索引扩展功能</p>
+<h3 id="级联流复制">级联流复制</h3>
 
-<p>5.1 PostgreSQL 支持 表达式索引，部分索引，联合索引</p>
+<p>2012年推出的9.2版本，支持级联流复制。意思是备库还可以再连备库。</p>
 
-<p>5.2 PostgreSQL 支持图像相似度、文本相似度搜索</p>
+<p>级联复制特别适合跨机房的使用，例如主库在A机房，备库在B机房，但是B机房需要建立多个备库时，那么B机房只需要建立一个直连主库的备库，其他的备库可以通过B机房的这个备库级联产生。从而减少网络开销。</p>
 
-<p>5.3 自定义索引访问方法(bloom, rum, ……)</p>
+<h3 id="流式虚拟备库">流式虚拟备库</h3>
 
-<p>PostgreSQL支持</p>
+<p>2012年推出的9.2版本，除了支持级联复制，还支持虚拟备库，什么是虚拟备库呢？就是只有WAL，没有数据文件的备库。</p>
 
-<h3 id="多引擎和外部源支持">多引擎和外部源支持</h3>
-<p>1. 多引擎支持</p>
+<p>通过虚拟备库，可以流式的接收WAL，进行实时的流式WAL归档。提高备份或归档的实时性。</p>
 
-<p>1.1 PostgreSQL</p>
+<h3 id="逻辑复制的基础">逻辑复制的基础</h3>
 
-<p>内置heap, 通过插件实现内存表, 列存储, 压缩存储, 流式存储, 非关系存储等。</p>
+<p>2014年推出的9.4版本，在WAL中增加了逻辑复制需要的基础信息，通过插件，可以实现逻辑复制。</p>
 
-<p>1.2 MySQL</p>
+<p>逻辑复制可以做到对主库的部分复制，例如表级复制，而不是整个集群的块级一致复制。</p>
 
-<p>MyISAM, innodb, …</p>
+<p>逻辑复制的备库不仅仅是只读的，也可以执行写操作。</p>
 
-<p>2. 外部表</p>
+<h3 id="增加几种同步级别">增加几种同步级别</h3>
 
-<p>PostgreSQL支持任意外部数据源, (例如jdbc, file, odbc, oracle, mysql, db2, redis, mongo, ES, hadoop……)</p>
+<p>2016年推出的9.6版本，PG的流式复制，通过复制WAL达到同步的目的，因此同步级别也和WAL有关。通过synchronous_commit参数，可以配置事务的同步级别。</p>
 
-<p>https://wiki.postgresql.org/wiki/Fdw</p>
+<p>1、on, 表示本地WAL fsync，同步standby WAL fsync。即两份持久化的WAL。</p>
 
-<p>3. dblink</p>
+<p>2、remote_apply, 表示本地WAL fsync，同步standby WAL 已恢复。这个带来的RT最高。</p>
 
-<p>PostgreSQL 支持</p>
+<p>3、remote_write, 表示本地WAL fsync，同步standby WAL 异步write完成。一份持久化，备库的WAL可能还在OS CACHE中。</p>
 
-<p>4. 内存表</p>
+<p>4、local, 表示本地WAL fsync。</p>
 
-<p>PostgreSQL 通过外部表支持，或者通过插件支持</p>
+<p>5、off, 表示本地WAL写到wal buffer中即返回客户端事务提交成功的ACK，为异步提交（数据库CRASH可能导致事务丢失，但不会导致数据库不一致）。</p>
 
-<p>5. ES(弹性搜索引擎) 引擎</p>
+<p>RT影响，从低到高如下：</p>
 
-<p>PostgreSQL 支持</p>
-
-<h3 id="安全">安全</h3>
-<p>1. 数据加密</p>
-
-<p>PostgreSQL 支持加密数据类型，可选GPG加密算法</p>
-
-<p>2. 认证方法</p>
-
-<p>PostgreSQL 支持 密码、LDAP、AD、GSSAPI、SSPI、Ident、Peer、RADIUS、PAM、签名认证</p>
-
-<p>3. 数据传输加密</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>4. 行安全策略</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>5. 数据库内部支持libselinux接口, (美国国家安全局制定的安全加强标准)</p>
-
-<p>PostgreSQL 支持</p>
-
-<h3 id="优化器">优化器</h3>
-<p>http://www.postgresql.org/docs/9.5/static/runtime-config-query.html</p>
-
-<p>1. GPU 并行计算支持</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>2. 遗传优化器算法</p>
-
-<p>PostgreSQL 支持CBO、CRO、遗传算法</p>
-
-<p>3. HINT PLAN</p>
-
-<p>4. CPU 并行计算</p>
-
-<p>PostgreSQL 支持 (线性性能提升)</p>
-
-<p>5. 自定义成本因子</p>
-
-<p>PostgreSQL 支持</p>
-
-<h3 id="编程扩展">编程扩展</h3>
-<p>1. 是否支持采样查询</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>2. 是否支持扩展采样算法</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>3. 自定义数据类型</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>4. 自定义索引方法</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>5. 字符集自动转换, C扩展接口</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>6. 自定义聚合</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>7. 自定义窗口</p>
-
-<p>PostgreSQL 支持</p>
-
-<h3 id="扩展能力">扩展能力</h3>
-<p>1. 类型扩展，操作符扩展，函数扩展，索引方法扩展，索引扩展，</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>2. C触发器函数， C事件触发器函数</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>3. 函数语言扩展</p>
-
-<p>PostgreSQL 支持扩展函数支持接口, erlang, ….</p>
-
-<p>4. 机器学习库</p>
-
-<p>PostgreSQL 支持</p>
-
-<p>5. 流式计算</p>
-
-<p>PostgreSQL 支持</p>
+<p>off, local, remote_write, on, remote_apply。</p>
 
 
                 </div>
@@ -602,7 +416,7 @@ into the {body} of the default.hbs template -->
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/automation/">Automation</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/architecture/">Architecture</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -616,12 +430,21 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                            <li><a href="/k8s-from-scrach">[GCE]单节点部署kubernetes集群</a></li>
-                                        
-                                    
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                                   
@@ -639,53 +462,15 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                            <li><a href="/devops-docker-presentation">Devops那些事-虚拟化讲座讲义</a></li>
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                            <li><a href="/archi-postgresql">Postgres的流复制最佳实践</a></li>
-                                        
-                                    
-                                  
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -697,134 +482,23 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
                                 
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -857,37 +531,16 @@ into the {body} of the default.hbs template -->
                                     
                                         
                                         
+                                            <li><a href="/archi-architect-org">对开发方式的思考</a></li>
+                                        
                                     
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
                                   
                                 
                                   
                                     
                                         
                                         
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
+                                            <li><a href="/archi-architect-who">论什么是软件架构?</a></li>
                                         
                                     
                                   
@@ -901,10 +554,39 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
                                     
-                                        
-                                        
-                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                                   
@@ -920,9 +602,9 @@ into the {body} of the default.hbs template -->
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/automation/">
+                            <a href="/tag/architecture/">
                                 
-                                    See all 28 posts  →
+                                    See all 2 posts  →
                                 
                             </a>
                         </footer>
@@ -936,7 +618,7 @@ into the {body} of the default.hbs template -->
     <article class="post-card devops no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/devops-docker-presentation">
+            <a class="post-card-content-link" href="/devops-apache-proxy">
                 <header class="post-card-header">
                     
                         
@@ -946,7 +628,7 @@ into the {body} of the default.hbs template -->
                         
                     
 
-                    <h2 class="post-card-title">Devops那些事-虚拟化讲座讲义</h2>
+                    <h2 class="post-card-title">Apache2.4中的反向代理配置</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -985,24 +667,24 @@ into the {body} of the default.hbs template -->
             
                 
 
-    <article class="post-card devops">
+    <article class="post-card distribution">
         
-            <a class="post-card-image-link" href="/archi-postgresql">
-                <div class="post-card-image" style="background-image: url(/assets/images/database.jpg)"></div>
+            <a class="post-card-image-link" href="/jvm-oop-basic">
+                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/archi-postgresql">
+            <a class="post-card-content-link" href="/jvm-oop-basic">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Automation</span>
+                                <span class="post-card-tags">Jvm</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">Postgres的流复制最佳实践</h2>
+                    <h2 class="post-card-title">Java OO设计中的常见问题</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -1051,13 +733,13 @@ into the {body} of the default.hbs template -->
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">PostgreSQL MySQL 数据类型映射</div>
+    <div class="floating-header-title">Postgres的流复制</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=PostgreSQL+MySQL+%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%98%A0%E5%B0%84&amp;url=https://rmrfself.github.io/archi-postgresql"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Postgres%E7%9A%84%E6%B5%81%E5%A4%8D%E5%88%B6&amp;url=https://rmrfself.github.io/archi-postgresql"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 

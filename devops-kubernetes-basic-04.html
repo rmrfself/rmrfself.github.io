@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>kubernetes中的基本概念(四) linux命名空间</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markdown.min.js"></script>
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="Learn, Innovate, Share - Business Based Vision." />
+    <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="http://localhost:4000/devops-kubernetes-basic-04" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="张庆华的个人日志" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="kubernetes中的基本概念(四) linux命名空间" />
+    <meta property="og:description" content="Linux内如何进行资源隔离? pods pod 是一组共享存储和网络的容器。 pod内的容器共享IP地址和端口空间。可以通过localhost互相发现。 共享的底层原因是pod内的容器处在同一个namespace内。 命名空间隔离(namespace isolation) groups内的进程有独立的进程PID空间、user、挂载点、网络等。 独立的进程PID空间 命名空间内的pid(进程ID)是相互独立的(可重复的) 网络资源空间隔离 网络空间有独立的虚拟网络栈(二层以上)，空间内包含一个loopback接口。 独立的路由表，socket监听，防火墙，连接跟踪表，私有ip地址集以及其他网络资源。 UTS 独立的mount空间 不同命名空间内的挂载点(mount points)是相互隔离的。通过配置，不同空间内的挂载点可以共享。 IPC 空间隔离 信号量通信地址空间在namespace内是相互隔离的。 用户空间隔离 用户空间之间的用户uid是相互隔离的。 UTS空间介绍 groups内的进程可以设置独立的hostname， 通过uname输出可以查看hostname的full格式。 linux namespaces resource limiting 内存使用量控制(memory limit)。 优先级 设置一些进程获取更多的cpu利用率。 度量 记录资源(cpu,内存,volume,网络吞吐量)的使用量, 长用在按使用量计费。 控制 冻结组内资源或者进程，重启。 和ns有关的命令 lsns 进程有两种方式添加到特定的命名空间内 1.通过clone系列的系统调用函数(clone调用可以创建新的ns) 2.通过setns系统调用(这个系统调用添加进程到已经存在的ns) nsenter -t 29221 –mount –uts –ipc" />
+    <meta property="og:url" content="http://localhost:4000/devops-kubernetes-basic-04" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/deployments.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2016-04-08T22:10:19+08:00" />
+    <meta property="article:modified_time" content="2016-04-08T22:10:19+08:00" />
+    <meta property="article:tag" content="Automation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="kubernetes中的基本概念(四) linux命名空间" />
+    <meta name="twitter:description" content="Linux内如何进行资源隔离? pods pod 是一组共享存储和网络的容器。 pod内的容器共享IP地址和端口空间。可以通过localhost互相发现。 共享的底层原因是pod内的容器处在同一个namespace内。 命名空间隔离(namespace isolation) groups内的进程有独立的进程PID空间、user、挂载点、网络等。 独立的进程PID空间 命名空间内的pid(进程ID)是相互独立的(可重复的) 网络资源空间隔离 网络空间有独立的虚拟网络栈(二层以上)，空间内包含一个loopback接口。 独立的路由表，socket监听，防火墙，连接跟踪表，私有ip地址集以及其他网络资源。 UTS 独立的mount空间 不同命名空间内的挂载点(mount points)是相互隔离的。通过配置，不同空间内的挂载点可以共享。 IPC 空间隔离 信号量通信地址空间在namespace内是相互隔离的。 用户空间隔离 用户空间之间的用户uid是相互隔离的。 UTS空间介绍 groups内的进程可以设置独立的hostname， 通过uname输出可以查看hostname的full格式。 linux namespaces resource limiting 内存使用量控制(memory limit)。 优先级 设置一些进程获取更多的cpu利用率。 度量 记录资源(cpu,内存,volume,网络吞吐量)的使用量, 长用在按使用量计费。 控制 冻结组内资源或者进程，重启。 和ns有关的命令 lsns 进程有两种方式添加到特定的命名空间内 1.通过clone系列的系统调用函数(clone调用可以创建新的ns) 2.通过setns系统调用(这个系统调用添加进程到已经存在的ns) nsenter -t 29221 –mount –uts –ipc" />
+    <meta name="twitter:url" content="http://localhost:4000/" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/deployments.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="张庆华的个人日志" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Automation" />
+    <meta name="twitter:site" content="@rmrfself" />
+    <meta name="twitter:creator" content="@rmrfself" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "张庆华的个人日志",
+        "logo": "http://localhost:4000/assets/images/blog-icon.svg"
+    },
+    "url": "http://localhost:4000/devops-kubernetes-basic-04",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:4000/assets/images/deployments.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:4000/devops-kubernetes-basic-04"
+    },
+    "description": "Linux内如何进行资源隔离? pods pod 是一组共享存储和网络的容器。 pod内的容器共享IP地址和端口空间。可以通过localhost互相发现。 共享的底层原因是pod内的容器处在同一个namespace内。 命名空间隔离(namespace isolation) groups内的进程有独立的进程PID空间、user、挂载点、网络等。 独立的进程PID空间 命名空间内的pid(进程ID)是相互独立的(可重复的) 网络资源空间隔离 网络空间有独立的虚拟网络栈(二层以上)，空间内包含一个loopback接口。 独立的路由表，socket监听，防火墙，连接跟踪表，私有ip地址集以及其他网络资源。 UTS 独立的mount空间 不同命名空间内的挂载点(mount points)是相互隔离的。通过配置，不同空间内的挂载点可以共享。 IPC 空间隔离 信号量通信地址空间在namespace内是相互隔离的。 用户空间隔离 用户空间之间的用户uid是相互隔离的。 UTS空间介绍 groups内的进程可以设置独立的hostname， 通过uname输出可以查看hostname的full格式。 linux namespaces resource limiting 内存使用量控制(memory limit)。 优先级 设置一些进程获取更多的cpu利用率。 度量 记录资源(cpu,内存,volume,网络吞吐量)的使用量, 长用在按使用量计费。 控制 冻结组内资源或者进程，重启。 和ns有关的命令 lsns 进程有两种方式添加到特定的命名空间内 1.通过clone系列的系统调用函数(clone调用可以创建新的ns) 2.通过setns系统调用(这个系统调用添加进程到已经存在的ns) nsenter -t 29221 –mount –uts –ipc"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="kubernetes中的基本概念(四) linux命名空间" href="/feed.xml" />
+
+</head>
+<body class="devops">
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-fb" href="https://facebook.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+</a>
+            
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <article class="post-full  ">
+            <header class="post-full-header">
+                <h1 class="post-full-title">kubernetes中的基本概念(四) linux命名空间</h1>
+                <section class="post-full-meta">
+                    
+                        <span class="date-divider">分类: </span>
+                        
+                            
+                               <a href='/tag/automation/'>AUTOMATION</a>
+                            
+                        
+                    
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime=" 8 April 2016">2016-04-08 22:10</time>
+                </section>
+            </header>
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>Linux内如何进行资源隔离?</p>
+
+<h4 id="pods">pods</h4>
+
+<p>pod 是一组共享存储和网络的容器。</p>
+
+<p>pod内的容器共享IP地址和端口空间。可以通过localhost互相发现。</p>
+
+<p>共享的底层原因是pod内的容器处在同一个namespace内。</p>
+
+<h5 id="命名空间隔离namespace-isolation">命名空间隔离(namespace isolation)</h5>
+
+<p>groups内的进程有独立的进程PID空间、user、挂载点、网络等。</p>
+
+<ul>
+  <li>独立的进程PID空间</li>
+</ul>
+
+<p>命名空间内的pid(进程ID)是相互独立的(可重复的)</p>
+
+<ul>
+  <li>网络资源空间隔离</li>
+</ul>
+
+<p>网络空间有独立的虚拟网络栈(二层以上)，空间内包含一个loopback接口。</p>
+
+<p>独立的路由表，socket监听，防火墙，连接跟踪表，私有ip地址集以及其他网络资源。</p>
+
+<ul>
+  <li>
+    <p>UTS</p>
+  </li>
+  <li>
+    <p>独立的mount空间</p>
+  </li>
+</ul>
+
+<p>不同命名空间内的挂载点(mount points)是相互隔离的。通过配置，不同空间内的挂载点可以共享。</p>
+
+<ul>
+  <li>IPC 空间隔离</li>
+</ul>
+
+<p>信号量通信地址空间在namespace内是相互隔离的。</p>
+
+<ul>
+  <li>用户空间隔离</li>
+</ul>
+
+<p>用户空间之间的用户uid是相互隔离的。</p>
+
+<p><a href="https://lwn.net/Articles/179345/">UTS空间介绍</a></p>
+
+<p>groups内的进程可以设置独立的hostname， 通过<code class="highlighter-rouge">uname</code>输出可以查看hostname的full格式。</p>
+
+<h5 id="linux-namespaces">linux namespaces</h5>
+
+<ul>
+  <li>
+    <ol>
+      <li>resource limiting</li>
+    </ol>
+  </li>
+</ul>
+
+<p>内存使用量控制(memory limit)。</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>优先级</li>
+    </ol>
+  </li>
+</ul>
+
+<p>设置一些进程获取更多的cpu利用率。</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>度量</li>
+    </ol>
+  </li>
+</ul>
+
+<p>记录资源(cpu,内存,volume,网络吞吐量)的使用量, 长用在按使用量计费。</p>
+
+<ul>
+  <li>控制</li>
+</ul>
+
+<p>冻结组内资源或者进程，重启。</p>
+
+<p>和ns有关的命令</p>
+
+<blockquote>
+  <p>lsns</p>
+</blockquote>
+
+<p>进程有两种方式添加到特定的命名空间内</p>
+
+<ul>
+  <li>
+    <p>1.通过clone系列的系统调用函数(clone调用可以创建新的ns)</p>
+  </li>
+  <li>
+    <p>2.通过setns系统调用(这个系统调用添加进程到已经存在的ns)</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>nsenter -t 29221 –mount –uts –ipc –net –pid sh</p>
+</blockquote>
+
+<h5 id="pod是一个namespace抽象的实例">pod是一个namespace抽象的实例</h5>
+
+<p>POD内的容器被抽象共同处在”逻辑上“的”主机“上。它们共享”网络“和”IPC” 空间。</p>
+
+<p>可通过设置<code class="highlighter-rouge">v1.PodSpec.shareProcessNamespace: true</code> 共享进程空间（pid）。</p>
+
+                </div>
+            </section>
+            <!-- Email subscribe form at the bottom of the page -->
+            
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+        </article>
+    </div>
+</main>
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/automation/">Automation</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/k8s-from-scrach">[GCE]单节点部署kubernetes集群</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/devops-docker-presentation">Devops那些事-虚拟化讲座讲义</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/archi-postgresql-02">PostgreSQL MySQL 数据类型映射</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/automation/">
+                                
+                                    See all 28 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card devops">
+        
+            <a class="post-card-image-link" href="/devops-kubernetes-basic-05">
+                <div class="post-card-image" style="background-image: url(/assets/images/deployments.pngs)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/devops-kubernetes-basic-05">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Automation</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Kubernetes中的基本概念(五) pods的生命周期</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card javaee no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/springboot-annotations-01">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Spring</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">spring中的100个问题-注解是如何工作的(一)</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+        </div>
+    </div>
+</aside>
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://localhost:4000/">
+            
+                <img src="/assets/images/favicon.png" alt="张庆华的个人日志 icon" />
+            
+            <span>张庆华的个人日志</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">kubernetes中的基本概念(四) linux命名空间</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=kubernetes%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%28%E5%9B%9B%29+linux%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4&amp;url=https://rmrfself.github.io/devops-kubernetes-basic-04"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/devops-kubernetes-basic-04"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+<!-- /post -->
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="my_profile">
+                    <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
+                    <div class='profile_detail'>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
+                    </div>
+                </section>
+            </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
+        </footer>
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+    
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-126286097-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+</body>
+</html>

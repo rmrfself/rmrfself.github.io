@@ -9,7 +9,7 @@
 
 
 
-    <title>Java中的并发编程框架(一)</title>
+    <title>概率统计基础理论学习笔记(二)</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -41,30 +41,30 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="Learn, Innovate, Share - Business Based Vision." />
     <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="http://localhost:4000/jvm-concurrent" />
+    <link rel="canonical" href="http://localhost:4000/statistical-and-probability-theory-02" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Java中的并发编程框架(一)" />
-    <meta property="og:description" content="并行计算是计算机历史上的一个伤疤。 Java并行执行框架 线程可执行体的几种形式 Runnable Callable 直接集成Thread Runnable 和 Callable 接口的异同 都代表一个可执行任务(task) Runnable 接口可以当做Thread的构造参数传入Thread实例，Callable不可以。 Runnable 和 Callable 都可以被ExecutorService调度管理 返回值 Runnable 接口的run函数没有参数，没有返回值。 public interface Runnable { public void run(); } 被executor调度时，future没有值 public void executeTask() { executorService = Executors.newSingleThreadExecutor(); Future future = executorService.submit(new EventLoggingTask()); executorService.shutdown(); } Callable接口的定义 Callable定义中包含了泛型的返回值。 public interface Callable&lt;V&gt; { V" />
-    <meta property="og:url" content="http://localhost:4000/jvm-concurrent" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/spring_java8.png" />
+    <meta property="og:title" content="概率统计基础理论学习笔记(二)" />
+    <meta property="og:description" content="很多天才，Lapelace，惠更斯终其一生也不过贡献了一条公式而已。 概率的性质 定义 设样本空间Ω中的σ代表为F，定义在F上的实值集合P(A)成为概率，如果它满足一下条件: 1) 非负 2) 规范性 P(Ω) = 1 3) 可列可加性， 设$A_i$ ∈ Ϝ(i = 1,2,3,..)且$A_i$∩$A_j$=Φ(i‡j) 则 性质 1) P(Φ) = 0， 不可能的事件概率等于0 如何定义不可能? 2) 有限可加性 3) 逆事件概率 4)单调性 若 A⊂B, 则 P(A) ≤ P(B),且 P(B - A) = P(B) - P(A) 5) 加法定理 若A、B是任意两个事件，则 P(A∪B) = P(A)" />
+    <meta property="og:url" content="http://localhost:4000/statistical-and-probability-theory-02" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/calculus2.pngs" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
-    <meta property="article:published_time" content="2015-09-08T11:11:11+08:00" />
-    <meta property="article:modified_time" content="2015-09-08T11:11:11+08:00" />
-    <meta property="article:tag" content="Jvm" />
+    <meta property="article:published_time" content="2013-01-20T15:20:11+08:00" />
+    <meta property="article:modified_time" content="2013-01-20T15:20:11+08:00" />
+    <meta property="article:tag" content="Math" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Java中的并发编程框架(一)" />
-    <meta name="twitter:description" content="并行计算是计算机历史上的一个伤疤。 Java并行执行框架 线程可执行体的几种形式 Runnable Callable 直接集成Thread Runnable 和 Callable 接口的异同 都代表一个可执行任务(task) Runnable 接口可以当做Thread的构造参数传入Thread实例，Callable不可以。 Runnable 和 Callable 都可以被ExecutorService调度管理 返回值 Runnable 接口的run函数没有参数，没有返回值。 public interface Runnable { public void run(); } 被executor调度时，future没有值 public void executeTask() { executorService = Executors.newSingleThreadExecutor(); Future future = executorService.submit(new EventLoggingTask()); executorService.shutdown(); } Callable接口的定义 Callable定义中包含了泛型的返回值。 public interface Callable&lt;V&gt; { V" />
+    <meta name="twitter:title" content="概率统计基础理论学习笔记(二)" />
+    <meta name="twitter:description" content="很多天才，Lapelace，惠更斯终其一生也不过贡献了一条公式而已。 概率的性质 定义 设样本空间Ω中的σ代表为F，定义在F上的实值集合P(A)成为概率，如果它满足一下条件: 1) 非负 2) 规范性 P(Ω) = 1 3) 可列可加性， 设$A_i$ ∈ Ϝ(i = 1,2,3,..)且$A_i$∩$A_j$=Φ(i‡j) 则 性质 1) P(Φ) = 0， 不可能的事件概率等于0 如何定义不可能? 2) 有限可加性 3) 逆事件概率 4)单调性 若 A⊂B, 则 P(A) ≤ P(B),且 P(B - A) = P(B) - P(A) 5) 加法定理 若A、B是任意两个事件，则 P(A∪B) = P(A)" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/spring_java8.png" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/calculus2.pngs" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Jvm" />
+    <meta name="twitter:data2" content="Math" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
     <meta property="og:image:width" content="1400" />
@@ -79,18 +79,18 @@
         "name": "张庆华的个人日志",
         "logo": "http://localhost:4000/assets/images/blog-icon.svg"
     },
-    "url": "http://localhost:4000/jvm-concurrent",
+    "url": "http://localhost:4000/statistical-and-probability-theory-02",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/spring_java8.png",
+        "url": "http://localhost:4000/assets/images/calculus2.pngs",
         "width": 2000,
         "height": 666
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://localhost:4000/jvm-concurrent"
+        "@id": "http://localhost:4000/statistical-and-probability-theory-02"
     },
-    "description": "并行计算是计算机历史上的一个伤疤。 Java并行执行框架 线程可执行体的几种形式 Runnable Callable 直接集成Thread Runnable 和 Callable 接口的异同 都代表一个可执行任务(task) Runnable 接口可以当做Thread的构造参数传入Thread实例，Callable不可以。 Runnable 和 Callable 都可以被ExecutorService调度管理 返回值 Runnable 接口的run函数没有参数，没有返回值。 public interface Runnable { public void run(); } 被executor调度时，future没有值 public void executeTask() { executorService = Executors.newSingleThreadExecutor(); Future future = executorService.submit(new EventLoggingTask()); executorService.shutdown(); } Callable接口的定义 Callable定义中包含了泛型的返回值。 public interface Callable&lt;V&gt; { V"
+    "description": "很多天才，Lapelace，惠更斯终其一生也不过贡献了一条公式而已。 概率的性质 定义 设样本空间Ω中的σ代表为F，定义在F上的实值集合P(A)成为概率，如果它满足一下条件: 1) 非负 2) 规范性 P(Ω) = 1 3) 可列可加性， 设$A_i$ ∈ Ϝ(i = 1,2,3,..)且$A_i$∩$A_j$=Φ(i‡j) 则 性质 1) P(Φ) = 0， 不可能的事件概率等于0 如何定义不可能? 2) 有限可加性 3) 逆事件概率 4)单调性 若 A⊂B, 则 P(A) ≤ P(B),且 P(B - A) = P(B) - P(A) 5) 加法定理 若A、B是任意两个事件，则 P(A∪B) = P(A)"
 }
     </script>
 
@@ -103,10 +103,10 @@
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="Java中的并发编程框架(一)" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="概率统计基础理论学习笔记(二)" href="/feed.xml" />
 
 </head>
-<body class="distribution">
+<body class="science">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -152,180 +152,112 @@ into the {body} of the default.hbs template -->
     <div class="inner">
         <article class="post-full  ">
             <header class="post-full-header">
-                <h1 class="post-full-title">Java中的并发编程框架(一)</h1>
+                <h1 class="post-full-title">概率统计基础理论学习笔记(二)</h1>
                 <section class="post-full-meta">
                     
                         <span class="date-divider">分类: </span>
                         
                             
-                               <a href='/tag/jvm/'>JVM</a>
+                               <a href='/tag/math/'>MATH</a>
                             
                         
                     
-                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime=" 8 September 2015">2015-09-08 11:11</time>
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="20 January 2013">2013-01-20 15:20</time>
                 </section>
             </header>
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>并行计算是计算机历史上的一个伤疤。</p>
+                    <p>很多天才，Lapelace，惠更斯终其一生也不过贡献了一条公式而已。</p>
 
-<h2 id="java并行执行框架">Java并行执行框架</h2>
+<h3 id="概率的性质">概率的性质</h3>
 
-<h3 id="线程可执行体的几种形式">线程可执行体的几种形式</h3>
+<ul>
+  <li>定义
+设样本空间Ω中的σ代表为F，定义在F上的实值集合P(A)成为概率，如果它满足一下条件:</li>
+</ul>
+
+<p>1) 非负
+2) 规范性 P(Ω) = 1
+3) 可列可加性， 设$A_i$ ∈ Ϝ(i = 1,2,3,..)且$A_i$∩$A_j$=Φ(i‡j) 则</p>
+
+<script type="math/tex; mode=display">P(⋃_{i=j}^{∞}A_i) = ∑_{i=j}^{∞}P(A_i)</script>
+
+<ul>
+  <li>性质</li>
+</ul>
+
+<p>1) P(Φ) = 0，   不可能的事件概率等于0</p>
+
+<blockquote>
+  <p>如何定义不可能?</p>
+</blockquote>
+
+<p>2) 有限可加性</p>
+
+<p>3) 逆事件概率</p>
+
+<script type="math/tex; mode=display">P(\bar{A}) = 1 - P(A)</script>
+
+<p>4)单调性 若 A⊂B, 则 P(A) ≤ P(B),且</p>
+
+<p>P(B - A) = P(B) - P(A)</p>
+
+<p>5) 加法定理  若A、B是任意两个事件，则</p>
+
+<p>P(A∪B) = P(A) + B(B) - P(AB)</p>
+
+<p>定理5 证明</p>
+
+<p>将A∪B 表示成 互斥事件之并</p>
+
+<script type="math/tex; mode=display">A∪B = A∪(B-AB)</script>
+
+<p>P(A∪B) = P(A) + P(B - AB) = P(A) + P(B) - P(AB)</p>
+
+<p>6) 证明 $ P(A) = 1 - P(\bar{A}) $</p>
+
+<p>因为$A\bar{A}$ = Φ,  A∪B = Ω, 所以 由概率的性质</p>
+
+<p>1 = P(Ω) = $P(A∪\bar{A})$ = P(A) + $P(\bar{A})$</p>
+
+<p>7) 证明 P(AB) = 1 - $P(\bar{A})$ - $P(\bar{B})$ + $P(\bar{AB})$</p>
+
+<p>P(AB) = 1 - $P(\bar{AB})$ =  1 - $P(\bar{A} ∪ \bar{B})$
+= 1 - [$P(\bar{A})$ + $P(\bar{B})$ - P((\bar{A}(\bar{B})]</p>
+
+<p>8) 已知事件$A_1$,$A_2$同时发生，则A发生，证明:</p>
+
+<p>P(A) ≧ P($A_1$) + P($A_2$) - 1</p>
+
+<p>证明过程</p>
+
+<p>$A_1<script type="math/tex">A_2$ ⊂ A， 所以  P(A) ≥ P($A_1</script>A_2$) ≥ P($A_1$) + P($A_2$) - P($A_1$$A_2$) ≥ P($A_1$) + P($A_2$) - 1</p>
+
+<p>上式最后一步成立，是因为 1 ≥ P($A_1$$A_2$) ≥ 0</p>
+
+<p>9) 设P(A) = p,  P(B) = q,  P(AB) = r,  用 p,q,r表示下列事件的概率:</p>
 
 <ul>
   <li>
-    <p>Runnable</p>
-  </li>
-  <li>
-    <p>Callable</p>
-  </li>
-  <li>
-    <p>直接集成Thread</p>
+    <ul>
+      <li>$P(\bar{A}∪\bar{B})$</li>
+    </ul>
   </li>
 </ul>
 
-<h4 id="runnable-和-callable-接口的异同">Runnable 和 Callable 接口的异同</h4>
+<p>$P(\bar{A}∪\bar{B})$ = $P(\bar{AB})$ = 1 - P(AB) = 1 - r</p>
 
 <ul>
   <li>
-    <p>都代表一个可执行任务(task)</p>
-  </li>
-  <li>
-    <p>Runnable 接口可以当做Thread的构造参数传入Thread实例，Callable不可以。</p>
-  </li>
-  <li>
-    <p>Runnable 和 Callable 都可以被ExecutorService调度管理</p>
-  </li>
-  <li>
-    <p>返回值</p>
-  </li>
-  <li>
-    <p>Runnable 接口的run函数没有参数，没有返回值。</p>
+    <ul>
+      <li>$求P(\bar{A}B)$</li>
+    </ul>
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public interface Runnable {
-    public void run();
-}
-</code></pre></div></div>
+<p>$\bar{A}B$ = B - AB // 这个公式很重要</p>
 
-<p>被executor调度时，future没有值</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public void executeTask() {
-    executorService = Executors.newSingleThreadExecutor();
-    Future future = executorService.submit(new EventLoggingTask());
-    executorService.shutdown();
-}
-</code></pre></div></div>
-
-<p>Callable接口的定义</p>
-
-<p>Callable定义中包含了泛型的返回值。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public interface Callable&lt;V&gt; {
-    V call() throws Exception;
-}
-</code></pre></div></div>
-
-<p>调用的例子</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class MyTestTask implements Callable&lt;Integer&gt; {
-    int number;
- 
-    // standard constructors
- 
-    public Integer call() throws InvalidParamaterException {
-        int fact = 1;
-        // ...
-        for(int count = number; count &gt; 1; count--) {
-            fact = fact * count;
-        }
- 
-        return fact;
-    }
-}
-
-执行单体测试
-
-@Test
-public void runtest(){
-    MyTestTask task = new MyTestTask(5);
-    Future&lt;Integer&gt; future = executorService.submit(task);
-    assertEquals(120, future.get().intValue());
-}
-
-</code></pre></div></div>
-
-<p>执行层面的问题是， 为什么future能捕捉到执行线程的返回值?</p>
-
-<p>问题一</p>
-
-<p>future 是定义在主栈上的局部变量， thread实例在另外一个栈上，是什么机制保证线程退出时把返回值交给调用方？</p>
-
-<p>一个可解释的模型是，  在JIT中，在主线程调用wait元语，子线程退出后notifiy主线程。</p>
-
-<p>总之 future会一对一mapping到thread堆栈，不然它无法确保取到值。</p>
-
-<h4 id="使用executorservice类">使用ExecutorService类</h4>
-
-<p>ExecutorService 提供了一个线程池的管理方法，用来对线程进行创建和销毁。</p>
-
-<p>常用例子</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Runnable tasktmp = () -&gt; {
-            String threadName = Thread.currentThread().getName();
-            System.out.println("Hello " + threadName);
-        };
-        // 直接运行lambda实例
-        tasktmp.run();
-
-        // 提交一个lambda格式的task
-        ExecutorService  executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(() -&gt; {
-            String threadName = Thread.currentThread().getName();
-            System.out.println(threadName);
-        });
-
-        // 提交一个Callable接口的task
-        Callable&lt;Integer&gt; task = () -&gt; {
-          try {
-              TimeUnit.SECONDS.sleep(1);
-              return  123;
-
-          } catch (InterruptedException e){
-              throw new InterruptedException("task interrupted");
-          }
-        };
-
-        ExecutorService executorService1 = Executors.newFixedThreadPool(1);
-        Future&lt;Integer&gt; future = executorService1.submit(task);
-
-        // 使用feature获取返回值
-        Integer result = future.get();
-
-        System.out.println("future done?" + future.isDone());
-        System.out.println("result :" + result);
-
-        // 使用可调度的Service实例
-        ScheduledExecutorService executorService2 = Executors.newScheduledThreadPool(1);
-        Runnable task1 = () -&gt; System.out.println("Scheduling: " + System.nanoTime());
-        ScheduledFuture&lt;?&gt; future1 = executorService2.schedule(task1, 3,TimeUnit.SECONDS);
-        TimeUnit.MILLISECONDS.sleep(1337);
-
-        long remainingDelay = future1.getDelay(TimeUnit.MILLISECONDS);
-
-        System.out.printf("Remaining Delay: %sms", remainingDelay);
-
-        ScheduledExecutorService executor3 = Executors.newScheduledThreadPool(1);
-
-        Runnable task3 = () -&gt; System.out.println("Scheduling: " + System.nanoTime());
-
-        int initialDelay = 0;
-        int period = 1;
-        // 反复执行的例子
-        executor3.scheduleAtFixedRate(task3, initialDelay, period, TimeUnit.SECONDS);
-</code></pre></div></div>
+<p>所以，$P(\bar{A}∪\bar{B})$ = P(B - AB) = P(B) - P(AB) = q - r</p>
 
 
                 </div>
@@ -376,7 +308,7 @@ public void runtest(){
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/jvm/">Jvm</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/math/">Math</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -386,6 +318,80 @@ public void runtest(){
                                 
                                 
                                   
+                                    
+                                        
+                                        
+                                            <li><a href="/data-scientist-startup">实现AI的基本策略</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/manifold-howto">张量模型中的常用定理</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
                                 
                                   
                                 
@@ -477,101 +483,7 @@ public void runtest(){
                                     
                                         
                                         
-                                            <li><a href="/springboot-how-bean-managed">spring中的100个问题-bean是被透明化管理的?</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/jvm-jmm">JVM内部机制(七) Java内存模型(Java Momory Model)</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/springboot-how-bean-type-created">spring中的100个问题-bean如何支持运行时类型解析的?</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
+                                            <li><a href="/statistical-and-probability-theory">概率统计基础理论学习笔记(三)</a></li>
                                         
                                     
                                   
@@ -599,74 +511,14 @@ public void runtest(){
                                         
                                         
                                     
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
                                   
                                 
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/jvm/">
+                            <a href="/tag/math/">
                                 
-                                    See all 22 posts  →
+                                    See all 6 posts  →
                                 
                             </a>
                         </footer>
@@ -677,24 +529,24 @@ public void runtest(){
             
                 
 
-    <article class="post-card distribution">
+    <article class="post-card science">
         
-            <a class="post-card-image-link" href="/jvm-collections">
-                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.png)"></div>
+            <a class="post-card-image-link" href="/linaer-algebra-theory">
+                <div class="post-card-image" style="background-image: url(/assets/images/calculus2.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/jvm-collections">
+            <a class="post-card-content-link" href="/linaer-algebra-theory">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Jvm</span>
+                                <span class="post-card-tags">Math</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">Java中的工具类-集合</h2>
+                    <h2 class="post-card-title">(MIT)初等线性代数理论笔记(一)</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -733,24 +585,24 @@ public void runtest(){
             
                 
 
-    <article class="post-card distribution">
+    <article class="post-card science">
         
-            <a class="post-card-image-link" href="/jvm-collections">
-                <div class="post-card-image" style="background-image: url(/assets/images/spring_java8.png)"></div>
+            <a class="post-card-image-link" href="/statistical-and-probability-theory-01">
+                <div class="post-card-image" style="background-image: url(/assets/images/calculus2.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/jvm-collections">
+            <a class="post-card-content-link" href="/statistical-and-probability-theory-01">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Jvm</span>
+                                <span class="post-card-tags">Math</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">Java中的hashCode()与equals()</h2>
+                    <h2 class="post-card-title">概率统计基础理论学习笔记(一)</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -799,18 +651,18 @@ public void runtest(){
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">Java中的并发编程框架(一)</div>
+    <div class="floating-header-title">概率统计基础理论学习笔记(二)</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Java%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E6%A1%86%E6%9E%B6%28%E4%B8%80%29&amp;url=https://rmrfself.github.io/jvm-concurrent"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%28%E4%BA%8C%29&amp;url=https://rmrfself.github.io/statistical-and-probability-theory-02"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/jvm-concurrent"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/statistical-and-probability-theory-02"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
