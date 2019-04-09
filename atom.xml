@@ -143,6 +143,21 @@
     
       
       <item>
+        <title>消息中间件-RabbitMQ应用模式解析(二)</title>
+        
+          <description>&lt;p&gt;消息中间件解析。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 21 Jan 2018 22:00:10 +0800</pubDate>
+        <link>
+        http://localhost:4000/event-based-archi</link>
+        <guid isPermaLink="true">http://localhost:4000/event-based-archi</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Ethereum开发笔记1-0: 智能合约</title>
         
           <description>&lt;p&gt;交易(Transaction)是人类社会迈向文明的最重要的一步。以前都是靠抢的。&lt;/p&gt;

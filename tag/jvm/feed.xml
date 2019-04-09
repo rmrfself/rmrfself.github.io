@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/jvm/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-09T13:24:18+08:00</updated>
+  <updated>2019-04-09T18:44:25+08:00</updated>
   <id>http://localhost:4000/tag/jvm/feed.xml</id>
 
   
@@ -42,6 +42,117 @@
   
   
 
+  
+    <entry>
+      <title type="html">消息中间件-RabbitMQ应用模式解析(二)</title>
+      <link href="http://localhost:4000/event-based-archi" rel="alternate" type="text/html" title="消息中间件-RabbitMQ应用模式解析(二)" />
+      <published>2018-01-21T22:00:10+08:00</published>
+      <updated>2018-01-21T22:00:10+08:00</updated>
+      <id>http://localhost:4000/event-based-archi</id>
+      <content type="html" xml:base="http://localhost:4000/event-based-archi">&lt;p&gt;消息中间件解析。&lt;/p&gt;
+
+&lt;h4 id=&quot;架构上的差异&quot;&gt;架构上的差异&lt;/h4&gt;
+
+&lt;h5 id=&quot;layer-based-architecture&quot;&gt;Layer based architecture&lt;/h5&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/MVC-Process.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;从设计上看，基于分层的应用架构设计，比如 Model-controller-view ，或者 前端的model-(view-model-mediator)-view 模式，本质上是一种&lt;code class=&quot;highlighter-rouge&quot;&gt;同步&lt;/code&gt;设计思想。&lt;/p&gt;
+
+&lt;h5 id=&quot;event-based-archtecture&quot;&gt;Event based archtecture&lt;/h5&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/events.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;基于事件(event-based)的架构设计，本质上是对应用或者不同实体的状态的订阅和处理。&lt;/p&gt;
+
+&lt;p&gt;基于web 事件的常规设计模式&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/webevents.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为什么微服务架构下，异步消息引擎变得如此重要?&lt;/p&gt;
+
+&lt;p&gt;关系型数据可以看做对状态空间的持久化，消息中间件是状态的异步处理引擎。&lt;/p&gt;
+
+&lt;p&gt;kafka综合了上述两类特点。&lt;/p&gt;
+
+&lt;p&gt;大数据背景下，除了数据本身的状态变得重要之外，状态之间的关系也非常重要。特别是不同类型的实体之间的关联。经典段子是沃尔玛&lt;code class=&quot;highlighter-rouge&quot;&gt;啤酒和尿不湿&lt;/code&gt;销量的调查。&lt;/p&gt;
+
+&lt;h5 id=&quot;rabbitmq的特性&quot;&gt;RabbitMQ的特性&lt;/h5&gt;
+
+&lt;p&gt;消息中间件重要的特性:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;合并和分组消息，在rabbitmq中有exchange组件实现，也成为消息路由。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;RabbitMq对消息分组做了2层抽象:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;virtual host&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;基于多租户的逻辑分组&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;channel&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;基于TCP连接的逻辑分组。&lt;/p&gt;
+
+&lt;p&gt;RabbitMQ支持4种消息分组或者路由方式&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Direct 路由方式&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/rabbitmq01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这种消息路由方式基于key的&lt;code class=&quot;highlighter-rouge&quot;&gt;相等&lt;/code&gt;匹配模式，是一对一订阅方式的实现。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fanout 路由方式(广播方式)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/rabbitmq02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这种方式是全播方式 &lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt; 模式匹配，是1对多订阅方式的实现。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Topic 路由方式&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这种方式是消息路由&lt;code class=&quot;highlighter-rouge&quot;&gt;多对多&lt;/code&gt;的方式。常用户批处理。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Header 路由方式&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;基于Headers定义属性的、高优先级的订阅-处理方式。&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="jvm" />
+      
+
+      
+        <summary type="html">消息中间件解析。</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">spring中的100个问题-bean是被透明化管理的?</title>
@@ -902,811 +1013,6 @@ main(){       
 
       
         <summary type="html">Language is just like a puppet.</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">JVM内部机制(二)Java方法调用</title>
-      <link href="http://localhost:4000/jvm-method-call" rel="alternate" type="text/html" title="JVM内部机制(二)Java方法调用" />
-      <published>2016-01-22T22:10:11+08:00</published>
-      <updated>2016-01-22T22:10:11+08:00</updated>
-      <id>http://localhost:4000/jvm-method-call</id>
-      <content type="html" xml:base="http://localhost:4000/jvm-method-call">&lt;p&gt;封装、继承、多态。&lt;/p&gt;
-
-&lt;p&gt;封装做为继承奠定基础，继承又为多态的表达奠定基础。&lt;/p&gt;
-
-&lt;h3 id=&quot;堆栈&quot;&gt;堆栈&lt;/h3&gt;
-
-&lt;p&gt;堆的索引保存在栈上。&lt;/p&gt;
-
-&lt;p&gt;堆栈是一种数据结构,但更准确的说法是它是一种算法。&lt;/p&gt;
-
-&lt;p&gt;方法调用过程中, 堆栈的作用:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;存储方法用到的参数。用BP+偏移量的方法,把参数引入到方法作用域内。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;存储方法的返回值。把返回值重新放回到调用方的栈中。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;存储下一条指令的地址, 以便方法调用返回后继续执行。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;存储机器指令用到的操作数。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;堆栈先进后出、后进先出的性质, 契合了函数嵌套调用的过程。&lt;/p&gt;
-
-&lt;p&gt;就像拉皮筋,被动伸展（这个过程消耗生物体能量）,却可自动收缩。递归表达了更高级的调用形式- 自动伸缩。&lt;/p&gt;
-
-&lt;p&gt;方法调用的技术实现可通过两个寄存器(bp,sp)交替赋值做到。这样形式是为传参和带值返回设计的，因为参数的数量和类型是不固定的。&lt;/p&gt;
-
-&lt;p&gt;如果不考虑传参，直接jmp也可以模拟函数调用。在数字电路的实现程序中存在很多的goto或者直接跳转。&lt;/p&gt;
-
-&lt;p&gt;进程加载后,加载器在table中默认寻找代码段main标签指向的地址，并放入寄存器(CS:IP),开始拉皮筋式的函数调用。&lt;/p&gt;
-
-&lt;p&gt;CS:IP 和 BP:SP 张开了一个至少2个维度的空间。随着指令指针IP的往前推进,BP和SP像两个用弹簧连在一起的滑块,上下移动。&lt;/p&gt;
-
-&lt;p&gt;在Hotspot中通过解析字节码实现的函数调用,在宏观上也是基于上面的认识。&lt;/p&gt;
-
-&lt;h3 id=&quot;jvm中java函数的执行过程&quot;&gt;JVM中java函数的执行过程&lt;/h3&gt;
-
-&lt;p&gt;JVM中执行Java方法经历了两个大的阶段:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;ol&gt;
-      &lt;li&gt;JVM为执行java函数配备堆栈模型，然后JMP到调用Main函数。 这一步实现了从C++到Java的跨越。&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;虚拟机的设计目标就是为了做到这一步，JVM中所有的设计都是为了高效、准确的执行java字节码中的方法。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;ol&gt;
-      &lt;li&gt;从字节码中解析字节码函数调用指令，eg. invoke_virtual，通过解释器或者JIT的指令分发函数去执行java函数。 从这个角度讲，java函数完成了‘函数’的定义，这个阶段的函数是抽象命令的集合。当被JIT解释执行的时候，才对应到了不同CPU架构下的具体指令的函数实现。Java的函数实现过程是用具体CPU架构下的指令去拟合的过程。&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;从抽象到具体的实现过程中，存在各种映射关系。这种映射可以有不同类型的解释器或者编译器完成。&lt;/p&gt;
-
-&lt;h4 id=&quot;第一阶段-使用jni接口调用main函数&quot;&gt;第一阶段 使用JNI接口调用Main函数&lt;/h4&gt;
-
-&lt;p&gt;下面是一个长途跋涉的分析过程。&lt;/p&gt;
-
-&lt;p&gt;在jvm的加载过程中，InvocationFunctions* ifn 这个结构体是libjvm动态库加载过程的精华所在。InvocationFunctions 是由3个函数指针组成的结构体。分别指向三个JNI接口。&lt;/p&gt;
-
-&lt;p&gt;启动步骤包括&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;JLI_Launch -&amp;gt; LoadJavaVM -&amp;gt; JVMInit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;第一步，启动器中的main函数&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int
-main(int argc, char **argv)
-{
-    /* ..省略.. */ // 这一步直接返回JLI_Launch
-    return JLI_Launch(margc, margv,
-                   sizeof(const_jargs) / sizeof(char *), const_jargs,
-                   sizeof(const_appclasspath) / sizeof(char *), const_appclasspath,
-                   FULL_VERSION,
-                   DOT_VERSION,
-                   (const_progname != NULL) ? const_progname : *margv,
-                   (const_launcher != NULL) ? const_launcher : *margv,
-                   (const_jargs != NULL) ? JNI_TRUE : JNI_FALSE,
-                   const_cpwildcard, const_javaw, const_ergo_class);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;第二步，初始化jvm， 这一步相当于为工厂车间里面的各种生产工具上电。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
- * Entry point. 
- */
-int
-JLI_Launch(int argc, char ** argv,              /* main argc, argc */
-        int jargc, const char** jargv,          /* java args */
-        int appclassc, const char** appclassv,  /* app classpath */
-        const char* fullversion,                /* full version defined */
-        const char* dotversion,                 /* dot version defined */
-        const char* pname,                      /* program name */
-        const char* lname,                      /* launcher name */
-        jboolean javaargs,                      /* JAVA_ARGS */
-        jboolean cpwildcard,                    /* classpath wildcard*/
-        jboolean javaw,                         /* windows-only javaw */
-        jint ergo                               /* ergonomics class policy */
-)
-{
-    int mode = LM_UNKNOWN;  // 有三种模式 { &quot;Unknown&quot;, &quot;Main class&quot;, &quot;JAR file&quot; }; 用Main class 启动或者jar包启动，默认为未知
-    char *what = NULL;
-    char *cpath = 0;
-    char *main_class = NULL; // 指定main_class
-    int ret;
-    InvocationFunctions ifn; // vm从动态库加载以后，返回地址存在这个结构中。为JNI本地函数调用放开接口，这个结构体中存储了3个函数指针。调用者可直接跳转。
-    jlong start, end;
-    char jvmpath[MAXPATHLEN]; // jvm 路径
-    char jrepath[MAXPATHLEN]; // jre 路径
-    char jvmcfg[MAXPATHLEN];
-
-    _fVersion = fullversion;
-    _dVersion = dotversion;
-    _launcher_name = lname;
-    _program_name = pname;
-    _is_java_args = javaargs;
-    _wc_enabled = cpwildcard;
-    _ergo_policy = ergo; // java -XX:+PrintFlagsInitial -version jvm 运行时参数设置。 ergonomics class 可以解释为 java运行时体征类
-    /*
-     * 略过
-     */
-    if (!LoadJavaVM(jvmpath, &amp;amp;ifn)) { // 从相应平台上加载jvm的动态链接库，初始化ifn
-        return(6);
-    }
-    .... 为java application设置参数（略过） ....
-    // 启动jvm， 这个函数以后，java就像天空中的风筝，与启动器分道扬镳了
-    return JVMInit(&amp;amp;ifn, threadStackSize, argc, argv, mode, what, ret);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;接下来，创建一个启动线程。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int
-JVMInit(InvocationFunctions* ifn, jlong threadStackSize,
-        int argc, char **argv,
-        int mode, char *what, int ret)
-{
-    ShowSplashScreen();
-    return ContinueInNewThread(ifn, threadStackSize, argc, argv, mode, what, ret);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;最后，设置主线程堆栈大小，传入参数，正式载入JavaMain&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int
-ContinueInNewThread(InvocationFunctions* ifn, jlong threadStackSize,
-                    int argc, char **argv,
-                    int mode, char *what, int ret)
-{
-
-    /*
-     * If user doesn't specify stack size, check if VM has a preference.
-     * Note that HotSpot no longer supports JNI_VERSION_1_1 but it will
-     * return its default stack size through the init args structure.
-     */
-    if (threadStackSize == 0) {
-      struct JDK1_1InitArgs args1_1;
-      memset((void*)&amp;amp;args1_1, 0, sizeof(args1_1));
-      args1_1.version = JNI_VERSION_1_1;
-      ifn-&amp;gt;GetDefaultJavaVMInitArgs(&amp;amp;args1_1);  /* ignore return value */
-      if (args1_1.javaStackSize &amp;gt; 0) {
-         threadStackSize = args1_1.javaStackSize;
-      }
-    }
-
-    { /* Create a new thread to create JVM and invoke main method */
-      JavaMainArgs args;
-      int rslt;
-
-      args.argc = argc;
-      args.argv = argv;
-      args.mode = mode;
-      args.what = what;
-      args.ifn = *ifn;
-
-      rslt = ContinueInNewThread0(JavaMain, threadStackSize, (void*)&amp;amp;args);
-      /* If the caller has deemed there is an error we
-       * simply return that, otherwise we return the value of
-       * the callee
-       */
-      return (ret != 0) ? ret : rslt;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;jvm中使用&lt;a href=&quot;http://man7.org/linux/man-pages/man3/pthread_create.3.html&quot;&gt;pthread_create&lt;/a&gt;创建线程资源。&lt;/p&gt;
-
-&lt;p&gt;关于pthread_create相关的系统调用函数在&lt;unix系统编程&gt;一书有非常精彩，终生难忘的讲解。&lt;/unix系统编程&gt;&lt;/p&gt;
-
-&lt;p&gt;在pthread_create调用过程中，参数 (void &lt;em&gt;(&lt;/em&gt;)(void*))continuation 是一个函数指针格式的入参，指向JavaMain入口函数。&lt;/p&gt;
-
-&lt;p&gt;JavaMain的定义&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int JNICALL JavaMain(void * args); /* entry point 
-
-int JNICALL
-JavaMain(void * _args)
-{
-    JavaMainArgs *args = (JavaMainArgs *)_args; // 参数的地址是随线程启动传入的
-    int argc = args-&amp;gt;argc; // 参数数量，对函数来说，数量和类型同等重要，因为它是寻址依据。
-    char **argv = args-&amp;gt;argv;
-    int mode = args-&amp;gt;mode;
-    char *what = args-&amp;gt;what;
-    InvocationFunctions ifn = args-&amp;gt;ifn;//函数指针构成的结构体
-
-    JavaVM *vm = 0;
-    JNIEnv *env = 0;
-    jclass mainClass = NULL;
-    jclass appClass = NULL; // actual application class being launched
-    jmethodID mainID;
-    jobjectArray mainArgs;
-    int ret = 0;
-    jlong start, end;
-
-    ....
-
-    if (!InitializeJVM(&amp;amp;vm, &amp;amp;env, &amp;amp;ifn)) { // ifn-&amp;gt;CreateJavaVM(pvm, (void **)penv, &amp;amp;args); 这一步初始化虚拟机， 可以看到ifn所以jvm动态库入口的函数指针，在这个函数中的作用是初始化JVM。以上的5步函数跳转是为这次调用准备环境变量和参数。
-        JLI_ReportErrorMessage(JVM_ERROR1);
-        exit(1);
-    }
-    
-    .....
-
-    /* Invoke main method. */  // 这里调用Main函数。
-    (*env)-&amp;gt;CallStaticVoidMethod(env, mainClass, mainID, mainArgs);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;启动器主体部分逻辑分析完毕。&lt;/p&gt;
-
-&lt;p&gt;ifn的定义如下:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
- * Pointers to the needed JNI invocation API, initialized by LoadJavaVM.
- */
-typedef jint (JNICALL *CreateJavaVM_t)(JavaVM **pvm, void **env, void *args);
-typedef jint (JNICALL *GetDefaultJavaVMInitArgs_t)(void *args);
-typedef jint (JNICALL *GetCreatedJavaVMs_t)(JavaVM **vmBuf, jsize bufLen, jsize *nVMs);
-
-typedef struct {
-    CreateJavaVM_t CreateJavaVM;
-    GetDefaultJavaVMInitArgs_t GetDefaultJavaVMInitArgs;
-    GetCreatedJavaVMs_t GetCreatedJavaVMs;
-} InvocationFunctions;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;ifn-&amp;gt;CreateJavaVM的值指向了libjvm动态库导出的符号链接JNI_CreateJavaVM。&lt;/p&gt;
-
-&lt;p&gt;另外两个函数指针被Java Native函数使用。&lt;/p&gt;
-
-&lt;p&gt;这个方法的定义文件是&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/jdk8u/hotspot/src/share/vm/prims/jni.cpp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;JNI_CreateJavaVM函数后，Java世界大门从此打开。&lt;/p&gt;
-
-&lt;h4 id=&quot;java中的函数调用过程&quot;&gt;Java中的函数调用过程&lt;/h4&gt;
-
-&lt;p&gt;函数调用堆栈&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/JavaCalls.png&quot; alt=&quot;jvm函数调用堆栈&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JavaCalls&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;经过一系列的引导和堆栈切换，最终函数落到这个地方:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  jdk8u/hotspot/src/share/vm/runtime/javaCalls.cpp
-  ...
-
-    // do call
-  { JavaCallWrapper link(method, receiver, result, CHECK);
-    { HandleMark hm(thread);  // HandleMark used by HandleMarkCleaner
-
-      StubRoutines::call_stub()(
-        (address)&amp;amp;link,
-        // (intptr_t*)&amp;amp;(result-&amp;gt;_value), // see NOTE above (compiler problem)
-        result_val_address,          // see NOTE above (compiler problem)
-        result_type,
-        method(),
-        entry_point,
-        args-&amp;gt;parameters(),
-        args-&amp;gt;size_of_parameters(),
-        CHECK
-      );
-  } // Exit JavaCallWrapper (can block - potential return oop must be preserved)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这个方法是Jvm中最精妙的地方，它是一个陷阱。&lt;/p&gt;
-
-&lt;p&gt;Java文件中定义的方法, 它按照MethodDesc定义的格式被载入内存后，始终以java字节码的形式存在于Metaspace的堆中。背后的问题是，C++生成的机器指令如何调用抽象的“字节码”？&lt;/p&gt;
-
-&lt;p&gt;或者说，java的字节码是如何“嫁接”或者“寄生”到C++的堆栈中的？&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/grafting.png&quot; alt=&quot;嫁接&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;字节码中的method在JVM中布局结构,如下图&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/Method.png&quot; alt=&quot;java method layout&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;call_stub 也是一个函数指针，定义如下:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; // Calls to Java
-  typedef void (*CallStub)(
-    address   link,
-    intptr_t* result,
-    BasicType result_type,
-    Method* method,
-    address   entry_point,
-    intptr_t* parameters,
-    int       size_of_parameters,
-    TRAPS
-  );
-
-   static CallStub call_stub() { 
-       return CAST_TO_FN_PTR(CallStub, _call_stub_entry); 
-    }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;x86平台上，_call_stub_entry 在文件&lt;/p&gt;
-
-&lt;p&gt;jdk8u/hotspot/src/cpu/x86/vm/stubGenerator_x86_64.cpp&lt;/p&gt;
-
-&lt;p&gt;中被初始化，这个类是平台相关的实现。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    StubRoutines::_call_stub_entry =
-      generate_call_stub(StubRoutines::_call_stub_return_address);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这个陷阱的布置路线&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;thread.cpp -&amp;gt; Threads::create_vm()
-
-↓↓↓↓↓↓↓↓↓ 
-
-init.cpp -&amp;gt; init_globals() -&amp;gt; stubRoutines_init1() -&amp;gt; stubRoutines_init2()
-
-↓↓↓↓↓↓↓↓↓ 
-
-stubRoutines.cpp
-StubGenerator_generate() -&amp;gt; generate_initial()
-
-↓↓↓↓↓↓↓↓↓ 
-StubRoutines::_call_stub_entry              =
-      generate_call_stub(StubRoutines::_call_stub_return_address);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;x86上的陷阱生成函数StubGenerator_generate(), 分析一下这个函数&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//------------------------------------------------------------------------------------------------------------------------
-  // Call stubs are used to call Java from C
-  //
-  //    [ return_from_Java     ] &amp;lt;--- rsp
-  //    [ argument word n      ]
-  //      ...
-  // -N [ argument word 1      ]
-  // -7 [ Possible padding for stack alignment ]
-  // -6 [ Possible padding for stack alignment ]
-  // -5 [ Possible padding for stack alignment ]
-  // -4 [ mxcsr save           ] &amp;lt;--- rsp_after_call
-  // -3 [ saved rbx,            ]
-  // -2 [ saved rsi            ]
-  // -1 [ saved rdi            ]
-  //  0 [ saved rbp,            ] &amp;lt;--- rbp,
-  //  1 [ return address       ]
-  //  2 [ ptr. to call wrapper ]
-  //  3 [ result               ]
-  //  4 [ result_type          ]
-  //  5 [ method               ]
-  //  6 [ entry_point          ]
-  //  7 [ parameters           ]
-  //  8 [ parameter_size       ]
-  //  9 [ thread               ]
-
-
-  address generate_call_stub(address&amp;amp; return_address) {
-    StubCodeMark mark(this, &quot;StubRoutines&quot;, &quot;call_stub&quot;);
-    address start = __ pc(); // 取到当前指令寄存器的值，从这个地址开始注入“字节码”编译后的汇编代码
-
-    // stub code parameters / addresses
-    assert(frame::entry_frame_call_wrapper_offset == 2, &quot;adjust this code&quot;);
-    bool  sse_save = false;
-    const Address rsp_after_call(rbp, -4 * wordSize); // same as in generate_catch_exception()!
-    const int     locals_count_in_bytes  (4*wordSize);
-    const Address mxcsr_save    (rbp, -4 * wordSize);
-    const Address saved_rbx     (rbp, -3 * wordSize);
-    const Address saved_rsi     (rbp, -2 * wordSize);
-    const Address saved_rdi     (rbp, -1 * wordSize);
-    const Address result        (rbp,  3 * wordSize);
-    const Address result_type   (rbp,  4 * wordSize);
-    const Address method        (rbp,  5 * wordSize);
-    const Address entry_point   (rbp,  6 * wordSize);
-    const Address parameters    (rbp,  7 * wordSize);
-    const Address parameter_size(rbp,  8 * wordSize);
-    const Address thread        (rbp,  9 * wordSize); // same as in generate_catch_exception()!
-    sse_save =  UseSSE &amp;gt; 0;
-
-    // stub code // 桩代码开始  __ 这个符号是一个宏，被替换后执行emit方法： 直接把机器指令送入代码段内存
-    __ enter();
-    __ movptr(rcx, parameter_size);              // parameter counter
-    __ shlptr(rcx, Interpreter::logStackElementSize); // convert parameter count to bytes
-    __ addptr(rcx, locals_count_in_bytes);       // reserve space for register saves
-    __ subptr(rsp, rcx);
-    __ andptr(rsp, -(StackAlignmentInBytes));    // Align stack
-
-    // save rdi, rsi, &amp;amp; rbx, according to C calling conventions // 这个地方是最微妙的地方，查了很多资料后来终于懂了
-    __ movptr(saved_rdi, rdi);
-    __ movptr(saved_rsi, rsi);
-    __ movptr(saved_rbx, rbx);
-    // save and initialize %mxcsr
-    if (sse_save) {
-      Label skip_ldmx;
-      __ stmxcsr(mxcsr_save);
-      __ movl(rax, mxcsr_save);
-      __ andl(rax, MXCSR_MASK);    // Only check control and mask bits
-      ExternalAddress mxcsr_std(StubRoutines::addr_mxcsr_std());
-      __ cmp32(rax, mxcsr_std);
-      __ jcc(Assembler::equal, skip_ldmx);
-      __ ldmxcsr(mxcsr_std);
-      __ bind(skip_ldmx);
-    }
-
-    // make sure the control word is correct.
-    __ fldcw(ExternalAddress(StubRoutines::addr_fpu_cntrl_wrd_std()));
-
-#ifdef ASSERT
-    // make sure we have no pending exceptions
-    { Label L;
-      __ movptr(rcx, thread);
-      __ cmpptr(Address(rcx, Thread::pending_exception_offset()), (int32_t)NULL_WORD);
-      __ jcc(Assembler::equal, L);
-      __ stop(&quot;StubRoutines::call_stub: entered with pending exception&quot;);
-      __ bind(L);
-    }
-#endif
-
-    // pass parameters if any
-    BLOCK_COMMENT(&quot;pass parameters if any&quot;);
-    Label parameters_done;
-    __ movl(rcx, parameter_size);  // parameter counter
-    __ testl(rcx, rcx);
-    __ jcc(Assembler::zero, parameters_done);
-
-    // parameter passing loop
-
-    Label loop;
-    // Copy Java parameters in reverse order (receiver last)
-    // Note that the argument order is inverted in the process
-    // source is rdx[rcx: N-1..0]
-    // dest   is rsp[rbx: 0..N-1]
-
-    __ movptr(rdx, parameters);          // parameter pointer
-    __ xorptr(rbx, rbx);
-
-    __ BIND(loop); // 这一步循环，把参数复制到当前栈中
-
-    // get parameter
-    __ movptr(rax, Address(rdx, rcx, Interpreter::stackElementScale(), -wordSize));
-    __ movptr(Address(rsp, rbx, Interpreter::stackElementScale(),
-                    Interpreter::expr_offset_in_bytes(0)), rax);          // store parameter
-    __ increment(rbx);
-    __ decrement(rcx);
-    __ jcc(Assembler::notZero, loop);
-
-    // call Java function
-    __ BIND(parameters_done);
-    __ movptr(rbx, method);           // get Method*  // 保存mothod的地址，跳入 _entry_point 以后会用到
-    __ movptr(rax, entry_point);      // get entry_point // 字节码解析入口
-    __ mov(rsi, rsp);                 // set sender sp
-    BLOCK_COMMENT(&quot;call Java function&quot;);
-    __ call(rax);
-
-    BLOCK_COMMENT(&quot;call_stub_return_address:&quot;);
-    return_address = __ pc();
-
-#ifdef COMPILER2
-    {
-      Label L_skip;
-      if (UseSSE &amp;gt;= 2) {
-        __ verify_FPU(0, &quot;call_stub_return&quot;);
-      } else {
-        for (int i = 1; i &amp;lt; 8; i++) {
-          __ ffree(i);
-        }
-
-        // UseSSE &amp;lt;= 1 so double result should be left on TOS
-        __ movl(rsi, result_type);
-        __ cmpl(rsi, T_DOUBLE);
-        __ jcc(Assembler::equal, L_skip);
-        if (UseSSE == 0) {
-          // UseSSE == 0 so float result should be left on TOS
-          __ cmpl(rsi, T_FLOAT);
-          __ jcc(Assembler::equal, L_skip);
-        }
-        __ ffree(0);
-      }
-      __ BIND(L_skip);
-    }
-#endif // COMPILER2
-
-    // store result depending on type
-    // (everything that is not T_LONG, T_FLOAT or T_DOUBLE is treated as T_INT)
-    __ movptr(rdi, result);
-    Label is_long, is_float, is_double, exit;
-    __ movl(rsi, result_type);
-    __ cmpl(rsi, T_LONG);
-    __ jcc(Assembler::equal, is_long);
-    __ cmpl(rsi, T_FLOAT);
-    __ jcc(Assembler::equal, is_float);
-    __ cmpl(rsi, T_DOUBLE);
-    __ jcc(Assembler::equal, is_double);
-
-    // handle T_INT case
-    __ movl(Address(rdi, 0), rax);
-    __ BIND(exit);
-
-    // check that FPU stack is empty
-    __ verify_FPU(0, &quot;generate_call_stub&quot;);
-
-    // pop parameters
-    __ lea(rsp, rsp_after_call);
-
-    // restore %mxcsr
-    if (sse_save) {
-      __ ldmxcsr(mxcsr_save);
-    }
-
-    // restore rdi, rsi and rbx,
-    __ movptr(rbx, saved_rbx);
-    __ movptr(rsi, saved_rsi);
-    __ movptr(rdi, saved_rdi);
-    __ addptr(rsp, 4*wordSize);
-
-    // return
-    __ pop(rbp);
-    __ ret(0);
-
-    // handle return types different from T_INT
-    __ BIND(is_long);
-    __ movl(Address(rdi, 0 * wordSize), rax);
-    __ movl(Address(rdi, 1 * wordSize), rdx);
-    __ jmp(exit);
-
-    __ BIND(is_float);
-    // interpreter uses xmm0 for return values
-    if (UseSSE &amp;gt;= 1) {
-      __ movflt(Address(rdi, 0), xmm0);
-    } else {
-      __ fstp_s(Address(rdi, 0));
-    }
-    __ jmp(exit);
-
-    __ BIND(is_double);
-    // interpreter uses xmm0 for return values
-    if (UseSSE &amp;gt;= 2) {
-      __ movdbl(Address(rdi, 0), xmm0);
-    } else {
-      __ fstp_d(Address(rdi, 0));
-    }
-    __ jmp(exit);
-
-    return start;
-  }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这段代码最让人费解的是参数传递问题:&lt;/p&gt;
-
-&lt;p&gt;如何在解析字节码的时候，拿到参数的类型和对应的值？&lt;/p&gt;
-
-&lt;p&gt;这个问题最终的答案在_entry_point例程中。 它也是一个提前挖好的“陷阱”。&lt;/p&gt;
-
-&lt;p&gt;上一个函数执行以后，通过这个指令&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   __ movptr(rax, entry_point);      // get entry_point // 字节码解析入口
-    __ mov(rsi, rsp);                 // set sender sp
-    BLOCK_COMMENT(&quot;call Java function&quot;);
-    __ call(rax);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;跳入了 entry_point， 这个陷阱的“生成过程”如下&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//
-// Generic interpreted method entry to (asm) interpreter
-//
-address InterpreterGenerator::generate_normal_entry(bool synchronized) {
-  // determine code generation flags
-  bool inc_counter  = UseCompiler || CountCompiledCalls;
-
-  // ebx: Method*
-  // r13: sender sp
-  address entry_point = __ pc();
-
-  const Address constMethod(rbx, Method::const_offset()); // java字节码存在constMethod中， Method中保存constMethod的引用
-  const Address access_flags(rbx, Method::access_flags_offset());
-  const Address size_of_parameters(rdx,
-                                   ConstMethod::size_of_parameters_offset()); //取得参数数量
-  const Address size_of_locals(rdx, ConstMethod::size_of_locals_offset()); //取得本地变量的数量。  
-
-  // get parameter size (always needed)
-  __ movptr(rdx, constMethod);
-  __ load_unsigned_short(rcx, size_of_parameters);
-
-  // rbx: Method*
-  // rcx: size of parameters // rcx寄存器的值，来自_call_stub
-  // r13: sender_sp (could differ from sp+wordSize if we were called via c2i )
-
-  __ load_unsigned_short(rdx, size_of_locals); // get size of locals in words
-  __ subl(rdx, rcx); // rdx = no. of additional locals
-
-  // YYY
-//   __ incrementl(rdx);
-//   __ andl(rdx, -2);
-
-  // see if we've got enough room on the stack for locals plus overhead.
-  generate_stack_overflow_check();
-
-  // get return address
-  __ pop(rax);
-
-  // compute beginning of parameters (r14)
-  __ lea(r14, Address(rsp, rcx, Address::times_8, -wordSize));
-
-  // rdx - # of additional locals
-  // allocate space for locals
-  // explicitly initialize locals  // 清零
-  {
-    Label exit, loop;
-    __ testl(rdx, rdx);
-    __ jcc(Assembler::lessEqual, exit); // do nothing if rdx &amp;lt;= 0
-    __ bind(loop);
-    __ push((int) NULL_WORD); // initialize local variables
-    __ decrementl(rdx); // until everything initialized
-    __ jcc(Assembler::greater, loop);
-    __ bind(exit);
-  }
-
-  // initialize fixed part of activation frame // 所有的尺寸设定好以后，生成java中的栈帧
-  generate_fixed_frame(false);
-
-  // make sure method is not native &amp;amp; not abstract
-#ifdef ASSERT
-  __ movl(rax, access_flags);
-  {
-    Label L;
-    __ testl(rax, JVM_ACC_NATIVE);
-    __ jcc(Assembler::zero, L);
-    __ stop(&quot;tried to execute native method as non-native&quot;);
-    __ bind(L);
-  }
-  {
-    Label L;
-    __ testl(rax, JVM_ACC_ABSTRACT);
-    __ jcc(Assembler::zero, L);
-    __ stop(&quot;tried to execute abstract method in interpreter&quot;);
-    __ bind(L);
-  }
-#endif
-
-  // Since at this point in the method invocation the exception
-  // handler would try to exit the monitor of synchronized methods
-  // which hasn't been entered yet, we set the thread local variable
-  // _do_not_unlock_if_synchronized to true. The remove_activation
-  // will check this flag.
-
-  const Address do_not_unlock_if_synchronized(r15_thread,
-        in_bytes(JavaThread::do_not_unlock_if_synchronized_offset()));
-  __ movbool(do_not_unlock_if_synchronized, true);
-
-  __ profile_parameters_type(rax, rcx, rdx);
-  // increment invocation count &amp;amp; check for overflow
-  Label invocation_counter_overflow;
-  Label profile_method;
-  Label profile_method_continue;
-  if (inc_counter) {
-    generate_counter_incr(&amp;amp;invocation_counter_overflow,
-                          &amp;amp;profile_method,
-                          &amp;amp;profile_method_continue);
-    if (ProfileInterpreter) {
-      __ bind(profile_method_continue);
-    }
-  }
-
-  Label continue_after_compile;
-  __ bind(continue_after_compile);
-
-  // check for synchronized interpreted methods
-  bang_stack_shadow_pages(false);
-
-  // reset the _do_not_unlock_if_synchronized flag
-  __ movbool(do_not_unlock_if_synchronized, false);
-
-  // check for synchronized methods
-  // Must happen AFTER invocation_counter check and stack overflow check,
-  // so method is not locked if overflows.
-  if (synchronized) {
-    // Allocate monitor and lock method
-    lock_method();
-  } else {
-    // no synchronization necessary
-#ifdef ASSERT
-    {
-      Label L;
-      __ movl(rax, access_flags);
-      __ testl(rax, JVM_ACC_SYNCHRONIZED);
-      __ jcc(Assembler::zero, L);
-      __ stop(&quot;method needs synchronization&quot;);
-      __ bind(L);
-    }
-#endif
-  }
-
-  // start execution
-#ifdef ASSERT
-  {
-    Label L;
-     const Address monitor_block_top (rbp,
-                 frame::interpreter_frame_monitor_block_top_offset * wordSize);
-    __ movptr(rax, monitor_block_top);
-    __ cmpptr(rax, rsp);
-    __ jcc(Assembler::equal, L);
-    __ stop(&quot;broken stack frame setup in interpreter&quot;);
-    __ bind(L);
-  }
-#endif
-
-  // jvmti support
-  __ notify_method_entry();
-
-  __ dispatch_next(vtos);
-
-  // invocation counter overflow
-  if (inc_counter) {
-    if (ProfileInterpreter) {
-      // We have decided to profile this method in the interpreter
-      __ bind(profile_method);
-      __ call_VM(noreg, CAST_FROM_FN_PTR(address, InterpreterRuntime::profile_method));
-      __ set_method_data_pointer_for_bcp();
-      __ get_method(rbx);
-      __ jmp(profile_method_continue);
-    }
-    // Handle overflow of counter and compile method
-    __ bind(invocation_counter_overflow);
-    generate_counter_overflow(&amp;amp;continue_after_compile);
-  }
-
-  return entry_point;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  // jvmti support
-  __ notify_method_entry();
-
-  __ dispatch_next(vtos);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这段代码继续往下执行字节码指令，进入到模板编译器阶段。&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>mikezhang</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="jvm" />
-      
-
-      
-        <summary type="html">封装、继承、多态。</summary>
       
 
       
