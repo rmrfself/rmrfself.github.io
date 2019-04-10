@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/math/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-09T18:44:25+08:00</updated>
+  <updated>2019-04-10T21:24:02+08:00</updated>
   <id>http://localhost:4000/tag/math/feed.xml</id>
 
   
@@ -42,92 +42,6 @@
   
   
 
-  
-    <entry>
-      <title type="html">实现AI的基本策略</title>
-      <link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="实现AI的基本策略" />
-      <published>2018-12-31T16:11:01+08:00</published>
-      <updated>2018-12-31T16:11:01+08:00</updated>
-      <id>http://localhost:4000/data-scientist-startup</id>
-      <content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;p&gt;机器学习成功的地方在于它可以做到&lt;code class=&quot;highlighter-rouge&quot;&gt;跨领域&lt;/code&gt;应用。&lt;/p&gt;
-
-&lt;h3 id=&quot;实现ai的基本策略&quot;&gt;实现AI的基本策略&lt;/h3&gt;
-
-&lt;h4 id=&quot;构建ai基础设施&quot;&gt;构建AI基础设施&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;矢量化的基础计算设施
-    &lt;ul&gt;
-      &lt;li&gt;可扩展的计算资源&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;构建基于ai的劳动力&quot;&gt;构建基于AI的&lt;code class=&quot;highlighter-rouge&quot;&gt;劳动力&lt;/code&gt;&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;机器人&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;机器设置&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;构建基于ai的可信任工具&quot;&gt;构建基于AI的可信任工具&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;智能识别，防篡改&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;基于ai的数据建模&quot;&gt;基于AI的数据建模&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;基于大数据的数据建模&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;使用ai驱动业务策略&quot;&gt;使用AI驱动业务策略&lt;/h4&gt;
-
-&lt;h4 id=&quot;构建基于ai的交互工具echosystem&quot;&gt;构建基于AI的交互工具(echosystem)&lt;/h4&gt;
-
-&lt;h4 id=&quot;机器学习的任务和目标&quot;&gt;机器学习的任务和目标&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;识别数据中的模式&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;预测未知数据&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;机器学习&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>mikezhang</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="math" />
-      
-
-      
-        <summary type="html">机器学习成功的地方在于它可以做到跨领域应用。</summary>
-      
-
-      
-      
-    </entry>
   
     <entry>
       <title type="html">张量模型中的常用定理</title>

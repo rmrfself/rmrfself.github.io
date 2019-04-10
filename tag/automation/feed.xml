@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/automation/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-09T18:44:25+08:00</updated>
+  <updated>2019-04-10T21:24:02+08:00</updated>
   <id>http://localhost:4000/tag/automation/feed.xml</id>
 
   
@@ -42,6 +42,148 @@
   
   
 
+  
+    <entry>
+      <title type="html">Aws中基于vpc网络结构解析</title>
+      <link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="Aws中基于vpc网络结构解析" />
+      <published>2018-12-29T21:01:01+08:00</published>
+      <updated>2018-12-29T21:01:01+08:00</updated>
+      <id>http://localhost:4000/data-scientist-startup</id>
+      <content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;h5 id=&quot;计费规则&quot;&gt;计费规则&lt;/h5&gt;
+
+&lt;p&gt;VPC定义的所有功能组件，包括路由表、子网定义、安全规则都是免费的。&lt;/p&gt;
+
+&lt;h5 id=&quot;规划vpc&quot;&gt;规划VPC&lt;/h5&gt;
+
+&lt;p&gt;规划vpc时，通常考虑以下几点:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在同一个vpc中划分子网&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;比如，按互联网产品的交付方式分，把子网按照不同的网段分为Dev(开发环境)、Testing(staging测试环境)、Product(生产环境)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vpc-structure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;按照地理区域划分网络&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;vpc中各组件的使用方法&quot;&gt;VPC中各组件的使用方法&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;弹性网络接口(Elastic Network Interfaces)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这个组件是对硬件网卡的抽象，包含网络协议地址(v4、v6、Mac地址)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;路由表(Route table)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;路由表是子网(subnet)的一个重要的&lt;code class=&quot;highlighter-rouge&quot;&gt;逻辑组件&lt;/code&gt;(VPC内的组件是抽象的逻辑组件)。它是连接子网内的实例 和 网关的重要凭证。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;路由表的核心作用是指定&amp;lt;源(source)---data---目的地(destination)&amp;gt;封装后的数据包发往何方。
+
+跨网络的数据需要发到网关(gateway)，由网关决定数据的下一站。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;VPC中包含一个&lt;code class=&quot;highlighter-rouge&quot;&gt;默认的路由表&lt;/code&gt;，也成为主路由(main route)。&lt;/p&gt;
+
+&lt;p&gt;通常在建立子网时，如果不指定路由，子网会默认使用VPC的默认路由。&lt;/p&gt;
+
+&lt;p&gt;下图两个子网都默认连接到了VPC内部的默认路由。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/routing-Route_Replace_Main_Start-diagramrouting-Route_Replace_Main_Start-diagram.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;网关(gateway)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;vpc中有两种常用网关&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;internet gateway&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;nat gateway&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Internet gateway是VPC中常用的网关,它的特点是允许数据双向进出。&lt;/p&gt;
+
+&lt;p&gt;连接到internet gateway的子网称为 public network。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/internet-gateway-overview-diagram.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;还有另外一种网关是Nat Gateway。 如果一个子网的路由绑定到了nat gateway，它称为private network。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/nat-gateway-diagram.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;从安全的角度看vpc&quot;&gt;从安全的角度看VPC&lt;/h5&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vpc-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安全组(Security Group)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;安全组是&lt;code class=&quot;highlighter-rouge&quot;&gt;实例级别&lt;/code&gt;的访问控制规则,可绑定到具体实例。&lt;/p&gt;
+
+&lt;p&gt;一个安全组的定义包含以下几个部分:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;名称、所属的VPC&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/aws-sg-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;进站(inbound)规则&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/aws-sg-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;出站(outbound)规则&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/aws-sg-03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;网络访问列表(Network access control lists)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Nacl是subnet级别的网络访问控制规则，可绑定的子网。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vpc-0-sg.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">计费规则</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">[GCE]单节点部署kubernetes集群</title>
@@ -1162,95 +1304,6 @@ script statistics:
 
       
         <summary type="html">Cucumber在自动化测试中的用法</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">mac OSX上安装Mysql</title>
-      <link href="http://localhost:4000/devops-mysql-mac-install" rel="alternate" type="text/html" title="mac OSX上安装Mysql" />
-      <published>2016-07-21T10:06:10+08:00</published>
-      <updated>2016-07-21T10:06:10+08:00</updated>
-      <id>http://localhost:4000/devops-mysql-mac-install</id>
-      <content type="html" xml:base="http://localhost:4000/devops-mysql-mac-install">&lt;p&gt;使用brew安装mysql(已更新至sierra)&lt;/p&gt;
-
-&lt;h2 id=&quot;install-mysql-on-macos&quot;&gt;Install MySQL on macOS&lt;/h2&gt;
-&lt;p&gt;This procedure explains how to install &lt;a href=&quot;https://www.mysql.com&quot;&gt;MySQL&lt;/a&gt; using &lt;a href=&quot;http://brew.sh&quot;&gt;Homebrew&lt;/a&gt; on macOS Sierra 10.12&lt;/p&gt;
-
-&lt;h3 id=&quot;install-homebrew&quot;&gt;Install Homebrew&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Installing Homebrew is effortless, open Terminal and enter :&lt;br /&gt;
- &lt;code class=&quot;highlighter-rouge&quot;&gt;$  /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Note:&lt;/strong&gt; Homebrew will download and install Command Line Tools for Xcode 8.0 as part of the installation process.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;install-mysql&quot;&gt;Install MySQL&lt;/h3&gt;
-&lt;p&gt;At this time of writing, Homebrew has MySQL version &lt;strong&gt;5.7.15&lt;/strong&gt; as default formulae in its main repository :&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Enter the following command : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew info mysql&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Expected output: &lt;strong&gt;mysql: stable 5.7.15 (bottled)&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;To install MySQL enter : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew install mysql&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;additional-configuration&quot;&gt;Additional configuration&lt;/h2&gt;
-&lt;h3 id=&quot;homebrew&quot;&gt;Homebrew&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Install &lt;strong&gt;brew services&lt;/strong&gt; first : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew tap homebrew/services&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Load and start the MySQL service : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew services start mysql&lt;/code&gt;. &lt;br /&gt;
-Expected output : &lt;strong&gt;Successfully started &lt;code class=&quot;highlighter-rouge&quot;&gt;mysql&lt;/code&gt; (label: homebrew.mxcl.mysql)&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Check of the MySQL service has been loaded : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ brew services list&lt;/code&gt; &lt;sup&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Verify the installed MySQL instance : &lt;code class=&quot;highlighter-rouge&quot;&gt;$ mysql -V&lt;/code&gt;. &lt;br /&gt;
-Expected output : &lt;strong&gt;Ver 14.14 Distrib 5.7.15, for osx10.12 (x86_64)&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;mysql&quot;&gt;MySQL&lt;/h3&gt;
-&lt;p&gt;Open Terminal and execute the following command to set the root password:&lt;br /&gt;
- &lt;code class=&quot;highlighter-rouge&quot;&gt;mysqladmin -u root password 'yourpassword'&lt;/code&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Important&lt;/strong&gt; : Use the single ‘quotes’ to surround the password and make sure to select a strong password!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;database-management&quot;&gt;Database Management&lt;/h3&gt;
-&lt;p&gt;To manage your databases, I recommend using &lt;a href=&quot;http://www.sequelpro.com&quot;&gt;Sequel Pro&lt;/a&gt;, a MySQL management tool designed for macOS. &lt;br /&gt;
-Current version available: &lt;strong&gt;1.1.2&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;comments&quot;&gt;Comments&lt;/h5&gt;
-&lt;p&gt;&lt;a name=&quot;1&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; The &lt;code class=&quot;highlighter-rouge&quot;&gt;brew services start mysql&lt;/code&gt; - instruction is equal to :&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
-$ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>mikezhang</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="automation" />
-      
-
-      
-        <summary type="html">使用brew安装mysql(已更新至sierra)</summary>
       
 
       
