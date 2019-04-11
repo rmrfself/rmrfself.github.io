@@ -50,7 +50,7 @@
     <meta property="og:title" content="Aws中基于vpc网络结构解析" />
     <meta property="og:description" content="计费规则 VPC定义的所有功能组件，包括路由表、子网定义、安全规则都是免费的。 规划VPC 规划vpc时，通常考虑以下几点: 在同一个vpc中划分子网 比如，按互联网产品的交付方式分，把子网按照不同的网段分为Dev(开发环境)、Testing(staging测试环境)、Product(生产环境) 按照地理区域划分网络 VPC中各组件的使用方法 弹性网络接口(Elastic Network Interfaces) 这个组件是对硬件网卡的抽象，包含网络协议地址(v4、v6、Mac地址) 路由表(Route table) 路由表是子网(subnet)的一个重要的逻辑组件(VPC内的组件是抽象的逻辑组件)。它是连接子网内的实例 和 网关的重要凭证。 路由表的核心作用是指定&lt;源(source)---data---目的地(destination)&gt;封装后的数据包发往何方。 跨网络的数据需要发到网关(gateway)，由网关决定数据的下一站。 VPC中包含一个默认的路由表，也成为主路由(main route)。 通常在建立子网时，如果不指定路由，子网会默认使用VPC的默认路由。 下图两个子网都默认连接到了VPC内部的默认路由。 网关(gateway) vpc中有两种常用网关 internet gateway nat gateway Internet gateway是VPC中常用的网关,它的特点是允许数据双向进出。 连接到internet gateway的子网称为 public network。 还有另外一种网关是Nat Gateway。 如果一个子网的路由绑定到了nat gateway，它称为private network。 从安全的角度看VPC 安全组(Security Group) 安全组是实例级别的访问控制规则,可绑定到具体实例。 一个安全组的定义包含以下几个部分: 名称、所属的VPC 进站(inbound)规则 出站(outbound)规则 网络访问列表(Network access" />
     <meta property="og:url" content="http://localhost:4000/devops-aws-vpc" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/AmazonWebservices_Logo.png" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/icon-cloud-aws.png" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
     <meta property="article:published_time" content="2018-12-29T21:01:01+08:00" />
@@ -60,7 +60,7 @@
     <meta name="twitter:title" content="Aws中基于vpc网络结构解析" />
     <meta name="twitter:description" content="计费规则 VPC定义的所有功能组件，包括路由表、子网定义、安全规则都是免费的。 规划VPC 规划vpc时，通常考虑以下几点: 在同一个vpc中划分子网 比如，按互联网产品的交付方式分，把子网按照不同的网段分为Dev(开发环境)、Testing(staging测试环境)、Product(生产环境) 按照地理区域划分网络 VPC中各组件的使用方法 弹性网络接口(Elastic Network Interfaces) 这个组件是对硬件网卡的抽象，包含网络协议地址(v4、v6、Mac地址) 路由表(Route table) 路由表是子网(subnet)的一个重要的逻辑组件(VPC内的组件是抽象的逻辑组件)。它是连接子网内的实例 和 网关的重要凭证。 路由表的核心作用是指定&lt;源(source)---data---目的地(destination)&gt;封装后的数据包发往何方。 跨网络的数据需要发到网关(gateway)，由网关决定数据的下一站。 VPC中包含一个默认的路由表，也成为主路由(main route)。 通常在建立子网时，如果不指定路由，子网会默认使用VPC的默认路由。 下图两个子网都默认连接到了VPC内部的默认路由。 网关(gateway) vpc中有两种常用网关 internet gateway nat gateway Internet gateway是VPC中常用的网关,它的特点是允许数据双向进出。 连接到internet gateway的子网称为 public network。 还有另外一种网关是Nat Gateway。 如果一个子网的路由绑定到了nat gateway，它称为private network。 从安全的角度看VPC 安全组(Security Group) 安全组是实例级别的访问控制规则,可绑定到具体实例。 一个安全组的定义包含以下几个部分: 名称、所属的VPC 进站(inbound)规则 出站(outbound)规则 网络访问列表(Network access" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/AmazonWebservices_Logo.png" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/icon-cloud-aws.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
@@ -82,7 +82,7 @@
     "url": "http://localhost:4000/devops-aws-vpc",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/AmazonWebservices_Logo.png",
+        "url": "http://localhost:4000/assets/images/icon-cloud-aws.png",
         "width": 2000,
         "height": 666
     },
