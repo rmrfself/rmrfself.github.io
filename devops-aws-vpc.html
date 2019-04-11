@@ -9,7 +9,7 @@
 
 
 
-    <title>张量模型中的常用定理</title>
+    <title>Aws中基于vpc网络结构解析</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -41,34 +41,30 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="Learn, Innovate, Share - Business Based Vision." />
     <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="http://localhost:4000/manifold-howto" />
+    <link rel="canonical" href="http://localhost:4000/devops-aws-vpc" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="张量模型中的常用定理" />
-    <meta property="og:description" content="#TODO
-
-" />
-    <meta property="og:url" content="http://localhost:4000/manifold-howto" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta property="og:title" content="Aws中基于vpc网络结构解析" />
+    <meta property="og:description" content="计费规则 VPC定义的所有功能组件，包括路由表、子网定义、安全规则都是免费的。 规划VPC 规划vpc时，通常考虑以下几点: 在同一个vpc中划分子网 比如，按互联网产品的交付方式分，把子网按照不同的网段分为Dev(开发环境)、Testing(staging测试环境)、Product(生产环境) 按照地理区域划分网络 VPC中各组件的使用方法 弹性网络接口(Elastic Network Interfaces) 这个组件是对硬件网卡的抽象，包含网络协议地址(v4、v6、Mac地址) 路由表(Route table) 路由表是子网(subnet)的一个重要的逻辑组件(VPC内的组件是抽象的逻辑组件)。它是连接子网内的实例 和 网关的重要凭证。 路由表的核心作用是指定&lt;源(source)---data---目的地(destination)&gt;封装后的数据包发往何方。 跨网络的数据需要发到网关(gateway)，由网关决定数据的下一站。 VPC中包含一个默认的路由表，也成为主路由(main route)。 通常在建立子网时，如果不指定路由，子网会默认使用VPC的默认路由。 下图两个子网都默认连接到了VPC内部的默认路由。 网关(gateway) vpc中有两种常用网关 internet gateway nat gateway Internet gateway是VPC中常用的网关,它的特点是允许数据双向进出。 连接到internet gateway的子网称为 public network。 还有另外一种网关是Nat Gateway。 如果一个子网的路由绑定到了nat gateway，它称为private network。 从安全的角度看VPC 安全组(Security Group) 安全组是实例级别的访问控制规则,可绑定到具体实例。 一个安全组的定义包含以下几个部分: 名称、所属的VPC 进站(inbound)规则 出站(outbound)规则 网络访问列表(Network access" />
+    <meta property="og:url" content="http://localhost:4000/devops-aws-vpc" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/AmazonWebservices_Logo.png" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
     <meta property="article:author" content="https://www.facebook.com/rmrfself" />
-    <meta property="article:published_time" content="2016-05-28T16:16:01+08:00" />
-    <meta property="article:modified_time" content="2016-05-28T16:16:01+08:00" />
-    <meta property="article:tag" content="Math" />
+    <meta property="article:published_time" content="2018-12-29T21:01:01+08:00" />
+    <meta property="article:modified_time" content="2018-12-29T21:01:01+08:00" />
+    <meta property="article:tag" content="Automation" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="张量模型中的常用定理" />
-    <meta name="twitter:description" content="#TODO
-
-" />
+    <meta name="twitter:title" content="Aws中基于vpc网络结构解析" />
+    <meta name="twitter:description" content="计费规则 VPC定义的所有功能组件，包括路由表、子网定义、安全规则都是免费的。 规划VPC 规划vpc时，通常考虑以下几点: 在同一个vpc中划分子网 比如，按互联网产品的交付方式分，把子网按照不同的网段分为Dev(开发环境)、Testing(staging测试环境)、Product(生产环境) 按照地理区域划分网络 VPC中各组件的使用方法 弹性网络接口(Elastic Network Interfaces) 这个组件是对硬件网卡的抽象，包含网络协议地址(v4、v6、Mac地址) 路由表(Route table) 路由表是子网(subnet)的一个重要的逻辑组件(VPC内的组件是抽象的逻辑组件)。它是连接子网内的实例 和 网关的重要凭证。 路由表的核心作用是指定&lt;源(source)---data---目的地(destination)&gt;封装后的数据包发往何方。 跨网络的数据需要发到网关(gateway)，由网关决定数据的下一站。 VPC中包含一个默认的路由表，也成为主路由(main route)。 通常在建立子网时，如果不指定路由，子网会默认使用VPC的默认路由。 下图两个子网都默认连接到了VPC内部的默认路由。 网关(gateway) vpc中有两种常用网关 internet gateway nat gateway Internet gateway是VPC中常用的网关,它的特点是允许数据双向进出。 连接到internet gateway的子网称为 public network。 还有另外一种网关是Nat Gateway。 如果一个子网的路由绑定到了nat gateway，它称为private network。 从安全的角度看VPC 安全组(Security Group) 安全组是实例级别的访问控制规则,可绑定到具体实例。 一个安全组的定义包含以下几个部分: 名称、所属的VPC 进站(inbound)规则 出站(outbound)规则 网络访问列表(Network access" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/AmazonWebservices_Logo.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="张庆华的个人日志" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Math" />
+    <meta name="twitter:data2" content="Automation" />
     <meta name="twitter:site" content="@rmrfself" />
     <meta name="twitter:creator" content="@rmrfself" />
     <meta property="og:image:width" content="1400" />
@@ -83,20 +79,18 @@
         "name": "张庆华的个人日志",
         "logo": "http://localhost:4000/assets/images/blog-icon.svg"
     },
-    "url": "http://localhost:4000/manifold-howto",
+    "url": "http://localhost:4000/devops-aws-vpc",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
+        "url": "http://localhost:4000/assets/images/AmazonWebservices_Logo.png",
         "width": 2000,
         "height": 666
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://localhost:4000/manifold-howto"
+        "@id": "http://localhost:4000/devops-aws-vpc"
     },
-    "description": "#TODO
-
-"
+    "description": "计费规则 VPC定义的所有功能组件，包括路由表、子网定义、安全规则都是免费的。 规划VPC 规划vpc时，通常考虑以下几点: 在同一个vpc中划分子网 比如，按互联网产品的交付方式分，把子网按照不同的网段分为Dev(开发环境)、Testing(staging测试环境)、Product(生产环境) 按照地理区域划分网络 VPC中各组件的使用方法 弹性网络接口(Elastic Network Interfaces) 这个组件是对硬件网卡的抽象，包含网络协议地址(v4、v6、Mac地址) 路由表(Route table) 路由表是子网(subnet)的一个重要的逻辑组件(VPC内的组件是抽象的逻辑组件)。它是连接子网内的实例 和 网关的重要凭证。 路由表的核心作用是指定&lt;源(source)---data---目的地(destination)&gt;封装后的数据包发往何方。 跨网络的数据需要发到网关(gateway)，由网关决定数据的下一站。 VPC中包含一个默认的路由表，也成为主路由(main route)。 通常在建立子网时，如果不指定路由，子网会默认使用VPC的默认路由。 下图两个子网都默认连接到了VPC内部的默认路由。 网关(gateway) vpc中有两种常用网关 internet gateway nat gateway Internet gateway是VPC中常用的网关,它的特点是允许数据双向进出。 连接到internet gateway的子网称为 public network。 还有另外一种网关是Nat Gateway。 如果一个子网的路由绑定到了nat gateway，它称为private network。 从安全的角度看VPC 安全组(Security Group) 安全组是实例级别的访问控制规则,可绑定到具体实例。 一个安全组的定义包含以下几个部分: 名称、所属的VPC 进站(inbound)规则 出站(outbound)规则 网络访问列表(Network access"
 }
     </script>
 
@@ -109,10 +103,10 @@
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="张量模型中的常用定理" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Aws中基于vpc网络结构解析" href="/feed.xml" />
 
 </head>
-<body class="science">
+<body class="devops">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
         <!-- default -->
@@ -156,25 +150,132 @@ into the {body} of the default.hbs template -->
 <!-- #post -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
-        <article class="post-full  no-image">
+        <article class="post-full  ">
             <header class="post-full-header">
-                <h1 class="post-full-title">张量模型中的常用定理</h1>
+                <h1 class="post-full-title">Aws中基于vpc网络结构解析</h1>
                 <section class="post-full-meta">
                     
                         <span class="date-divider">分类: </span>
                         
                             
-                               <a href='/tag/math/'>MATH</a>
+                               <a href='/tag/automation/'>AUTOMATION</a>
                             
                         
                     
-                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="28 May 2016">2016-05-28 16:16</time>
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="29 December 2018">2018-12-29 21:01</time>
                 </section>
             </header>
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>#TODO</p>
+                    <h5 id="计费规则">计费规则</h5>
 
+<p>VPC定义的所有功能组件，包括路由表、子网定义、安全规则都是免费的。</p>
+
+<h5 id="规划vpc">规划VPC</h5>
+
+<p>规划vpc时，通常考虑以下几点:</p>
+
+<ul>
+  <li>在同一个vpc中划分子网</li>
+</ul>
+
+<p>比如，按互联网产品的交付方式分，把子网按照不同的网段分为Dev(开发环境)、Testing(staging测试环境)、Product(生产环境)</p>
+
+<p><img src="/assets/images/vpc-structure.png" alt="" /></p>
+
+<ul>
+  <li>按照地理区域划分网络</li>
+</ul>
+
+<h6 id="vpc中各组件的使用方法">VPC中各组件的使用方法</h6>
+
+<ul>
+  <li>弹性网络接口(Elastic Network Interfaces)</li>
+</ul>
+
+<p>这个组件是对硬件网卡的抽象，包含网络协议地址(v4、v6、Mac地址)</p>
+
+<ul>
+  <li>路由表(Route table)</li>
+</ul>
+
+<p>路由表是子网(subnet)的一个重要的<code class="highlighter-rouge">逻辑组件</code>(VPC内的组件是抽象的逻辑组件)。它是连接子网内的实例 和 网关的重要凭证。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>路由表的核心作用是指定&lt;源(source)---data---目的地(destination)&gt;封装后的数据包发往何方。
+
+跨网络的数据需要发到网关(gateway)，由网关决定数据的下一站。
+</code></pre></div></div>
+
+<p>VPC中包含一个<code class="highlighter-rouge">默认的路由表</code>，也成为主路由(main route)。</p>
+
+<p>通常在建立子网时，如果不指定路由，子网会默认使用VPC的默认路由。</p>
+
+<p>下图两个子网都默认连接到了VPC内部的默认路由。</p>
+
+<p><img src="/assets/images/routing-Route_Replace_Main_Start-diagramrouting-Route_Replace_Main_Start-diagram.png" alt="" /></p>
+
+<ul>
+  <li>网关(gateway)</li>
+</ul>
+
+<p>vpc中有两种常用网关</p>
+
+<ul>
+  <li>
+    <p>internet gateway</p>
+  </li>
+  <li>
+    <p>nat gateway</p>
+  </li>
+</ul>
+
+<p>Internet gateway是VPC中常用的网关,它的特点是允许数据双向进出。</p>
+
+<p>连接到internet gateway的子网称为 public network。</p>
+
+<p><img src="/assets/images/internet-gateway-overview-diagram.png" alt="" /></p>
+
+<p>还有另外一种网关是Nat Gateway。 如果一个子网的路由绑定到了nat gateway，它称为private network。</p>
+
+<p><img src="/assets/images/nat-gateway-diagram.png" alt="" /></p>
+
+<h5 id="从安全的角度看vpc">从安全的角度看VPC</h5>
+
+<p><img src="/assets/images/vpc-02.png" alt="" /></p>
+
+<ul>
+  <li>安全组(Security Group)</li>
+</ul>
+
+<p>安全组是<code class="highlighter-rouge">实例级别</code>的访问控制规则,可绑定到具体实例。</p>
+
+<p>一个安全组的定义包含以下几个部分:</p>
+
+<ul>
+  <li>名称、所属的VPC</li>
+</ul>
+
+<p><img src="/assets/images/aws-sg-01.png" alt="" /></p>
+
+<ul>
+  <li>进站(inbound)规则</li>
+</ul>
+
+<p><img src="/assets/images/aws-sg-02.png" alt="" /></p>
+
+<ul>
+  <li>出站(outbound)规则</li>
+</ul>
+
+<p><img src="/assets/images/aws-sg-03.png" alt="" /></p>
+
+<ul>
+  <li>网络访问列表(Network access control lists)</li>
+</ul>
+
+<p>Nacl是subnet级别的网络访问控制规则，可绑定的子网。</p>
+
+<p><img src="/assets/images/vpc-0-sg.png" alt="" /></p>
 
                 </div>
             </section>
@@ -224,7 +325,7 @@ into the {body} of the default.hbs template -->
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/math/">Math</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/automation/">Automation</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -234,7 +335,18 @@ into the {body} of the default.hbs template -->
                                 
                                 
                                   
+                                    
+                                  
                                 
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/k8s-from-scrach">[GCE]单节点部署kubernetes集群</a></li>
+                                        
+                                    
                                   
                                 
                                   
@@ -254,7 +366,56 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                            <li><a href="/devops-docker-presentation">Devops那些事-虚拟化讲座讲义</a></li>
+                                        
+                                    
+                                  
                                 
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/archi-postgresql-02">PostgreSQL MySQL 数据类型映射</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
@@ -266,28 +427,138 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                    
+                                  
                                 
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
                                 
                                   
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                    
+                                  
                                 
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
                                 
                                   
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
                                     
                                   
                                 
@@ -318,55 +589,10 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
+                                        
+                                        
+                                    
                                   
                                 
                                   
@@ -389,27 +615,9 @@ into the {body} of the default.hbs template -->
                                     
                                         
                                         
-                                            <li><a href="/statistical-and-probability-theory">概率统计基础理论学习笔记(三)</a></li>
-                                        
                                     
                                   
                                 
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/linaer-algebra-theory">(MIT)初等线性代数理论笔记(一)</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/statistical-and-probability-theory-02">概率统计基础理论学习笔记(二)</a></li>
-                                        
-                                    
                                   
                                 
                                   
@@ -420,18 +628,36 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
                                     
                                         
                                         
                                     
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/math/">
+                            <a href="/tag/automation/">
                                 
-                                    See all 5 posts  →
+                                    See all 30 posts  →
                                 
                             </a>
                         </footer>
@@ -440,82 +666,28 @@ into the {body} of the default.hbs template -->
             
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
             
-                
-
-    <article class="post-card devops">
-        
-            <a class="post-card-image-link" href="/devops-operation-commands">
-                <div class="post-card-image" style="background-image: url(/assets/images/DevOps-track.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/devops-operation-commands">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Automation</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">ubuntu上的常用指令汇总</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p></p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-            
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
             
                 
 
     <article class="post-card devops">
         
-            <a class="post-card-image-link" href="/devops-kubernetes-basic-10">
+            <a class="post-card-image-link" href="/k8s-dashboard-install">
                 <div class="post-card-image" style="background-image: url(/assets/images/deployments.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/devops-kubernetes-basic-10">
+            <a class="post-card-content-link" href="/k8s-dashboard-install">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Automation</span>
+                                <span class="post-card-tags">Kubernetes</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">kubernetes中的基本概念(十) NodePort、Lb(Service)、Ingress的使用场景</h2>
+                    <h2 class="post-card-title">[GCE]安装Kubernetes Dashboard</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -564,18 +736,18 @@ into the {body} of the default.hbs template -->
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">张量模型中的常用定理</div>
+    <div class="floating-header-title">Aws中基于vpc网络结构解析</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%E5%BC%A0%E9%87%8F%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E5%AE%9A%E7%90%86&amp;url=https://rmrfself.github.io/manifold-howto"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Aws%E4%B8%AD%E5%9F%BA%E4%BA%8Evpc%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E8%A7%A3%E6%9E%90&amp;url=https://rmrfself.github.io/devops-aws-vpc"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/manifold-howto"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/devops-aws-vpc"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 

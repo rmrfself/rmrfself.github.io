@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/automation/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-10T21:24:02+08:00</updated>
+  <updated>2019-04-11T14:51:18+08:00</updated>
   <id>http://localhost:4000/tag/automation/feed.xml</id>
 
   
@@ -45,11 +45,11 @@
   
     <entry>
       <title type="html">Aws中基于vpc网络结构解析</title>
-      <link href="http://localhost:4000/data-scientist-startup" rel="alternate" type="text/html" title="Aws中基于vpc网络结构解析" />
+      <link href="http://localhost:4000/devops-aws-vpc" rel="alternate" type="text/html" title="Aws中基于vpc网络结构解析" />
       <published>2018-12-29T21:01:01+08:00</published>
       <updated>2018-12-29T21:01:01+08:00</updated>
-      <id>http://localhost:4000/data-scientist-startup</id>
-      <content type="html" xml:base="http://localhost:4000/data-scientist-startup">&lt;h5 id=&quot;计费规则&quot;&gt;计费规则&lt;/h5&gt;
+      <id>http://localhost:4000/devops-aws-vpc</id>
+      <content type="html" xml:base="http://localhost:4000/devops-aws-vpc">&lt;h5 id=&quot;计费规则&quot;&gt;计费规则&lt;/h5&gt;
 
 &lt;p&gt;VPC定义的所有功能组件，包括路由表、子网定义、安全规则都是免费的。&lt;/p&gt;
 
