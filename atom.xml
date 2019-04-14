@@ -143,6 +143,21 @@
     
       
       <item>
+        <title>Essential系列-ceph对象存储(一)</title>
+        
+          <description>&lt;h4 id=&quot;云环境中的存储技术&quot;&gt;云环境中的存储技术&lt;/h4&gt;
+
+</description>
+        
+        <pubDate>Mon, 26 Feb 2018 21:00:10 +0800</pubDate>
+        <link>
+        http://localhost:4000/archi-ceph-osd-essentials</link>
+        <guid isPermaLink="true">http://localhost:4000/archi-ceph-osd-essentials</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>消息中间件-RabbitMQ应用模式解析(二)</title>
         
           <description>&lt;p&gt;消息中间件解析。&lt;/p&gt;
@@ -334,6 +349,35 @@
         <link>
         http://localhost:4000/archi-design-pattern-instructure</link>
         <guid isPermaLink="true">http://localhost:4000/archi-design-pattern-instructure</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Redis Cluster高可用(ha)性解析</title>
+        
+          <description>&lt;p&gt;Redis 的含义&lt;code class=&quot;highlighter-rouge&quot;&gt;REmote DIctionary Server&lt;/code&gt;。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 19 Jan 2017 23:12:10 +0800</pubDate>
+        <link>
+        http://localhost:4000/archi-redis-cluster-01</link>
+        <guid isPermaLink="true">http://localhost:4000/archi-redis-cluster-01</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>微服务架构模式-什么是服务?</title>
+        
+          <description>
+</description>
+        
+        <pubDate>Mon, 09 Jan 2017 23:00:10 +0800</pubDate>
+        <link>
+        http://localhost:4000/archi-event-based-01</link>
+        <guid isPermaLink="true">http://localhost:4000/archi-event-based-01</guid>
       </item>
       
     

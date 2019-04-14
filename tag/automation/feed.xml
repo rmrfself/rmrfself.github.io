@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/automation/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-11T15:30:04+08:00</updated>
+  <updated>2019-04-14T16:04:43+08:00</updated>
   <id>http://localhost:4000/tag/automation/feed.xml</id>
 
   
@@ -331,6 +331,183 @@ kubectl get pods –all-namespaces&lt;/p&gt;
 
       
         <summary type="html">使用kubeadm部署单master节点的k8s, 1个master + 2个minion</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Essential系列-ceph对象存储(一)</title>
+      <link href="http://localhost:4000/archi-ceph-osd-essentials" rel="alternate" type="text/html" title="Essential系列-ceph对象存储(一)" />
+      <published>2018-02-26T21:00:10+08:00</published>
+      <updated>2018-02-26T21:00:10+08:00</updated>
+      <id>http://localhost:4000/archi-ceph-osd-essentials</id>
+      <content type="html" xml:base="http://localhost:4000/archi-ceph-osd-essentials">&lt;h4 id=&quot;云环境中的存储技术&quot;&gt;云环境中的存储技术&lt;/h4&gt;
+
+&lt;h5 id=&quot;block-storage&quot;&gt;Block Storage&lt;/h5&gt;
+
+&lt;p&gt;传统的块存储的例子是物理磁盘，它就是一个块存储设备。&lt;/p&gt;
+
+&lt;p&gt;但云环境中的Block Storage是通过Nas(Network Attached Storage)模拟的块设备(不然的话，如何做到实时分配和计费?)。&lt;a href=&quot;https://en.wikipedia.org/wiki/Block-level_storage&quot;&gt;参考&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;不管传统意义上的块存储(磁盘)，还是云环境中的块存储，它的主要目的只有一个:&lt;/p&gt;
+
+&lt;p&gt;为性能敏感的数据提供廉价的持久化的存储。&lt;/p&gt;
+
+&lt;p&gt;它的特性是:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;低延迟&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;传输速度块(相对网络存储)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;支持多种操作系统，提供硬件级容错机制&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;数据在块上是如何组织的?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/blockstorage01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;数据被存储在固定大小的块上(比如 512字节)，块是最基础的存储单元。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;没有比块更高的元数据(meta data)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果操作系统要访问块数据，它需要先用某种格式(ext2,3,4)挂载(mount)。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这就是在linux系统上无法直接访问fat格式的磁盘的原因。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;由操作西永决定块内的数据如何被访问(提供访问操作视图)。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;数据块接口的性能比较&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/blockstorage02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(光纤网络的速度可达到100G/S)&lt;/p&gt;
+
+&lt;p&gt;云环境中常见块存储服务:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;EBS(AWS Elastic Block Storage), AWS提供的原始数据存储服务,格式化以后它可以被挂载到EC2示例中。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Azure Block Storage，微软Azure云提供的块存储服务。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Google Persistence Disks，谷歌的持久化存储服务。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;阿里云的云盘/本地盘&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;file-storage&quot;&gt;File Storage&lt;/h5&gt;
+
+&lt;p&gt;文件存储，像对于块存储，它的操作视图是基于文件或者文档。相对于块高了一个层次。&lt;/p&gt;
+
+&lt;p&gt;文件的典型特性:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;所有文件都有一个名字，并且是可字节寻址的。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;可随机访问。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;通过文件句柄可以进行IO操作。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/filestorage01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;使用场景:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;文档共享&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;数据库集群&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;大数据存储&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;文档存储最简单的例子是Samba和NFS&lt;/p&gt;
+
+&lt;h5 id=&quot;object-storage&quot;&gt;Object Storage&lt;/h5&gt;
+
+&lt;p&gt;对象存储是云环境中，被应用常用的一种存储方式。&lt;/p&gt;
+
+&lt;p&gt;数据存储的特性:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;包含一个句柄URL格式或者ObjectId&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;有元数据，包括用户元数据和操作系统元数据。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;包含版本&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;不需要挂载&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;可随处访问(at any endpoint)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;常见用途:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;归档存储&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Server-less 容器存储&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;同步或共享文件&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="automation" />
+      
+
+      
+        <summary type="html">云环境中的存储技术</summary>
       
 
       
@@ -1266,44 +1443,6 @@ script statistics:
 
       
         <summary type="html">对质量的理解是优秀开发的基础。</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">自动化测试工具-cucumber</title>
-      <link href="http://localhost:4000/devops-automation" rel="alternate" type="text/html" title="自动化测试工具-cucumber" />
-      <published>2016-09-18T23:10:19+08:00</published>
-      <updated>2016-09-18T23:10:19+08:00</updated>
-      <id>http://localhost:4000/devops-automation</id>
-      <content type="html" xml:base="http://localhost:4000/devops-automation">&lt;p&gt;Cucumber在自动化测试中的用法&lt;/p&gt;
-
-&lt;h2 id=&quot;与jenkins集成&quot;&gt;与jenkins集成&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cucumber-jvm.png&quot; alt=&quot;jenkins-cucumber-jvm&quot; /&gt;&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>mikezhang</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="automation" />
-      
-
-      
-        <summary type="html">Cucumber在自动化测试中的用法</summary>
       
 
       

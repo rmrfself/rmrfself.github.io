@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="http://localhost:4000/tag/microservice/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2019-04-14T16:04:43+08:00</updated>
+  <id>http://localhost:4000/tag/microservice/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">张庆华的个人日志 | </title>
+  
+
+  
+    <subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Redis Cluster高可用(ha)性解析</title>
+      <link href="http://localhost:4000/archi-redis-cluster-01" rel="alternate" type="text/html" title="Redis Cluster高可用(ha)性解析" />
+      <published>2017-01-19T23:12:10+08:00</published>
+      <updated>2017-01-19T23:12:10+08:00</updated>
+      <id>http://localhost:4000/archi-redis-cluster-01</id>
+      <content type="html" xml:base="http://localhost:4000/archi-redis-cluster-01">&lt;p&gt;Redis 的含义&lt;code class=&quot;highlighter-rouge&quot;&gt;REmote DIctionary Server&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h5 id=&quot;高可用性和自用failover&quot;&gt;高可用性和自用Failover&lt;/h5&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/redis-archi.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://redis.io/topics/sentinel&quot;&gt;Redis Sentinel Documentation&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Redis Sentinel(哨兵)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sentinel 为高可用(ha)提供了4个基本功能:&lt;/p&gt;
+
+&lt;p&gt;Monitoring: &lt;code class=&quot;highlighter-rouge&quot;&gt;监控master和slave是否正常工作&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Notification: &lt;code class=&quot;highlighter-rouge&quot;&gt;通过api对外发送消息&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Automatic failover: &lt;code class=&quot;highlighter-rouge&quot;&gt;检测到失败状态以后自动切换主从&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Configuration provider: 服务发现&lt;/p&gt;
+
+&lt;p&gt;启动Sentinel的两种方式&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;redis-sentinel /path/to/sentinel.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;或者 配合redis-server启动&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;redis-server /path/to/sentinel.conf --sentinel
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;fail over过程:&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="microservice" />
+      
+
+      
+        <summary type="html">Redis 的含义REmote DIctionary Server。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">微服务架构模式-什么是服务?</title>
+      <link href="http://localhost:4000/archi-event-based-01" rel="alternate" type="text/html" title="微服务架构模式-什么是服务?" />
+      <published>2017-01-09T23:00:10+08:00</published>
+      <updated>2017-01-09T23:00:10+08:00</updated>
+      <id>http://localhost:4000/archi-event-based-01</id>
+      <content type="html" xml:base="http://localhost:4000/archi-event-based-01"></content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>mikezhang</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="microservice" />
+      
+
+      
+        <summary type="html"></summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>
