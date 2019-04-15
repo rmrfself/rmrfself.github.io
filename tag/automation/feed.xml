@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/automation/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-15T09:31:26+08:00</updated>
+  <updated>2019-04-15T09:37:20+08:00</updated>
   <id>http://localhost:4000/tag/automation/feed.xml</id>
 
   
@@ -387,9 +387,7 @@ kubectl get pods –all-namespaces&lt;/p&gt;
 
 &lt;p&gt;这就是在linux系统上无法直接访问fat格式的磁盘的原因。&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;由操作西永决定块内的数据如何被访问(提供访问操作视图)。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;由操作系统决定块内的数据如何被访问(提供访问操作视图)。&lt;/p&gt;
 
 &lt;p&gt;数据块接口的性能比较&lt;/p&gt;
 
@@ -416,7 +414,7 @@ kubectl get pods –all-namespaces&lt;/p&gt;
 
 &lt;h5 id=&quot;file-storage&quot;&gt;File Storage&lt;/h5&gt;
 
-&lt;p&gt;文件存储，像对于块存储，它的操作视图是基于文件或者文档。相对于块高了一个层次。&lt;/p&gt;
+&lt;p&gt;文件存储，相对于块存储，它的操作视图是基于文件或者文档。相对于块高了一个层次。&lt;/p&gt;
 
 &lt;p&gt;文件的典型特性:&lt;/p&gt;
 
