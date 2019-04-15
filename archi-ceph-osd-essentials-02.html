@@ -48,7 +48,7 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Essential系列-ceph对象存储/日志文件系统是如何工作的(二)" />
-    <meta property="og:description" content="云环境中的文件系统 基于unix文件系统是操作系统中简单易懂的部分。 这是由它的设计决定的-一切皆是文件。 当前的文件系统基本分为两类: 基于事务或日志(journal)的写方式，它提供了更好的高可用性 不含日志的写方式 不使用日志(no journal)的文件系统 ext2的工作方式 文件系统中的存储概念 block 一个逻辑块(block)是最小的能被文件系统分配的存储单元，以用字节(byte)为单位。单个文件可以包含多个blocks 逻辑卷(local volume) 一个磁盘分区或者整个物理磁盘 inode 文件元数据(meta data)的存储数据结构。 文件数据本身以外的数据,比如 时间戳、ownership 信息，访问权限，安全信息，文件大小以及存储的位置。 directory 目录，一种特别的文件，包含内容文件的inode元数据列表。 基本面上看，文件系统的写文件过程至少包含了2个IO过程: inode(文件元数据)的写入过程 实际文件内容写入对应的block的过程 这里面存在2个问题: 先写元数据还是先写实际数据? 如果在任意一个IO中，出现了异常中断应该如何处理? 这两个问题是所有多重IO系统面临的通用问题 Journaling 在linux系统中，一个文件的元信息有inode结构维持。 inode的主要结构信息: owner : ****owner username**** permissions : read-write size : 1 pointer : 4 # 指向block pointer :" />
+    <meta property="og:description" content="How to build storage infrastruction? 基于unix文件系统是操作系统中简单易懂的部分。 这是由它的设计决定的-一切皆是文件。 当前的文件系统基本分为两类: 基于事务或日志(journal)的写方式，它提供了更好的高可用性 不含日志的写方式 不使用日志(no journal)的文件系统 ext2的工作方式 文件系统中的存储概念 block 一个逻辑块(block)是最小的能被文件系统分配的存储单元，以用字节(byte)为单位。单个文件可以包含多个blocks 逻辑卷(local volume) 一个磁盘分区或者整个物理磁盘 inode 文件元数据(meta data)的存储数据结构。 文件数据本身以外的数据,比如 时间戳、ownership 信息，访问权限，安全信息，文件大小以及存储的位置。 directory 目录，一种特别的文件，包含内容文件的inode元数据列表。 基本面上看，文件系统的写文件过程至少包含了2个IO过程: inode(文件元数据)的写入过程 实际文件内容写入对应的block的过程 这里面存在2个问题: 先写元数据还是先写实际数据? 如果在任意一个IO中，出现了异常中断应该如何处理? 这两个问题是所有多重IO系统面临的通用问题 Journaling 在linux系统中，一个文件的元信息有inode结构维持。 inode的主要结构信息: owner : ****owner username**** permissions : read-write size : 1 pointer : 4" />
     <meta property="og:url" content="http://localhost:4000/archi-ceph-osd-essentials-02" />
     <meta property="og:image" content="http://localhost:4000/assets/images/middleware01.png" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
@@ -58,7 +58,7 @@
     <meta property="article:tag" content="Automation" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Essential系列-ceph对象存储/日志文件系统是如何工作的(二)" />
-    <meta name="twitter:description" content="云环境中的文件系统 基于unix文件系统是操作系统中简单易懂的部分。 这是由它的设计决定的-一切皆是文件。 当前的文件系统基本分为两类: 基于事务或日志(journal)的写方式，它提供了更好的高可用性 不含日志的写方式 不使用日志(no journal)的文件系统 ext2的工作方式 文件系统中的存储概念 block 一个逻辑块(block)是最小的能被文件系统分配的存储单元，以用字节(byte)为单位。单个文件可以包含多个blocks 逻辑卷(local volume) 一个磁盘分区或者整个物理磁盘 inode 文件元数据(meta data)的存储数据结构。 文件数据本身以外的数据,比如 时间戳、ownership 信息，访问权限，安全信息，文件大小以及存储的位置。 directory 目录，一种特别的文件，包含内容文件的inode元数据列表。 基本面上看，文件系统的写文件过程至少包含了2个IO过程: inode(文件元数据)的写入过程 实际文件内容写入对应的block的过程 这里面存在2个问题: 先写元数据还是先写实际数据? 如果在任意一个IO中，出现了异常中断应该如何处理? 这两个问题是所有多重IO系统面临的通用问题 Journaling 在linux系统中，一个文件的元信息有inode结构维持。 inode的主要结构信息: owner : ****owner username**** permissions : read-write size : 1 pointer : 4 # 指向block pointer :" />
+    <meta name="twitter:description" content="How to build storage infrastruction? 基于unix文件系统是操作系统中简单易懂的部分。 这是由它的设计决定的-一切皆是文件。 当前的文件系统基本分为两类: 基于事务或日志(journal)的写方式，它提供了更好的高可用性 不含日志的写方式 不使用日志(no journal)的文件系统 ext2的工作方式 文件系统中的存储概念 block 一个逻辑块(block)是最小的能被文件系统分配的存储单元，以用字节(byte)为单位。单个文件可以包含多个blocks 逻辑卷(local volume) 一个磁盘分区或者整个物理磁盘 inode 文件元数据(meta data)的存储数据结构。 文件数据本身以外的数据,比如 时间戳、ownership 信息，访问权限，安全信息，文件大小以及存储的位置。 directory 目录，一种特别的文件，包含内容文件的inode元数据列表。 基本面上看，文件系统的写文件过程至少包含了2个IO过程: inode(文件元数据)的写入过程 实际文件内容写入对应的block的过程 这里面存在2个问题: 先写元数据还是先写实际数据? 如果在任意一个IO中，出现了异常中断应该如何处理? 这两个问题是所有多重IO系统面临的通用问题 Journaling 在linux系统中，一个文件的元信息有inode结构维持。 inode的主要结构信息: owner : ****owner username**** permissions : read-write size : 1 pointer : 4" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/middleware01.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -90,7 +90,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/archi-ceph-osd-essentials-02"
     },
-    "description": "云环境中的文件系统 基于unix文件系统是操作系统中简单易懂的部分。 这是由它的设计决定的-一切皆是文件。 当前的文件系统基本分为两类: 基于事务或日志(journal)的写方式，它提供了更好的高可用性 不含日志的写方式 不使用日志(no journal)的文件系统 ext2的工作方式 文件系统中的存储概念 block 一个逻辑块(block)是最小的能被文件系统分配的存储单元，以用字节(byte)为单位。单个文件可以包含多个blocks 逻辑卷(local volume) 一个磁盘分区或者整个物理磁盘 inode 文件元数据(meta data)的存储数据结构。 文件数据本身以外的数据,比如 时间戳、ownership 信息，访问权限，安全信息，文件大小以及存储的位置。 directory 目录，一种特别的文件，包含内容文件的inode元数据列表。 基本面上看，文件系统的写文件过程至少包含了2个IO过程: inode(文件元数据)的写入过程 实际文件内容写入对应的block的过程 这里面存在2个问题: 先写元数据还是先写实际数据? 如果在任意一个IO中，出现了异常中断应该如何处理? 这两个问题是所有多重IO系统面临的通用问题 Journaling 在linux系统中，一个文件的元信息有inode结构维持。 inode的主要结构信息: owner : ****owner username**** permissions : read-write size : 1 pointer : 4 # 指向block pointer :"
+    "description": "How to build storage infrastruction? 基于unix文件系统是操作系统中简单易懂的部分。 这是由它的设计决定的-一切皆是文件。 当前的文件系统基本分为两类: 基于事务或日志(journal)的写方式，它提供了更好的高可用性 不含日志的写方式 不使用日志(no journal)的文件系统 ext2的工作方式 文件系统中的存储概念 block 一个逻辑块(block)是最小的能被文件系统分配的存储单元，以用字节(byte)为单位。单个文件可以包含多个blocks 逻辑卷(local volume) 一个磁盘分区或者整个物理磁盘 inode 文件元数据(meta data)的存储数据结构。 文件数据本身以外的数据,比如 时间戳、ownership 信息，访问权限，安全信息，文件大小以及存储的位置。 directory 目录，一种特别的文件，包含内容文件的inode元数据列表。 基本面上看，文件系统的写文件过程至少包含了2个IO过程: inode(文件元数据)的写入过程 实际文件内容写入对应的block的过程 这里面存在2个问题: 先写元数据还是先写实际数据? 如果在任意一个IO中，出现了异常中断应该如何处理? 这两个问题是所有多重IO系统面临的通用问题 Journaling 在linux系统中，一个文件的元信息有inode结构维持。 inode的主要结构信息: owner : ****owner username**** permissions : read-write size : 1 pointer : 4"
 }
     </script>
 
@@ -167,7 +167,7 @@ into the {body} of the default.hbs template -->
             </header>
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>云环境中的文件系统</p>
+                    <p>How to build storage infrastruction?</p>
 
 <p>基于unix文件系统是操作系统中<code class="highlighter-rouge">简单易懂</code>的部分。</p>
 
@@ -360,6 +360,10 @@ pointer : null
 <p>更优化、最常用的方式是，在事务提交中，不写入数据本身，仅仅写入数据的meta data。</p>
 
 <p>NTFS, XFS, EXT3 都实现了这种方式。</p>
+
+<p>参考</p>
+
+<p><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/file-journaling.pdf">file journaling</a></p>
 
 
                 </div>

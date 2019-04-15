@@ -48,7 +48,7 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Essential系列-ceph对象存储(一)" />
-    <meta property="og:description" content="云环境中的存储技术 Block Storage 传统的块存储的例子是物理磁盘，它就是一个块存储设备。 但云环境中的Block Storage是通过Nas(Network Attached Storage)模拟的块设备(不然的话，如何做到实时分配和计费?)。参考 不管传统意义上的块存储(磁盘)，还是云环境中的块存储，它的主要目的只有一个: 为性能敏感的数据提供廉价的持久化的存储。 它的特性是: 低延迟 传输速度块(相对网络存储) 支持多种操作系统，提供硬件级容错机制 数据在块上是如何组织的? 数据被存储在固定大小的块上(比如 512字节)，块是最基础的存储单元。 没有比块更高的元数据(meta data) 如果操作系统要访问块数据，它需要先用某种格式(ext2,3,4)挂载(mount)。 这就是在linux系统上无法直接访问fat格式的磁盘的原因。 由操作系统决定块内的数据如何被访问(提供访问操作视图)。 数据块接口的性能比较 (光纤网络的速度可达到100G/S) 云环境中常见块存储服务: EBS(AWS Elastic Block Storage), AWS提供的原始数据存储服务,格式化以后它可以被挂载到EC2示例中。 Azure Block Storage，微软Azure云提供的块存储服务。 Google Persistence Disks，谷歌的持久化存储服务。 阿里云的云盘/本地盘 File Storage 文件存储，相对于块存储，它的操作视图是基于文件或者文档。相对于块高了一个层次。 文件的典型特性: 所有文件都有一个名字，并且是可字节寻址的。 可随机访问。 通过文件句柄可以进行IO操作。 使用场景: 文档共享 数据库集群 大数据存储 文档存储最简单的例子是Samba和NFS Object" />
+    <meta property="og:description" content="存储技术分类 云环境中的存储技术 Block Storage 传统的块存储的例子是物理磁盘，它就是一个块存储设备。 但云环境中的Block Storage是通过Nas(Network Attached Storage)模拟的块设备(不然的话，如何做到实时分配和计费?)。参考 不管传统意义上的块存储(磁盘)，还是云环境中的块存储，它的主要目的只有一个: 为性能敏感的数据提供廉价的持久化的存储。 它的特性是: 低延迟 传输速度块(相对网络存储) 支持多种操作系统，提供硬件级容错机制 数据在块上是如何组织的? 数据被存储在固定大小的块上(比如 512字节)，块是最基础的存储单元。 没有比块更高的元数据(meta data) 如果操作系统要访问块数据，它需要先用某种格式(ext2,3,4)挂载(mount)。 这就是在linux系统上无法直接访问fat格式的磁盘的原因。 由操作系统决定块内的数据如何被访问(提供访问操作视图)。 数据块接口的性能比较 (光纤网络的速度可达到100G/S) 云环境中常见块存储服务: EBS(AWS Elastic Block Storage), AWS提供的原始数据存储服务,格式化以后它可以被挂载到EC2示例中。 Azure Block Storage，微软Azure云提供的块存储服务。 Google Persistence Disks，谷歌的持久化存储服务。 阿里云的云盘/本地盘 File Storage 文件存储，相对于块存储，它的操作视图是基于文件或者文档。相对于块高了一个层次。 文件的典型特性: 所有文件都有一个名字，并且是可字节寻址的。 可随机访问。 通过文件句柄可以进行IO操作。 使用场景: 文档共享 数据库集群 大数据存储 文档存储最简单的例子是Samba和NFS" />
     <meta property="og:url" content="http://localhost:4000/archi-ceph-osd-essentials" />
     <meta property="og:image" content="http://localhost:4000/assets/images/middleware01.png" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
@@ -58,7 +58,7 @@
     <meta property="article:tag" content="Automation" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Essential系列-ceph对象存储(一)" />
-    <meta name="twitter:description" content="云环境中的存储技术 Block Storage 传统的块存储的例子是物理磁盘，它就是一个块存储设备。 但云环境中的Block Storage是通过Nas(Network Attached Storage)模拟的块设备(不然的话，如何做到实时分配和计费?)。参考 不管传统意义上的块存储(磁盘)，还是云环境中的块存储，它的主要目的只有一个: 为性能敏感的数据提供廉价的持久化的存储。 它的特性是: 低延迟 传输速度块(相对网络存储) 支持多种操作系统，提供硬件级容错机制 数据在块上是如何组织的? 数据被存储在固定大小的块上(比如 512字节)，块是最基础的存储单元。 没有比块更高的元数据(meta data) 如果操作系统要访问块数据，它需要先用某种格式(ext2,3,4)挂载(mount)。 这就是在linux系统上无法直接访问fat格式的磁盘的原因。 由操作系统决定块内的数据如何被访问(提供访问操作视图)。 数据块接口的性能比较 (光纤网络的速度可达到100G/S) 云环境中常见块存储服务: EBS(AWS Elastic Block Storage), AWS提供的原始数据存储服务,格式化以后它可以被挂载到EC2示例中。 Azure Block Storage，微软Azure云提供的块存储服务。 Google Persistence Disks，谷歌的持久化存储服务。 阿里云的云盘/本地盘 File Storage 文件存储，相对于块存储，它的操作视图是基于文件或者文档。相对于块高了一个层次。 文件的典型特性: 所有文件都有一个名字，并且是可字节寻址的。 可随机访问。 通过文件句柄可以进行IO操作。 使用场景: 文档共享 数据库集群 大数据存储 文档存储最简单的例子是Samba和NFS Object" />
+    <meta name="twitter:description" content="存储技术分类 云环境中的存储技术 Block Storage 传统的块存储的例子是物理磁盘，它就是一个块存储设备。 但云环境中的Block Storage是通过Nas(Network Attached Storage)模拟的块设备(不然的话，如何做到实时分配和计费?)。参考 不管传统意义上的块存储(磁盘)，还是云环境中的块存储，它的主要目的只有一个: 为性能敏感的数据提供廉价的持久化的存储。 它的特性是: 低延迟 传输速度块(相对网络存储) 支持多种操作系统，提供硬件级容错机制 数据在块上是如何组织的? 数据被存储在固定大小的块上(比如 512字节)，块是最基础的存储单元。 没有比块更高的元数据(meta data) 如果操作系统要访问块数据，它需要先用某种格式(ext2,3,4)挂载(mount)。 这就是在linux系统上无法直接访问fat格式的磁盘的原因。 由操作系统决定块内的数据如何被访问(提供访问操作视图)。 数据块接口的性能比较 (光纤网络的速度可达到100G/S) 云环境中常见块存储服务: EBS(AWS Elastic Block Storage), AWS提供的原始数据存储服务,格式化以后它可以被挂载到EC2示例中。 Azure Block Storage，微软Azure云提供的块存储服务。 Google Persistence Disks，谷歌的持久化存储服务。 阿里云的云盘/本地盘 File Storage 文件存储，相对于块存储，它的操作视图是基于文件或者文档。相对于块高了一个层次。 文件的典型特性: 所有文件都有一个名字，并且是可字节寻址的。 可随机访问。 通过文件句柄可以进行IO操作。 使用场景: 文档共享 数据库集群 大数据存储 文档存储最简单的例子是Samba和NFS" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/middleware01.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -90,7 +90,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/archi-ceph-osd-essentials"
     },
-    "description": "云环境中的存储技术 Block Storage 传统的块存储的例子是物理磁盘，它就是一个块存储设备。 但云环境中的Block Storage是通过Nas(Network Attached Storage)模拟的块设备(不然的话，如何做到实时分配和计费?)。参考 不管传统意义上的块存储(磁盘)，还是云环境中的块存储，它的主要目的只有一个: 为性能敏感的数据提供廉价的持久化的存储。 它的特性是: 低延迟 传输速度块(相对网络存储) 支持多种操作系统，提供硬件级容错机制 数据在块上是如何组织的? 数据被存储在固定大小的块上(比如 512字节)，块是最基础的存储单元。 没有比块更高的元数据(meta data) 如果操作系统要访问块数据，它需要先用某种格式(ext2,3,4)挂载(mount)。 这就是在linux系统上无法直接访问fat格式的磁盘的原因。 由操作系统决定块内的数据如何被访问(提供访问操作视图)。 数据块接口的性能比较 (光纤网络的速度可达到100G/S) 云环境中常见块存储服务: EBS(AWS Elastic Block Storage), AWS提供的原始数据存储服务,格式化以后它可以被挂载到EC2示例中。 Azure Block Storage，微软Azure云提供的块存储服务。 Google Persistence Disks，谷歌的持久化存储服务。 阿里云的云盘/本地盘 File Storage 文件存储，相对于块存储，它的操作视图是基于文件或者文档。相对于块高了一个层次。 文件的典型特性: 所有文件都有一个名字，并且是可字节寻址的。 可随机访问。 通过文件句柄可以进行IO操作。 使用场景: 文档共享 数据库集群 大数据存储 文档存储最简单的例子是Samba和NFS Object"
+    "description": "存储技术分类 云环境中的存储技术 Block Storage 传统的块存储的例子是物理磁盘，它就是一个块存储设备。 但云环境中的Block Storage是通过Nas(Network Attached Storage)模拟的块设备(不然的话，如何做到实时分配和计费?)。参考 不管传统意义上的块存储(磁盘)，还是云环境中的块存储，它的主要目的只有一个: 为性能敏感的数据提供廉价的持久化的存储。 它的特性是: 低延迟 传输速度块(相对网络存储) 支持多种操作系统，提供硬件级容错机制 数据在块上是如何组织的? 数据被存储在固定大小的块上(比如 512字节)，块是最基础的存储单元。 没有比块更高的元数据(meta data) 如果操作系统要访问块数据，它需要先用某种格式(ext2,3,4)挂载(mount)。 这就是在linux系统上无法直接访问fat格式的磁盘的原因。 由操作系统决定块内的数据如何被访问(提供访问操作视图)。 数据块接口的性能比较 (光纤网络的速度可达到100G/S) 云环境中常见块存储服务: EBS(AWS Elastic Block Storage), AWS提供的原始数据存储服务,格式化以后它可以被挂载到EC2示例中。 Azure Block Storage，微软Azure云提供的块存储服务。 Google Persistence Disks，谷歌的持久化存储服务。 阿里云的云盘/本地盘 File Storage 文件存储，相对于块存储，它的操作视图是基于文件或者文档。相对于块高了一个层次。 文件的典型特性: 所有文件都有一个名字，并且是可字节寻址的。 可随机访问。 通过文件句柄可以进行IO操作。 使用场景: 文档共享 数据库集群 大数据存储 文档存储最简单的例子是Samba和NFS"
 }
     </script>
 
@@ -167,7 +167,9 @@ into the {body} of the default.hbs template -->
             </header>
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h4 id="云环境中的存储技术">云环境中的存储技术</h4>
+                    <p>存储技术分类</p>
+
+<h4 id="云环境中的存储技术">云环境中的存储技术</h4>
 
 <h5 id="block-storage">Block Storage</h5>
 

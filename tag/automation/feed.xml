@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/automation/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-15T15:31:18+08:00</updated>
+  <updated>2019-04-15T15:38:30+08:00</updated>
   <id>http://localhost:4000/tag/automation/feed.xml</id>
 
   
@@ -343,7 +343,7 @@ kubectl get pods –all-namespaces&lt;/p&gt;
       <published>2018-02-26T21:00:10+08:00</published>
       <updated>2018-02-26T21:00:10+08:00</updated>
       <id>http://localhost:4000/archi-ceph-osd-essentials-02</id>
-      <content type="html" xml:base="http://localhost:4000/archi-ceph-osd-essentials-02">&lt;p&gt;云环境中的文件系统&lt;/p&gt;
+      <content type="html" xml:base="http://localhost:4000/archi-ceph-osd-essentials-02">&lt;p&gt;How to build storage infrastruction?&lt;/p&gt;
 
 &lt;p&gt;基于unix文件系统是操作系统中&lt;code class=&quot;highlighter-rouge&quot;&gt;简单易懂&lt;/code&gt;的部分。&lt;/p&gt;
 
@@ -535,7 +535,11 @@ pointer : null
 
 &lt;p&gt;更优化、最常用的方式是，在事务提交中，不写入数据本身，仅仅写入数据的meta data。&lt;/p&gt;
 
-&lt;p&gt;NTFS, XFS, EXT3 都实现了这种方式。&lt;/p&gt;</content>
+&lt;p&gt;NTFS, XFS, EXT3 都实现了这种方式。&lt;/p&gt;
+
+&lt;p&gt;参考&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://pages.cs.wisc.edu/~remzi/OSTEP/file-journaling.pdf&quot;&gt;file journaling&lt;/a&gt;&lt;/p&gt;</content>
 
       
       
@@ -556,7 +560,7 @@ pointer : null
       
 
       
-        <summary type="html">云环境中的文件系统</summary>
+        <summary type="html">How to build storage infrastruction?</summary>
       
 
       
@@ -569,7 +573,9 @@ pointer : null
       <published>2018-02-26T21:00:10+08:00</published>
       <updated>2018-02-26T21:00:10+08:00</updated>
       <id>http://localhost:4000/archi-ceph-osd-essentials</id>
-      <content type="html" xml:base="http://localhost:4000/archi-ceph-osd-essentials">&lt;h4 id=&quot;云环境中的存储技术&quot;&gt;云环境中的存储技术&lt;/h4&gt;
+      <content type="html" xml:base="http://localhost:4000/archi-ceph-osd-essentials">&lt;p&gt;存储技术分类&lt;/p&gt;
+
+&lt;h4 id=&quot;云环境中的存储技术&quot;&gt;云环境中的存储技术&lt;/h4&gt;
 
 &lt;h5 id=&quot;block-storage&quot;&gt;Block Storage&lt;/h5&gt;
 
@@ -731,7 +737,7 @@ pointer : null
       
 
       
-        <summary type="html">云环境中的存储技术</summary>
+        <summary type="html">存储技术分类</summary>
       
 
       

@@ -145,7 +145,7 @@
       <item>
         <title>Essential系列-ceph对象存储/日志文件系统是如何工作的(二)</title>
         
-          <description>&lt;p&gt;云环境中的文件系统&lt;/p&gt;
+          <description>&lt;p&gt;How to build storage infrastruction?&lt;/p&gt;
 
 </description>
         
@@ -160,7 +160,7 @@
       <item>
         <title>Essential系列-ceph对象存储(一)</title>
         
-          <description>&lt;h4 id=&quot;云环境中的存储技术&quot;&gt;云环境中的存储技术&lt;/h4&gt;
+          <description>&lt;p&gt;存储技术分类&lt;/p&gt;
 
 </description>
         
