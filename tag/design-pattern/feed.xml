@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/design-pattern/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-14T16:04:43+08:00</updated>
+  <updated>2019-04-15T09:31:26+08:00</updated>
   <id>http://localhost:4000/tag/design-pattern/feed.xml</id>
 
   
@@ -51,7 +51,7 @@
       <id>http://localhost:4000/archi-design-pattern-bahavior2</id>
       <content type="html" xml:base="http://localhost:4000/archi-design-pattern-bahavior2">&lt;p&gt;高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;画图不易，请勿转载。&lt;/p&gt;
 
@@ -59,7 +59,7 @@
 
 &lt;h4 id=&quot;iterator迭代器&quot;&gt;Iterator(迭代器)&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_iterator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_iterator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
 
@@ -131,13 +131,13 @@ class client{
 
 &lt;h4 id=&quot;中介者mediator&quot;&gt;中介者(Mediator)&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_mediator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_mediator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;备忘录memento&quot;&gt;备忘录(Memento)&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_memento.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_memento.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.util.List;
 import java.util.ArrayList;
@@ -195,7 +195,7 @@ class Caretaker {
 
 &lt;h4 id=&quot;订阅观察者模式observe&quot;&gt;订阅/观察者模式(Observe)&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_observe.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_observe.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class AbstractSubject(object):
     def register(self, listener):
@@ -261,15 +261,15 @@ if __name__==&quot;__main__&quot;:
 
 &lt;h4 id=&quot;状态state&quot;&gt;状态(state)&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_state.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_state.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;策略模式strategy&quot;&gt;策略模式(Strategy)&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_strategy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_strategy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;模板方法template&quot;&gt;模板方法(Template)&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_template.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_template.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
@@ -367,7 +367,7 @@ if __name__==&quot;__main__&quot;:
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h4 id=&quot;访问者visitor&quot;&gt;访问者(visitor)&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_vistor.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_vistor.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;visistor模式在spring-beans中的应用:&lt;/p&gt;
 
@@ -426,7 +426,7 @@ if __name__==&quot;__main__&quot;:
       <id>http://localhost:4000/archi-design-pattern-bahavior</id>
       <content type="html" xml:base="http://localhost:4000/archi-design-pattern-bahavior">&lt;p&gt;如果对每一个类型为 T1的对象 o1，都有类型为 T2 的对象o2，使得以 T1定义的所有程序 P 在所有的对象 o1 都代换成 o2 时，程序 P 的行为没有发生变化，那么类型 T2 是类型 T1 的子类型。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;画图不易，请勿转载。&lt;/p&gt;
 
@@ -434,7 +434,7 @@ if __name__==&quot;__main__&quot;:
 
 &lt;h2 id=&quot;chain-of-repository责任链&quot;&gt;Chain of repository(责任链)&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_chain_of_repo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_chain_of_repo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.util.*;
 
@@ -526,7 +526,7 @@ public class ChainOfResponsibilityExample
 
 &lt;h2 id=&quot;命令模式command&quot;&gt;命令模式(command)&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_command.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_command.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;命令模式是比较深刻的设计模式。它抽象了方法«调用过程»,把方法请求和受到影响的类之间的关联解耦。&lt;/p&gt;
@@ -627,7 +627,7 @@ public class PressSwitch {
 
 &lt;h2 id=&quot;解释器interpreter&quot;&gt;解释器(Interpreter)&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_interpreter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_interpreter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Interpreter_pattern&quot;&gt;源码示例&lt;/a&gt;&lt;/p&gt;
 
@@ -761,7 +761,7 @@ public class InterpreterExample {
       <id>http://localhost:4000/archi-design-pattern-createral</id>
       <content type="html" xml:base="http://localhost:4000/archi-design-pattern-createral">&lt;p&gt;类型的本质是一种约束。接口可以理解为一种行为类型。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;画图不易，请勿转载。&lt;/p&gt;
 
@@ -773,7 +773,7 @@ public class InterpreterExample {
 
 &lt;h2 id=&quot;prototype原型&quot;&gt;prototype(原型)&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_prototype.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_prototype.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/** Prototype Class **/
  public class Cookie implements Cloneable {
@@ -824,7 +824,7 @@ public class InterpreterExample {
 
 &lt;p&gt;## 工厂方法&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ![](http://blog.h5tube.com/design_patterns_factory_method.png)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ![](/assets/images/design_patterns_factory_method.png)
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;//Button类
@@ -849,7 +849,7 @@ class MacButtonFactory implements ButtonFactory{
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 ## 抽象工厂
 
-![](http://blog.h5tube.com/design_patterns_abstract_factory.png)
+![](/assets/images/design_patterns_abstract_factory.png)
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;public interface Button {}
@@ -881,7 +881,7 @@ public class WinBorder implements Border {}&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 ## Builder(建造、生成器)
 
-![](http://blog.h5tube.com/design_patterns_builder.png)
+![](/assets/images/design_patterns_builder.png)
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;/** “Product” */
@@ -983,7 +983,7 @@ public class WinBorder implements Border {}&lt;/p&gt;
       <id>http://localhost:4000/archi-design-pattern-instructure</id>
       <content type="html" xml:base="http://localhost:4000/archi-design-pattern-instructure">&lt;p&gt;架构可以描述为在时空、认知局限下的条件下对最优解的追求过程。所以架构也是需要迭代的，这是局限条件不断被打破的过程。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/architecture_01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;画图不易，请勿转载。&lt;/p&gt;
 
@@ -991,11 +991,11 @@ public class WinBorder implements Border {}&lt;/p&gt;
 
 &lt;h2 id=&quot;适配器模式&quot;&gt;适配器模式&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_adapter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_adapter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;代理模式&quot;&gt;代理模式&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_proxy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_proxy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F&quot;&gt;源码示例&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import java.util.*;
@@ -1049,7 +1049,7 @@ class ProxyExample {
 
 &lt;h2 id=&quot;桥接模式&quot;&gt;桥接模式&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_bridge.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_bridge.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%A9%8B%E6%8E%A5%E6%A8%A1%E5%BC%8F&quot;&gt;代码示例&lt;/a&gt;&lt;/p&gt;
 
@@ -1126,15 +1126,15 @@ class BridgePattern {
 
 &lt;h2 id=&quot;组合模式&quot;&gt;组合模式&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_composite.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_composite.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;装饰器模式&quot;&gt;装饰器模式&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_decorator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_decorator.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;外观模式&quot;&gt;外观模式&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_facade.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_facade.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Facade_pattern&quot;&gt;源码示例&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/* Complex parts */
@@ -1180,7 +1180,7 @@ class You {
 
 &lt;h2 id=&quot;享元模式&quot;&gt;享元模式&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/design_patterns_flyweight.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/design_patterns_flyweight.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public enum FontEffect {
     BOLD, ITALIC, SUPERSCRIPT, SUBSCRIPT, STRIKETHROUGH

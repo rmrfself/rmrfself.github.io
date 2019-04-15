@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-14T16:04:43+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">Aws中基于vpc网络结构解析</title><link href="http://localhost:4000/devops-aws-vpc" rel="alternate" type="text/html" title="Aws中基于vpc网络结构解析" /><published>2018-12-29T21:01:01+08:00</published><updated>2018-12-29T21:01:01+08:00</updated><id>http://localhost:4000/devops-aws-vpc</id><content type="html" xml:base="http://localhost:4000/devops-aws-vpc">&lt;h5 id=&quot;计费规则&quot;&gt;计费规则&lt;/h5&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-15T09:31:26+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">Aws中基于vpc网络结构解析</title><link href="http://localhost:4000/devops-aws-vpc" rel="alternate" type="text/html" title="Aws中基于vpc网络结构解析" /><published>2018-12-29T21:01:01+08:00</published><updated>2018-12-29T21:01:01+08:00</updated><id>http://localhost:4000/devops-aws-vpc</id><content type="html" xml:base="http://localhost:4000/devops-aws-vpc">&lt;h5 id=&quot;计费规则&quot;&gt;计费规则&lt;/h5&gt;
 
 &lt;p&gt;VPC定义的所有功能组件，包括路由表、子网定义、安全规则都是免费的。&lt;/p&gt;
 
@@ -543,11 +543,11 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
 
 &lt;h3 id=&quot;devops-team&quot;&gt;Devops team&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/aws-delivery.png&quot; alt=&quot;devops&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/aws-delivery.png&quot; alt=&quot;devops&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;#TODO&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">基于价值的软件交付流程</summary></entry><entry><title type="html">前端工程中的测试模型</title><link href="http://localhost:4000/archi-vuejs-test-model" rel="alternate" type="text/html" title="前端工程中的测试模型" /><published>2018-09-12T12:11:11+08:00</published><updated>2018-09-12T12:11:11+08:00</updated><id>http://localhost:4000/archi-vuejs-test-model</id><content type="html" xml:base="http://localhost:4000/archi-vuejs-test-model">&lt;h2 id=&quot;architecture-design&quot;&gt;Architecture Design&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h3&gt;
 
@@ -557,13 +557,13 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
 
 &lt;h4 id=&quot;基于vuejs的前端工程&quot;&gt;基于vuejs的前端工程&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/vuejs-architecture.png&quot; alt=&quot;vuejs architecture&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/vuejs-architecture.png&quot; alt=&quot;vuejs architecture&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;测试方法端到端测试单元测试集成测试&quot;&gt;测试方法(端到端测试、单元测试、集成测试)&lt;/h4&gt;
 
 &lt;h4 id=&quot;云上交付&quot;&gt;云上交付&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;how-to-do-unit-test-based-on-vuejs-30&quot;&gt;How to do unit test based on vuejs-3.0&lt;/h4&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">前端工程的持续交付模型。</summary></entry><entry><title type="html">Ethereum开发笔记1-1: Blockchain简介</title><link href="http://localhost:4000/ethereum-dapp-develop-01" rel="alternate" type="text/html" title="Ethereum开发笔记1-1: Blockchain简介" /><published>2018-09-06T11:11:11+08:00</published><updated>2018-09-06T11:11:11+08:00</updated><id>http://localhost:4000/ethereum-dapp-develop-01</id><content type="html" xml:base="http://localhost:4000/ethereum-dapp-develop-01">&lt;p&gt;共识就是一起检查一个区块&lt;code class=&quot;highlighter-rouge&quot;&gt;是否&lt;/code&gt;有效。&lt;/p&gt;
 
@@ -877,7 +877,7 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
 
 &lt;p&gt;每当有新变量添加的时候, 编译器会生成一个新的隐藏类。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-hiddenclass.png&quot; alt=&quot;Google I/O 2012&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/nodejs-hiddenclass.png&quot; alt=&quot;Google I/O 2012&quot; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;整数变量的使用&lt;/li&gt;
@@ -953,19 +953,19 @@ var a = new array();
 a[0] = 77;
 a[1] = 88;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-array-class-01.png&quot; alt=&quot;integer in array&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/nodejs-array-class-01.png&quot; alt=&quot;integer in array&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Second step
 a[2] = 0.5;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-array-class-02.png&quot; alt=&quot;integer in array&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/nodejs-array-class-02.png&quot; alt=&quot;integer in array&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Third step
 a[3] = true
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/nodejs-array-class-03.png&quot; alt=&quot;bad thing&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/nodejs-array-class-03.png&quot; alt=&quot;bad thing&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;更好的方法:&lt;/p&gt;
 

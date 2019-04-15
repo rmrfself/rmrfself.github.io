@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/microservice/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-14T16:04:43+08:00</updated>
+  <updated>2019-04-15T09:31:26+08:00</updated>
   <id>http://localhost:4000/tag/microservice/feed.xml</id>
 
   
@@ -110,8 +110,8 @@
     </entry>
   
     <entry>
-      <title type="html">微服务架构模式-什么是服务?</title>
-      <link href="http://localhost:4000/archi-event-based-01" rel="alternate" type="text/html" title="微服务架构模式-什么是服务?" />
+      <title type="html">微服务架构模式-最佳实践(一)</title>
+      <link href="http://localhost:4000/archi-event-based-01" rel="alternate" type="text/html" title="微服务架构模式-最佳实践(一)" />
       <published>2017-01-09T23:00:10+08:00</published>
       <updated>2017-01-09T23:00:10+08:00</updated>
       <id>http://localhost:4000/archi-event-based-01</id>

@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/architecture/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-14T16:04:43+08:00</updated>
+  <updated>2019-04-15T09:31:26+08:00</updated>
   <id>http://localhost:4000/tag/architecture/feed.xml</id>
 
   
@@ -57,7 +57,7 @@
 
 &lt;p&gt;开发的目标是为了实现人和工具的交互，工具和工具之间的交互。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/why-iterate.png&quot; alt=&quot;人机交互&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/why-iterate.png&quot; alt=&quot;人机交互&quot; /&gt;&lt;/p&gt;
 
 &lt;h5 id=&quot;对效率的思考&quot;&gt;对效率的思考&lt;/h5&gt;
 
@@ -141,7 +141,7 @@
 
 &lt;p&gt;总体原则&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/architecture-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/architecture-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;从架构的角度看(下面箭头方向)，推荐的架构原则&lt;/p&gt;
 

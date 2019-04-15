@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/jvm/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-14T16:04:43+08:00</updated>
+  <updated>2019-04-15T09:31:26+08:00</updated>
   <id>http://localhost:4000/tag/jvm/feed.xml</id>
 
   
@@ -162,13 +162,13 @@
       <id>http://localhost:4000/springboot-how-bean-managed</id>
       <content type="html" xml:base="http://localhost:4000/springboot-how-bean-managed">&lt;h2 id=&quot;spring-bean的实现路线图&quot;&gt;Spring bean的实现路线图&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/spring-beans-managed.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/spring-beans-managed.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;bean在spring内部的表示形式&quot;&gt;bean在spring内部的表示形式&lt;/h4&gt;
 
 &lt;h5 id=&quot;如何理解bean&quot;&gt;如何理解bean&lt;/h5&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/spring-beans-managed01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
+&lt;p&gt;&lt;img src=&quot;/assets/images/spring-beans-managed01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
 
       
       
@@ -465,7 +465,7 @@ W(r).v == r.v
 
 &lt;h3 id=&quot;被jmm允许的意外情况&quot;&gt;被Jmm允许的意外情况&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/jmm-02.png&quot; alt=&quot;jmm&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/jmm-02.png&quot; alt=&quot;jmm&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;本文解释一下在JDK8中,JVM如何执行方法。&lt;/p&gt;
 
@@ -543,15 +543,15 @@ W(r).v == r.v
 
 &lt;h2 id=&quot;bean-container的类图&quot;&gt;Bean Container的类图&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/factory-bean.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/factory-bean.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;spring提供了3中方式创建beans&quot;&gt;spring提供了3中方式创建beans&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/bean-create-instance.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/bean-create-instance.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;函数调用堆栈&quot;&gt;函数调用堆栈&lt;/h4&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/bean-instance-create.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/bean-instance-create.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;autowirecapablebeanfactory-接口&quot;&gt;AutowireCapableBeanFactory 接口&lt;/h4&gt;
 
@@ -808,14 +808,14 @@ public void run() {
 
 &lt;h3 id=&quot;线程调度模型&quot;&gt;线程调度模型&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/thread-model-design.png&quot; alt=&quot;线程调度模型&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/thread-model-design.png&quot; alt=&quot;线程调度模型&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;线程的调度方式目前的实现主要有两种:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;抢占式(preemptive)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/thread-preemptive-mode.png&quot; alt=&quot;抢占式&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/thread-preemptive-mode.png&quot; alt=&quot;抢占式&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;抢占式线程有内核主动调度并负责上下文切换。&lt;/p&gt;
 
@@ -823,7 +823,7 @@ public void run() {
   &lt;li&gt;协作式(cooperative)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/thread-cooperate-mode.png&quot; alt=&quot;协作式&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/thread-cooperate-mode.png&quot; alt=&quot;协作式&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;协作式线程最大的特点是调度权有线程自己决定，所以不存在并发和同步引起的问题。&lt;/p&gt;
 
@@ -848,7 +848,7 @@ root         6     2     6  0    1 Oct18 ?        00:00:00 [mm_percpu_wq]s
 
 &lt;p&gt;task_struct结构体类似Jvm中的instance_oop对象，是一个多层次链，用来存储运行时需要的所有资源引用。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/task_struct.png&quot; alt=&quot;task_struct&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/task_struct.png&quot; alt=&quot;task_struct&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;用户线程&quot;&gt;用户线程&lt;/h3&gt;
 
@@ -860,7 +860,7 @@ root         6     2     6  0    1 Oct18 ?        00:00:00 [mm_percpu_wq]s
 
 &lt;p&gt;在linux平台上，jvm内的线程模型也是1对1的关系&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/jvm-thread-frame.png&quot; alt=&quot;jvm thread model&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/jvm-thread-frame.png&quot; alt=&quot;jvm thread model&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;参考文献&lt;/p&gt;
 

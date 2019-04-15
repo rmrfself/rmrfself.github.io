@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/spring/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-14T16:04:43+08:00</updated>
+  <updated>2019-04-15T09:31:26+08:00</updated>
   <id>http://localhost:4000/tag/spring/feed.xml</id>
 
   
@@ -422,7 +422,7 @@ demo git:(master) ✗ javac -Xprint  -XprintRounds  -XprintProcessorInfo   -clas
 
 &lt;p&gt;篇幅原因，下一篇分析spring中的注解。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://blog.h5tube.com/bean-life-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
+&lt;p&gt;&lt;img src=&quot;/assets/images/bean-life-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
 
       
       
@@ -500,7 +500,7 @@ demo git:(master) ✗ javac -Xprint  -XprintRounds  -XprintProcessorInfo   -clas
 &lt;h4 id=&quot;注解是在何时when何地where如何how起作用的&quot;&gt;注解是在何时(when)、何地(where)、如何(how)起作用的？&lt;/h4&gt;
 
 &lt;p&gt;注解在java体系中的结构层次图，简要描述如下
-&lt;a href=&quot;http://blog.h5tube.com/annotation-02.png&quot;&gt;Java annotations&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;/assets/images/annotation-02.png&quot;&gt;Java annotations&lt;/a&gt;&lt;/p&gt;
 
 &lt;h5 id=&quot;当注解应用在字段时&quot;&gt;当注解应用在字段时&lt;/h5&gt;
 

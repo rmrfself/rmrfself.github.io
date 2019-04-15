@@ -203,14 +203,14 @@ into the {body} of the default.hbs template -->
 
 <h3 id="线程调度模型">线程调度模型</h3>
 
-<p><img src="http://blog.h5tube.com/thread-model-design.png" alt="线程调度模型" /></p>
+<p><img src="/assets/images/thread-model-design.png" alt="线程调度模型" /></p>
 
 <p>线程的调度方式目前的实现主要有两种:</p>
 <ul>
   <li>抢占式(preemptive)</li>
 </ul>
 
-<p><img src="http://blog.h5tube.com/thread-preemptive-mode.png" alt="抢占式" /></p>
+<p><img src="/assets/images/thread-preemptive-mode.png" alt="抢占式" /></p>
 
 <p>抢占式线程有内核主动调度并负责上下文切换。</p>
 
@@ -218,7 +218,7 @@ into the {body} of the default.hbs template -->
   <li>协作式(cooperative)</li>
 </ul>
 
-<p><img src="http://blog.h5tube.com/thread-cooperate-mode.png" alt="协作式" /></p>
+<p><img src="/assets/images/thread-cooperate-mode.png" alt="协作式" /></p>
 
 <p>协作式线程最大的特点是调度权有线程自己决定，所以不存在并发和同步引起的问题。</p>
 
@@ -243,7 +243,7 @@ root         6     2     6  0    1 Oct18 ?        00:00:00 [mm_percpu_wq]s
 
 <p>task_struct结构体类似Jvm中的instance_oop对象，是一个多层次链，用来存储运行时需要的所有资源引用。</p>
 
-<p><img src="http://blog.h5tube.com/task_struct.png" alt="task_struct" /></p>
+<p><img src="/assets/images/task_struct.png" alt="task_struct" /></p>
 
 <h3 id="用户线程">用户线程</h3>
 
@@ -255,7 +255,7 @@ root         6     2     6  0    1 Oct18 ?        00:00:00 [mm_percpu_wq]s
 
 <p>在linux平台上，jvm内的线程模型也是1对1的关系</p>
 
-<p><img src="http://blog.h5tube.com/jvm-thread-frame.png" alt="jvm thread model" /></p>
+<p><img src="/assets/images/jvm-thread-frame.png" alt="jvm thread model" /></p>
 
 <p>参考文献</p>
 
@@ -780,7 +780,7 @@ root         6     2     6  0    1 Oct18 ?        00:00:00 [mm_percpu_wq]s
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
                 <section class="my_profile">
-                    <a href='#' class='ava'><img src='http://blog.h5tube.com/me.jpg' /></a>
+                    <a href='#' class='ava'><img src='/assets/images/me.jpg' /></a>
                     <div class='profile_detail'>
                         <h4>About me</h4>
                         <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
