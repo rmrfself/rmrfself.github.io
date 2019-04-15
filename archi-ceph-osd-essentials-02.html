@@ -361,9 +361,11 @@ pointer : null
 
 <p>NTFS, XFS, EXT3 都实现了这种方式。</p>
 
-<p>参考</p>
+<p>总结</p>
 
-<p><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/file-journaling.pdf">file journaling</a></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>基于日志journal的文件写入方式，也用在mysql和postgresql数据持久化过程之中。是一种通用思想。
+ceph的架构目标是实现存储Infrastruction， 它在journing之上又构建了一层meta data，目标是实现存储的任务水平扩展，同时保证原子性。
+</code></pre></div></div>
 
 
                 </div>
@@ -463,7 +465,7 @@ pointer : null
                                     
                                         
                                         
-                                            <li><a href="/archi-ceph-osd-essentials">Essential系列-ceph对象存储(一)</a></li>
+                                            <li><a href="/archi-ceph-osd-essentials">Essential系列-存储技术概述(一)</a></li>
                                         
                                     
                                   
@@ -844,7 +846,7 @@ pointer : null
                         
                     
 
-                    <h2 class="post-card-title">Essential系列-ceph对象存储(一)</h2>
+                    <h2 class="post-card-title">Essential系列-存储技术概述(一)</h2>
                 </header>
                 <section class="post-card-excerpt">
                     

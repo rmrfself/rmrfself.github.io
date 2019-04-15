@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/automation/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-15T15:38:30+08:00</updated>
+  <updated>2019-04-15T16:10:29+08:00</updated>
   <id>http://localhost:4000/tag/automation/feed.xml</id>
 
   
@@ -157,7 +157,12 @@
 
 &lt;p&gt;Nacl是subnet级别的网络访问控制规则，可绑定的子网。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/vpc-0-sg.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
+&lt;p&gt;&lt;img src=&quot;/assets/images/vpc-0-sg.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;总结&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aws的vpc是amazon云环境实现的一套Network Infrastructure。目标是实现网络层结构的自由编排。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
 
       
       
@@ -309,7 +314,12 @@ kubectl get pods –all-namespaces&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/&quot;&gt;Creating a single master cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;</content>
+&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;总结&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;k8s 至今仍是实现不管是monolithic还是微服务架构最理想的容器编排手段。优点是概念相对来说比较少，入门容易。缺点是每个概念彻底理解清楚非常难，因为每个resource之间的嵌套引用。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
 
       
       
@@ -537,9 +547,11 @@ pointer : null
 
 &lt;p&gt;NTFS, XFS, EXT3 都实现了这种方式。&lt;/p&gt;
 
-&lt;p&gt;参考&lt;/p&gt;
+&lt;p&gt;总结&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://pages.cs.wisc.edu/~remzi/OSTEP/file-journaling.pdf&quot;&gt;file journaling&lt;/a&gt;&lt;/p&gt;</content>
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;基于日志journal的文件写入方式，也用在mysql和postgresql数据持久化过程之中。是一种通用思想。
+ceph的架构目标是实现存储Infrastruction， 它在journing之上又构建了一层meta data，目标是实现存储的任务水平扩展，同时保证原子性。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
 
       
       
@@ -568,8 +580,8 @@ pointer : null
     </entry>
   
     <entry>
-      <title type="html">Essential系列-ceph对象存储(一)</title>
-      <link href="http://localhost:4000/archi-ceph-osd-essentials" rel="alternate" type="text/html" title="Essential系列-ceph对象存储(一)" />
+      <title type="html">Essential系列-存储技术概述(一)</title>
+      <link href="http://localhost:4000/archi-ceph-osd-essentials" rel="alternate" type="text/html" title="Essential系列-存储技术概述(一)" />
       <published>2018-02-26T21:00:10+08:00</published>
       <updated>2018-02-26T21:00:10+08:00</updated>
       <id>http://localhost:4000/archi-ceph-osd-essentials</id>
@@ -716,7 +728,14 @@ pointer : null
   &lt;li&gt;
     &lt;p&gt;同步或共享文件&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content>
+&lt;/ul&gt;
+
+&lt;p&gt;总结&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;块存储是构建在inode、block、volume逐层索引原理之上的存储方式。
+文件存储是以文件操作(POSIX接口)为操作视图实现的存储方式。
+对象存储为适应云环境碎片文件存储诞生的，在文件存储至少扩展了元信息，增加了环境上下文、云用户信息。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
 
       
       

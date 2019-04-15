@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/ethereum/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-04-15T15:38:30+08:00</updated>
+  <updated>2019-04-15T16:10:29+08:00</updated>
   <id>http://localhost:4000/tag/ethereum/feed.xml</id>
 
   
@@ -328,6 +328,13 @@
 恢复原来的状态，但是还需要支付交易费用，交易费用加至矿工账户。
 
 否则，将所有剩余的瓦斯归还给发送者，消耗掉的瓦斯作为交易费用发送给矿工。 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;总结&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Blockchain是构建的公钥链之上的状态数据库。Ethereum 是构建状态数据库之上的执行引擎，并实现了图灵完备，简单讲，就是有自己的编程语言。
+
+价值存储有图灵完备的必要吗?
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
 
       

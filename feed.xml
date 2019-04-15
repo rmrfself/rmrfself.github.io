@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-15T15:38:30+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">Aws中基于vpc网络结构解析</title><link href="http://localhost:4000/devops-aws-vpc" rel="alternate" type="text/html" title="Aws中基于vpc网络结构解析" /><published>2018-12-29T21:01:01+08:00</published><updated>2018-12-29T21:01:01+08:00</updated><id>http://localhost:4000/devops-aws-vpc</id><content type="html" xml:base="http://localhost:4000/devops-aws-vpc">&lt;h5 id=&quot;计费规则&quot;&gt;计费规则&lt;/h5&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-15T16:10:29+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">Aws中基于vpc网络结构解析</title><link href="http://localhost:4000/devops-aws-vpc" rel="alternate" type="text/html" title="Aws中基于vpc网络结构解析" /><published>2018-12-29T21:01:01+08:00</published><updated>2018-12-29T21:01:01+08:00</updated><id>http://localhost:4000/devops-aws-vpc</id><content type="html" xml:base="http://localhost:4000/devops-aws-vpc">&lt;h5 id=&quot;计费规则&quot;&gt;计费规则&lt;/h5&gt;
 
 &lt;p&gt;VPC定义的所有功能组件，包括路由表、子网定义、安全规则都是免费的。&lt;/p&gt;
 
@@ -106,7 +106,12 @@
 
 &lt;p&gt;Nacl是subnet级别的网络访问控制规则，可绑定的子网。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/vpc-0-sg.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">计费规则</summary></entry><entry><title type="html">[GCE]安装Kubernetes Dashboard</title><link href="http://localhost:4000/k8s-dashboard-install" rel="alternate" type="text/html" title="[GCE]安装Kubernetes Dashboard" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/k8s-dashboard-install</id><content type="html" xml:base="http://localhost:4000/k8s-dashboard-install">&lt;p&gt;Kubeternetes Dashboatd 安装手记&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/vpc-0-sg.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;总结&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aws的vpc是amazon云环境实现的一套Network Infrastructure。目标是实现网络层结构的自由编排。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">计费规则</summary></entry><entry><title type="html">[GCE]安装Kubernetes Dashboard</title><link href="http://localhost:4000/k8s-dashboard-install" rel="alternate" type="text/html" title="[GCE]安装Kubernetes Dashboard" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/k8s-dashboard-install</id><content type="html" xml:base="http://localhost:4000/k8s-dashboard-install">&lt;p&gt;Kubeternetes Dashboatd 安装手记&lt;/p&gt;
 
 &lt;h3 id=&quot;安装&quot;&gt;安装&lt;/h3&gt;
 
@@ -346,6 +351,11 @@ Events:            &amp;lt;none&amp;gt;
 
 输出
 Starting to serve on 127.0.0.1:8001 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;总结&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;备忘
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="kubernetes" /><summary type="html">Kubeternetes Dashboatd 安装手记</summary></entry><entry><title type="html">[GCE]单节点部署kubernetes集群</title><link href="http://localhost:4000/k8s-from-scrach" rel="alternate" type="text/html" title="[GCE]单节点部署kubernetes集群" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/k8s-from-scrach</id><content type="html" xml:base="http://localhost:4000/k8s-from-scrach">&lt;p&gt;使用kubeadm部署单master节点的k8s, 1个master + 2个minion&lt;/p&gt;
 
 &lt;h3 id=&quot;1-安装docker以及master节点初始化&quot;&gt;1. 安装Docker以及Master节点初始化&lt;/h3&gt;
@@ -464,7 +474,12 @@ kubectl get pods –all-namespaces&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/&quot;&gt;Creating a single master cluster with kubeadm&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">使用kubeadm部署单master节点的k8s, 1个master + 2个minion</summary></entry><entry><title type="html">在容器中使用Nuxt框架(docker-compose版)</title><link href="http://localhost:4000/vuejs-nuxjs-docker" rel="alternate" type="text/html" title="在容器中使用Nuxt框架(docker-compose版)" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/vuejs-nuxjs-docker</id><content type="html" xml:base="http://localhost:4000/vuejs-nuxjs-docker">&lt;p&gt;为前端开发者提供一个boilerplate,内部持续推进版&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.projectcalico.org/v3.2/getting-started/kubernetes/&quot;&gt;Quickstart for Calico on Kubernetes&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;总结&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;k8s 至今仍是实现不管是monolithic还是微服务架构最理想的容器编排手段。优点是概念相对来说比较少，入门容易。缺点是每个概念彻底理解清楚非常难，因为每个resource之间的嵌套引用。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">使用kubeadm部署单master节点的k8s, 1个master + 2个minion</summary></entry><entry><title type="html">在容器中使用Nuxt框架(docker-compose版)</title><link href="http://localhost:4000/vuejs-nuxjs-docker" rel="alternate" type="text/html" title="在容器中使用Nuxt框架(docker-compose版)" /><published>2018-10-10T19:20:11+08:00</published><updated>2018-10-10T19:20:11+08:00</updated><id>http://localhost:4000/vuejs-nuxjs-docker</id><content type="html" xml:base="http://localhost:4000/vuejs-nuxjs-docker">&lt;p&gt;为前端开发者提供一个boilerplate,内部持续推进版&lt;/p&gt;
 
 &lt;h3 id=&quot;代码地址&quot;&gt;代码地址&lt;/h3&gt;
 
@@ -539,13 +554,19 @@ SSL_CERT_KEY_PATH=./certs/zqh.key.pem
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nuxt-js      npm run buildStart   Up       0.0.0.0:3000-&amp;gt;3000/tcp
 nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:80-&amp;gt;80/tcp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;总结&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Do repeat yourself. 
+Make use of the tools.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="kubernetes" /><summary type="html">为前端开发者提供一个boilerplate,内部持续推进版</summary></entry><entry><title type="html">搭建devops团队</title><link href="http://localhost:4000/devops-baseon-cloud" rel="alternate" type="text/html" title="搭建devops团队" /><published>2018-09-20T00:11:15+08:00</published><updated>2018-09-20T00:11:15+08:00</updated><id>http://localhost:4000/devops-baseon-cloud</id><content type="html" xml:base="http://localhost:4000/devops-baseon-cloud">&lt;p&gt;基于价值的软件交付流程&lt;/p&gt;
 
 &lt;h3 id=&quot;devops-team&quot;&gt;Devops team&lt;/h3&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/aws-delivery.png&quot; alt=&quot;devops&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;#TODO&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">基于价值的软件交付流程</summary></entry><entry><title type="html">前端工程中的测试模型</title><link href="http://localhost:4000/archi-vuejs-test-model" rel="alternate" type="text/html" title="前端工程中的测试模型" /><published>2018-09-12T12:11:11+08:00</published><updated>2018-09-12T12:11:11+08:00</updated><id>http://localhost:4000/archi-vuejs-test-model</id><content type="html" xml:base="http://localhost:4000/archi-vuejs-test-model">&lt;h2 id=&quot;architecture-design&quot;&gt;Architecture Design&lt;/h2&gt;
+&lt;p&gt;TODO MORE&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">基于价值的软件交付流程</summary></entry><entry><title type="html">前端工程中的测试模型</title><link href="http://localhost:4000/archi-vuejs-test-model" rel="alternate" type="text/html" title="前端工程中的测试模型" /><published>2018-09-12T12:11:11+08:00</published><updated>2018-09-12T12:11:11+08:00</updated><id>http://localhost:4000/archi-vuejs-test-model</id><content type="html" xml:base="http://localhost:4000/archi-vuejs-test-model">&lt;h2 id=&quot;architecture-design&quot;&gt;Architecture Design&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/cloud-front-end-archi.png&quot; alt=&quot;vuejs deployed into cloud&quot; /&gt;&lt;/p&gt;
 
@@ -844,6 +865,13 @@ nuxt-nginx   ./start.sh           Up       0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:
 恢复原来的状态，但是还需要支付交易费用，交易费用加至矿工账户。
 
 否则，将所有剩余的瓦斯归还给发送者，消耗掉的瓦斯作为交易费用发送给矿工。 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;总结&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Blockchain是构建的公钥链之上的状态数据库。Ethereum 是构建状态数据库之上的执行引擎，并实现了图灵完备，简单讲，就是有自己的编程语言。
+
+价值存储有图灵完备的必要吗?
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="ethereum" /><summary type="html">共识就是一起检查一个区块是否有效。</summary></entry><entry><title type="html">Guideline-编写有效率的javascript代码</title><link href="http://localhost:4000/archi-efficient-js" rel="alternate" type="text/html" title="Guideline-编写有效率的javascript代码" /><published>2018-08-09T12:11:19+08:00</published><updated>2018-08-09T12:11:19+08:00</updated><id>http://localhost:4000/archi-efficient-js</id><content type="html" xml:base="http://localhost:4000/archi-efficient-js">&lt;p&gt;Trust yourself, not the VM。&lt;/p&gt;
 
 &lt;ol&gt;
@@ -991,7 +1019,12 @@ var data = [1,2,0.5, true];
 
 add(1, 2) // 生成单态隐藏类 monomorphic
 add(&quot;a&quot;,&quot;b&quot;) // 多态 polymorphic
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
+&lt;p&gt;总结&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;没有规矩的javascript代码就像是一碗缠在一起面条，剪不断，理还乱。
+不要让prototype嵌套的太深。
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;
@@ -1190,6 +1223,8 @@ pointer : null
 
 &lt;p&gt;NTFS, XFS, EXT3 都实现了这种方式。&lt;/p&gt;
 
-&lt;p&gt;参考&lt;/p&gt;
+&lt;p&gt;总结&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://pages.cs.wisc.edu/~remzi/OSTEP/file-journaling.pdf&quot;&gt;file journaling&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">How to build storage infrastruction?</summary></entry></feed>
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;基于日志journal的文件写入方式，也用在mysql和postgresql数据持久化过程之中。是一种通用思想。
+ceph的架构目标是实现存储Infrastruction， 它在journing之上又构建了一层meta data，目标是实现存储的任务水平扩展，同时保证原子性。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">How to build storage infrastruction?</summary></entry></feed>
