@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-15T09:37:20+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">Aws中基于vpc网络结构解析</title><link href="http://localhost:4000/devops-aws-vpc" rel="alternate" type="text/html" title="Aws中基于vpc网络结构解析" /><published>2018-12-29T21:01:01+08:00</published><updated>2018-12-29T21:01:01+08:00</updated><id>http://localhost:4000/devops-aws-vpc</id><content type="html" xml:base="http://localhost:4000/devops-aws-vpc">&lt;h5 id=&quot;计费规则&quot;&gt;计费规则&lt;/h5&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-15T15:31:18+08:00</updated><id>http://localhost:4000/</id><title type="html">张庆华的个人日志</title><subtitle>Learn, Innovate, Share - Business Based Vision.</subtitle><entry><title type="html">Aws中基于vpc网络结构解析</title><link href="http://localhost:4000/devops-aws-vpc" rel="alternate" type="text/html" title="Aws中基于vpc网络结构解析" /><published>2018-12-29T21:01:01+08:00</published><updated>2018-12-29T21:01:01+08:00</updated><id>http://localhost:4000/devops-aws-vpc</id><content type="html" xml:base="http://localhost:4000/devops-aws-vpc">&lt;h5 id=&quot;计费规则&quot;&gt;计费规则&lt;/h5&gt;
 
 &lt;p&gt;VPC定义的所有功能组件，包括路由表、子网定义、安全规则都是免费的。&lt;/p&gt;
 
@@ -996,145 +996,196 @@ add(&quot;a&quot;,&quot;b&quot;) // 多态 polymorphic
 
 &lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UJPdhx5zTaw&quot;&gt;Google I/O 2012 - Breaking the JavaScript Speed Limit with V8&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">Trust yourself, not the VM。</summary></entry><entry><title type="html">Essential系列-ceph对象存储(一)</title><link href="http://localhost:4000/archi-ceph-osd-essentials" rel="alternate" type="text/html" title="Essential系列-ceph对象存储(一)" /><published>2018-02-26T21:00:10+08:00</published><updated>2018-02-26T21:00:10+08:00</updated><id>http://localhost:4000/archi-ceph-osd-essentials</id><content type="html" xml:base="http://localhost:4000/archi-ceph-osd-essentials">&lt;h4 id=&quot;云环境中的存储技术&quot;&gt;云环境中的存储技术&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UJPdhx5zTaw&quot;&gt;Google I/O 2012 - Breaking the JavaScript Speed Limit with V8&lt;/a&gt;&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="nodejs" /><summary type="html">Trust yourself, not the VM。</summary></entry><entry><title type="html">Essential系列-ceph对象存储/日志文件系统是如何工作的(二)</title><link href="http://localhost:4000/archi-ceph-osd-essentials-02" rel="alternate" type="text/html" title="Essential系列-ceph对象存储/日志文件系统是如何工作的(二)" /><published>2018-02-26T21:00:10+08:00</published><updated>2018-02-26T21:00:10+08:00</updated><id>http://localhost:4000/archi-ceph-osd-essentials-02</id><content type="html" xml:base="http://localhost:4000/archi-ceph-osd-essentials-02">&lt;p&gt;云环境中的文件系统&lt;/p&gt;
 
-&lt;h5 id=&quot;block-storage&quot;&gt;Block Storage&lt;/h5&gt;
+&lt;p&gt;基于unix文件系统是操作系统中&lt;code class=&quot;highlighter-rouge&quot;&gt;简单易懂&lt;/code&gt;的部分。&lt;/p&gt;
 
-&lt;p&gt;传统的块存储的例子是物理磁盘，它就是一个块存储设备。&lt;/p&gt;
+&lt;p&gt;这是由它的设计决定的-一切皆是文件。&lt;/p&gt;
 
-&lt;p&gt;但云环境中的Block Storage是通过Nas(Network Attached Storage)模拟的块设备(不然的话，如何做到实时分配和计费?)。&lt;a href=&quot;https://en.wikipedia.org/wiki/Block-level_storage&quot;&gt;参考&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;不管传统意义上的块存储(磁盘)，还是云环境中的块存储，它的主要目的只有一个:&lt;/p&gt;
-
-&lt;p&gt;为性能敏感的数据提供廉价的持久化的存储。&lt;/p&gt;
-
-&lt;p&gt;它的特性是:&lt;/p&gt;
+&lt;p&gt;当前的文件系统基本分为两类:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;低延迟&lt;/p&gt;
+    &lt;p&gt;基于事务或日志(journal)的写方式，它提供了更好的高可用性&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;传输速度块(相对网络存储)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;支持多种操作系统，提供硬件级容错机制&lt;/p&gt;
+    &lt;p&gt;不含日志的写方式&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;数据在块上是如何组织的?&lt;/p&gt;
+&lt;h5 id=&quot;不使用日志no-journal的文件系统-ext2的工作方式&quot;&gt;不使用日志(no journal)的文件系统 ext2的工作方式&lt;/h5&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/blockstorage01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;文件系统中的存储概念&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;block&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一个逻辑块(block)是最小的能被文件系统分配的存储单元，以用字节(byte)为单位。单个文件可以包含多个blocks&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;逻辑卷(local volume)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一个磁盘分区或者整个物理磁盘&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;inode&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;文件元数据(meta data)的存储数据结构。&lt;/p&gt;
+
+&lt;p&gt;文件数据本身以外的数据,比如 时间戳、ownership 信息，访问权限，安全信息，文件大小以及存储的位置。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;directory&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;目录，一种特别的文件，包含内容文件的inode元数据列表。&lt;/p&gt;
+
+&lt;p&gt;基本面上看，文件系统的写文件过程至少包含了2个IO过程:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;数据被存储在固定大小的块上(比如 512字节)，块是最基础的存储单元。&lt;/p&gt;
+    &lt;p&gt;inode(文件元数据)的写入过程&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;没有比块更高的元数据(meta data)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如果操作系统要访问块数据，它需要先用某种格式(ext2,3,4)挂载(mount)。&lt;/p&gt;
+    &lt;p&gt;实际文件内容写入对应的block的过程&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;这就是在linux系统上无法直接访问fat格式的磁盘的原因。&lt;/p&gt;
+&lt;p&gt;这里面存在2个问题:&lt;/p&gt;
 
-&lt;p&gt;由操作系统决定块内的数据如何被访问(提供访问操作视图)。&lt;/p&gt;
+&lt;p&gt;先写元数据还是先写实际数据?&lt;/p&gt;
 
-&lt;p&gt;数据块接口的性能比较&lt;/p&gt;
+&lt;p&gt;如果在任意一个IO中，出现了异常中断应该如何处理?&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/blockstorage02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;这两个问题是所有多重IO系统面临的通用问题&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;(光纤网络的速度可达到100G/S)&lt;/p&gt;
+&lt;h5 id=&quot;journaling&quot;&gt;Journaling&lt;/h5&gt;
 
-&lt;p&gt;云环境中常见块存储服务:&lt;/p&gt;
+&lt;p&gt;在linux系统中，一个文件的元信息有inode结构维持。&lt;/p&gt;
+
+&lt;p&gt;inode的主要结构信息:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;owner : ****owner username****
+permissions : read-write
+size : 1
+pointer : 4 # 指向block
+pointer : null
+pointer : null
+pointer : null
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;一次IO要经过三次IO操作:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/inode01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;EBS(AWS Elastic Block Storage), AWS提供的原始数据存储服务,格式化以后它可以被挂载到EC2示例中。&lt;/p&gt;
+    &lt;p&gt;Bitmap 结构描述了inode和block的对应关系&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Azure Block Storage，微软Azure云提供的块存储服务。&lt;/p&gt;
+    &lt;p&gt;inode结构描述block的具体信息&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Google Persistence Disks，谷歌的持久化存储服务。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;阿里云的云盘/本地盘&lt;/p&gt;
+    &lt;p&gt;block存储数据本身的二进制内容&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h5 id=&quot;file-storage&quot;&gt;File Storage&lt;/h5&gt;
+&lt;p&gt;以上三次独立的IO过程，任意一个阶段出现异常，都会引起数据的丢失或者不一致的情况:&lt;/p&gt;
 
-&lt;p&gt;文件存储，相对于块存储，它的操作视图是基于文件或者文档。相对于块高了一个层次。&lt;/p&gt;
+&lt;p&gt;1) Block 被写入磁盘，但是Inode信息没有写入或者更新&lt;/p&gt;
 
-&lt;p&gt;文件的典型特性:&lt;/p&gt;
+&lt;p&gt;2) inode被更新了，但是block没有写完整&lt;/p&gt;
+
+&lt;p&gt;3) bitmap更新了，但是剩余两个信息不完整&lt;/p&gt;
+
+&lt;p&gt;以上三个问题归结为&lt;code class=&quot;highlighter-rouge&quot;&gt;IO一致性&lt;/code&gt;问题&lt;/p&gt;
+
+&lt;p&gt;目前有以下几种解决方式:&lt;/p&gt;
+
+&lt;p&gt;一、使用文件系统扫描工具 fsck&lt;/p&gt;
+
+&lt;p&gt;这是一种亡羊补牢的方式。&lt;/p&gt;
+
+&lt;p&gt;File system checker(文件系统扫描)&lt;/p&gt;
+
+&lt;p&gt;unix系统中典型的文件扫描工具是fsck(注: 在linux系统启动过程中，如果之前异常关机，会启动这个扫面程序)&lt;/p&gt;
+
+&lt;p&gt;fsck的确认项动作:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;所有文件都有一个名字，并且是可字节寻址的。&lt;/p&gt;
+    &lt;p&gt;superblock 超级块检查&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;可随机访问。&lt;/p&gt;
+    &lt;p&gt;free blocks 检查已分配的区块和inode以及bitmap的对应关系，如果出现异常，重建元数据信息&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;通过文件句柄可以进行IO操作。&lt;/p&gt;
+    &lt;p&gt;inode 完整新检查 &amp;amp;&amp;amp; inode重复检查&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;目录检查&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;坏块检查&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/filestorage01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;二、使用日志journaling&lt;/p&gt;
 
-&lt;p&gt;使用场景:&lt;/p&gt;
+&lt;p&gt;日志文件系统使用的常规手段是 Wal， 很面熟的词，因为这是数据库系统输入写入和实现日志分发功能的常用手段，全称是write-ahead loging。&lt;/p&gt;
+
+&lt;p&gt;wal的思想是:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;实际执行写入动作之前，做一个动作笔记或者action list 并存在一个地方。这一步操作成为写前日志。postgresql的默认存贮位置是DATA/wal&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;这一步动作的目的是先记录动作的所有raw data，如果在接下来的动作中，任意一步失败了，可以通过回放解决。这也是很多事务型的操作常用的设计手段。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ext3是经典的、常用的基于journaling文件系统。&lt;/p&gt;
+
+&lt;p&gt;ext4实现完整的、&lt;code class=&quot;highlighter-rouge&quot;&gt;state safe&lt;/code&gt; 状态安全的日志原子性写入操作。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ext4journaling01s.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;以上，可归结为三个步骤:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;文档共享&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;数据库集群&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;大数据存储&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;Action 1&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;文档存储最简单的例子是Samba和NFS&lt;/p&gt;
-
-&lt;h5 id=&quot;object-storage&quot;&gt;Object Storage&lt;/h5&gt;
-
-&lt;p&gt;对象存储是云环境中，被应用常用的一种存储方式。&lt;/p&gt;
-
-&lt;p&gt;数据存储的特性:&lt;/p&gt;
+&lt;p&gt;Journal write transaction 开启一个日志写入事务&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;包含一个句柄URL格式或者ObjectId&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;有元数据，包括用户元数据和操作系统元数据。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;包含版本&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;不需要挂载&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;可随处访问(at any endpoint)&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;Action 2&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;常见用途:&lt;/p&gt;
+&lt;p&gt;Journal commit, 日志内的内容写入完成以后，提交事务。&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;归档存储&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Server-less 容器存储&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;同步或共享文件&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">云环境中的存储技术</summary></entry></feed>
+  &lt;li&gt;Action 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Checkpoint, 这一步讲更新的内容写入磁盘上的最终的位置，包括数据本身和元数据。&lt;/p&gt;
+
+&lt;p&gt;这样，日志文件以一个事务的数据结构大小为窗口，向前推进，如果在数据写入磁盘的过程中出现异常，仅仅replay这个事务即可。&lt;/p&gt;
+
+&lt;p&gt;这里的问题是，随着文件写入越来越多，日志文件会越来越大，如何处理这种问题?&lt;/p&gt;
+
+&lt;p&gt;答案是 使用循环日志&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/journalex403.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Action 4&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;回收已经写入成功的事务占用的磁盘空间。&lt;/p&gt;
+
+&lt;p&gt;总结，这种写入方式确实实现了状态安全的写入过程，但是问题是，数据写入了2次。&lt;/p&gt;
+
+&lt;p&gt;更优化、最常用的方式是，在事务提交中，不写入数据本身，仅仅写入数据的meta data。&lt;/p&gt;
+
+&lt;p&gt;NTFS, XFS, EXT3 都实现了这种方式。&lt;/p&gt;</content><author><name>mikezhang</name></author><category term="automation" /><summary type="html">云环境中的文件系统</summary></entry></feed>

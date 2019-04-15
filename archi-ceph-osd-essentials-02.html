@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Essential系列-ceph对象存储/日志文件系统是如何工作的(二)</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markdown.min.js"></script>
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="Learn, Innovate, Share - Business Based Vision." />
+    <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="http://localhost:4000/archi-ceph-osd-essentials-02" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="张庆华的个人日志" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Essential系列-ceph对象存储/日志文件系统是如何工作的(二)" />
+    <meta property="og:description" content="云环境中的文件系统 基于unix文件系统是操作系统中简单易懂的部分。 这是由它的设计决定的-一切皆是文件。 当前的文件系统基本分为两类: 基于事务或日志(journal)的写方式，它提供了更好的高可用性 不含日志的写方式 不使用日志(no journal)的文件系统 ext2的工作方式 文件系统中的存储概念 block 一个逻辑块(block)是最小的能被文件系统分配的存储单元，以用字节(byte)为单位。单个文件可以包含多个blocks 逻辑卷(local volume) 一个磁盘分区或者整个物理磁盘 inode 文件元数据(meta data)的存储数据结构。 文件数据本身以外的数据,比如 时间戳、ownership 信息，访问权限，安全信息，文件大小以及存储的位置。 directory 目录，一种特别的文件，包含内容文件的inode元数据列表。 基本面上看，文件系统的写文件过程至少包含了2个IO过程: inode(文件元数据)的写入过程 实际文件内容写入对应的block的过程 这里面存在2个问题: 先写元数据还是先写实际数据? 如果在任意一个IO中，出现了异常中断应该如何处理? 这两个问题是所有多重IO系统面临的通用问题 Journaling 在linux系统中，一个文件的元信息有inode结构维持。 inode的主要结构信息: owner : ****owner username**** permissions : read-write size : 1 pointer : 4 # 指向block pointer :" />
+    <meta property="og:url" content="http://localhost:4000/archi-ceph-osd-essentials-02" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/middleware01.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:author" content="https://www.facebook.com/rmrfself" />
+    <meta property="article:published_time" content="2018-02-26T21:00:10+08:00" />
+    <meta property="article:modified_time" content="2018-02-26T21:00:10+08:00" />
+    <meta property="article:tag" content="Automation" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Essential系列-ceph对象存储/日志文件系统是如何工作的(二)" />
+    <meta name="twitter:description" content="云环境中的文件系统 基于unix文件系统是操作系统中简单易懂的部分。 这是由它的设计决定的-一切皆是文件。 当前的文件系统基本分为两类: 基于事务或日志(journal)的写方式，它提供了更好的高可用性 不含日志的写方式 不使用日志(no journal)的文件系统 ext2的工作方式 文件系统中的存储概念 block 一个逻辑块(block)是最小的能被文件系统分配的存储单元，以用字节(byte)为单位。单个文件可以包含多个blocks 逻辑卷(local volume) 一个磁盘分区或者整个物理磁盘 inode 文件元数据(meta data)的存储数据结构。 文件数据本身以外的数据,比如 时间戳、ownership 信息，访问权限，安全信息，文件大小以及存储的位置。 directory 目录，一种特别的文件，包含内容文件的inode元数据列表。 基本面上看，文件系统的写文件过程至少包含了2个IO过程: inode(文件元数据)的写入过程 实际文件内容写入对应的block的过程 这里面存在2个问题: 先写元数据还是先写实际数据? 如果在任意一个IO中，出现了异常中断应该如何处理? 这两个问题是所有多重IO系统面临的通用问题 Journaling 在linux系统中，一个文件的元信息有inode结构维持。 inode的主要结构信息: owner : ****owner username**** permissions : read-write size : 1 pointer : 4 # 指向block pointer :" />
+    <meta name="twitter:url" content="http://localhost:4000/" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/middleware01.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="张庆华的个人日志" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Automation" />
+    <meta name="twitter:site" content="@rmrfself" />
+    <meta name="twitter:creator" content="@rmrfself" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "张庆华的个人日志",
+        "logo": "http://localhost:4000/assets/images/blog-icon.svg"
+    },
+    "url": "http://localhost:4000/archi-ceph-osd-essentials-02",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:4000/assets/images/middleware01.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:4000/archi-ceph-osd-essentials-02"
+    },
+    "description": "云环境中的文件系统 基于unix文件系统是操作系统中简单易懂的部分。 这是由它的设计决定的-一切皆是文件。 当前的文件系统基本分为两类: 基于事务或日志(journal)的写方式，它提供了更好的高可用性 不含日志的写方式 不使用日志(no journal)的文件系统 ext2的工作方式 文件系统中的存储概念 block 一个逻辑块(block)是最小的能被文件系统分配的存储单元，以用字节(byte)为单位。单个文件可以包含多个blocks 逻辑卷(local volume) 一个磁盘分区或者整个物理磁盘 inode 文件元数据(meta data)的存储数据结构。 文件数据本身以外的数据,比如 时间戳、ownership 信息，访问权限，安全信息，文件大小以及存储的位置。 directory 目录，一种特别的文件，包含内容文件的inode元数据列表。 基本面上看，文件系统的写文件过程至少包含了2个IO过程: inode(文件元数据)的写入过程 实际文件内容写入对应的block的过程 这里面存在2个问题: 先写元数据还是先写实际数据? 如果在任意一个IO中，出现了异常中断应该如何处理? 这两个问题是所有多重IO系统面临的通用问题 Journaling 在linux系统中，一个文件的元信息有inode结构维持。 inode的主要结构信息: owner : ****owner username**** permissions : read-write size : 1 pointer : 4 # 指向block pointer :"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Essential系列-ceph对象存储/日志文件系统是如何工作的(二)" href="/feed.xml" />
+
+</head>
+<body class="distribution">
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.svg" alt="张庆华的个人日志" /></a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">主页</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">关于Mike</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-fb" href="https://facebook.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+</a>
+            
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/rmrfself" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <article class="post-full  ">
+            <header class="post-full-header">
+                <h1 class="post-full-title">Essential系列-ceph对象存储/日志文件系统是如何工作的(二)</h1>
+                <section class="post-full-meta">
+                    
+                        <span class="date-divider">分类: </span>
+                        
+                            
+                               <a href='/tag/automation/'>AUTOMATION</a>
+                            
+                        
+                    
+                    <span class="date-divider">发布于: </span><time class="post-full-meta-date" datetime="26 February 2018">2018-02-26 21:00</time>
+                </section>
+            </header>
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>云环境中的文件系统</p>
+
+<p>基于unix文件系统是操作系统中<code class="highlighter-rouge">简单易懂</code>的部分。</p>
+
+<p>这是由它的设计决定的-一切皆是文件。</p>
+
+<p>当前的文件系统基本分为两类:</p>
+
+<ul>
+  <li>
+    <p>基于事务或日志(journal)的写方式，它提供了更好的高可用性</p>
+  </li>
+  <li>
+    <p>不含日志的写方式</p>
+  </li>
+</ul>
+
+<h5 id="不使用日志no-journal的文件系统-ext2的工作方式">不使用日志(no journal)的文件系统 ext2的工作方式</h5>
+
+<p>文件系统中的存储概念</p>
+
+<ul>
+  <li>block</li>
+</ul>
+
+<p>一个逻辑块(block)是最小的能被文件系统分配的存储单元，以用字节(byte)为单位。单个文件可以包含多个blocks</p>
+
+<ul>
+  <li>逻辑卷(local volume)</li>
+</ul>
+
+<p>一个磁盘分区或者整个物理磁盘</p>
+
+<ul>
+  <li>inode</li>
+</ul>
+
+<p>文件元数据(meta data)的存储数据结构。</p>
+
+<p>文件数据本身以外的数据,比如 时间戳、ownership 信息，访问权限，安全信息，文件大小以及存储的位置。</p>
+
+<ul>
+  <li>directory</li>
+</ul>
+
+<p>目录，一种特别的文件，包含内容文件的inode元数据列表。</p>
+
+<p>基本面上看，文件系统的写文件过程至少包含了2个IO过程:</p>
+
+<ul>
+  <li>
+    <p>inode(文件元数据)的写入过程</p>
+  </li>
+  <li>
+    <p>实际文件内容写入对应的block的过程</p>
+  </li>
+</ul>
+
+<p>这里面存在2个问题:</p>
+
+<p>先写元数据还是先写实际数据?</p>
+
+<p>如果在任意一个IO中，出现了异常中断应该如何处理?</p>
+
+<p><code class="highlighter-rouge">这两个问题是所有多重IO系统面临的通用问题</code></p>
+
+<h5 id="journaling">Journaling</h5>
+
+<p>在linux系统中，一个文件的元信息有inode结构维持。</p>
+
+<p>inode的主要结构信息:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>owner : ****owner username****
+permissions : read-write
+size : 1
+pointer : 4 # 指向block
+pointer : null
+pointer : null
+pointer : null
+</code></pre></div></div>
+
+<p>一次IO要经过三次IO操作:</p>
+
+<p><img src="/assets/images/inode01.png" alt="" /></p>
+
+<ul>
+  <li>
+    <p>Bitmap 结构描述了inode和block的对应关系</p>
+  </li>
+  <li>
+    <p>inode结构描述block的具体信息</p>
+  </li>
+  <li>
+    <p>block存储数据本身的二进制内容</p>
+  </li>
+</ul>
+
+<p>以上三次独立的IO过程，任意一个阶段出现异常，都会引起数据的丢失或者不一致的情况:</p>
+
+<p>1) Block 被写入磁盘，但是Inode信息没有写入或者更新</p>
+
+<p>2) inode被更新了，但是block没有写完整</p>
+
+<p>3) bitmap更新了，但是剩余两个信息不完整</p>
+
+<p>以上三个问题归结为<code class="highlighter-rouge">IO一致性</code>问题</p>
+
+<p>目前有以下几种解决方式:</p>
+
+<p>一、使用文件系统扫描工具 fsck</p>
+
+<p>这是一种亡羊补牢的方式。</p>
+
+<p>File system checker(文件系统扫描)</p>
+
+<p>unix系统中典型的文件扫描工具是fsck(注: 在linux系统启动过程中，如果之前异常关机，会启动这个扫面程序)</p>
+
+<p>fsck的确认项动作:</p>
+
+<ul>
+  <li>
+    <p>superblock 超级块检查</p>
+  </li>
+  <li>
+    <p>free blocks 检查已分配的区块和inode以及bitmap的对应关系，如果出现异常，重建元数据信息</p>
+  </li>
+  <li>
+    <p>inode 完整新检查 &amp;&amp; inode重复检查</p>
+  </li>
+  <li>
+    <p>目录检查</p>
+  </li>
+  <li>
+    <p>坏块检查</p>
+  </li>
+</ul>
+
+<p>二、使用日志journaling</p>
+
+<p>日志文件系统使用的常规手段是 Wal， 很面熟的词，因为这是数据库系统输入写入和实现日志分发功能的常用手段，全称是write-ahead loging。</p>
+
+<p>wal的思想是:</p>
+
+<p><code class="highlighter-rouge">实际执行写入动作之前，做一个动作笔记或者action list 并存在一个地方。这一步操作成为写前日志。postgresql的默认存贮位置是DATA/wal</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>这一步动作的目的是先记录动作的所有raw data，如果在接下来的动作中，任意一步失败了，可以通过回放解决。这也是很多事务型的操作常用的设计手段。
+</code></pre></div></div>
+
+<p>ext3是经典的、常用的基于journaling文件系统。</p>
+
+<p>ext4实现完整的、<code class="highlighter-rouge">state safe</code> 状态安全的日志原子性写入操作。</p>
+
+<p><img src="/assets/images/ext4journaling01s.png" alt="" /></p>
+
+<p>以上，可归结为三个步骤:</p>
+
+<ul>
+  <li>Action 1</li>
+</ul>
+
+<p>Journal write transaction 开启一个日志写入事务</p>
+
+<ul>
+  <li>Action 2</li>
+</ul>
+
+<p>Journal commit, 日志内的内容写入完成以后，提交事务。</p>
+
+<ul>
+  <li>Action 3</li>
+</ul>
+
+<p>Checkpoint, 这一步讲更新的内容写入磁盘上的最终的位置，包括数据本身和元数据。</p>
+
+<p>这样，日志文件以一个事务的数据结构大小为窗口，向前推进，如果在数据写入磁盘的过程中出现异常，仅仅replay这个事务即可。</p>
+
+<p>这里的问题是，随着文件写入越来越多，日志文件会越来越大，如何处理这种问题?</p>
+
+<p>答案是 使用循环日志</p>
+
+<p><img src="/assets/images/journalex403.png" alt="" /></p>
+
+<ul>
+  <li>Action 4</li>
+</ul>
+
+<p>回收已经写入成功的事务占用的磁盘空间。</p>
+
+<p>总结，这种写入方式确实实现了状态安全的写入过程，但是问题是，数据写入了2次。</p>
+
+<p>更优化、最常用的方式是，在事务提交中，不写入数据本身，仅仅写入数据的meta data。</p>
+
+<p>NTFS, XFS, EXT3 都实现了这种方式。</p>
+
+
+                </div>
+            </section>
+            <!-- Email subscribe form at the bottom of the page -->
+            
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+        </article>
+    </div>
+</main>
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 张庆华的个人日志 &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/automation/">Automation</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/devops-aws-vpc">Aws中基于vpc网络结构解析</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/k8s-from-scrach">[GCE]单节点部署kubernetes集群</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/archi-ceph-osd-essentials">Essential系列-ceph对象存储(一)</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/automation/">
+                                
+                                    See all 32 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card javaee no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/archi-efficient-js">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Nodejs</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Guideline-编写有效率的javascript代码</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card distribution">
+        
+            <a class="post-card-image-link" href="/archi-ceph-osd-essentials">
+                <div class="post-card-image" style="background-image: url(/assets/images/middleware01.png)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/archi-ceph-osd-essentials">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Automation</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Essential系列-ceph对象存储(一)</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+        </div>
+    </div>
+</aside>
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://localhost:4000/">
+            
+                <img src="/assets/images/favicon.png" alt="张庆华的个人日志 icon" />
+            
+            <span>张庆华的个人日志</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Essential系列-ceph对象存储/日志文件系统是如何工作的(二)</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Essential%E7%B3%BB%E5%88%97-ceph%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%2F%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%28%E4%BA%8C%29&amp;url=https://rmrfself.github.io/archi-ceph-osd-essentials-02"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://rmrfself.github.io/archi-ceph-osd-essentials-02"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+<!-- /post -->
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="my_profile">
+                    <a href='#' class='ava'><img src='/assets/images/me.jpg' /></a>
+                    <div class='profile_detail'>
+                        <h4>About me</h4>
+                        <p>My name is Zhang QingHua(张庆华). Foreign friends call me Mike. I was born in 1980s.</p>
+                        <p>I am an IT developer focusing on web technology(PC and Mobile). Now i am employed by one of vendor of Rakuten.com as a software archtect at Dalian(大连).</p>
+                        <p>I graduated from ShanDong University in July 2006 with a computer science degree.</p>
+                        <p>In my spare time, i like swimming, hiking in the wild and learning in Youtube.com.</p>
+                        <p>Last updated at: 2017/12/12</p>
+                    </div>
+                </section>
+            </div>
+            <p class="copyright inner"><a href="http://localhost:4000/">张庆华的个人日志</a> &copy; 2012年6月 | 微信: xanderQ</p>
+        </footer>
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+    
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-126286097-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+</body>
+</html>

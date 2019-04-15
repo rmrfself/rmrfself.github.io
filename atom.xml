@@ -143,6 +143,21 @@
     
       
       <item>
+        <title>Essential系列-ceph对象存储/日志文件系统是如何工作的(二)</title>
+        
+          <description>&lt;p&gt;云环境中的文件系统&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 26 Feb 2018 21:00:10 +0800</pubDate>
+        <link>
+        http://localhost:4000/archi-ceph-osd-essentials-02</link>
+        <guid isPermaLink="true">http://localhost:4000/archi-ceph-osd-essentials-02</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Essential系列-ceph对象存储(一)</title>
         
           <description>&lt;h4 id=&quot;云环境中的存储技术&quot;&gt;云环境中的存储技术&lt;/h4&gt;
