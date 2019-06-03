@@ -48,7 +48,7 @@
     <meta property="og:site_name" content="张庆华的个人日志" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Kubernetes中的基本概念(二)" />
-    <meta property="og:description" content="对象是抽象的实例化。kubenetes是对”service“的多层抽象。 kubenetes中的对象 命名空间 用来隔离不同team或者工程中的资源。 相同命名空间中的资源通过labels来区分。 当创建一个service时，dns记录中默认使用命名空间来作为空间内各种服务的root。 类似这种格式 ..svc.cluster.local #### labels 和 selectors labels 最主要的用途是组织资源(subsets). 它可以让使用者，以一个非常松散的方式，把组织架构映射到k8s的对象上。 比如 ``` "release" : "stable", "release" : "canary" "environment" : "dev", "environment" : "qa", "environment" : "production" "tier" : "frontend", "tier" : "backend", "tier" : "cache" "partition" : "customerA", "partition" : "customerB" "track" : "daily"," />
+    <meta property="og:description" content="对象是抽象的实例化。kubenetes是对”service“的多层抽象。 kubenetes中的对象 命名空间 用来隔离不同team或者工程中的资源。 相同命名空间中的资源通过labels来区分。 当创建一个service时，dns记录中默认使用命名空间来作为空间内各种服务的root。 类似这种格式 &lt;service-name&gt;.&lt;namespace-name&gt;.svc.cluster.local labels 和 selectors labels 最主要的用途是组织资源(subsets). 它可以让使用者，以一个非常松散的方式，把组织架构映射到k8s的对象上。 比如 "release" : "stable", "release" : "canary" "environment" : "dev", "environment" : "qa", "environment" : "production" "tier" : "frontend", "tier" : "backend", "tier" : "cache" "partition" : "customerA", "partition" : "customerB" "track" : "daily", "track" :" />
     <meta property="og:url" content="http://localhost:4000/devops-kubernetes-basic-02" />
     <meta property="og:image" content="http://localhost:4000/assets/images/deployments.png" />
     <meta property="article:publisher" content="https://www.facebook.com/rmrfself" />
@@ -58,7 +58,7 @@
     <meta property="article:tag" content="Automation" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Kubernetes中的基本概念(二)" />
-    <meta name="twitter:description" content="对象是抽象的实例化。kubenetes是对”service“的多层抽象。 kubenetes中的对象 命名空间 用来隔离不同team或者工程中的资源。 相同命名空间中的资源通过labels来区分。 当创建一个service时，dns记录中默认使用命名空间来作为空间内各种服务的root。 类似这种格式 ..svc.cluster.local #### labels 和 selectors labels 最主要的用途是组织资源(subsets). 它可以让使用者，以一个非常松散的方式，把组织架构映射到k8s的对象上。 比如 ``` "release" : "stable", "release" : "canary" "environment" : "dev", "environment" : "qa", "environment" : "production" "tier" : "frontend", "tier" : "backend", "tier" : "cache" "partition" : "customerA", "partition" : "customerB" "track" : "daily"," />
+    <meta name="twitter:description" content="对象是抽象的实例化。kubenetes是对”service“的多层抽象。 kubenetes中的对象 命名空间 用来隔离不同team或者工程中的资源。 相同命名空间中的资源通过labels来区分。 当创建一个service时，dns记录中默认使用命名空间来作为空间内各种服务的root。 类似这种格式 &lt;service-name&gt;.&lt;namespace-name&gt;.svc.cluster.local labels 和 selectors labels 最主要的用途是组织资源(subsets). 它可以让使用者，以一个非常松散的方式，把组织架构映射到k8s的对象上。 比如 "release" : "stable", "release" : "canary" "environment" : "dev", "environment" : "qa", "environment" : "production" "tier" : "frontend", "tier" : "backend", "tier" : "cache" "partition" : "customerA", "partition" : "customerB" "track" : "daily", "track" :" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/deployments.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -90,7 +90,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/devops-kubernetes-basic-02"
     },
-    "description": "对象是抽象的实例化。kubenetes是对”service“的多层抽象。 kubenetes中的对象 命名空间 用来隔离不同team或者工程中的资源。 相同命名空间中的资源通过labels来区分。 当创建一个service时，dns记录中默认使用命名空间来作为空间内各种服务的root。 类似这种格式 ..svc.cluster.local #### labels 和 selectors labels 最主要的用途是组织资源(subsets). 它可以让使用者，以一个非常松散的方式，把组织架构映射到k8s的对象上。 比如 ``` "release" : "stable", "release" : "canary" "environment" : "dev", "environment" : "qa", "environment" : "production" "tier" : "frontend", "tier" : "backend", "tier" : "cache" "partition" : "customerA", "partition" : "customerB" "track" : "daily","
+    "description": "对象是抽象的实例化。kubenetes是对”service“的多层抽象。 kubenetes中的对象 命名空间 用来隔离不同team或者工程中的资源。 相同命名空间中的资源通过labels来区分。 当创建一个service时，dns记录中默认使用命名空间来作为空间内各种服务的root。 类似这种格式 &lt;service-name&gt;.&lt;namespace-name&gt;.svc.cluster.local labels 和 selectors labels 最主要的用途是组织资源(subsets). 它可以让使用者，以一个非常松散的方式，把组织架构映射到k8s的对象上。 比如 "release" : "stable", "release" : "canary" "environment" : "dev", "environment" : "qa", "environment" : "production" "tier" : "frontend", "tier" : "backend", "tier" : "cache" "partition" : "customerA", "partition" : "customerB" "track" : "daily", "track" :"
 }
     </script>
 
@@ -175,147 +175,178 @@ into the {body} of the default.hbs template -->
 
 <p>用来隔离不同team或者工程中的资源。 相同命名空间中的资源通过labels来区分。</p>
 
-<p>当创建一个service时，dns记录中默认使用命名空间来作为空间内各种服务的root。
-类似这种格式</p>
-<service-name>.<namespace-name>.svc.cluster.local
+<p>当创建一个service时，dns记录中默认使用命名空间来作为空间内各种服务的root。</p>
 
-#### labels 和 selectors
+<p>类似这种格式</p>
 
-labels 最主要的用途是组织资源(subsets).
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;service-name&gt;.&lt;namespace-name&gt;.svc.cluster.local
+</code></pre></div></div>
 
-它可以让使用者，以一个非常松散的方式，把组织架构映射到k8s的对象上。
+<h4 id="labels-和-selectors">labels 和 selectors</h4>
 
-比如 
+<p>labels 最主要的用途是组织资源(subsets).</p>
 
-```
-"release" : "stable", "release" : "canary"
+<p>它可以让使用者，以一个非常松散的方式，把组织架构映射到k8s的对象上。</p>
+
+<p>比如</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"release" : "stable", "release" : "canary"
 "environment" : "dev", "environment" : "qa", "environment" : "production"
 "tier" : "frontend", "tier" : "backend", "tier" : "cache"
 "partition" : "customerA", "partition" : "customerB"
 "track" : "daily", "track" : "weekly"
-```
+</code></pre></div></div>
 
-selectors 选择器一般用来匹配比它底层次的抽象资源。
+<p>selectors 选择器一般用来匹配比它底层次的抽象资源。</p>
 
-比如， ingress 通过selectors来匹配service。
+<p>比如， ingress 通过selectors来匹配service。</p>
 
-service 通过选择器来匹配pods。
+<p>service 通过选择器来匹配pods。</p>
 
-pods通过选择器来匹配nodes。
+<p>pods通过选择器来匹配nodes。</p>
 
-也经常用来相同层次下，资源交叉使用的情况。
+<p>也经常用来相同层次下，资源交叉使用的情况。</p>
 
-在api查询中，也可以作为条件使用
+<p>在api查询中，也可以作为条件使用</p>
 
-&gt; kubectl get pods -l environment=production,tier=frontend
+<blockquote>
+  <p>kubectl get pods -l environment=production,tier=frontend</p>
+</blockquote>
 
-#### 对象创建
+<h4 id="对象创建">对象创建</h4>
 
-对象创建有两种方式
+<p>对象创建有两种方式</p>
 
-* 使用api
+<ul>
+  <li>使用api</li>
+</ul>
 
-&gt; kubectl run nginx --image nginx  或者 `kubectl create deployment nginx --image nginx`
+<blockquote>
+  <p>kubectl run nginx –image nginx  或者 <code class="highlighter-rouge">kubectl create deployment nginx --image nginx</code></p>
+</blockquote>
 
-* 使用yaml描述文件
+<ul>
+  <li>使用yaml描述文件</li>
+</ul>
 
-&gt; k create -f nginx.yaml
-&gt; k delete -f nginx.yaml -f redis.yaml
+<blockquote>
+  <p>k create -f nginx.yaml
+k delete -f nginx.yaml -f redis.yaml</p>
+</blockquote>
 
+<h3 id="架构architecture-of-k8s">架构(architecture of k8s)</h3>
 
-### 架构(architecture of k8s)
+<h4 id="node">Node</h4>
 
-#### Node
+<h5 id="地址address">地址(address)</h5>
 
-##### 地址(address)
+<ul>
+  <li>hostName</li>
+</ul>
 
-* hostName
+<p>node节点的hostname， <code class="highlighter-rouge">cat /etc/hosts</code></p>
 
-node节点的hostname， `cat /etc/hosts`
+<ul>
+  <li>ExternalIP</li>
+</ul>
 
-* ExternalIP
+<p>集群外的IP， 被外部路由器管理</p>
 
-集群外的IP， 被外部路由器管理
+<ul>
+  <li>InternalIP</li>
+</ul>
 
-* InternalIP
+<p>被集群内部路由表管理</p>
 
-被集群内部路由表管理
+<h5 id="状态condition">状态(Condition)</h5>
 
-##### 状态(Condition)
+<p>节点状态</p>
 
-节点状态
+<p>OutOfDisk、Ready、MemoryPressure、PIDPressure、DiskPressure、NetworkUnavailable</p>
 
-OutOfDisk、Ready、MemoryPressure、PIDPressure、DiskPressure、NetworkUnavailable
+<blockquote>
+  <p>注: 对k8s来说，硬件的状态被抽象为内存、磁盘、PID(进程资源)、网络的状态。</p>
+</blockquote>
 
-&gt; 注: 对k8s来说，硬件的状态被抽象为内存、磁盘、PID(进程资源)、网络的状态。
+<h5 id="容量capacity">容量(Capacity)</h5>
 
-##### 容量(Capacity)
+<p>描述资源（CPU,Memory,pods的数量)的数量。</p>
 
-描述资源（CPU,Memory,pods的数量)的数量。
+<h5 id="基本信息info">基本信息(Info)</h5>
 
-##### 基本信息(Info)
+<p>内核版本、k8s(kubelet,kubeproxy)的版本、docker的版本、os的基本信息。</p>
 
-内核版本、k8s(kubelet,kubeproxy)的版本、docker的版本、os的基本信息。
+<h5 id="管理node-controller">管理(Node Controller)</h5>
 
-##### 管理(Node Controller)
+<p>node作为计算资源，比如 aws的EC2, k8s的cluster服务构建在node层面之上。</p>
 
-node作为计算资源，比如 aws的EC2, k8s的cluster服务构建在node层面之上。
+<ul>
+  <li>节点的注册</li>
+</ul>
 
-* 节点的注册
-
-```
---kubeconfig - Path to credentials to authenticate itself to the apiserver.
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--kubeconfig - Path to credentials to authenticate itself to the apiserver.
 --cloud-provider - How to talk to a cloud provider to read metadata about itself.
 --register-node - Automatically register with the API server.
---register-with-taints - Register the node with the given list of taints (comma separated <key>=<value>:<effect>). No-op if register-node is false.
+--register-with-taints - Register the node with the given list of taints (comma separated &lt;key&gt;=&lt;value&gt;:&lt;effect&gt;). No-op if register-node is false.
 --node-ip - IP address of the node.
 --node-labels - Labels to add when registering the node in the cluster (see label restrictions enforced by the NodeRestriction admission plugin in 1.13+).
 --node-status-update-frequency - Specifies how often kubelet posts node status to master.
-```
+</code></pre></div></div>
 
-#### 节点之间的通信
+<h4 id="节点之间的通信">节点之间的通信</h4>
 
-[组件之间的通信](https://d33wubrfki0l68.cloudfront.net/518e18713c865fe67a5f23fc64260806d72b38f5/61d75/images/docs/post-ccm-arch.png)
+<p><a href="https://d33wubrfki0l68.cloudfront.net/518e18713c865fe67a5f23fc64260806d72b38f5/61d75/images/docs/post-ccm-arch.png">组件之间的通信</a></p>
 
-* 获取pods的日志
+<ul>
+  <li>
+    <p>获取pods的日志</p>
+  </li>
+  <li>
+    <p>为pods扩容</p>
+  </li>
+  <li>
+    <p>为kublet提供端口转发功能</p>
+  </li>
+</ul>
 
-* 为pods扩容
+<h4 id="容器更新-20180510">容器(更新 2018/05/10)</h4>
 
-* 为kublet提供端口转发功能
+<h5 id="镜像更新策略">镜像更新策略</h5>
 
+<p>默认策略 IfNotPresent, 如果本地存在，则不更新。</p>
 
-#### 容器(更新 2018/05/10)
+<p>强制更新: <code class="highlighter-rouge">imagePullPolicy: Always</code>, 缺省情况使用latest tag</p>
 
-##### 镜像更新策略
+<h5 id="构建多层架构镜像更新-20180510">构建<code class="highlighter-rouge">多层架构镜像</code>(更新 2018/05/10)</h5>
 
-默认策略 IfNotPresent, 如果本地存在，则不更新。
+<p>~/.docker/config.json ,添加 <code class="highlighter-rouge">"experimental": "enabled"</code>, 开启试验feature。</p>
 
-强制更新: `imagePullPolicy: Always`, 缺省情况使用latest tag
+<h5 id="使用私有仓库">使用私有仓库</h5>
 
-##### 构建`多层架构镜像`(更新 2018/05/10)
+<p>国内推荐阿里云的CR</p>
 
-~/.docker/config.json ,添加 `"experimental": "enabled"`, 开启试验feature。
+<blockquote>
+  <p>docker login –username=account~sample@qq.com registry.cn-beijing.aliyuncs.com</p>
+</blockquote>
 
-##### 使用私有仓库
+<h5 id="容器运行环境container-environment">容器运行环境(container environment)</h5>
 
-国内推荐阿里云的CR
+<p>运行时会被注入一些环境变量， 比如  FOO_SERVICE_HOST, FOO_SERVICE_PORT等，这些可以直接在应用中通过env环境变量读取。</p>
 
-&gt; docker login --username=account~sample@qq.com registry.cn-beijing.aliyuncs.com
+<h5 id="容器生命周期hooks">容器生命周期hooks</h5>
 
-##### 容器运行环境(container environment)
+<p>可以订阅这两个消息， PostStart 和 PreStop</p>
 
-运行时会被注入一些环境变量， 比如  FOO_SERVICE_HOST, FOO_SERVICE_PORT等，这些可以直接在应用中通过env环境变量读取。
+<p>hook handler 有两种实现方式</p>
 
-##### 容器生命周期hooks
-
-可以订阅这两个消息， PostStart 和 PreStop
-
-hook handler 有两种实现方式
-
-* pre-stop.sh  shell形式
-
-* HTTP 请求
-</effect></value></key></namespace-name></service-name>
+<ul>
+  <li>
+    <p>pre-stop.sh  shell形式</p>
+  </li>
+  <li>
+    <p>HTTP 请求</p>
+  </li>
+</ul>
 
                 </div>
             </section>
